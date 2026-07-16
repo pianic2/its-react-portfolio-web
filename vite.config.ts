@@ -7,7 +7,8 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    maxWorkers: 1,
+    maxWorkers: 4,
+    pool: 'threads',
     setupFiles: ['./src/tests/setup.ts'],
     css: true,
   },

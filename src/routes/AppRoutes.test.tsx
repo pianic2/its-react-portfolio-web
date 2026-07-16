@@ -32,7 +32,7 @@ describe('localized application routes', () => {
     expect(await screen.findByTestId('location')).toHaveTextContent('/it')
     expect(
       screen.getByRole('heading', {
-        name: 'Creo prodotti digitali utili.',
+        name: 'Costruisco progetti per capire come funzionano davvero le cose.',
       }),
     ).toBeInTheDocument()
   })
@@ -44,21 +44,17 @@ describe('localized application routes', () => {
     expect(await screen.findByTestId('location')).toHaveTextContent('/en')
     expect(
       screen.getByRole('heading', {
-        name: 'I build useful digital products.',
+        name: 'I build projects to understand how things really work.',
       }),
     ).toBeInTheDocument()
   })
 
   it.each([
-    ['/it', 'Creo prodotti digitali utili.'],
-    ['/it/progetti', 'Progetti costruiti per imparare e per durare.'],
     ['/it/competenze', 'Competenze'],
     ['/it/metodo', 'Metodo'],
     ['/it/profilo', 'Profilo'],
     ['/it/contatti', 'Contatti'],
     ['/it/privacy', 'Privacy'],
-    ['/en', 'I build useful digital products.'],
-    ['/en/projects', 'Projects built for learning and for the long term.'],
     ['/en/skills', 'Skills'],
     ['/en/method', 'Method'],
     ['/en/profile', 'Profile'],
@@ -73,97 +69,160 @@ describe('localized application routes', () => {
   it('renders the exact English Home narrative and actions', () => {
     renderRoute('/en')
 
-    expect(screen.getByText('SOFTWARE, HARDWARE AND REAL PROBLEMS')).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'I design and build software that connects people, data and physical devices — from web APIs to smart-home systems.',
-      ),
-    ).toBeInTheDocument()
+    expect(screen.getByText('FULL STACK DEVELOPER IN TRAINING')).toBeInTheDocument()
+    expect(screen.getByText(/I’m Niccolò, a Full Stack Development student at/)).toBeInTheDocument()
     const trainingLink = screen.getByRole('link', { name: /ITS Prodigi/ })
     expect(trainingLink).toHaveAttribute('href', 'https://www.itsprodigi.it/')
     expect(trainingLink).toHaveAttribute('target', '_blank')
     expect(trainingLink).toHaveAttribute('rel', 'noopener noreferrer')
-    expect(
-      screen.getByText(/I am currently training as a Full Stack Developer at/),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Explore my projects' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'View my projects' })).toHaveAttribute(
       'href',
       '/en/projects',
     )
-    expect(screen.getByRole('link', { name: /View GitHub/ })).toHaveAttribute(
+    expect(screen.getAllByRole('link', { name: /GitHub/ })[0]).toHaveAttribute(
       'href',
       'https://github.com/pianic2',
     )
-    expect(screen.getByRole('link', { name: 'Let’s talk' })).toHaveAttribute('href', '/en/contact')
+    expect(screen.getByRole('link', { name: 'See how I work' })).toHaveAttribute(
+      'href',
+      '/en/method',
+    )
+    const introduction = screen.getByText(/I’m Niccolò, a Full Stack Development student at/)
+    const supportingText = screen.getByText(
+      /Some of these projects were created during my ITS training/,
+    )
+    expect(
+      introduction.compareDocumentPosition(supportingText) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
+    expect(
+      supportingText.compareDocumentPosition(screen.getByTestId('home-hero-actions')) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
+    expect(
+      screen.getByRole('heading', { name: 'From code to a complete product.' }),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('learning-items').children).toHaveLength(3)
+    expect(
+      screen.getByRole('heading', { name: 'Three projects from different parts of my journey.' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Different tools for different projects.' }),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('skill-groups').children).toHaveLength(5)
+    expect(
+      screen.getByRole('heading', { name: 'Understand first, then build.' }),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('process-steps').children).toHaveLength(4)
+    expect(
+      screen.getByRole('heading', {
+        name: 'I’m looking for opportunities to learn, contribute and challenge myself.',
+      }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
   it('renders the exact Italian Home narrative and actions', () => {
     renderRoute('/it')
 
-    expect(screen.getByText('SOFTWARE, HARDWARE E PROBLEMI REALI')).toBeInTheDocument()
+    expect(screen.getByText('FULL STACK DEVELOPER IN FORMAZIONE')).toBeInTheDocument()
     expect(
-      screen.getByText(
-        'Progetto e realizzo software che collega persone, dati e dispositivi fisici — dalle API web ai sistemi per la casa intelligente.',
-      ),
+      screen.getByText(/Mi chiamo Niccolò e studio sviluppo Full Stack presso/),
     ).toBeInTheDocument()
-    expect(screen.getByText(/Sto completando il mio percorso di formazione/)).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Esplora i miei progetti' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Guarda i progetti' })).toHaveAttribute(
       'href',
       '/it/progetti',
     )
-    expect(screen.getByRole('link', { name: /Vedi GitHub/ })).toHaveAttribute(
+    expect(screen.getAllByRole('link', { name: /GitHub/ })[0]).toHaveAttribute(
       'href',
       'https://github.com/pianic2',
     )
-    expect(screen.getByRole('link', { name: 'Parliamone' })).toHaveAttribute('href', '/it/contatti')
-  })
-
-  it('renders hero actions after the introduction and ITS training text', () => {
-    renderRoute('/en')
-
-    const introduction = screen.getByText(
-      'I design and build software that connects people, data and physical devices — from web APIs to smart-home systems.',
+    expect(screen.getByRole('link', { name: 'Scopri il mio metodo' })).toHaveAttribute(
+      'href',
+      '/it/metodo',
     )
-    const training = screen.getByText(/I am currently training as a Full Stack Developer at/)
-    const actions = screen.getByTestId('home-hero-actions')
-
     expect(
-      introduction.compareDocumentPosition(training) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy()
+      screen.getByRole('heading', { name: 'Dal codice al prodotto completo.' }),
+    ).toBeInTheDocument()
     expect(
-      training.compareDocumentPosition(actions) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy()
+      screen.getByRole('heading', { name: 'Tecnologie diverse, scelte in base al progetto.' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Prima capire, poi costruire.' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
+        name: 'Sto cercando occasioni per imparare, contribuire e mettermi alla prova.',
+      }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
   it('renders the exact English and Italian Projects introductions', () => {
     const english = renderRoute('/en/projects')
 
-    expect(screen.getByText('PROJECT INDEX')).toBeInTheDocument()
+    expect(screen.getByText('MY PROJECTS')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'The ITS projects demonstrate how I respond to defined educational requirements. HomeEdge shows how I approach an independent product that must evolve through research, decisions, implementation and continuous review.',
+        'This page brings together three projects with very different goals: a personal product that is still evolving and two projects developed during my ITS training.',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Open a project to understand the problem, the implemented solution, its current stage and the evidence available today.',
+        'Each project explains where it started, what has been built, its current stage and where to inspect the work.',
       ),
     ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Projects with different goals' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { name: 'What I worked on' })).toHaveLength(3)
+    expect(screen.getAllByRole('heading', { name: 'What I would improve' })).toHaveLength(3)
+    expect(
+      screen.getByRole('heading', { name: 'What changes from one project to another?' }),
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('project-comparison')).toHaveAttribute(
+      'data-layout',
+      'responsive-panels',
+    )
+    expect(
+      screen.getByRole('heading', {
+        name: 'These are not perfect projects. They are projects that are helping me grow.',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Want to see the work behind the projects?' }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Open HomeEdge' })).toHaveAttribute(
+      'href',
+      '/en/projects/homeedge-ai-platform',
+    )
+    expect(screen.getByRole('link', { name: 'Read about my approach' })).toHaveAttribute(
+      'href',
+      '/en/method',
+    )
+    expect(screen.getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/en/contact')
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
+    expect(screen.queryByText('[UNVALIDATED]')).not.toBeInTheDocument()
 
     english.unmount()
     renderRoute('/it/progetti')
 
-    expect(screen.getByText('INDICE DEI PROGETTI')).toBeInTheDocument()
+    expect(screen.getByText('I MIEI PROGETTI')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'I progetti ITS mostrano come rispondo a requisiti didattici definiti. HomeEdge mostra invece come affronto un prodotto indipendente che deve evolvere attraverso ricerca, decisioni, implementazione e revisione continua.',
+        'Questa pagina raccoglie tre progetti con obiettivi molto diversi: un prodotto personale ancora in evoluzione e due lavori sviluppati durante il percorso ITS.',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Apri un progetto per comprenderne il problema, la soluzione implementata, la fase attuale e le evidenze disponibili oggi.',
+        'Per ogni progetto trovi il problema di partenza, ciò che è stato realizzato, lo stato attuale e i collegamenti per approfondire.',
       ),
     ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Progetti con obiettivi diversi' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { name: 'Cosa ho curato' })).toHaveLength(3)
+    expect(screen.getAllByRole('heading', { name: 'Cosa vorrei migliorare' })).toHaveLength(3)
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
   it('renders the expanded HomeEdge evidence and transparency narrative in English', () => {

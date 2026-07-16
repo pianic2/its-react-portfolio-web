@@ -2,21 +2,22 @@
 
 ## Scope
 
-This delivery composes the Projects section only. It replaces the Home and Projects placeholders and redesigns Project Detail without implementing the remaining Home sections, changing the global design system, or adding unverified project claims.
+This delivery completes the Home and Projects editorial experiences without changing the global design system, implementing the remaining portfolio pages, or adding unverified project claims.
 
 ## Content architecture
 
 `PortfolioContentProvider` is mounted once in the localized `AppLayout`. It exposes validated, synchronous content through `usePortfolioContent`, including the current language, all projects, featured projects, ID and slug lookups, and localized detail paths. Zod validation remains a module-load concern in the content loaders and is not repeated during React renders.
 
-The project view model provides rendering-oriented fields such as the stable project number, localized origin label, primary claim status and label, repository URL, localized detail path, deterministic visual variant, card narrative and detail narrative. Components do not import raw content records or infer visual identity from array position.
+The project view model provides rendering-oriented fields such as the stable project number, localized origin label, primary claim status and label, repository URL, localized detail path, deterministic visual variant, explicit question, supporting text, work summary and possible future improvement. Components do not import raw content records or infer editorial copy from other fields.
 
 ## Components
 
-- `ProjectShowcase` owns the semantic section and keeps heading copy and descriptive copy in separate responsive areas.
-- `ProjectShowcaseCard` renders the exact localized card summary, value statement, project origin, capability chips, one claim status, and explicit detail and repository actions. Projects-page actions use a vertical full-width action zone.
+- `EditorialSectionHeader` keeps heading copy and descriptive copy in separate responsive areas.
+- `HomeHero`, `LearningSection`, `SkillsSection`, `ProcessSection` and `ContactSection` compose the six Home sections around the shared project showcase.
+- `ProjectShowcaseCard` renders the exact localized question, description, supporting text, project origin, capability chips, one claim status, and explicit detail and repository actions. The Projects variant also renders the localized work and possible-improvement fields.
 - `ProjectArtwork` composes repository-independent geometric artwork from Digital Studio theme tokens and existing halftone or diagonal patterns.
-- `HomePage` presents the introduction, verified ITS Prodigi link and actions in one vertical reading flow before the Home showcase variant.
-- `ProjectsPage` renders the richer project-index variant.
+- `ProjectGuide`, `ProjectComparison`, `ProjectJourneySection` and `ProjectsClosingSection` complete the Projects narrative. Comparison uses three semantic panels rather than a wide table.
+- `HomePage` and `ProjectsPage` only compose feature components; public copy remains in the validated content layer.
 - `ProjectDetailPage` uses the context for slug resolution and presents a project hero, idea, built work, value, current stage, readable evidence items, and project navigation. Evidence separates localized type, title, description and link label. Internal claim copy and the raw `[UNVALIDATED]` marker are not rendered publicly.
 
 ## Responsive and accessibility contract

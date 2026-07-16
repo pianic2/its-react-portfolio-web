@@ -85,3 +85,16 @@ including its purpose, human review and any subsequent modification.
 Public content may include verified repository, demo and professional profile
 links. Do not commit personal email addresses, phone numbers, precise location
 data, secrets, invented metrics or unsupported production/security claims.
+
+## Home and Projects content architecture
+
+Home and Projects read all bilingual editorial copy through
+`PortfolioContentContext`. The validated content repository owns the complete
+Home section model, the Projects page model and the localized project fields
+used by both page variants. Components do not contain public copy.
+
+Project identity, origin, ordering, repository links and claim status remain
+shared invariants. Questions, supporting text, work summaries and possible
+future improvements are localized explicitly and are never inferred from
+other fields. The Projects comparison uses responsive semantic panels so it
+does not require a horizontally scrolling table on narrow screens.

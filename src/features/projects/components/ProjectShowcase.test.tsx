@@ -11,7 +11,7 @@ function renderShowcase(language: Language, variant: 'home' | 'projects') {
     <DigitalStudioProvider>
       <MemoryRouter>
         <PortfolioContentProvider language={language}>
-          <ProjectShowcase headingLevel={variant === 'projects' ? 'h1' : 'h2'} variant={variant} />
+          <ProjectShowcase variant={variant} />
         </PortfolioContentProvider>
       </MemoryRouter>
     </DigitalStudioProvider>,
@@ -21,167 +21,80 @@ function renderShowcase(language: Language, variant: 'home' | 'projects') {
 describe('ProjectShowcase', () => {
   it('renders exactly three projects in deterministic order', () => {
     renderShowcase('en', 'projects')
-
     const projects = screen.getAllByRole('article')
     expect(projects).toHaveLength(3)
-    expect(projects.map((project) => within(project).getByRole('heading').textContent)).toEqual([
-      'HomeEdge AI Platform',
-      'ITS Library API',
-      'ITS Node.js Project',
-    ])
-  })
-
-  it('uses the compact Home composition and links to the project index', () => {
-    renderShowcase('it', 'home')
-
     expect(
-      screen.getByRole('heading', {
-        name: 'Origini diverse, un solo modo di lavorare.',
-      }),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Esplora tutti i progetti' })).toHaveAttribute(
-      'href',
-      '/it/progetti',
-    )
+      projects.map((project) => within(project).getByRole('heading', { level: 3 }).textContent),
+    ).toEqual(['HomeEdge AI Platform', 'ITS Library API', 'ITS Node.js Project'])
   })
 
-  it('keeps heading and description in two distinct structural areas', () => {
+  it('keeps the selected-project heading in two structural blocks', () => {
     renderShowcase('en', 'home')
-
-    expect(screen.getByTestId('home-showcase-heading-area')).toContainElement(
-      screen.getByRole('heading', { name: 'Different origins, one way of working.' }),
+    expect(screen.getByTestId('home-showcase-heading')).toContainElement(
+      screen.getByRole('heading', { name: 'Three projects from different parts of my journey.' }),
     )
-    expect(screen.getByTestId('home-showcase-description-area')).toHaveTextContent(
-      'Two projects were developed during my ITS training.',
-    )
-  })
-
-  it('keeps the Projects heading and description in distinct structural areas', () => {
-    renderShowcase('it', 'projects')
-
-    expect(screen.getByTestId('projects-showcase-heading-area')).toContainElement(
-      screen.getByRole('heading', { name: 'Progetti costruiti per imparare e per durare.' }),
-    )
-    expect(screen.getByTestId('projects-showcase-description-area')).toHaveTextContent(
-      'I progetti ITS mostrano come rispondo a requisiti didattici definiti.',
+    expect(screen.getByTestId('home-showcase-description')).toHaveTextContent(
+      'The Library API and the Node.js project were developed during my ITS course.',
     )
   })
 
-  it('renders localized origin labels independently from claim status', () => {
+  it('renders origin and claim status once per project', () => {
     renderShowcase('en', 'projects')
-
-    expect(screen.getByText('Personal long-term project')).toBeInTheDocument()
-    expect(screen.getAllByText('ITS training project')).toHaveLength(2)
+    expect(screen.getByText('PERSONAL PROJECT')).toBeInTheDocument()
+    expect(screen.getAllByText('ITS PROJECT')).toHaveLength(2)
     expect(screen.getAllByText('Backed by evidence')).toHaveLength(3)
   })
 
-  it('uses vertical full-width action zones on the Projects variant', () => {
+  it('renders explicit questions and supporting text for all cards', () => {
     renderShowcase('en', 'projects')
-
-    for (const id of ['homeedge-ai-platform', 'its-library-api-laravel', 'node-list-manager']) {
-      const actions = screen.getByTestId(`project-actions-${id}`)
-      expect(actions).toHaveAttribute('data-layout', 'vertical-full-width')
-      expect(within(actions).getAllByRole('link')).toHaveLength(2)
+    for (const text of [
+      'How can a room provide useful information without turning the home into an opaque system?',
+      'How can books, authors and categories be organised in a backend that is easy to run and maintain?',
+      'How complex does a backend need to be to manage lists and tasks?',
+      'The project is still at an early stage, but it is not intended as a one-off experiment. I plan to keep developing it, adding backend and mobile capabilities only after their boundaries have been properly tested.',
+      'This project helped me work on the relationship between API design, database entities and protected write operations.',
+      'The goal was not to create a large architecture, but to keep the code understandable and the project easy to verify.',
+    ]) {
+      expect(screen.getByText(text)).toBeInTheDocument()
     }
   })
 
-  it('keeps repository actions in a new tab', () => {
-    renderShowcase('en', 'projects')
-
-    const repository = screen.getAllByRole('link', { name: /Open the repository/ })[0]
-    expect(repository).toHaveAttribute('target', '_blank')
-    expect(repository).toHaveAttribute('rel', 'noopener noreferrer')
+  it('renders project-page work and possible improvement copy', () => {
+    renderShowcase('it', 'projects')
+    expect(screen.getAllByRole('heading', { name: 'Cosa ho curato' })).toHaveLength(3)
+    expect(screen.getAllByRole('heading', { name: 'Cosa vorrei migliorare' })).toHaveLength(3)
+    expect(screen.getByText(/Ho definito la visione, i confini dell’MVP/)).toBeInTheDocument()
+    expect(screen.getByText(/Una possibile evoluzione è aggiungere/)).toBeInTheDocument()
+    expect(screen.getByText(/Potrei estendere la validazione/)).toBeInTheDocument()
   })
 
-  it('renders localized detail paths, repository links and visible claim statuses', () => {
+  it('uses valid detail and new-tab repository links', () => {
     renderShowcase('it', 'projects')
-
     expect(screen.getByRole('link', { name: /^Scopri HomeEdge$/ })).toHaveAttribute(
       'href',
       '/it/progetti/homeedge-ai-platform',
     )
-    expect(screen.getAllByText('Supportato da evidenze')).toHaveLength(3)
-    expect(screen.getAllByRole('link', { name: /Apri il repository/ })[2]).toHaveAttribute(
+    const repositories = screen.getAllByRole('link', { name: /Apri il repository/ })
+    expect(repositories).toHaveLength(3)
+    expect(repositories[2]).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node',
     )
+    for (const repository of repositories) {
+      expect(repository).toHaveAttribute('target', '_blank')
+      expect(repository).toHaveAttribute('rel', 'noopener noreferrer')
+    }
   })
 
-  it('renders English content without removed public projects', () => {
-    renderShowcase('en', 'home')
-
-    expect(screen.getByText('ITS Node.js Project')).toBeInTheDocument()
+  it('uses vertical full-width actions on Projects and keeps all public projects', () => {
+    renderShowcase('en', 'projects')
+    for (const id of ['homeedge-ai-platform', 'its-library-api-laravel', 'node-list-manager']) {
+      expect(screen.getByTestId(`project-actions-${id}`)).toHaveAttribute(
+        'data-layout',
+        'vertical-full-width',
+      )
+    }
     expect(screen.queryByText('Restaurant Kitchef Brain')).not.toBeInTheDocument()
     expect(screen.queryByText('AI Social Agent')).not.toBeInTheDocument()
-  })
-
-  it('renders the exact English summary and value for every project card', () => {
-    renderShowcase('en', 'projects')
-
-    expect(
-      screen.getByText(
-        'A modular smart-home platform designed to understand what is happening in a room while keeping data collection local, limited and transparent.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'It brings together physical sensors, software architecture and responsible data use in one project.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'A complete educational backend for organising books, authors and categories through a documented and protected REST API.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'It shows how authentication, validation, data relationships and file management work together in a real backend.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'A compact backend for managing lists and tasks, built with clear Express routes, persistent SQLite data and automated tests.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'It demonstrates how to keep a small application organised, testable and easy to extend without unnecessary complexity.',
-      ),
-    ).toBeInTheDocument()
-  })
-
-  it('renders the exact Italian summary and value for every project card', () => {
-    renderShowcase('it', 'projects')
-
-    expect(
-      screen.getByText(
-        'Una piattaforma smart home modulare pensata per capire cosa accade in una stanza, mantenendo la raccolta dei dati locale, limitata e trasparente.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Un backend didattico completo per organizzare libri, autori e categorie attraverso una API REST documentata e protetta.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Mostra come autenticazione, validazione, relazioni tra dati e gestione dei file lavorano insieme in un backend reale.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Un backend compatto per gestire liste e attività, costruito con route Express chiare, dati persistenti in SQLite e test automatici.',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Mostra come mantenere una piccola applicazione ordinata, verificabile e facile da estendere senza introdurre complessità inutile.',
-      ),
-    ).toBeInTheDocument()
   })
 })
