@@ -7,6 +7,7 @@ This record separates implemented evidence from checks that still require a depe
 - `/__dev/design-system` remains guarded by `import.meta.env.DEV` and is absent from production routing;
 - the former monolithic IRPW-15 review page is decomposed into development-only showcase modules;
 - `PageContainer`, `PageSection`, `StudioCard`, application link primitives and `StudioIconButton` replace duplicated layout, surface and interaction implementations;
+- showcase sections follow one centred full-width flow, while each section owns its internal responsive grid;
 - the showcase exposes semantic colours, typography, spacing, responsive layout tokens, radii, border widths, shadows and decorative patterns;
 - Material UI buttons, chips, alerts and form states are exercised through the customized Digital Studio theme;
 - internal, external and button links are distinguishable by semantics and presentation;
@@ -16,18 +17,23 @@ This record separates implemented evidence from checks that still require a depe
 - standard and featured `StudioCard` variants are reviewed with short and long content;
 - focus, disabled state and reduced-motion behaviour are exposed through real interactive controls;
 - a local, non-persisted reduced-motion override supports repeatable visual comparison without changing application preferences;
-- the route reports the current viewport width, Material UI breakpoint, theme and operating-system reduced-motion preference.
+- the route reports the current viewport width, Material UI breakpoint, theme and operating-system reduced-motion preference;
+- a development-only component laboratory exercises a project preview, release-readiness panel and contact composition with realistic content pressure.
 
 ## Source-review findings addressed
 
 | Finding | Impact | Resolution |
 | --- | --- | --- |
 | The review route reimplemented page gutters, safe areas and shadow clearance. | The showcase could drift from production layout behaviour. | Replaced the local container with `PageContainer` and `PageSection`. |
+| `PageContainer` reserved shadow clearance only on the inline end. | The optical axis could appear left-biased and the content width could become difficult to reason about. | Shadow and safe-area clearance are now symmetric, border-box based and bounded by an explicit maximum inline size. |
+| The global two-column showcase grid received multiple fragment children. | Some desktop rows contained one left-hand card and an empty right-hand cell, creating a large apparent right margin. | Replaced the global grid with one centred vertical flow; responsive grids now exist only inside the section that owns them. |
 | Review panels used local `Paper` composition instead of the shared surface primitive. | Card variants and shadow footprint were not reviewed consistently. | Replaced top-level review panels with `StudioCard`-based `ShowcaseSection`. |
 | The component sample used direct MUI `Card` and `Link` elements. | Shared IRPW-16 primitives were not exercised by the review route. | Added explicit samples for `StudioCard`, `InternalLink`, `ExternalLink`, `ButtonLink` and `StudioIconButton`. |
 | Structural layout contained fixed dimensions and shadow translations. | Responsive review depended on demo-specific magic values. | Replaced structural values with tokens, `theme.spacing()`, content-based sizing and `shadowOffsets`. |
+| The halftone preview rendered as an incomplete or overly sparse dot row in some viewport states. | The decorative pattern no longer represented the intended Pop Art language. | Rebuilt the token as a staggered two-layer radial pattern and set explicit repeat and tile sizing in the hero surface. |
+| The showcase exposed primitives but did not test realistic compositions. | Components could look correct in isolation while failing under actual content density. | Added three development-only composed candidates covering project evidence, delivery status and contact-form layout. |
 | Reduced motion was described but could not be compared repeatedly inside the route. | Review depended entirely on external browser configuration. | Added system-preference reporting and a local, non-persisted reduced-motion preview. |
-| No test targeted the showcase contract. | Required sections and interaction states could disappear unnoticed. | Added focused rendering, navigation, disabled-state, theme, Drawer and reduced-motion tests. |
+| No test targeted the showcase contract. | Required sections and interaction states could disappear unnoticed. | Added focused rendering, navigation, disabled-state, theme, Drawer, reduced-motion and composed-component tests. |
 
 ## Canonical browser evidence matrix
 
@@ -38,7 +44,9 @@ The following screenshots and manual checks remain required before Project Owner
 | Light theme | Pending | Pending | Pending |
 | Dark theme | Pending | Pending | Pending |
 | No horizontal overflow | Pending | Pending | Pending |
+| Centred optical axis | Pending | Pending | Pending |
 | Offset shadows remain visible | Pending | Pending | Pending |
+| Halftone repeats across the full preview surface | Pending | Pending | Pending |
 | Typography wraps without clipping | Pending | Pending | Pending |
 | Keyboard focus remains visible | Pending | Pending | Pending |
 | Disabled states remain perceivable | Pending | Pending | Pending |
@@ -50,6 +58,7 @@ Additional evidence required:
 
 - one screenshot showing a keyboard focus ring;
 - one screenshot showing the floating mobile navigation Drawer;
+- one screenshot showing the component laboratory at desktop width;
 - a textual result for operating-system `prefers-reduced-motion: reduce`, because a still image cannot prove the absence of motion.
 
 ## Automated validation status
