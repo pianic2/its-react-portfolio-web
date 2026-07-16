@@ -31,24 +31,34 @@ export function MobileNavigationDrawer({
       open={open}
       slotProps={{
         paper: {
-          sx: (theme) => ({
-            bgcolor: 'background.default',
-            borderLeft: `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.border}`,
-            boxShadow: theme.digitalStudio.shadows.large,
-            maxWidth: '100%',
-            overflowX: 'hidden',
-            paddingBlockEnd: `max(${theme.digitalStudio.layout.panelInset.compact}px, env(safe-area-inset-bottom))`,
-            paddingBlockStart: `max(${theme.digitalStudio.layout.panelInset.compact}px, env(safe-area-inset-top))`,
-            paddingInlineEnd: `max(${theme.digitalStudio.layout.panelInset.compact}px, env(safe-area-inset-right))`,
-            paddingInlineStart: `${theme.digitalStudio.layout.panelInset.compact}px`,
-            width: `min(100vw, ${theme.breakpoints.values.sm}px)`,
-          }),
+          sx: (theme) => {
+            const { pageGutter, panelInset, shadowClearance } = theme.digitalStudio.layout
+            const compactViewportReservation = pageGutter.compact * 2 + shadowClearance
+            const maximumWidth = theme.breakpoints.values.sm - pageGutter.compact * 2
+
+            return {
+              bgcolor: 'background.paper',
+              border: `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.border}`,
+              borderRadius: `${theme.digitalStudio.radii.lg}px`,
+              bottom: `max(${pageGutter.compact + shadowClearance}px, calc(env(safe-area-inset-bottom) + ${shadowClearance}px))`,
+              boxShadow: theme.digitalStudio.shadows.large,
+              height: 'auto',
+              maxWidth: '100%',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+              overscrollBehavior: 'contain',
+              padding: `${panelInset.compact}px`,
+              right: `max(${pageGutter.compact + shadowClearance}px, calc(env(safe-area-inset-right) + ${shadowClearance}px))`,
+              top: `max(${pageGutter.compact}px, env(safe-area-inset-top))`,
+              width: `min(calc(100vw - ${compactViewportReservation}px), ${maximumWidth}px)`,
+            }
+          },
         },
       }}
     >
-      <Stack spacing={6} sx={{ minWidth: 0 }}>
+      <Stack spacing={5} sx={{ minWidth: 0 }}>
         <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography component="h2" variant="h4">
+          <Typography component="h2" variant="h5">
             {labels.title}
           </Typography>
           <StudioIconButton aria-label={labels.close} onClick={onClose}>
