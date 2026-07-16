@@ -55,7 +55,12 @@ export function SiteIdentity({ language }: SiteIdentityProps) {
       </Box>
       <Typography
         component="span"
-        sx={{ fontWeight: 900, lineHeight: 1.1, minWidth: 0 }}
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          fontWeight: 900,
+          lineHeight: 1.1,
+          minWidth: 0,
+        }}
         variant="h6"
       >
         Niccolò Piazzi
