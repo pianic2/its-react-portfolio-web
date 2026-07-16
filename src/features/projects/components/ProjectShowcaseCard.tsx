@@ -11,7 +11,8 @@ type ProjectShowcaseCardProps = {
   language: Language
   project: ProjectViewModel
   repositoryLabel: string
-  valueLabel: string
+  futureImprovementLabel: string
+  whatIWorkedOnLabel: string
   variant: 'home' | 'projects'
 }
 
@@ -19,7 +20,8 @@ export function ProjectShowcaseCard({
   language,
   project,
   repositoryLabel,
-  valueLabel,
+  futureImprovementLabel,
+  whatIWorkedOnLabel,
   variant,
 }: ProjectShowcaseCardProps) {
   const titleId = `showcase-${project.id}-title`
@@ -59,15 +61,6 @@ export function ProjectShowcaseCard({
         }}
       >
         <Stack spacing={1.5} sx={{ minWidth: 0 }}>
-          <Stack
-            direction="row"
-            sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 1, justifyContent: 'space-between' }}
-          >
-            <Typography sx={{ letterSpacing: 0 }} variant="overline">
-              {project.eyebrow}
-            </Typography>
-            <Chip label={project.claimLabel} size="small" variant="outlined" />
-          </Stack>
           <Box
             data-project-origin={project.origin}
             sx={{
@@ -83,6 +76,15 @@ export function ProjectShowcaseCard({
               {project.originLabel}
             </Typography>
           </Box>
+          <Typography sx={{ letterSpacing: 0 }} variant="overline">
+            {project.eyebrow}
+          </Typography>
+          <Chip
+            label={project.claimLabel}
+            size="small"
+            sx={{ alignSelf: 'flex-start' }}
+            variant="outlined"
+          />
           <Typography
             component="h3"
             id={titleId}
@@ -96,27 +98,44 @@ export function ProjectShowcaseCard({
           >
             {project.title}
           </Typography>
+          <Typography
+            component="p"
+            sx={{ fontSize: { xs: '1.15rem', sm: '1.3rem' }, fontWeight: 800 }}
+          >
+            {project.question}
+          </Typography>
           <Typography color="text.secondary">{project.narrative.cardSummary}</Typography>
+          <Typography>{project.supportingText}</Typography>
         </Stack>
 
-        <Box
-          sx={{
-            borderInlineStart: (theme) =>
-              `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
-            minWidth: 0,
-            paddingInlineStart: 2,
-          }}
-        >
-          <Typography component="p" sx={{ fontWeight: 900, letterSpacing: 0 }} variant="overline">
-            {valueLabel}
-          </Typography>
-          <Typography sx={{ mt: 1 }}>{project.narrative.cardValue}</Typography>
-          {variant === 'home' && project.originDescription ? (
-            <Typography color="text.secondary" sx={{ mt: 1.5 }}>
-              {project.originDescription}
-            </Typography>
-          ) : null}
-        </Box>
+        {variant === 'projects' ? (
+          <Stack spacing={2.5}>
+            <Box
+              sx={{
+                borderInlineStart: (theme) =>
+                  `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
+                paddingInlineStart: 2,
+              }}
+            >
+              <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
+                {whatIWorkedOnLabel}
+              </Typography>
+              <Typography sx={{ mt: 1 }}>{project.whatIWorkedOn}</Typography>
+            </Box>
+            <Box
+              sx={{
+                borderInlineStart: (theme) =>
+                  `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.accent}`,
+                paddingInlineStart: 2,
+              }}
+            >
+              <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
+                {futureImprovementLabel}
+              </Typography>
+              <Typography sx={{ mt: 1 }}>{project.futureImprovement}</Typography>
+            </Box>
+          </Stack>
+        ) : null}
 
         <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
           {project.capabilities.map((capability) => (

@@ -1,6 +1,7 @@
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
 import { Box, Stack, Typography } from '@mui/material'
 import { ButtonLink } from '../../../components/actions/AppLink'
+import { EditorialSectionHeader } from '../../../components/layout/EditorialSectionHeader'
 import { PageContainer } from '../../../components/layout/PageContainer'
 import { PageSection } from '../../../components/layout/PageSection'
 import { usePortfolioContent } from '../../../content/context'
@@ -9,6 +10,7 @@ import { ProjectShowcaseCard } from './ProjectShowcaseCard'
 
 type ProjectShowcaseProps = {
   headingLevel?: 'h1' | 'h2'
+  showHeader?: boolean
   variant: 'home' | 'projects'
 }
 
@@ -18,66 +20,50 @@ const placementByVariant = {
   'electric-cyan': { md: '3 / span 8' },
 } as const
 
-export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcaseProps) {
+export function ProjectShowcase({
+  headingLevel = 'h2',
+  showHeader = true,
+  variant,
+}: ProjectShowcaseProps) {
   const { featuredProjects, language, projects, siteContent } = usePortfolioContent()
-  const copy = siteContent.projectExperience[variant]
+  const copy =
+    variant === 'home'
+      ? siteContent.homePage.selectedProjects
+      : siteContent.projectExperience.projects
   const displayedProjects = variant === 'home' ? featuredProjects : projects
   const headingId = `${variant}-project-showcase-title`
 
   return (
-    <PageSection aria-labelledby={headingId} spacing="spacious">
+    <PageSection
+      aria-label={!showHeader ? siteContent.projectsPage.hero.eyebrow : undefined}
+      aria-labelledby={showHeader ? headingId : undefined}
+      spacing="spacious"
+    >
       <PageContainer>
         <Stack spacing={{ xs: 5, md: 7 }}>
-          <Box
-            sx={{
-              alignItems: { md: 'start' },
-              display: 'grid',
-              gap: 3,
-              gridTemplateColumns: {
-                xs: 'minmax(0, 1fr)',
-                md: 'minmax(0, 0.9fr) minmax(18rem, 1.1fr)',
-              },
-              minWidth: 0,
-            }}
-          >
-            <Stack
-              data-testid={`${variant}-showcase-heading-area`}
-              spacing={1.5}
-              sx={{ minWidth: 0 }}
-            >
-              <Typography sx={{ letterSpacing: 0 }} variant="overline">
-                {copy.eyebrow}
-              </Typography>
-              <Typography
-                component={headingLevel}
-                id={headingId}
-                sx={{
-                  fontSize: { xs: '2.25rem', sm: '3rem', md: '4rem' },
-                  letterSpacing: 0,
-                  maxWidth: '16ch',
-                  overflowWrap: 'break-word',
-                }}
-                variant="h2"
-              >
-                {copy.title}
-              </Typography>
-            </Stack>
-            <Stack
-              data-testid={`${variant}-showcase-description-area`}
-              spacing={2}
-              sx={{ minWidth: 0, paddingBlockStart: { md: 3 } }}
-            >
-              <Typography
-                color="text.secondary"
-                sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '55ch' }}
-              >
-                {copy.introduction}
-              </Typography>
-              <Typography sx={{ fontWeight: 800, maxWidth: '55ch' }}>
-                {copy.supportingText}
-              </Typography>
-            </Stack>
-          </Box>
+          {showHeader ? (
+            <EditorialSectionHeader
+              description={'description' in copy ? copy.description : copy.introduction}
+              eyebrow={copy.eyebrow}
+              headingLevel={headingLevel}
+              id={headingId}
+              supportingContent={
+                variant === 'home' ? (
+                  <Typography sx={{ fontWeight: 900 }}>
+                    {siteContent.projectExperience.labels.projectOriginLabels['personal-long-term']}
+                    {' · '}
+                    {siteContent.projectExperience.labels.projectOriginLabels['its-training']}
+                  </Typography>
+                ) : (
+                  <Typography sx={{ fontWeight: 800 }}>
+                    {siteContent.projectExperience.projects.supportingText}
+                  </Typography>
+                )
+              }
+              testId={`${variant}-showcase`}
+              title={copy.title}
+            />
+          ) : null}
 
           <Box
             data-project-count={displayedProjects.length}
@@ -100,7 +86,10 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
                   language={language}
                   project={project}
                   repositoryLabel={siteContent.projectExperience.labels.repositoryLabel}
-                  valueLabel={siteContent.projectExperience.labels.valueLabel}
+                  futureImprovementLabel={
+                    siteContent.projectExperience.labels.futureImprovementLabel
+                  }
+                  whatIWorkedOnLabel={siteContent.projectExperience.labels.whatIWorkedOnLabel}
                   variant={variant}
                 />
               </Box>
