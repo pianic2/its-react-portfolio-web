@@ -16,6 +16,7 @@ This record separates implemented evidence from checks that still require a depe
 - Italian and British flag graphics are shown through the shared `LanguageFlag` component;
 - standard and featured `StudioCard` variants are reviewed with short and long content;
 - focus, disabled state and reduced-motion behaviour are exposed through real interactive controls;
+- outlined fields use a surface-backed label plate so borders and focus rings never cross the label text;
 - a local, non-persisted reduced-motion override supports repeatable visual comparison without changing application preferences;
 - the route reports the current viewport width, Material UI breakpoint, theme and operating-system reduced-motion preference;
 - a development-only component laboratory exercises a project preview, release-readiness panel and contact composition with realistic content pressure.
@@ -31,6 +32,7 @@ This record separates implemented evidence from checks that still require a depe
 | The component sample used direct MUI `Card` and `Link` elements. | Shared IRPW-16 primitives were not exercised by the review route. | Added explicit samples for `StudioCard`, `InternalLink`, `ExternalLink`, `ButtonLink` and `StudioIconButton`. |
 | Structural layout contained fixed dimensions and shadow translations. | Responsive review depended on demo-specific magic values. | Replaced structural values with tokens, `theme.spacing()`, content-based sizing and `shadowOffsets`. |
 | The halftone preview rendered as an incomplete or overly sparse dot row in some viewport states. | The decorative pattern no longer represented the intended Pop Art language. | Rebuilt the token as a staggered two-layer radial pattern and set explicit repeat and tile sizing in the hero surface. |
+| The outlined-field focus ring continued behind the floating label. | The label looked crossed by the border and focus treatment, especially in dark mode. | Added a surface-backed, padded and raised `MuiInputLabel` plate while retaining the high-contrast focus ring around the field. |
 | The showcase exposed primitives but did not test realistic compositions. | Components could look correct in isolation while failing under actual content density. | Added three development-only composed candidates covering project evidence, delivery status and contact-form layout. |
 | Reduced motion was described but could not be compared repeatedly inside the route. | Review depended entirely on external browser configuration. | Added system-preference reporting and a local, non-persisted reduced-motion preview. |
 | No test targeted the showcase contract. | Required sections and interaction states could disappear unnoticed. | Added focused rendering, navigation, disabled-state, theme, Drawer, reduced-motion and composed-component tests. |
@@ -48,6 +50,7 @@ The following screenshots and manual checks remain required before Project Owner
 | Offset shadows remain visible | Pending | Pending | Pending |
 | Halftone repeats across the full preview surface | Pending | Pending | Pending |
 | Typography wraps without clipping | Pending | Pending | Pending |
+| Outlined labels remain isolated from borders and focus rings | Pending | Pending | Pending |
 | Keyboard focus remains visible | Pending | Pending | Pending |
 | Disabled states remain perceivable | Pending | Pending | Pending |
 | Reduced-motion behaviour | Pending | Pending | Pending |
@@ -57,6 +60,7 @@ Boundary checks without mandatory screenshots: 320 px, 600 px, 1024 px and 1280 
 Additional evidence required:
 
 - one screenshot showing a keyboard focus ring;
+- one screenshot showing the focused outlined-field label treatment in dark mode;
 - one screenshot showing the floating mobile navigation Drawer;
 - one screenshot showing the component laboratory at desktop width;
 - a textual result for operating-system `prefers-reduced-motion: reduce`, because a still image cannot prove the absence of motion.
