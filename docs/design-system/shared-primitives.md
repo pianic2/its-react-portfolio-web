@@ -59,6 +59,6 @@ The mobile and tablet layout uses a temporary Material UI Drawer. Its paper is a
 - motion is removed by the existing `prefers-reduced-motion` theme policy;
 - semantic landmarks and navigation lists are preserved.
 
-## Showcase boundary
+## Showcase integration
 
-The existing `/__dev/design-system` route remains development-only scaffolding. IRPW-16 supplies reusable primitives; the complete responsive state matrix, screenshots and recorded visual-review findings remain IRPW-17 scope.
+The development-only `/__dev/design-system` route consumes these primitives directly. IRPW-17 adds the responsive state matrix, local review controls, focused showcase tests and the visual/accessibility evidence record without creating a second application or public UI package.
