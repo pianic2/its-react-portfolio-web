@@ -41,20 +41,36 @@ export function SiteHeader({ language }: SiteHeaderProps) {
         })}
       >
         <Paper
-          sx={(theme) => ({
-            alignItems: 'center',
-            bgcolor: 'background.paper',
-            boxShadow: theme.digitalStudio.shadows.large,
-            display: 'grid',
-            gap: 4,
-            gridTemplateColumns: { xs: 'minmax(0, 1fr) auto', lg: 'auto 1fr auto' },
-            minWidth: 0,
-            px: {
-              xs: `${theme.digitalStudio.layout.panelInset.compact}px`,
-              lg: `${theme.digitalStudio.layout.panelInset.regular}px`,
-            },
-            py: 3,
-          })}
+          sx={(theme) => {
+            const { colors, layout, radii, shadows } = theme.digitalStudio
+
+            return {
+              alignItems: 'center',
+              bgcolor: colors.surfaceStrong,
+              borderRadius: `${radii.md}px`,
+              boxShadow: shadows.medium,
+              display: 'grid',
+              gap: 4,
+              gridTemplateColumns: { xs: 'minmax(0, 1fr) auto', lg: 'auto 1fr auto' },
+              minWidth: 0,
+              overflow: 'hidden',
+              pb: 3,
+              position: 'relative',
+              pt: 4,
+              px: {
+                xs: `${layout.panelInset.compact}px`,
+                lg: `${layout.panelInset.regular}px`,
+              },
+              '&::before': {
+                background: `linear-gradient(90deg, ${colors.primary} 0 34%, ${colors.secondary} 34% 67%, ${colors.accent} 67% 100%)`,
+                blockSize: theme.spacing(1.5),
+                content: '""',
+                insetInline: 0,
+                insetBlockStart: 0,
+                position: 'absolute',
+              },
+            }
+          }}
         >
           <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0 }}>
             <SiteIdentity language={language} />
@@ -91,6 +107,8 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             aria-label={menuLabels[language]}
             onClick={() => setMobileNavigationOpen(true)}
             sx={{
+              bgcolor: 'primary.main',
+              color: 'primary.contrastText',
               display: { xs: 'inline-flex', lg: 'none' },
               gridColumn: '2',
               gridRow: '1',
