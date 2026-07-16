@@ -15,7 +15,7 @@ export function ProjectDetailPage({ language }: ProjectDetailPageProps) {
         {routeDefinitions.projectDetail.labels[language]}
       </Typography>
       <Typography>
-        {language === 'it' ? 'Progetto' : 'Project'}: {slug}
+        {language === 'en' ? 'Project' : 'Progetto'}: {slug}
       </Typography>
     </Stack>
   )
