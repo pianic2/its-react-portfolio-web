@@ -5,6 +5,7 @@ import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { StudioCard } from '../components/surfaces/StudioCard'
 import { AccessibilityShowcase } from './design-system/AccessibilityShowcase'
+import { ComposedComponentShowcase } from './design-system/ComposedComponentShowcase'
 import { PrimitiveShowcase } from './design-system/PrimitiveShowcase'
 import { ShowcaseReviewControls } from './design-system/ShowcaseReviewControls'
 import { TokenShowcase } from './design-system/TokenShowcase'
@@ -38,7 +39,7 @@ export function DesignSystemPage() {
   return (
     <Box
       data-force-reduced-motion={forcedReducedMotion ? 'true' : 'false'}
-      sx={{ minHeight: '100vh' }}
+      sx={{ inlineSize: '100%', minHeight: '100vh', overflowX: 'clip' }}
     >
       {forcedReducedMotion ? (
         <GlobalStyles
@@ -59,7 +60,12 @@ export function DesignSystemPage() {
 
       <SkipLink label="Skip to design-system content" targetId="design-system-main" />
 
-      <Box component="main" id="design-system-main" sx={{ outline: 'none' }} tabIndex={-1}>
+      <Box
+        component="main"
+        id="design-system-main"
+        sx={{ inlineSize: '100%', outline: 'none' }}
+        tabIndex={-1}
+      >
         <PageSection component="div" spacing="compact">
           <PageContainer>
             <StudioCard component="header" variant="featured">
@@ -81,7 +87,8 @@ export function DesignSystemPage() {
                   },
                   '&::before': {
                     backgroundImage: theme.digitalStudio.patterns.halftone,
-                    backgroundSize: theme.spacing(3),
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: `${theme.spacing(2.25)} ${theme.spacing(2.25)}`,
                     content: '""',
                     inset: 0,
                     opacity: 0.12,
@@ -120,15 +127,14 @@ export function DesignSystemPage() {
 
         <PageSection component="div" spacing="compact">
           <PageContainer>
-            <Box
+            <Stack
               sx={(theme) => ({
-                display: 'grid',
                 gap: {
                   xs: `${theme.digitalStudio.layout.sectionGap.compact + theme.digitalStudio.layout.shadowClearance}px`,
                   sm: `${theme.digitalStudio.layout.sectionGap.regular + theme.digitalStudio.layout.shadowClearance}px`,
                   md: `${theme.digitalStudio.layout.sectionGap.wide + theme.digitalStudio.layout.shadowClearance}px`,
                 },
-                gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, minmax(0, 1fr))' },
+                inlineSize: '100%',
               })}
             >
               <TokenShowcase />
@@ -137,7 +143,8 @@ export function DesignSystemPage() {
                 forcedReducedMotion={forcedReducedMotion}
                 systemReducedMotion={systemReducedMotion}
               />
-            </Box>
+              <ComposedComponentShowcase />
+            </Stack>
           </PageContainer>
         </PageSection>
       </Box>
