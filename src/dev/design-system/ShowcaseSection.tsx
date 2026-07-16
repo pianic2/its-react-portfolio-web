@@ -23,7 +23,7 @@ export function ShowcaseSection({
     <StudioCard
       aria-labelledby={headingId}
       component="section"
-      sx={{ gridColumn: wide ? { lg: '1 / -1' } : undefined }}
+      sx={{ gridColumn: wide ? { lg: '1 / -1' } : undefined, inlineSize: '100%' }}
     >
       <CardContent
         sx={(theme) => ({
