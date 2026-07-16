@@ -9,7 +9,7 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
   const theme = createTheme({
     cssVariables: true,
     digitalStudio,
-    spacing: 4,
+    spacing: digitalStudio.spacing.base,
     shape: {
       borderRadius: radii.md,
     },
