@@ -72,6 +72,24 @@ export const englishContent = {
           description:
             'Defining the MVP, organising the work and documenting the decisions that shape the project.',
         },
+        {
+          id: 'devops',
+          title: 'DevOps',
+          description:
+            'Build, test and deployment automation with CI/CD workflows, containerization and reproducible infrastructure.',
+        },
+        {
+          id: 'data',
+          title: 'Data',
+          description:
+            'Design and management of SQL and NoSQL databases, with a focus on data modeling, integrity and performance.',
+        },
+        {
+          id: 'stack',
+          title: 'Preferred Stack',
+          description:
+            'React, TypeScript, Django, Spring Boot, Expo, PostgreSQL, Docker, GitHub Actions, Azure and Linux.',
+        },
       ],
     },
     selectedProjects: {

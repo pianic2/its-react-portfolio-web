@@ -8,7 +8,11 @@ export function LearningSection() {
   const { siteContent } = usePortfolioContent()
   const copy = siteContent.homePage.learning
   return (
-    <PageSection aria-labelledby="home-learning-title" spacing="spacious">
+    <PageSection
+      aria-labelledby="home-learning-title"
+      spacing="spacious"
+      sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
+    >
       <PageContainer>
         <Stack spacing={5}>
           <Stack spacing={1.5} sx={{ maxWidth: '52rem' }}>
@@ -34,11 +38,12 @@ export function LearningSection() {
                 component="article"
                 sx={{
                   backgroundColor:
-                    index === 0 ? 'warning.main' : index === 1 ? 'secondary.main' : 'info.main',
-                  color: 'common.black',
+                    index === 0 ? 'warning.main' : index === 1 ? 'secondary.main' : index === 2 ? 'info.main' : index === 3 ? 'success.main' : index === 4 ? 'canvas.main' : 'error.main',
+                  color:
+                    index === 0 ? 'warning.contrastText' : index === 1 ? 'secondary.contrastText' : index === 2 ? 'info.contrastText' : index === 3 ? 'success.contrastText' : index === 4 ? 'canvas.contrastText' : 'error.contrastText',
                 }}
               >
-                <CardContent sx={{ p: 3, '&:last-child': { pb: 3 } }}>
+                <CardContent sx={{ p: 8, '&:last-child': { pb: 8 } }}>
                   <Typography component="h3" variant="h4">
                     {item.title}
                   </Typography>
@@ -49,6 +54,6 @@ export function LearningSection() {
           </Box>
         </Stack>
       </PageContainer>
-    </PageSection>
+    </PageSection >
   )
 }
