@@ -48,12 +48,14 @@ Pop Art separation is created with high-contrast outlines and offset shadows rat
 
 Interaction may use short translations and shadow compression to communicate hover and press states. Motion is an enhancement, not a requirement. Under `prefers-reduced-motion: reduce`, non-essential transforms, smooth scrolling and transitions are removed or reduced to near-instant changes.
 
+The development showcase also provides a local, non-persisted reduced-motion override. It exists only for repeatable review and does not alter the public preference model.
+
 ## Focus
 
 Interactive elements use a high-contrast double-ring focus treatment based on `focusInner` and `focusOuter`. Focus styling uses `:focus-visible` so keyboard navigation remains clear without adding persistent outlines to pointer interaction.
 
 ## Development review route
 
-During development, `/__dev/design-system` exposes a draft review surface for colour roles, typography, spacing, shape, shadows, Material UI states, focus and motion. The route is excluded from production routing and is not part of the public bilingual navigation contract.
+During development, `/__dev/design-system` exposes the complete IRPW-17 review surface for tokens, typography, layout foundations, shared primitives, focus, disabled state, responsive behaviour and reduced motion.
 
-This review surface is scaffolding for IRPW-15. The complete shared-component showcase remains bounded to IRPW-17.
+The route is excluded from production routing and from the public bilingual navigation contract. It remains application-local: it is not Storybook, a separate package or a public component-library product.

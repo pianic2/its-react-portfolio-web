@@ -231,11 +231,38 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
           },
         },
       },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: colors.textMuted,
+            maxWidth: 'calc(100% - 32px)',
+            '&.Mui-focused': {
+              color: colors.text,
+            },
+            '&.Mui-error': {
+              color: colors.error,
+            },
+            '&.Mui-disabled': {
+              opacity: 0.58,
+            },
+          },
+          outlined: {
+            '&.MuiInputLabel-shrink': {
+              backgroundColor: colors.surface,
+              borderRadius: radii.xs,
+              boxShadow: `0 0 0 ${focus.outerWidth}px ${colors.surface}`,
+              paddingInline: digitalStudio.spacing.base,
+              zIndex: 1,
+            },
+          },
+        },
+      },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
             backgroundColor: colors.surface,
             borderRadius: radii.md,
+            overflow: 'visible',
             '& .MuiOutlinedInput-notchedOutline': {
               borderColor: colors.border,
               borderWidth: digitalStudio.borderWidths.regular,
@@ -253,6 +280,14 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
               borderColor: colors.border,
               borderWidth: digitalStudio.borderWidths.bold,
             },
+          },
+        },
+      },
+      MuiFormHelperText: {
+        styleOverrides: {
+          root: {
+            marginInline: digitalStudio.spacing.base * 4,
+            marginTop: digitalStudio.spacing.base * 2,
           },
         },
       },
