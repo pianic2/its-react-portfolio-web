@@ -64,12 +64,12 @@ describe('localized application routes', () => {
 
   it('switches to the equivalent localized project detail route and stores the preference', async () => {
     const user = userEvent.setup()
-    renderRoute('/it/progetti/domain-modeling')
+    renderRoute('/it/progetti/gestore-liste-node')
 
     await user.click(screen.getByRole('link', { name: "Passa all'inglese", hidden: true }))
 
-    expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
-    expect(screen.getByRole('heading', { name: 'Project detail' })).toBeInTheDocument()
+    expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/node-list-manager')
+    expect(screen.getByRole('heading', { name: 'ITS Node.js Project' })).toBeInTheDocument()
     expect(window.localStorage.getItem('irpw.language-preference')).toBe('en')
   })
 
@@ -90,6 +90,15 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/en')
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
+  })
+
+  it('renders the localized Project Detail not-found state for an unknown slug', () => {
+    renderRoute('/en/projects/unknown-project')
+
+    expect(screen.getByRole('heading', { name: 'Project not found' })).toBeInTheDocument()
+    expect(
+      screen.getByText('The requested slug does not match a published project.'),
+    ).toBeInTheDocument()
   })
 
   it('exposes the complete design-system review surface only in development builds', () => {

@@ -39,12 +39,12 @@ describe('shared navigation primitives', () => {
 
   it('switches through one destination-language flag control and stores the preference', async () => {
     const user = userEvent.setup()
-    renderWithProviders(<LanguageSwitch />, '/it/progetti/domain-modeling')
+    renderWithProviders(<LanguageSwitch />, '/it/progetti/gestore-liste-node')
 
     expect(screen.getByTestId('language-flag-en')).toBeInTheDocument()
     await user.click(screen.getByRole('link', { name: "Passa all'inglese" }))
 
-    expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
+    expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/node-list-manager')
     expect(window.localStorage.getItem('irpw.language-preference')).toBe('en')
   })
 

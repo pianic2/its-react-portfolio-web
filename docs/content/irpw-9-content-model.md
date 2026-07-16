@@ -1,69 +1,72 @@
-# IRPW-9 content model
+# IRPW-9 content layer
 
-## Purpose
+## Purpose and boundary
 
-The content layer keeps bilingual portfolio data independent from React rendering and route construction. Static content remains versioned in the repository and is validated before pages consume it.
+The content layer is the validated source for bilingual portfolio content. It is independent of React page composition and keeps stable facts separate from localized copy.
+
+IRPW-9 supplies schemas, data, validation, view models, loaders and route integration. It does not implement the conversion-focused Home page tracked by IRPW-23. The current Home route may remain a placeholder; IRPW-23 must consume the featured-project loader instead of importing raw records.
 
 ## Data flow
 
 ```text
-raw bilingual content
+shared facts + localized copy
   -> Zod schemas
-  -> referential and locale-parity validation
-  -> locale/project loaders
-  -> page view data
-  -> React pages
+  -> integrity and locale-parity validation
+  -> view-model assembly
+  -> locale-aware loaders and route paths
+  -> React rendering
 ```
 
-## Boundaries
+## Directory responsibilities
 
-- `src/content/schema.ts` owns runtime contracts and inferred TypeScript types.
-- `src/content/data.ts` owns shared factual records and equivalent Italian/English copy.
-- `src/content/validation.ts` owns schema, reference, uniqueness and parity checks.
-- `src/content/loaders.ts` owns locale selection, project lookup and localized route generation.
-- React pages consume loaders and do not import raw content.
-- `src/routes/routeConfig.ts` remains the source of truth for route paths and route matching.
-- The design system is not changed by IRPW-9.
+- `src/content/schema.ts` defines runtime contracts and inferred TypeScript types. It has no dependency on React or routing.
+- `src/content/data/shared.ts` contains stable IDs, capability references, evidence URLs, external URLs, asset references, featured flags and order.
+- `src/content/data/it.ts` and `src/content/data/en.ts` contain localized site, navigation, CTA, capability, project, evidence-label and metadata copy.
+- `src/content/data/index.ts` assembles the raw repository without validating or rendering it.
+- `src/content/validation.ts` validates schemas, uniqueness, references and locale parity and produces actionable errors.
+- `src/content/viewModels.ts` joins validated shared facts with one locale. Pages do not perform this join.
+- `src/content/loaders.ts` exposes the public read API and is the only content module that constructs localized route paths.
+- `src/routes/routeConfig.ts` owns path patterns and route matching. It does not own navigation labels.
+- React pages consume loaders only and never import `src/content/data`.
 
-## Project identity and localization
+This separation prevents raw data, validation policy, URL construction and rendering concerns from becoming page-specific code.
 
-Each project has a stable non-localized `projectId`. Each locale provides an explicit slug and editorial copy. Route switching must preserve the stable ID and resolve the target locale slug rather than copying the current URL segment.
+## Identity, slugs and localization
 
-Shared records own facts that must not drift between locales:
+Each project has a stable, non-localized `id`. Localized records refer to it through `projectId`. Slugs are explicit locale-owned values and are not canonical identity.
 
-- project status;
-- capability references;
-- evidence;
-- external links;
-- asset references;
-- portfolio ordering.
+Language switching on Project Detail resolves the current slug to a stable project ID and then asks the target locale for its path. Copying the source slug into the target route is not supported.
 
-Localized records own:
+Italian and English must have equivalent project, capability, navigation, section, evidence, link, asset and claim contracts. Text may differ as a translation, but claim IDs, status and evidence references must remain equivalent.
 
-- slug;
-- title and summary;
-- problem, approach and outcome;
-- role description;
-- metadata;
-- claim presentation status.
+## Claim contract
 
-## Claim status
+Every claim has:
 
-- `verified`: requires at least one evidence reference and is reserved for claims supported by reviewed evidence.
-- `demonstrated`: requires evidence and describes behaviour or structure visible in the repository or a reproducible demo.
-- `declared`: records descriptive information without presenting it as independently verified.
-- `planned`: describes future work and cannot reference evidence as completed work.
+- a stable `id`;
+- localized `text`;
+- one status from `verified`, `demonstrated`, `declared` or `planned`;
+- evidence IDs governed by that status.
 
-The current four projects use `demonstrated` claims backed by their canonical repositories. HomeEdge and AI Social wording explicitly preserves their documented maturity boundaries.
+`verified` and `demonstrated` require at least one evidence reference. `declared` may carry evidence but is not promoted to independent verification. `planned` cannot reference evidence as proof of completed work. Validation also rejects evidence IDs that do not belong to the same project.
 
-## Initial project set
+The view model provides the localized status label. Pages and the future Home do not interpret status values themselves.
 
-1. HomeEdge AI Platform
-2. Restaurant Kitchef Brain
-3. AI Social Agent
-4. ITS Libreria API
+## Public loader API
 
-The source repositories are the factual evidence surface. Content must not claim production readiness, commercial readiness or completed roadmap components unless those repositories provide reviewed evidence.
+The supported project API is:
+
+```ts
+getFeaturedProjects(language)
+getAllProjects(language)
+getProjectById(language, projectId)
+getProjectBySlug(language, slug)
+getLocalizedProjectPath(projectId, language)
+```
+
+`getFeaturedProjects` returns validated view models in shared portfolio order. Each model includes a localized `path`, resolved capabilities, claims, evidence, links, assets and metadata. IRPW-23 should render this result directly and must not import raw files, filter records, reconstruct URLs or reinterpret claim status.
+
+Unknown IDs and slugs return `null`. Project Detail renders a localized not-found state for an unknown slug.
 
 ## Validation
 
@@ -76,26 +79,61 @@ npm run check
 
 Validation rejects:
 
-- invalid schema values;
-- unsupported verified or demonstrated claims;
-- missing locale records;
-- duplicate project IDs or localized slugs;
-- unknown evidence references;
-- missing capability references;
-- different project or navigation sets between Italian and English;
-- different claim status for the same project across locales.
+- invalid schema values and non-HTTPS external URLs;
+- duplicate shared project, capability and asset IDs;
+- duplicate project-local evidence, link, section and claim IDs;
+- duplicate slugs within a locale;
+- missing locale projects or capability copy;
+- unknown capability, evidence and asset references;
+- localized evidence, link or asset sets that do not match shared facts;
+- verified or demonstrated claims without evidence;
+- Italian and English navigation, section or claim-contract drift.
 
-Errors include a content path or entity identifier so the failing record is actionable.
+Errors include locale, entity type, stable ID and data path whenever that context is available.
 
 ## Adding a project
 
-1. Add one shared project record with a stable ID, evidence and capability references.
-2. Add one Italian localized record.
-3. Add one English localized record with the same project ID and claim status.
-4. Use an explicit slug in each locale.
-5. Run content validation and the complete quality gate.
-6. Add only claims supported by repository evidence.
+1. Add one shared project in `data/shared.ts` with a stable ID, evidence, links, capabilities, asset references, featured flag and order.
+2. Add one localized record in every locale file using the same project ID.
+3. Keep section IDs, claim IDs, claim statuses and evidence references equivalent across locales.
+4. Use a locale-owned slug and localized metadata.
+5. Add only claims supported by the referenced source. Preserve explicit source limitations.
+6. Run content validation and the complete quality gate.
 
-## Adding a locale
+## Adding a language
 
-A new locale requires a complete site record, navigation set, capability labels and one localized record for every shared project. Locale parity validation must be extended before the locale is exposed by routing.
+1. Add the language to `supportedLanguages` in `schema.ts`.
+2. Add a complete locale file with site copy, navigation, CTAs, capability copy and every project.
+3. Add localized path patterns in `routeConfig.ts`.
+4. Generalize the parity checks currently comparing Italian and English.
+5. Add loader, route-switch and negative validation tests before exposing the locale.
+
+## Canonical project sources
+
+### HomeEdge AI Platform
+
+- Repository: <https://github.com/pianic2/homeedge-ai-platform>
+- Primary evidence: <https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md>
+
+The portfolio states only that the Sprint 0 README defines the ESP32-C3 room/door MVP boundary and its included signals. Backend, mobile and AI service boundaries remain `[UNVALIDATED]`. The content does not claim production, commercial, safety-critical or security-grade readiness, or that target service directories prove implemented services.
+
+### ITS Library API in Laravel
+
+- Repository: <https://github.com/pianic2/its-php-libreria>
+- Primary evidence: <https://github.com/pianic2/its-php-libreria/blob/main/README.md>
+
+The content is limited to repository-documented REST resources, Laravel Sanctum protection and the local Docker Compose setup. It does not claim deployment or production readiness.
+
+### ITS Node.js Project
+
+- Selected repository: <https://github.com/pianic2/todo-list-manager-node>
+- Server evidence: <https://github.com/pianic2/todo-list-manager-node/blob/main/src/server.js>
+- Manifest evidence: <https://github.com/pianic2/todo-list-manager-node/blob/main/package.json>
+
+The public account also contains `todo-server`, but its public evidence is only a one-line README and no root `package.json` was available. `todo-list-manager-node` was selected because its source demonstrates an Express application with modular list and nested-item routes, while its manifest declares SQLite, Jest and Supertest.
+
+The `todo-list-manager-node` README currently contains a `Code` link that points to the Laravel repository. That link and the README's live-demo statements are therefore not used as portfolio evidence. The content does not claim deployment, uptime, production maturity or results.
+
+## Asset references
+
+The schema supports shared asset provenance plus localized alternative text. The current canonical dataset intentionally contains no public portfolio assets because no reviewed asset was required for IRPW-9. Adding a project asset requires both a shared asset record and matching localized asset copy; dangling references fail validation.
