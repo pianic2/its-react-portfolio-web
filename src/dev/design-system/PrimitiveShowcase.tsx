@@ -78,6 +78,12 @@ export function PrimitiveShowcase() {
 
           <Stack spacing={5} sx={{ minWidth: 0 }}>
             <TextField fullWidth helperText="Default helper text" label="Default field" />
+            <TextField
+              focused
+              fullWidth
+              helperText="The label plate keeps the focus ring visually separated."
+              label="Focused field"
+            />
             <TextField defaultValue="Persisted value" fullWidth label="Filled field" />
             <TextField
               error
