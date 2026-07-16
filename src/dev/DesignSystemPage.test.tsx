@@ -31,6 +31,7 @@ describe('responsive design-system showcase', () => {
     expect(
       screen.getByRole('heading', { name: 'Material UI with a Digital Studio voice' }),
     ).toBeInTheDocument()
+    expect(screen.getByLabelText('Focused field')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Focus, disabled state and optional motion' }),
     ).toBeInTheDocument()
