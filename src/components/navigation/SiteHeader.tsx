@@ -56,12 +56,15 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             py: 3,
           })}
         >
-          <SiteIdentity language={language} />
+          <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0 }}>
+            <SiteIdentity language={language} />
+          </Box>
 
           <Box
             sx={{
               display: { xs: 'none', lg: 'block' },
-              gridColumn: { lg: '1 / -1', xl: 'auto' },
+              gridColumn: { lg: '1 / -1', xl: '2' },
+              gridRow: { lg: '2', xl: '1' },
               justifySelf: { lg: 'stretch', xl: 'center' },
               minWidth: 0,
             }}
@@ -75,6 +78,8 @@ export function SiteHeader({ language }: SiteHeaderProps) {
               alignItems: 'center',
               display: { xs: 'none', lg: 'flex' },
               gap: 2,
+              gridColumn: '3',
+              gridRow: '1',
               justifySelf: 'end',
             }}
           >
@@ -85,7 +90,12 @@ export function SiteHeader({ language }: SiteHeaderProps) {
           <StudioIconButton
             aria-label={menuLabels[language]}
             onClick={() => setMobileNavigationOpen(true)}
-            sx={{ display: { xs: 'inline-flex', lg: 'none' }, justifySelf: 'end' }}
+            sx={{
+              display: { xs: 'inline-flex', lg: 'none' },
+              gridColumn: '2',
+              gridRow: '1',
+              justifySelf: 'end',
+            }}
           >
             <MenuRounded />
           </StudioIconButton>
