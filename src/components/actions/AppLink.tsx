@@ -3,7 +3,7 @@ import { Box, Button, Link as MuiLink, type ButtonProps, type LinkProps } from '
 import { Link, type LinkProps as RouterLinkProps } from 'react-router-dom'
 import type { Language } from '../../routes/routeConfig'
 
-export type InternalLinkProps = Omit<LinkProps, 'href'> & {
+export type InternalLinkProps = Omit<LinkProps, 'component' | 'href'> & {
   to: RouterLinkProps['to']
 }
 
@@ -60,10 +60,8 @@ export function ExternalLink({
   )
 }
 
-export type ButtonLinkProps = Omit<ButtonProps, 'href'> & {
-  to: RouterLinkProps['to']
-}
+export type ButtonLinkProps = Omit<ButtonProps<typeof Link>, 'component' | 'href'>
 
-export function ButtonLink({ to, ...props }: ButtonLinkProps) {
-  return <Button component={Link} to={to} {...props} />
+export function ButtonLink(props: ButtonLinkProps) {
+  return <Button component={Link} {...props} />
 }

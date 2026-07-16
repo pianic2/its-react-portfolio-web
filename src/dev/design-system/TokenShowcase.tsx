@@ -105,8 +105,8 @@ export function TokenShowcase() {
             Heading level six
           </Typography>
           <Typography>
-            Body copy remains suitable for long-form engineering explanations, architecture decisions
-            and concise portfolio narratives.
+            Body copy remains suitable for long-form engineering explanations, architecture
+            decisions and concise portfolio narratives.
           </Typography>
           <Typography color="text.secondary" variant="body2">
             Secondary copy keeps sufficient contrast in both light and dark modes.

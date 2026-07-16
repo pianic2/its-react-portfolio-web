@@ -33,8 +33,9 @@ export function AccessibilityShowcase({
       >
         <Stack spacing={5}>
           <Typography>
-            Use Tab to inspect every interactive element. The button below moves focus deliberately to
-            the following control so the high-contrast double ring can be reviewed without a mouse.
+            Use Tab to inspect every interactive element. The button below moves focus deliberately
+            to the following control so the high-contrast double ring can be reviewed without a
+            mouse.
           </Typography>
           <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 4 }}>
             <Button onClick={() => focusTarget.current?.focus()} variant="outlined">
@@ -82,9 +83,7 @@ export function AccessibilityShowcase({
           <Typography component="h3" variant="h4">
             Motion is enhancement.
           </Typography>
-          <Typography sx={{ mt: 3 }}>
-            Hover this sample with and without reduced motion.
-          </Typography>
+          <Typography sx={{ mt: 3 }}>Hover this sample with and without reduced motion.</Typography>
         </Box>
       </Box>
     </ShowcaseSection>

@@ -42,26 +42,10 @@ export function LanguageFlag({ language }: LanguageFlagProps) {
       ) : (
         <svg focusable="false" height="20" viewBox="0 0 30 20" width="30">
           <rect fill={flagColours.unitedKingdom.blue} height="20" width="30" />
-          <path
-            d="M0 0 30 20M30 0 0 20"
-            stroke={flagColours.unitedKingdom.white}
-            strokeWidth="5"
-          />
-          <path
-            d="M0 0 30 20M30 0 0 20"
-            stroke={flagColours.unitedKingdom.red}
-            strokeWidth="2.5"
-          />
-          <path
-            d="M15 0V20M0 10H30"
-            stroke={flagColours.unitedKingdom.white}
-            strokeWidth="7"
-          />
-          <path
-            d="M15 0V20M0 10H30"
-            stroke={flagColours.unitedKingdom.red}
-            strokeWidth="3.5"
-          />
+          <path d="M0 0 30 20M30 0 0 20" stroke={flagColours.unitedKingdom.white} strokeWidth="5" />
+          <path d="M0 0 30 20M30 0 0 20" stroke={flagColours.unitedKingdom.red} strokeWidth="2.5" />
+          <path d="M15 0V20M0 10H30" stroke={flagColours.unitedKingdom.white} strokeWidth="7" />
+          <path d="M15 0V20M0 10H30" stroke={flagColours.unitedKingdom.red} strokeWidth="3.5" />
         </svg>
       )}
     </Box>

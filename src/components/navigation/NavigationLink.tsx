@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom'
 const StyledNavigationLink = styled(NavLink, {
   shouldForwardProp: (property) => property !== 'fullWidth',
 })<{ fullWidth: boolean }>(({ fullWidth, theme }) => {
-  const { borderWidths, colors, focus, motion, radii, shadowOffsets, shadows } =
-    theme.digitalStudio
+  const { borderWidths, colors, focus, motion, radii, shadowOffsets, shadows } = theme.digitalStudio
 
   return {
     alignItems: 'center',

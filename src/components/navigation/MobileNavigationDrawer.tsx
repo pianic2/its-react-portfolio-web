@@ -17,11 +17,7 @@ type MobileNavigationDrawerProps = {
   open: boolean
 }
 
-export function MobileNavigationDrawer({
-  language,
-  onClose,
-  open,
-}: MobileNavigationDrawerProps) {
+export function MobileNavigationDrawer({ language, onClose, open }: MobileNavigationDrawerProps) {
   const labels = copy[language]
 
   return (

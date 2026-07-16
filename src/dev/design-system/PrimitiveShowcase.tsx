@@ -1,16 +1,7 @@
 import AddRounded from '@mui/icons-material/AddRounded'
 import CloseRounded from '@mui/icons-material/CloseRounded'
 import DeleteRounded from '@mui/icons-material/DeleteRounded'
-import {
-  Alert,
-  Box,
-  Button,
-  CardContent,
-  Chip,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Alert, Box, Button, CardContent, Chip, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { ButtonLink, ExternalLink, InternalLink } from '../../components/actions/AppLink'
 import { StudioIconButton } from '../../components/actions/StudioIconButton'
@@ -133,10 +124,7 @@ export function PrimitiveShowcase() {
             <PrimaryNavigation language="en" />
           </Box>
 
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            sx={{ alignItems: 'flex-start', gap: 4 }}
-          >
+          <Stack direction={{ xs: 'column', sm: 'row' }} sx={{ alignItems: 'flex-start', gap: 4 }}>
             <Button onClick={() => setNavigationOpen(true)} variant="outlined">
               Open navigation preview
             </Button>

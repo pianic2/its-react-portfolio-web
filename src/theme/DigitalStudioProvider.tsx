@@ -2,10 +2,7 @@ import { CssBaseline, GlobalStyles } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { readStoredThemeMode, writeStoredThemeMode } from '../preferences/preferences'
-import {
-  DigitalStudioContext,
-  type DigitalStudioContextValue,
-} from './DigitalStudioContext'
+import { DigitalStudioContext, type DigitalStudioContextValue } from './DigitalStudioContext'
 import { createDigitalStudioTheme } from './createDigitalStudioTheme'
 import type { ThemeMode } from './tokens'
 

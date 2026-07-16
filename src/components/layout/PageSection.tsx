@@ -40,6 +40,10 @@ export type PageSectionProps = Omit<BoxProps, 'component'> & {
   spacing?: SectionSpacing
 }
 
-export function PageSection({ component = 'section', spacing = 'regular', ...props }: PageSectionProps) {
-  return <PageSectionRoot component={component} sectionSpacing={spacing} {...props} />
+export function PageSection({
+  component = 'section',
+  spacing = 'regular',
+  ...props
+}: PageSectionProps) {
+  return <PageSectionRoot as={component} sectionSpacing={spacing} {...props} />
 }

@@ -8,8 +8,7 @@ const PageContainerRoot = styled(Box, {
   const { pageGutter, shadowClearance } = theme.digitalStudio.layout
   const maxWidth = `${theme.breakpoints.values.xl}px`
 
-  const inlinePadding = (gutter: number) =>
-    gutter + (reserveShadowClearance ? shadowClearance : 0)
+  const inlinePadding = (gutter: number) => gutter + (reserveShadowClearance ? shadowClearance : 0)
   const safeAreaPadding = reserveShadowClearance ? shadowClearance : 0
 
   const paddingFor = (gutter: number, safeArea: 'left' | 'right') =>
@@ -45,10 +44,6 @@ export function PageContainer({
   ...props
 }: PageContainerProps) {
   return (
-    <PageContainerRoot
-      component={component}
-      reserveShadowClearance={reserveShadowClearance}
-      {...props}
-    />
+    <PageContainerRoot as={component} reserveShadowClearance={reserveShadowClearance} {...props} />
   )
 }
