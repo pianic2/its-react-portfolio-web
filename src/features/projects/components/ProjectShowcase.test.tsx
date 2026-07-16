@@ -26,7 +26,7 @@ describe('ProjectShowcase', () => {
     expect(projects).toHaveLength(3)
     expect(projects.map((project) => within(project).getByRole('heading').textContent)).toEqual([
       'HomeEdge AI Platform',
-      'ITS Library API in Laravel',
+      'ITS Library API',
       'ITS Node.js Project',
     ])
   })
@@ -35,7 +35,9 @@ describe('ProjectShowcase', () => {
     renderShowcase('it', 'home')
 
     expect(
-      screen.getByRole('heading', { name: 'Tre sistemi, tre vincoli distinti' }),
+      screen.getByRole('heading', {
+        name: 'Tre progetti. Tre problemi concreti da risolvere.',
+      }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Esplora tutti i progetti' })).toHaveAttribute(
       'href',
@@ -46,12 +48,12 @@ describe('ProjectShowcase', () => {
   it('renders localized detail paths, repository links and visible claim statuses', () => {
     renderShowcase('it', 'projects')
 
-    expect(screen.getAllByRole('link', { name: /^Leggi il progetto$/ })[0]).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /^Scopri HomeEdge$/ })).toHaveAttribute(
       'href',
       '/it/progetti/homeedge-ai-platform',
     )
-    expect(screen.getAllByText('Dimostrato')).toHaveLength(3)
-    expect(screen.getAllByRole('link', { name: /Repository GitHub/ })[2]).toHaveAttribute(
+    expect(screen.getAllByText('Supportato da evidenze')).toHaveLength(3)
+    expect(screen.getAllByRole('link', { name: /Apri il repository/ })[2]).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node',
     )
@@ -63,5 +65,75 @@ describe('ProjectShowcase', () => {
     expect(screen.getByText('ITS Node.js Project')).toBeInTheDocument()
     expect(screen.queryByText('Restaurant Kitchef Brain')).not.toBeInTheDocument()
     expect(screen.queryByText('AI Social Agent')).not.toBeInTheDocument()
+  })
+
+  it('renders the exact English summary and value for every project card', () => {
+    renderShowcase('en', 'projects')
+
+    expect(
+      screen.getByText(
+        'A modular smart-home platform designed to understand what is happening in a room while keeping data collection local, limited and transparent.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'It brings together physical sensors, software architecture and responsible data use in one project.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'A complete educational backend for organising books, authors and categories through a documented and protected REST API.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'It shows how authentication, validation, data relationships and file management work together in a real backend.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'A compact backend for managing lists and tasks, built with clear Express routes, persistent SQLite data and automated tests.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'It demonstrates how to keep a small application organised, testable and easy to extend without unnecessary complexity.',
+      ),
+    ).toBeInTheDocument()
+  })
+
+  it('renders the exact Italian summary and value for every project card', () => {
+    renderShowcase('it', 'projects')
+
+    expect(
+      screen.getByText(
+        'Una piattaforma smart home modulare pensata per capire cosa accade in una stanza, mantenendo la raccolta dei dati locale, limitata e trasparente.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Un backend didattico completo per organizzare libri, autori e categorie attraverso una API REST documentata e protetta.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Mostra come autenticazione, validazione, relazioni tra dati e gestione dei file lavorano insieme in un backend reale.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Un backend compatto per gestire liste e attività, costruito con route Express chiare, dati persistenti in SQLite e test automatici.',
+      ),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Mostra come mantenere una piccola applicazione ordinata, verificabile e facile da estendere senza introdurre complessità inutile.',
+      ),
+    ).toBeInTheDocument()
   })
 })

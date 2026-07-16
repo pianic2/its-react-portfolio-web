@@ -24,6 +24,44 @@ describe('content repository validation', () => {
     )
   })
 
+  it('keeps the complete editorial narrative contract equivalent across locales', () => {
+    const repository = validateContentRepository()
+    const narrativeFields = [
+      'cardSummary',
+      'cardValue',
+      'heroSummary',
+      'idea',
+      'built',
+      'value',
+      'currentStage',
+      'evidenceIntroduction',
+    ]
+
+    for (const language of ['it', 'en'] as const) {
+      for (const project of repository.locales[language].projects) {
+        expect(Object.keys(project.narrative)).toEqual(narrativeFields)
+        expect(project.evidence.every((evidence) => evidence.description.length > 0)).toBe(true)
+      }
+    }
+  })
+
+  it('localizes the public claim taxonomy without changing internal statuses', () => {
+    const repository = validateContentRepository()
+
+    expect(repository.locales.en.common.claimStatusLabels).toEqual({
+      verified: 'Verified',
+      demonstrated: 'Backed by evidence',
+      declared: 'Documented direction',
+      planned: 'Planned next step',
+    })
+    expect(repository.locales.it.common.claimStatusLabels).toEqual({
+      verified: 'Verificato',
+      demonstrated: 'Supportato da evidenze',
+      declared: 'Direzione documentata',
+      planned: 'Prossimo passo pianificato',
+    })
+  })
+
   it('rejects a project missing from one language', () => {
     const repository = cloneRepository()
     repository.locales.en.projects.pop()
