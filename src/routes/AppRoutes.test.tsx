@@ -66,7 +66,7 @@ describe('localized application routes', () => {
     const user = userEvent.setup()
     renderRoute('/it/progetti/domain-modeling')
 
-    await user.click(screen.getByRole('link', { name: 'English' }))
+    await user.click(screen.getByRole('link', { name: "Passa all'inglese", hidden: true }))
 
     expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
     expect(screen.getByRole('heading', { name: 'Project detail' })).toBeInTheDocument()
@@ -77,16 +77,19 @@ describe('localized application routes', () => {
     renderRoute('/en')
 
     const mainNavigation = screen.getByRole('navigation', {
+      hidden: true,
       name: 'Main navigation',
     })
     expect(mainNavigation).not.toContainElement(screen.getByRole('link', { name: 'Privacy' }))
   })
 
-  it('renders an accessible localized not-found page', () => {
+  it('renders localized unknown routes inside the application shell', () => {
     renderRoute('/en/unknown')
 
+    expect(screen.getByRole('banner')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/en')
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
   it('exposes the design-system review surface only in development builds', () => {

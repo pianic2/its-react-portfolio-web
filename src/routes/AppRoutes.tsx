@@ -38,6 +38,7 @@ export function AppRoutes() {
               element={pageElement(page, language)}
             />
           ))}
+          <Route path="*" element={<NotFoundPage language={language} />} />
         </Route>
       ))}
       <Route path="*" element={<NotFoundPage />} />
