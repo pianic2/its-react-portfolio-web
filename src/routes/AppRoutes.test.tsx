@@ -77,16 +77,19 @@ describe('localized application routes', () => {
     renderRoute('/en')
 
     const mainNavigation = screen.getByRole('navigation', {
+      hidden: true,
       name: 'Main navigation',
     })
     expect(mainNavigation).not.toContainElement(screen.getByRole('link', { name: 'Privacy' }))
   })
 
-  it('renders an accessible localized not-found page', () => {
+  it('renders localized unknown routes inside the application shell', () => {
     renderRoute('/en/unknown')
 
+    expect(screen.getByRole('banner')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/en')
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
   it('exposes the design-system review surface only in development builds', () => {
