@@ -6,23 +6,30 @@ const PageContainerRoot = styled(Box, {
   shouldForwardProp: (property) => property !== 'reserveShadowClearance',
 })<{ reserveShadowClearance: boolean }>(({ reserveShadowClearance, theme }) => {
   const { pageGutter, shadowClearance } = theme.digitalStudio.layout
+  const maxWidth = `${theme.breakpoints.values.xl}px`
 
-  const inlineEnd = (gutter: number) => gutter + (reserveShadowClearance ? shadowClearance : 0)
+  const inlinePadding = (gutter: number) =>
+    gutter + (reserveShadowClearance ? shadowClearance : 0)
+  const safeAreaPadding = reserveShadowClearance ? shadowClearance : 0
+
+  const paddingFor = (gutter: number, safeArea: 'left' | 'right') =>
+    `max(${inlinePadding(gutter)}px, calc(env(safe-area-inset-${safeArea}) + ${safeAreaPadding}px))`
 
   return {
+    boxSizing: 'border-box',
+    inlineSize: '100%',
     marginInline: 'auto',
-    maxWidth: theme.breakpoints.values.xl,
+    maxInlineSize: maxWidth,
     minWidth: 0,
-    paddingInlineEnd: `max(${inlineEnd(pageGutter.compact)}px, calc(env(safe-area-inset-right) + ${reserveShadowClearance ? shadowClearance : 0}px))`,
-    paddingInlineStart: `max(${pageGutter.compact}px, env(safe-area-inset-left))`,
-    width: '100%',
+    paddingInlineEnd: paddingFor(pageGutter.compact, 'right'),
+    paddingInlineStart: paddingFor(pageGutter.compact, 'left'),
     [theme.breakpoints.up('sm')]: {
-      paddingInlineEnd: `max(${inlineEnd(pageGutter.regular)}px, calc(env(safe-area-inset-right) + ${reserveShadowClearance ? shadowClearance : 0}px))`,
-      paddingInlineStart: `max(${pageGutter.regular}px, env(safe-area-inset-left))`,
+      paddingInlineEnd: paddingFor(pageGutter.regular, 'right'),
+      paddingInlineStart: paddingFor(pageGutter.regular, 'left'),
     },
     [theme.breakpoints.up('md')]: {
-      paddingInlineEnd: `max(${inlineEnd(pageGutter.wide)}px, calc(env(safe-area-inset-right) + ${reserveShadowClearance ? shadowClearance : 0}px))`,
-      paddingInlineStart: `max(${pageGutter.wide}px, env(safe-area-inset-left))`,
+      paddingInlineEnd: paddingFor(pageGutter.wide, 'right'),
+      paddingInlineStart: paddingFor(pageGutter.wide, 'left'),
     },
   }
 })
