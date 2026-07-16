@@ -37,11 +37,12 @@ describe('shared navigation primitives', () => {
     expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
   })
 
-  it('switches the equivalent localized route and stores the preference', async () => {
+  it('switches through one destination-language flag control and stores the preference', async () => {
     const user = userEvent.setup()
     renderWithProviders(<LanguageSwitch />, '/it/progetti/domain-modeling')
 
-    await user.click(screen.getByRole('link', { name: 'English' }))
+    expect(screen.getByTestId('language-flag-en')).toBeInTheDocument()
+    await user.click(screen.getByRole('link', { name: "Passa all'inglese" }))
 
     expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
     expect(window.localStorage.getItem('irpw.language-preference')).toBe('en')
