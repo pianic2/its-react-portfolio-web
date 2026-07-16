@@ -39,9 +39,10 @@ export function PrimaryNavigation({
         }}
       >
         {mainNavigationPages.map((page) => (
-          <Box component="li" key={page} sx={{ minWidth: 0 }}>
+          <Box component="li" key={page} sx={{ minWidth: 0, width: vertical ? '100%' : 'auto' }}>
             <NavigationLink
               end={page === 'home'}
+              fullWidth={vertical}
               onNavigate={onNavigate}
               to={getRoutePath(page, language)}
             >
