@@ -28,13 +28,21 @@ Display typography is not used for paragraphs, form content or long navigation l
 
 ## Spacing and shape
 
-Material UI spacing uses a 4 px base unit. Components should prefer `theme.spacing()` instead of literal padding or gap values.
+Material UI spacing uses the design-system `spacing.base` token, currently 4 px. Components should prefer `theme.spacing()` instead of literal padding or gap values.
 
 The radius scale ranges from compact 6 px details to 48 px feature surfaces. Pill geometry is reserved for chips, badges and deliberately pill-shaped controls.
 
+## Optical alignment and safe areas
+
+Page gutters, panel insets and section gaps are named layout tokens. All top-level review surfaces use the same horizontal inset so headings, copy and controls share one vertical axis across the page.
+
+Pop Art shadows extend towards the inline and block ends. Layouts must reserve clearance equal to the largest shadow offset so the visible silhouette remains centred and is not clipped against the viewport. Nested shadowed surfaces reserve their own inline-end and block-end clearance.
+
+Viewport spacing also honours `env(safe-area-inset-*)` values. This keeps the same visual rhythm when the site is displayed in a standalone or full-screen context on devices with rounded corners, camera cut-outs or home indicators.
+
 ## Borders and elevation
 
-Pop Art separation is created with high-contrast outlines and offset shadows rather than realistic floating elevation. Components should use the named border-width and shadow tokens. Shadows are decorative and never the only boundary between content regions.
+Pop Art separation is created with high-contrast outlines and offset shadows rather than realistic floating elevation. Components should use the named border-width, shadow-offset and shadow tokens. Shadows are decorative and never the only boundary between content regions.
 
 ## Motion and reduced motion
 
