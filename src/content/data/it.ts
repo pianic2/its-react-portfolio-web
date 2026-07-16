@@ -26,6 +26,27 @@ export const italianContent = {
         'Portfolio bilingue di progetti software con claim collegati a evidenze pubbliche.',
     },
   },
+  projectExperience: {
+    home: {
+      eyebrow: 'Progetti selezionati',
+      title: 'Tre sistemi, tre vincoli distinti',
+      introduction:
+        'Una selezione mirata di lavori embedded, Laravel e Node.js, con ogni affermazione collegata a evidenze pubbliche nei repository.',
+      allProjectsLabel: 'Esplora tutti i progetti',
+    },
+    projects: {
+      eyebrow: 'Indice progetti',
+      title: 'Prima le evidenze, poi gli aggettivi',
+      introduction:
+        'Tre progetti tecnici presentati attraverso ambito documentato, limiti attuali e sorgenti ispezionabili.',
+    },
+    detail: {
+      backLabel: 'Torna ai progetti',
+      claimsTitle: 'Claim ed evidenze',
+      repositoryLabel: 'Apri il repository',
+      readProjectLabel: 'Leggi il progetto',
+    },
+  },
   common: {
     projectLabel: 'Progetto',
     repositoryLabel: 'Repository',

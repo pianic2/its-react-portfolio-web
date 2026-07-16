@@ -7,12 +7,27 @@ const repository = validateContentRepository()
 
 function loadProject(language: Language, projectId: string) {
   const project = buildProjectViewModel(repository, language, projectId)
-  return project
-    ? {
-        ...project,
-        path: getRoutePath('projectDetail', language, { slug: project.slug }),
-      }
-    : null
+  if (!project) return null
+
+  const primaryClaim = project.claims.at(0)
+  if (!primaryClaim) {
+    throw new Error(`Validated project "${projectId}" has no claim for locale "${language}".`)
+  }
+  const repositoryLink = project.links.find((link) => link.kind === 'repository')
+  if (!repositoryLink) {
+    throw new Error(
+      `Validated project "${projectId}" has no repository link for locale "${language}".`,
+    )
+  }
+
+  return {
+    ...project,
+    detailPath: getRoutePath('projectDetail', language, { slug: project.slug }),
+    path: getRoutePath('projectDetail', language, { slug: project.slug }),
+    repositoryUrl: repositoryLink.url,
+    claimStatus: primaryClaim.status,
+    claimLabel: primaryClaim.statusLabel,
+  }
 }
 
 export function getSiteContent(language: Language) {
@@ -55,8 +70,10 @@ export function getFeaturedProjects(language: Language) {
 }
 
 export function getLocalizedProjectPath(projectId: string, language: Language) {
-  return loadProject(language, projectId)?.path ?? null
+  return loadProject(language, projectId)?.detailPath ?? null
 }
+
+export type ProjectViewModel = NonNullable<ReturnType<typeof loadProject>>
 
 export function getNavigation(language: Language) {
   return repository.locales[language].navigation.map((item) => ({

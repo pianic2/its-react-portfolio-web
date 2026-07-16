@@ -30,6 +30,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 0,
+      visualVariant: 'signal-yellow',
     },
     {
       id: 'its-library-api-laravel',
@@ -51,6 +52,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 1,
+      visualVariant: 'studio-pink',
     },
     {
       id: 'node-list-manager',
@@ -77,6 +79,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 2,
+      visualVariant: 'electric-cyan',
     },
   ],
   assets: [],

@@ -27,6 +27,7 @@ export function buildProjectViewModel(
   return {
     id: core.id,
     projectId: core.id,
+    number: String(core.order + 1).padStart(2, '0'),
     slug: localized.slug,
     title: localized.title,
     eyebrow: localized.eyebrow,
@@ -35,6 +36,7 @@ export function buildProjectViewModel(
     metadata: localized.metadata,
     featured: core.featured,
     order: core.order,
+    visualVariant: core.visualVariant,
     capabilities: core.capabilityIds.map((capabilityId) => ({
       id: capabilityId,
       category: repository.capabilities.find((capability) => capability.id === capabilityId)

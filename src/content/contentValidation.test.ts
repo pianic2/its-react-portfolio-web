@@ -91,6 +91,15 @@ describe('content repository validation', () => {
       /entity=project id=homeedge-ai-platform path=projects\.0\.links\.0\.url: External URLs must use HTTPS/,
     )
   })
+
+  it('rejects a project without one canonical repository link', () => {
+    const repository = cloneRepository()
+    repository.projects[0]!.links[0]!.kind = 'documentation'
+
+    expect(() => validateContentRepository(repository)).toThrow(
+      /entity=project id=homeedge-ai-platform.*Projects require exactly one repository link/,
+    )
+  })
 })
 
 describe('content loaders', () => {

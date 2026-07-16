@@ -4,7 +4,7 @@
 
 The content layer is the validated source for bilingual portfolio content. It is independent of React page composition and keeps stable facts separate from localized copy.
 
-IRPW-9 supplies schemas, data, validation, view models, loaders and route integration. It does not implement the conversion-focused Home page tracked by IRPW-23. The current Home route may remain a placeholder; IRPW-23 must consume the featured-project loader instead of importing raw records.
+IRPW-9 supplies schemas, data, validation, view models, loaders and route integration. IRPW-23 consumes that contract through a localized React context while keeping visual composition outside the content layer.
 
 ## Data flow
 
@@ -26,6 +26,7 @@ shared facts + localized copy
 - `src/content/validation.ts` validates schemas, uniqueness, references and locale parity and produces actionable errors.
 - `src/content/viewModels.ts` joins validated shared facts with one locale. Pages do not perform this join.
 - `src/content/loaders.ts` exposes the public read API and is the only content module that constructs localized route paths.
+- `src/content/context` exposes the validated loader API to localized React routes without duplicating or reparsing data.
 - `src/routes/routeConfig.ts` owns path patterns and route matching. It does not own navigation labels.
 - React pages consume loaders only and never import `src/content/data`.
 
@@ -50,7 +51,7 @@ Every claim has:
 
 `verified` and `demonstrated` require at least one evidence reference. `declared` may carry evidence but is not promoted to independent verification. `planned` cannot reference evidence as proof of completed work. Validation also rejects evidence IDs that do not belong to the same project.
 
-The view model provides the localized status label. Pages and the future Home do not interpret status values themselves.
+The view model provides the localized status label. Pages and Home do not interpret status values themselves.
 
 ## Public loader API
 
@@ -64,7 +65,7 @@ getProjectBySlug(language, slug)
 getLocalizedProjectPath(projectId, language)
 ```
 
-`getFeaturedProjects` returns validated view models in shared portfolio order. Each model includes a localized `path`, resolved capabilities, claims, evidence, links, assets and metadata. IRPW-23 should render this result directly and must not import raw files, filter records, reconstruct URLs or reinterpret claim status.
+`getFeaturedProjects` returns validated view models in shared portfolio order. Each model includes a localized detail path, resolved capabilities, claims, evidence, links, assets, metadata and a deterministic visual variant. `PortfolioContentProvider` exposes this result to IRPW-23; visual components do not import raw files, filter records, reconstruct URLs or reinterpret claim status.
 
 Unknown IDs and slugs return `null`. Project Detail renders a localized not-found state for an unknown slug.
 

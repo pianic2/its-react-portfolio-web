@@ -22,6 +22,27 @@ export const englishContent = {
       description: 'Bilingual software portfolio with claims linked to public evidence.',
     },
   },
+  projectExperience: {
+    home: {
+      eyebrow: 'Selected work',
+      title: 'Three systems, three distinct constraints',
+      introduction:
+        'A focused selection of embedded, Laravel and Node.js work, with every statement tied to public repository evidence.',
+      allProjectsLabel: 'Explore all projects',
+    },
+    projects: {
+      eyebrow: 'Project index',
+      title: 'Evidence before adjectives',
+      introduction:
+        'Three technical projects presented through their documented scope, current limits and inspectable source material.',
+    },
+    detail: {
+      backLabel: 'Back to projects',
+      claimsTitle: 'Claims and evidence',
+      repositoryLabel: 'Open repository',
+      readProjectLabel: 'Read project',
+    },
+  },
   common: {
     projectLabel: 'Project',
     repositoryLabel: 'Repository',

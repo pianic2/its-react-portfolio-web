@@ -13,6 +13,7 @@ export const publicPageIds = [
 
 export const languageSchema = z.enum(supportedLanguages)
 export const pageIdSchema = z.enum(publicPageIds)
+export const projectVisualVariantSchema = z.enum(['signal-yellow', 'studio-pink', 'electric-cyan'])
 
 const stableIdSchema = z
   .string()
@@ -149,15 +150,26 @@ export const claimSchema = z.discriminatedUnion('status', [
   }),
 ])
 
-export const projectCoreSchema = z.object({
-  id: stableIdSchema,
-  capabilityIds: z.array(stableIdSchema).min(1),
-  evidence: z.array(evidenceSchema).min(1),
-  links: z.array(externalLinkSchema).min(1),
-  assetIds: z.array(stableIdSchema).default([]),
-  featured: z.boolean().default(false),
-  order: z.number().int().nonnegative(),
-})
+export const projectCoreSchema = z
+  .object({
+    id: stableIdSchema,
+    capabilityIds: z.array(stableIdSchema).min(1),
+    evidence: z.array(evidenceSchema).min(1),
+    links: z.array(externalLinkSchema).min(1),
+    assetIds: z.array(stableIdSchema).default([]),
+    featured: z.boolean().default(false),
+    order: z.number().int().nonnegative(),
+    visualVariant: projectVisualVariantSchema,
+  })
+  .superRefine((project, context) => {
+    if (project.links.filter((link) => link.kind === 'repository').length !== 1) {
+      context.addIssue({
+        code: 'custom',
+        path: ['links'],
+        message: 'Projects require exactly one repository link.',
+      })
+    }
+  })
 
 export const localizedProjectSchema = z.object({
   projectId: stableIdSchema,
@@ -206,6 +218,25 @@ export const siteContentSchema = z.object({
     secondaryCta: ctaSchema,
     metadata: z.object({ title: z.string().min(1), description: z.string().min(1) }),
   }),
+  projectExperience: z.object({
+    home: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      introduction: z.string().min(1),
+      allProjectsLabel: z.string().min(1),
+    }),
+    projects: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      introduction: z.string().min(1),
+    }),
+    detail: z.object({
+      backLabel: z.string().min(1),
+      claimsTitle: z.string().min(1),
+      repositoryLabel: z.string().min(1),
+      readProjectLabel: z.string().min(1),
+    }),
+  }),
   common: z.object({
     projectLabel: z.string().min(1),
     repositoryLabel: z.string().min(1),
@@ -236,3 +267,4 @@ export type ContentRepository = z.infer<typeof contentRepositorySchema>
 export type Language = (typeof supportedLanguages)[number]
 export type PageId = (typeof publicPageIds)[number]
 export type ClaimStatus = LocalizedProject['claims'][number]['status']
+export type ProjectVisualVariant = z.infer<typeof projectVisualVariantSchema>
