@@ -1,5 +1,6 @@
 import { Card, type CardProps } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import type { ElementType } from 'react'
 
 export type StudioCardVariant = 'standard' | 'featured'
 
@@ -24,6 +25,7 @@ const StudioCardRoot = styled(Card, {
 })
 
 export type StudioCardProps = Omit<CardProps, 'variant'> & {
+  component?: ElementType
   variant?: StudioCardVariant
 }
 
