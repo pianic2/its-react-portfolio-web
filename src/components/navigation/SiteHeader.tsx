@@ -65,8 +65,8 @@ export function SiteHeader({ language }: SiteHeaderProps) {
                 background: `linear-gradient(90deg, ${colors.primary} 0 34%, ${colors.secondary} 34% 67%, ${colors.accent} 67% 100%)`,
                 blockSize: theme.spacing(1.5),
                 content: '""',
-                insetInline: 0,
                 insetBlockStart: 0,
+                insetInline: 0,
                 position: 'absolute',
               },
             }
