@@ -1,6 +1,8 @@
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
+import BlockRounded from '@mui/icons-material/BlockRounded'
 import CheckCircleRounded from '@mui/icons-material/CheckCircleRounded'
 import CodeRounded from '@mui/icons-material/CodeRounded'
+import RateReviewRounded from '@mui/icons-material/RateReviewRounded'
 import SendRounded from '@mui/icons-material/SendRounded'
 import {
   Box,
@@ -28,6 +30,20 @@ const deliveryChecks = [
   { label: 'Accessibility review', status: 'Review' },
   { label: 'Production release', status: 'Blocked' },
 ] as const
+
+type DeliveryStatus = (typeof deliveryChecks)[number]['status']
+
+function getStatusPresentation(status: DeliveryStatus) {
+  if (status === 'Ready') {
+    return { color: 'success' as const, icon: <CheckCircleRounded /> }
+  }
+
+  if (status === 'Review') {
+    return { color: 'warning' as const, icon: <RateReviewRounded /> }
+  }
+
+  return { color: 'error' as const, icon: <BlockRounded /> }
+}
 
 function ProjectPreviewCard() {
   return (
@@ -115,29 +131,31 @@ function DeliveryStatusPanel() {
           </Box>
 
           <Stack divider={<Divider flexItem />} spacing={0}>
-            {deliveryChecks.map((check) => (
-              <Stack
-                direction="row"
-                key={check.label}
-                sx={{ alignItems: 'center', justifyContent: 'space-between', py: 3 }}
-              >
-                <Stack direction="row" sx={{ alignItems: 'center', gap: 2, minWidth: 0 }}>
-                  <CheckCircleRounded aria-hidden="true" fontSize="small" />
-                  <Typography>{check.label}</Typography>
+            {deliveryChecks.map((check) => {
+              const presentation = getStatusPresentation(check.status)
+
+              return (
+                <Stack
+                  direction="row"
+                  key={check.label}
+                  sx={{
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: 2,
+                    justifyContent: 'space-between',
+                    py: 3,
+                  }}
+                >
+                  <Typography sx={{ minWidth: 0, overflowWrap: 'anywhere' }}>{check.label}</Typography>
+                  <Chip
+                    color={presentation.color}
+                    icon={presentation.icon}
+                    label={check.status}
+                    size="small"
+                  />
                 </Stack>
-                <Chip
-                  color={
-                    check.status === 'Ready'
-                      ? 'success'
-                      : check.status === 'Review'
-                        ? 'warning'
-                        : 'error'
-                  }
-                  label={check.status}
-                  size="small"
-                />
-              </Stack>
-            ))}
+              )
+            })}
           </Stack>
         </Stack>
       </CardContent>
@@ -187,7 +205,12 @@ function ContactPanelPreview() {
               <TextField fullWidth label="Email" type="email" />
             </Box>
             <TextField fullWidth label="Project context" multiline rows={3} />
-            <Button endIcon={<SendRounded />} sx={{ alignSelf: 'flex-start' }} type="button" variant="contained">
+            <Button
+              endIcon={<SendRounded />}
+              sx={{ alignSelf: 'flex-start' }}
+              type="button"
+              variant="contained"
+            >
               Send preview
             </Button>
           </Stack>
