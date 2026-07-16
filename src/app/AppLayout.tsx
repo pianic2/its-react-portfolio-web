@@ -21,7 +21,12 @@ export function AppLayout({ language }: AppLayoutProps) {
       <SkipLink label={skipLabels[language]} targetId="main-content" />
       <RouteFocusManager targetId="main-content" />
       <SiteHeader language={language} />
-      <Box component="main" id="main-content" sx={{ flex: 1, minWidth: 0 }} tabIndex={-1}>
+      <Box
+        component="main"
+        id="main-content"
+        sx={{ flex: 1, minWidth: 0, outline: 'none' }}
+        tabIndex={-1}
+      >
         <Outlet />
       </Box>
       <SiteFooter language={language} />
