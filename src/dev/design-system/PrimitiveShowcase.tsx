@@ -161,6 +161,7 @@ export function PrimitiveShowcase() {
         description="Both variants reserve their offset-shadow footprint and remain non-interactive until they contain an explicit destination or action."
         eyebrow="08 · Surfaces"
         title="Standard and featured cards"
+        wide
       >
         <Box
           sx={{
