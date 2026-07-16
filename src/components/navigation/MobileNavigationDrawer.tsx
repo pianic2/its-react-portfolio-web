@@ -1,6 +1,7 @@
 import CloseRounded from '@mui/icons-material/CloseRounded'
-import { Divider, Drawer, IconButton, Stack, Typography } from '@mui/material'
+import { Divider, Drawer, Stack, Typography } from '@mui/material'
 import type { Language } from '../../routes/routeConfig'
+import { StudioIconButton } from '../actions/StudioIconButton'
 import { LanguageSwitch } from './LanguageSwitch'
 import { PrimaryNavigation } from './PrimaryNavigation'
 import { ThemeToggle } from './ThemeToggle'
@@ -50,17 +51,9 @@ export function MobileNavigationDrawer({
           <Typography component="h2" variant="h4">
             {labels.title}
           </Typography>
-          <IconButton
-            aria-label={labels.close}
-            onClick={onClose}
-            sx={(theme) => ({
-              bgcolor: 'background.paper',
-              border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
-              boxShadow: theme.digitalStudio.shadows.small,
-            })}
-          >
+          <StudioIconButton aria-label={labels.close} onClick={onClose}>
             <CloseRounded />
-          </IconButton>
+          </StudioIconButton>
         </Stack>
 
         <PrimaryNavigation language={language} onNavigate={onClose} orientation="vertical" />
