@@ -1,4 +1,4 @@
-import { Box, CardContent, Chip, Stack, Typography } from '@mui/material'
+import { Box, CardContent, Chip, GlobalStyles, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkipLink } from '../app/SkipLink'
 import { PageContainer } from '../components/layout/PageContainer'
@@ -38,19 +38,25 @@ export function DesignSystemPage() {
   return (
     <Box
       data-force-reduced-motion={forcedReducedMotion ? 'true' : 'false'}
-      sx={{
-        minHeight: '100vh',
-        '&[data-force-reduced-motion="true"] *, &[data-force-reduced-motion="true"] *::before, &[data-force-reduced-motion="true"] *::after': {
-          animationDuration: '0.01ms !important',
-          animationIterationCount: '1 !important',
-          scrollBehavior: 'auto !important',
-          transitionDuration: '0.01ms !important',
-        },
-        '&[data-force-reduced-motion="true"] .MuiButton-root:hover, &[data-force-reduced-motion="true"] .MuiButton-root:active, &[data-force-reduced-motion="true"] .MuiIconButton-root:hover, &[data-force-reduced-motion="true"] .MuiIconButton-root:active, &[data-force-reduced-motion="true"] a:hover, &[data-force-reduced-motion="true"] a:active, &[data-force-reduced-motion="true"] [data-motion-sensitive="true"]:hover': {
-          transform: 'none !important',
-        },
-      }}
+      sx={{ minHeight: '100vh' }}
     >
+      {forcedReducedMotion ? (
+        <GlobalStyles
+          styles={{
+            html: { scrollBehavior: 'auto !important' },
+            '*, *::before, *::after': {
+              animationDuration: '0.01ms !important',
+              animationIterationCount: '1 !important',
+              scrollBehavior: 'auto !important',
+              transitionDuration: '0.01ms !important',
+            },
+            '.MuiButton-root:hover, .MuiButton-root:active, .MuiIconButton-root:hover, .MuiIconButton-root:active, a:hover, a:active, .is-active, [data-motion-sensitive="true"]:hover': {
+              transform: 'none !important',
+            },
+          }}
+        />
+      ) : null}
+
       <SkipLink label="Skip to design-system content" targetId="design-system-main" />
 
       <Box component="main" id="design-system-main" sx={{ outline: 'none' }} tabIndex={-1}>
