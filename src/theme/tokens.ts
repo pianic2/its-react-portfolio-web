@@ -25,6 +25,9 @@ export type SemanticColors = {
 
 export type DigitalStudioThemeTokens = {
   colors: SemanticColors
+  spacing: {
+    base: number
+  }
   borderWidths: {
     thin: number
     regular: number
@@ -39,6 +42,11 @@ export type DigitalStudioThemeTokens = {
     xl: number
     pill: number
   }
+  shadowOffsets: {
+    small: number
+    medium: number
+    large: number
+  }
   shadows: {
     small: string
     medium: string
@@ -47,6 +55,24 @@ export type DigitalStudioThemeTokens = {
   patterns: {
     halftone: string
     diagonal: string
+  }
+  layout: {
+    pageGutter: {
+      compact: number
+      regular: number
+      wide: number
+    }
+    panelInset: {
+      compact: number
+      regular: number
+      wide: number
+    }
+    sectionGap: {
+      compact: number
+      regular: number
+      wide: number
+    }
+    shadowClearance: number
   }
   motion: {
     duration: {
@@ -119,6 +145,10 @@ export const semanticColorSchemes: Record<ThemeMode, SemanticColors> = {
   },
 }
 
+const spacing = {
+  base: 4,
+} as const
+
 const borderWidths = {
   thin: 1,
   regular: 2,
@@ -133,6 +163,31 @@ const radii = {
   lg: 32,
   xl: 48,
   pill: 999,
+} as const
+
+const shadowOffsets = {
+  small: 3,
+  medium: 6,
+  large: 10,
+} as const
+
+const layout = {
+  pageGutter: {
+    compact: 16,
+    regular: 24,
+    wide: 32,
+  },
+  panelInset: {
+    compact: 24,
+    regular: 32,
+    wide: 40,
+  },
+  sectionGap: {
+    compact: 24,
+    regular: 32,
+    wide: 40,
+  },
+  shadowClearance: shadowOffsets.large,
 } as const
 
 const motion = {
@@ -156,17 +211,20 @@ export function createDigitalStudioTokens(mode: ThemeMode): DigitalStudioThemeTo
 
   return {
     colors,
+    spacing,
     borderWidths,
     radii,
+    shadowOffsets,
     shadows: {
-      small: `3px 3px 0 ${shadowColor}`,
-      medium: `6px 6px 0 ${shadowColor}`,
-      large: `10px 10px 0 ${shadowColor}`,
+      small: `${shadowOffsets.small}px ${shadowOffsets.small}px 0 ${shadowColor}`,
+      medium: `${shadowOffsets.medium}px ${shadowOffsets.medium}px 0 ${shadowColor}`,
+      large: `${shadowOffsets.large}px ${shadowOffsets.large}px 0 ${shadowColor}`,
     },
     patterns: {
       halftone: `radial-gradient(circle at 2px 2px, ${colors.border} 1.25px, transparent 1.4px)`,
       diagonal: `repeating-linear-gradient(135deg, ${colors.border} 0 2px, transparent 2px 10px)`,
     },
+    layout,
     motion,
     focus: {
       width: 3,
