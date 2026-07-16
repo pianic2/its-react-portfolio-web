@@ -27,6 +27,16 @@ export const sharedContent = {
           type: 'documentation',
           url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md',
         },
+        {
+          id: 'homeedge-product-vision',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
+        },
+        {
+          id: 'homeedge-stakeholder-review',
+          type: 'report',
+          url: 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview',
+        },
       ],
       links: [
         {
@@ -38,6 +48,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 0,
+      origin: 'personal-long-term',
       visualVariant: 'signal-yellow',
     },
     {
@@ -70,6 +81,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 1,
+      origin: 'its-training',
       visualVariant: 'studio-pink',
     },
     {
@@ -102,6 +114,7 @@ export const sharedContent = {
       assetIds: [],
       featured: true,
       order: 2,
+      origin: 'its-training',
       visualVariant: 'electric-cyan',
     },
   ],

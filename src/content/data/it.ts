@@ -17,10 +17,17 @@ export const italianContent = {
   ],
   portfolio: {
     eyebrow: 'SOFTWARE, HARDWARE E PROBLEMI REALI',
-    headline: 'Trasformo idee complesse in prodotti utili e comprensibili.',
+    headline: 'Creo prodotti digitali utili.',
     introduction:
-      'Realizzo progetti che collegano codice, dispositivi e persone — dai sensori per la casa intelligente alle API web. Ogni progetto spiega cosa funziona oggi, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
-    primaryCta: { kind: 'internal', page: 'projects', label: 'Esplora i progetti' },
+      'Progetto e realizzo software che collega persone, dati e dispositivi fisici — dalle API web ai sistemi per la casa intelligente.',
+    training: {
+      prefix: 'Sto completando il mio percorso di formazione come Full Stack Developer presso ',
+      linkLabel: 'ITS Prodigi',
+      suffix:
+        ', dove sviluppo le mie competenze attraverso progetti pratici costruiti intorno a problemi tecnici reali.',
+      url: 'https://www.itsprodigi.it/',
+    },
+    primaryCta: { kind: 'internal', page: 'projects', label: 'Esplora i miei progetti' },
     secondaryCta: { kind: 'external', url: 'https://github.com/pianic2', label: 'Vedi GitHub' },
     contactCta: { kind: 'internal', page: 'contact', label: 'Parliamone' },
     metadata: {
@@ -32,17 +39,19 @@ export const italianContent = {
   projectExperience: {
     home: {
       eyebrow: 'PROGETTI SELEZIONATI',
-      title: 'Tre progetti. Tre problemi concreti da risolvere.',
+      title: 'Origini diverse, un solo modo di lavorare.',
       introduction:
-        'Una piattaforma smart home, una API per una libreria digitale e un backend Node.js. Insieme mostrano come affronto problemi diversi, scelgo gli strumenti adatti e rendo il risultato comprensibile e verificabile.',
+        'Due progetti sono stati sviluppati durante il mio percorso ITS. HomeEdge è invece il mio progetto portfolio personale a lungo termine: una piattaforma in evoluzione che intendo mantenere ed estendere oltre il corso.',
+      supportingText:
+        'Insieme mostrano come lavoro all’interno di requisiti didattici e come sviluppo nel tempo un prodotto indipendente.',
     },
     projects: {
       eyebrow: 'INDICE DEI PROGETTI',
-      title: 'Partiamo dal problema, non dalla tecnologia.',
+      title: 'Progetti costruiti per imparare e per durare.',
       introduction:
-        'Questi progetti non sono presentati come un elenco di framework. Ognuno parte da un bisogno concreto e mostra la soluzione, le decisioni adottate e i limiti attuali.',
+        'I progetti ITS mostrano come rispondo a requisiti didattici definiti. HomeEdge mostra invece come affronto un prodotto indipendente che deve evolvere attraverso ricerca, decisioni, implementazione e revisione continua.',
       supportingText:
-        'Scegli un progetto per capire a cosa serve, come funziona e a quale fase è arrivato.',
+        'Apri un progetto per comprenderne il problema, la soluzione implementata, la fase attuale e le evidenze disponibili oggi.',
     },
     labels: {
       ideaLabel: 'L’idea',
@@ -54,6 +63,10 @@ export const italianContent = {
       detailCtaLabel: 'Scopri il progetto',
       projectsCtaLabel: 'Esplora tutti i progetti',
       backToProjectsLabel: 'Torna ai progetti',
+      projectOriginLabels: {
+        'personal-long-term': 'Progetto personale a lungo termine',
+        'its-training': 'Progetto del percorso ITS',
+      },
     },
   },
   common: {
@@ -69,6 +82,15 @@ export const italianContent = {
       demonstrated: 'Supportato da evidenze',
       declared: 'Direzione documentata',
       planned: 'Prossimo passo pianificato',
+    },
+    evidenceTypeLabels: {
+      repository: 'Repository',
+      'pull-request': 'Pull request',
+      documentation: 'Documentazione',
+      test: 'Test',
+      demo: 'Demo',
+      screenshot: 'Screenshot',
+      report: 'Report',
     },
   },
   capabilities: [
@@ -90,6 +112,8 @@ export const italianContent = {
       eyebrow: 'SMART HOME · SISTEMI EMBEDDED',
       detailEyebrow: 'SMART HOME · EDGE COMPUTING · GOVERNANCE',
       ctaLabel: 'Scopri HomeEdge',
+      originDescription:
+        'HomeEdge non è un esercizio didattico isolato. È il progetto con cui approfondisco nel tempo sistemi embedded, architettura di prodotto e governance tecnica responsabile.',
       narrative: {
         cardSummary:
           'Una piattaforma smart home modulare pensata per capire cosa accade in una stanza, mantenendo la raccolta dei dati locale, limitata e trasparente.',
@@ -106,6 +130,8 @@ export const italianContent = {
           'HomeEdge si trova nella fase iniziale di sviluppo. Il nodo ESP32-C3 e i confini dell’MVP sono documentati. I servizi backend, l’applicazione mobile e le funzionalità assistite dall’AI sono direzioni pianificate che non sono ancora state dimostrate.',
         evidenceIntroduction:
           'Il repository pubblico permette di controllare i confini dell’MVP, i segnali inclusi, la direzione architetturale e le regole usate per evitare affermazioni non supportate.',
+        transparency:
+          'Il progetto viene gestito in modo trasparente attraverso GitHub, Jira e Confluence. GitHub contiene la fonte tecnica ufficiale, Jira traccia il lavoro pianificato e completato, mentre Confluence presenta agli stakeholder il contesto e i materiali di revisione.',
       },
       claims: [
         {
@@ -120,6 +146,18 @@ export const italianContent = {
           status: 'demonstrated',
           evidenceIds: ['homeedge-architecture-governance'],
         },
+        {
+          id: 'product-vision-boundaries',
+          text: 'La Product Vision spiega cosa intende diventare HomeEdge, quali funzionalità appartengono all’MVP attuale e quali idee restano fuori dal suo ambito presente.',
+          status: 'demonstrated',
+          evidenceIds: ['homeedge-product-vision'],
+        },
+        {
+          id: 'project-progress-stakeholder-review',
+          text: 'HomeEdge usa Jira per tracciare il lavoro e gli stati di revisione, mentre Confluence offre uno spazio rivolto agli stakeholder con contesto, report e materiali di verifica.',
+          status: 'demonstrated',
+          evidenceIds: ['homeedge-stakeholder-review'],
+        },
       ],
       evidence: [
         {
@@ -133,6 +171,20 @@ export const italianContent = {
           label: 'Architettura e governance',
           description:
             'La documentazione spiega come vengono revisionate le decisioni tecniche, i rischi e le funzionalità future prima di presentarle come lavoro completato.',
+        },
+        {
+          evidenceId: 'homeedge-product-vision',
+          label: 'Visione del prodotto e confini dell’MVP',
+          description:
+            'La Product Vision spiega cosa intende diventare HomeEdge, quali funzionalità appartengono all’MVP attuale e quali idee restano fuori dal suo ambito presente.',
+          linkLabel: 'Leggi la Product Vision',
+        },
+        {
+          evidenceId: 'homeedge-stakeholder-review',
+          label: 'Avanzamento del progetto e stakeholder review',
+          description:
+            'HomeEdge usa Jira per tracciare il lavoro e gli stati di revisione, mentre Confluence offre uno spazio rivolto agli stakeholder con contesto, report e materiali di verifica.',
+          linkLabel: 'Apri lo spazio stakeholder di HomeEdge',
         },
       ],
       links: [{ linkId: 'homeedge-github', label: 'Repository GitHub' }],

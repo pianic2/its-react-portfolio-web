@@ -14,6 +14,16 @@ export const publicPageIds = [
 export const languageSchema = z.enum(supportedLanguages)
 export const pageIdSchema = z.enum(publicPageIds)
 export const projectVisualVariantSchema = z.enum(['signal-yellow', 'studio-pink', 'electric-cyan'])
+export const projectOriginSchema = z.enum(['personal-long-term', 'its-training'])
+export const evidenceTypeSchema = z.enum([
+  'repository',
+  'pull-request',
+  'documentation',
+  'test',
+  'demo',
+  'screenshot',
+  'report',
+])
 
 const stableIdSchema = z
   .string()
@@ -107,15 +117,7 @@ export const localizedAssetSchema = z
 export const evidenceSchema = z
   .object({
     id: stableIdSchema,
-    type: z.enum([
-      'repository',
-      'pull-request',
-      'documentation',
-      'test',
-      'demo',
-      'screenshot',
-      'report',
-    ]),
+    type: evidenceTypeSchema,
     url: httpsUrlSchema.optional(),
     assetId: stableIdSchema.optional(),
   })
@@ -159,6 +161,7 @@ export const projectCoreSchema = z
     assetIds: z.array(stableIdSchema).default([]),
     featured: z.boolean().default(false),
     order: z.number().int().nonnegative(),
+    origin: projectOriginSchema,
     visualVariant: projectVisualVariantSchema,
   })
   .superRefine((project, context) => {
@@ -178,6 +181,7 @@ export const localizedProjectSchema = z.object({
   eyebrow: z.string().min(1),
   detailEyebrow: z.string().min(1),
   ctaLabel: z.string().min(1),
+  originDescription: z.string().min(1).optional(),
   narrative: z.object({
     cardSummary: z.string().min(1),
     cardValue: z.string().min(1),
@@ -187,6 +191,7 @@ export const localizedProjectSchema = z.object({
     value: z.string().min(1),
     currentStage: z.string().min(1),
     evidenceIntroduction: z.string().min(1),
+    transparency: z.string().min(1).optional(),
   }),
   claims: z.array(claimSchema).min(1),
   evidence: z
@@ -195,6 +200,7 @@ export const localizedProjectSchema = z.object({
         evidenceId: stableIdSchema,
         label: z.string().min(1),
         description: z.string().min(1),
+        linkLabel: z.string().min(1).optional(),
       }),
     )
     .min(1),
@@ -223,6 +229,12 @@ export const siteContentSchema = z.object({
     eyebrow: z.string().min(1),
     headline: z.string().min(1),
     introduction: z.string().min(1),
+    training: z.object({
+      prefix: z.string().min(1),
+      linkLabel: z.string().min(1),
+      suffix: z.string().min(1),
+      url: httpsUrlSchema,
+    }),
     primaryCta: ctaSchema,
     secondaryCta: ctaSchema,
     contactCta: ctaSchema,
@@ -233,6 +245,7 @@ export const siteContentSchema = z.object({
       eyebrow: z.string().min(1),
       title: z.string().min(1),
       introduction: z.string().min(1),
+      supportingText: z.string().min(1),
     }),
     projects: z.object({
       eyebrow: z.string().min(1),
@@ -250,6 +263,7 @@ export const siteContentSchema = z.object({
       detailCtaLabel: z.string().min(1),
       projectsCtaLabel: z.string().min(1),
       backToProjectsLabel: z.string().min(1),
+      projectOriginLabels: z.record(projectOriginSchema, z.string().min(1)),
     }),
   }),
   common: z.object({
@@ -263,6 +277,7 @@ export const siteContentSchema = z.object({
       z.enum(['verified', 'demonstrated', 'declared', 'planned']),
       z.string().min(1),
     ),
+    evidenceTypeLabels: z.record(evidenceTypeSchema, z.string().min(1)),
   }),
   capabilities: z.array(localizedCapabilitySchema).min(1),
   projects: z.array(localizedProjectSchema).min(1),

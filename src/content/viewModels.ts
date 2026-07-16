@@ -23,6 +23,8 @@ export function buildProjectViewModel(
   const linkCopy = new Map(localized.links.map((link) => [link.linkId, link]))
   const assetCopy = new Map(localized.assets.map((asset) => [asset.assetId, asset]))
   const statusLabels = repository.locales[language].common.claimStatusLabels
+  const originLabels = repository.locales[language].projectExperience.labels.projectOriginLabels
+  const evidenceTypeLabels = repository.locales[language].common.evidenceTypeLabels
 
   return {
     id: core.id,
@@ -33,10 +35,13 @@ export function buildProjectViewModel(
     eyebrow: localized.eyebrow,
     detailEyebrow: localized.detailEyebrow,
     ctaLabel: localized.ctaLabel,
+    originDescription: localized.originDescription,
     narrative: localized.narrative,
     metadata: localized.metadata,
     featured: core.featured,
     order: core.order,
+    origin: core.origin,
+    originLabel: originLabels[core.origin],
     visualVariant: core.visualVariant,
     capabilities: core.capabilityIds.map((capabilityId) => ({
       id: capabilityId,
@@ -51,6 +56,7 @@ export function buildProjectViewModel(
     evidence: core.evidence.map((evidence) => ({
       ...evidence,
       ...evidenceCopy.get(evidence.id),
+      typeLabel: evidenceTypeLabels[evidence.type],
     })),
     links: core.links.map((link) => ({
       ...link,

@@ -20,7 +20,7 @@ shared facts + localized copy
 ## Directory responsibilities
 
 - `src/content/schema.ts` defines runtime contracts and inferred TypeScript types. It has no dependency on React or routing.
-- `src/content/data/shared.ts` contains stable IDs, capability references, evidence URLs, external URLs, asset references, featured flags and order.
+- `src/content/data/shared.ts` contains stable IDs, project origins, capability references, evidence URLs, external URLs, asset references, featured flags and order.
 - `src/content/data/it.ts` and `src/content/data/en.ts` contain localized site, navigation, CTA, capability, project, evidence-label and metadata copy.
 - `src/content/data/index.ts` assembles the raw repository without validating or rendering it.
 - `src/content/validation.ts` validates schemas, uniqueness, references and locale parity and produces actionable errors.
@@ -39,6 +39,8 @@ Each project has a stable, non-localized `id`. Localized records refer to it thr
 Language switching on Project Detail resolves the current slug to a stable project ID and then asks the target locale for its path. Copying the source slug into the target route is not supported.
 
 Italian and English must have equivalent project, capability, navigation, narrative, evidence, link, asset and claim contracts. Text may differ as a translation, but narrative fields, claim IDs, status and evidence references must remain equivalent.
+
+Project origin is invariant and does not depend on localized titles. `personal-long-term` identifies HomeEdge; `its-training` identifies the Laravel and Node.js projects. The view model resolves localized origin labels for rendering.
 
 ## Claim contract
 
@@ -84,6 +86,8 @@ Validation rejects:
 - duplicate shared project, capability and asset IDs;
 - duplicate project-local evidence, link and claim IDs;
 - duplicate slugs within a locale;
+- any origin distribution other than one `personal-long-term` project and two `its-training` projects;
+- an origin assignment that does not match the three stable project IDs;
 - missing locale projects or capability copy;
 - unknown capability, evidence and asset references;
 - localized evidence, link or asset sets that do not match shared facts;
@@ -94,7 +98,7 @@ Errors include locale, entity type, stable ID and data path whenever that contex
 
 ## Adding a project
 
-1. Add one shared project in `data/shared.ts` with a stable ID, evidence, links, capabilities, asset references, featured flag and order.
+1. Add one shared project in `data/shared.ts` with a stable ID, origin, evidence, links, capabilities, asset references, featured flag and order.
 2. Add one localized record in every locale file using the same project ID.
 3. Provide every narrative field and keep claim IDs, claim statuses and evidence references equivalent across locales.
 4. Use a locale-owned slug and localized metadata.
@@ -115,8 +119,12 @@ Errors include locale, entity type, stable ID and data path whenever that contex
 
 - Repository: <https://github.com/pianic2/homeedge-ai-platform>
 - Primary evidence: <https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md>
+- Product Vision: <https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md>
+- Stakeholder space: <https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview>
 
 The portfolio states only that the Sprint 0 README defines the ESP32-C3 room/door MVP boundary and its included signals. Backend, mobile and AI service boundaries remain internally marked `[UNVALIDATED]`; the public narrative explains them as planned directions that have not been demonstrated yet. The content does not claim production, commercial, safety-critical or security-grade readiness, or that target service directories prove implemented services.
+
+The Product Vision is evidence that product direction and MVP boundaries are documented, not that every described capability is implemented. The Confluence URL is a stakeholder-review resource and may require Atlassian authentication; the portfolio does not describe it as publicly accessible.
 
 ### ITS Library API in Laravel
 

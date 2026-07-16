@@ -79,6 +79,36 @@ export function validateContentRepository(
   addDuplicates(problems, capabilityIds, 'entity=repository', 'capabilities')
   addDuplicates(problems, assetIds, 'entity=repository', 'assets')
 
+  const personalProjects = repository.projects.filter(
+    (project) => project.origin === 'personal-long-term',
+  )
+  const trainingProjects = repository.projects.filter(
+    (project) => project.origin === 'its-training',
+  )
+  if (personalProjects.length !== 1) {
+    problems.push(
+      `entity=repository path=projects.origin: expected exactly one personal-long-term project, received ${personalProjects.length}`,
+    )
+  }
+  if (trainingProjects.length !== 2) {
+    problems.push(
+      `entity=repository path=projects.origin: expected exactly two its-training projects, received ${trainingProjects.length}`,
+    )
+  }
+  const expectedOrigins = new Map([
+    ['homeedge-ai-platform', 'personal-long-term'],
+    ['its-library-api-laravel', 'its-training'],
+    ['node-list-manager', 'its-training'],
+  ])
+  for (const [projectId, expectedOrigin] of expectedOrigins) {
+    const actualOrigin = repository.projects.find((project) => project.id === projectId)?.origin
+    if (actualOrigin !== expectedOrigin) {
+      problems.push(
+        `entity=project id=${projectId} path=origin: expected "${expectedOrigin}", received "${actualOrigin ?? 'missing'}"`,
+      )
+    }
+  }
+
   for (const project of repository.projects) {
     const context = `entity=project id=${project.id}`
     addDuplicates(
@@ -226,6 +256,22 @@ export function validateContentRepository(
     if (sorted(Object.keys(it.narrative)) !== sorted(Object.keys(en.narrative))) {
       problems.push(
         `${context} path=locales.narrative: Italian and English narrative fields differ`,
+      )
+    }
+    if (Boolean(it.originDescription) !== Boolean(en.originDescription)) {
+      problems.push(
+        `${context} path=locales.originDescription: Italian and English origin descriptions differ`,
+      )
+    }
+    const itEvidence = it.evidence.map(
+      (evidence) => `${evidence.evidenceId}:${Boolean(evidence.linkLabel)}`,
+    )
+    const enEvidence = en.evidence.map(
+      (evidence) => `${evidence.evidenceId}:${Boolean(evidence.linkLabel)}`,
+    )
+    if (sorted(itEvidence) !== sorted(enEvidence)) {
+      problems.push(
+        `${context} path=locales.evidence: Italian and English evidence link contracts differ`,
       )
     }
     const itClaims = it.claims.map(

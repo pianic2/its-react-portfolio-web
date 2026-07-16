@@ -39,10 +39,65 @@ describe('content repository validation', () => {
 
     for (const language of ['it', 'en'] as const) {
       for (const project of repository.locales[language].projects) {
-        expect(Object.keys(project.narrative)).toEqual(narrativeFields)
+        expect(Object.keys(project.narrative)).toEqual(expect.arrayContaining(narrativeFields))
         expect(project.evidence.every((evidence) => evidence.description.length > 0)).toBe(true)
       }
     }
+  })
+
+  it('enforces one personal project and two ITS training projects by stable id', () => {
+    const projects = validateContentRepository().projects
+
+    expect(projects.filter((project) => project.origin === 'personal-long-term')).toHaveLength(1)
+    expect(projects.filter((project) => project.origin === 'its-training')).toHaveLength(2)
+    expect(projects.find((project) => project.id === 'homeedge-ai-platform')?.origin).toBe(
+      'personal-long-term',
+    )
+    expect(projects.find((project) => project.id === 'its-library-api-laravel')?.origin).toBe(
+      'its-training',
+    )
+    expect(projects.find((project) => project.id === 'node-list-manager')?.origin).toBe(
+      'its-training',
+    )
+  })
+
+  it('rejects an invalid project-origin distribution', () => {
+    const repository = cloneRepository()
+    repository.projects[0]!.origin = 'its-training'
+
+    expect(() => validateContentRepository(repository)).toThrow(
+      /expected exactly one personal-long-term project/,
+    )
+  })
+
+  it('validates HomeEdge transparency evidence and localized link labels', () => {
+    const repository = validateContentRepository()
+    const shared = repository.projects.find((project) => project.id === 'homeedge-ai-platform')!
+    const english = repository.locales.en.projects.find(
+      (project) => project.projectId === 'homeedge-ai-platform',
+    )!
+    const italian = repository.locales.it.projects.find(
+      (project) => project.projectId === 'homeedge-ai-platform',
+    )!
+
+    expect(
+      shared.evidence.find((evidence) => evidence.id === 'homeedge-product-vision'),
+    ).toMatchObject({
+      type: 'documentation',
+      url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
+    })
+    expect(
+      shared.evidence.find((evidence) => evidence.id === 'homeedge-stakeholder-review'),
+    ).toMatchObject({
+      type: 'report',
+      url: 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview',
+    })
+    expect(
+      english.evidence.find((item) => item.evidenceId === 'homeedge-product-vision')?.linkLabel,
+    ).toBe('Read the Product Vision')
+    expect(
+      italian.evidence.find((item) => item.evidenceId === 'homeedge-stakeholder-review')?.linkLabel,
+    ).toBe('Apri lo spazio stakeholder di HomeEdge')
   })
 
   it('localizes the public claim taxonomy without changing internal statuses', () => {
@@ -163,6 +218,17 @@ describe('content loaders', () => {
       'its-library-api-laravel',
       'node-list-manager',
     ])
+  })
+
+  it('exposes localized project-origin labels through the view model', () => {
+    expect(getProjectById('en', 'homeedge-ai-platform')).toMatchObject({
+      origin: 'personal-long-term',
+      originLabel: 'Personal long-term project',
+    })
+    expect(getProjectById('it', 'its-library-api-laravel')).toMatchObject({
+      origin: 'its-training',
+      originLabel: 'Progetto del percorso ITS',
+    })
   })
 
   it('returns featured projects in the order required by the future Home page', () => {
