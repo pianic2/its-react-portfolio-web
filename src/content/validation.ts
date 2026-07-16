@@ -156,12 +156,6 @@ export function validateContentRepository(
       const linkIds = new Set(core.links.map((link) => link.id))
       addDuplicates(
         problems,
-        localized.sections.map((section) => section.id),
-        context,
-        'sections',
-      )
-      addDuplicates(
-        problems,
         localized.claims.map((claim) => claim.id),
         context,
         'claims',
@@ -229,11 +223,10 @@ export function validateContentRepository(
     const en = english.projects.find((project) => project.projectId === projectId)
     if (!it || !en) continue
     const context = `entity=project id=${projectId}`
-    if (
-      sorted(it.sections.map((section) => section.id)) !==
-      sorted(en.sections.map((section) => section.id))
-    ) {
-      problems.push(`${context} path=locales.sections: Italian and English section sets differ`)
+    if (sorted(Object.keys(it.narrative)) !== sorted(Object.keys(en.narrative))) {
+      problems.push(
+        `${context} path=locales.narrative: Italian and English narrative fields differ`,
+      )
     }
     const itClaims = it.claims.map(
       (claim) => `${claim.id}:${claim.status}:${sorted(claim.evidenceIds)}`,

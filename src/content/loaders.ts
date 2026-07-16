@@ -45,6 +45,7 @@ export function getPortfolio(language: Language) {
     ...portfolio,
     primaryCta: resolveCta(portfolio.primaryCta),
     secondaryCta: resolveCta(portfolio.secondaryCta),
+    contactCta: resolveCta(portfolio.contactCta),
   }
 }
 

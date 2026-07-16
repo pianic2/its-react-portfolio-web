@@ -55,12 +55,19 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
                 {copy.title}
               </Typography>
             </Stack>
-            <Typography
-              color="text.secondary"
-              sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '55ch' }}
-            >
-              {copy.introduction}
-            </Typography>
+            <Stack spacing={2} sx={{ minWidth: 0 }}>
+              <Typography
+                color="text.secondary"
+                sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '55ch' }}
+              >
+                {copy.introduction}
+              </Typography>
+              {variant === 'projects' ? (
+                <Typography sx={{ fontWeight: 800, maxWidth: '55ch' }}>
+                  {siteContent.projectExperience.projects.supportingText}
+                </Typography>
+              ) : null}
+            </Stack>
           </Box>
 
           <Box
@@ -83,7 +90,9 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
                 <ProjectShowcaseCard
                   language={language}
                   project={project}
-                  readProjectLabel={siteContent.projectExperience.detail.readProjectLabel}
+                  repositoryLabel={siteContent.projectExperience.labels.repositoryLabel}
+                  valueLabel={siteContent.projectExperience.labels.valueLabel}
+                  variant={variant}
                 />
               </Box>
             ))}
@@ -96,7 +105,7 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
               to={getRoutePath('projects', language)}
               variant="outlined"
             >
-              {siteContent.projectExperience.home.allProjectsLabel}
+              {siteContent.projectExperience.labels.projectsCtaLabel}
             </ButtonLink>
           ) : null}
         </Stack>

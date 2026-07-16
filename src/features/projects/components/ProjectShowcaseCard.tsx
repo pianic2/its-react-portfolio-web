@@ -9,13 +9,17 @@ import { ProjectArtwork } from './ProjectArtwork'
 type ProjectShowcaseCardProps = {
   language: Language
   project: ProjectViewModel
-  readProjectLabel: string
+  repositoryLabel: string
+  valueLabel: string
+  variant: 'home' | 'projects'
 }
 
 export function ProjectShowcaseCard({
   language,
   project,
-  readProjectLabel,
+  repositoryLabel,
+  valueLabel,
+  variant,
 }: ProjectShowcaseCardProps) {
   const titleId = `showcase-${project.id}-title`
 
@@ -47,7 +51,7 @@ export function ProjectShowcaseCard({
           display: 'flex',
           flex: 1,
           flexDirection: 'column',
-          gap: 3,
+          gap: variant === 'home' ? 2.5 : 3.5,
           minWidth: 0,
           p: { xs: 3, sm: 4 },
           '&:last-child': { pb: { xs: 3, sm: 4 } },
@@ -76,8 +80,22 @@ export function ProjectShowcaseCard({
           >
             {project.title}
           </Typography>
-          <Typography color="text.secondary">{project.summary}</Typography>
+          <Typography color="text.secondary">{project.narrative.cardSummary}</Typography>
         </Stack>
+
+        <Box
+          sx={{
+            borderInlineStart: (theme) =>
+              `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
+            minWidth: 0,
+            paddingInlineStart: 2,
+          }}
+        >
+          <Typography component="p" sx={{ fontWeight: 900, letterSpacing: 0 }} variant="overline">
+            {valueLabel}
+          </Typography>
+          <Typography sx={{ mt: 1 }}>{project.narrative.cardValue}</Typography>
+        </Box>
 
         <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
           {project.capabilities.map((capability) => (
@@ -102,7 +120,7 @@ export function ProjectShowcaseCard({
             to={project.detailPath}
             variant="contained"
           >
-            {readProjectLabel}
+            {project.ctaLabel}
           </ButtonLink>
           <ExternalLink
             href={project.repositoryUrl}
@@ -110,7 +128,7 @@ export function ProjectShowcaseCard({
             newTab
             sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
           >
-            {project.links.find((link) => link.kind === 'repository')?.label}
+            {repositoryLabel}
           </ExternalLink>
         </Box>
       </CardContent>

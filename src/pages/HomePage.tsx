@@ -22,14 +22,17 @@ export function HomePage() {
             }}
           >
             <Stack spacing={3} sx={{ minWidth: 0 }}>
+              <Typography sx={{ letterSpacing: 0 }} variant="overline">
+                {portfolio.eyebrow}
+              </Typography>
               <Typography
                 component="h1"
                 id="home-page-title"
                 sx={{
-                  fontSize: { xs: '2.8rem', sm: '4.25rem', md: '5.75rem' },
+                  fontSize: { xs: '2.35rem', sm: '4rem', md: '4.75rem' },
                   letterSpacing: 0,
-                  maxWidth: '13ch',
-                  overflowWrap: 'break-word',
+                  maxWidth: '18ch',
+                  overflowWrap: 'normal',
                 }}
                 variant="h1"
               >
@@ -43,6 +46,11 @@ export function HomePage() {
               {portfolio.primaryCta.kind === 'internal' ? (
                 <ButtonLink to={portfolio.primaryCta.href} variant="contained">
                   {portfolio.primaryCta.label}
+                </ButtonLink>
+              ) : null}
+              {portfolio.contactCta.kind === 'internal' ? (
+                <ButtonLink to={portfolio.contactCta.href} variant="outlined">
+                  {portfolio.contactCta.label}
                 </ButtonLink>
               ) : null}
               {portfolio.secondaryCta.kind === 'external' ? (

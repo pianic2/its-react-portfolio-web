@@ -38,7 +38,7 @@ Each project has a stable, non-localized `id`. Localized records refer to it thr
 
 Language switching on Project Detail resolves the current slug to a stable project ID and then asks the target locale for its path. Copying the source slug into the target route is not supported.
 
-Italian and English must have equivalent project, capability, navigation, section, evidence, link, asset and claim contracts. Text may differ as a translation, but claim IDs, status and evidence references must remain equivalent.
+Italian and English must have equivalent project, capability, navigation, narrative, evidence, link, asset and claim contracts. Text may differ as a translation, but narrative fields, claim IDs, status and evidence references must remain equivalent.
 
 ## Claim contract
 
@@ -51,7 +51,7 @@ Every claim has:
 
 `verified` and `demonstrated` require at least one evidence reference. `declared` may carry evidence but is not promoted to independent verification. `planned` cannot reference evidence as proof of completed work. Validation also rejects evidence IDs that do not belong to the same project.
 
-The view model provides the localized status label. Pages and Home do not interpret status values themselves.
+The view model provides the localized status label and the complete editorial narrative. Pages and Home do not interpret status values or read internal claim text themselves.
 
 ## Public loader API
 
@@ -82,13 +82,13 @@ Validation rejects:
 
 - invalid schema values and non-HTTPS external URLs;
 - duplicate shared project, capability and asset IDs;
-- duplicate project-local evidence, link, section and claim IDs;
+- duplicate project-local evidence, link and claim IDs;
 - duplicate slugs within a locale;
 - missing locale projects or capability copy;
 - unknown capability, evidence and asset references;
 - localized evidence, link or asset sets that do not match shared facts;
 - verified or demonstrated claims without evidence;
-- Italian and English navigation, section or claim-contract drift.
+- Italian and English navigation, narrative or claim-contract drift.
 
 Errors include locale, entity type, stable ID and data path whenever that context is available.
 
@@ -96,7 +96,7 @@ Errors include locale, entity type, stable ID and data path whenever that contex
 
 1. Add one shared project in `data/shared.ts` with a stable ID, evidence, links, capabilities, asset references, featured flag and order.
 2. Add one localized record in every locale file using the same project ID.
-3. Keep section IDs, claim IDs, claim statuses and evidence references equivalent across locales.
+3. Provide every narrative field and keep claim IDs, claim statuses and evidence references equivalent across locales.
 4. Use a locale-owned slug and localized metadata.
 5. Add only claims supported by the referenced source. Preserve explicit source limitations.
 6. Run content validation and the complete quality gate.
@@ -116,7 +116,7 @@ Errors include locale, entity type, stable ID and data path whenever that contex
 - Repository: <https://github.com/pianic2/homeedge-ai-platform>
 - Primary evidence: <https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md>
 
-The portfolio states only that the Sprint 0 README defines the ESP32-C3 room/door MVP boundary and its included signals. Backend, mobile and AI service boundaries remain `[UNVALIDATED]`. The content does not claim production, commercial, safety-critical or security-grade readiness, or that target service directories prove implemented services.
+The portfolio states only that the Sprint 0 README defines the ESP32-C3 room/door MVP boundary and its included signals. Backend, mobile and AI service boundaries remain internally marked `[UNVALIDATED]`; the public narrative explains them as planned directions that have not been demonstrated yet. The content does not claim production, commercial, safety-critical or security-grade readiness, or that target service directories prove implemented services.
 
 ### ITS Library API in Laravel
 

@@ -175,18 +175,26 @@ export const localizedProjectSchema = z.object({
   projectId: stableIdSchema,
   slug: slugSchema,
   title: z.string().min(1),
-  eyebrow: z.string().min(1).optional(),
-  summary: z.string().min(1),
-  sections: z
-    .array(z.object({ id: stableIdSchema, label: z.string().min(1), body: z.string().min(1) }))
-    .min(1),
+  eyebrow: z.string().min(1),
+  detailEyebrow: z.string().min(1),
+  ctaLabel: z.string().min(1),
+  narrative: z.object({
+    cardSummary: z.string().min(1),
+    cardValue: z.string().min(1),
+    heroSummary: z.string().min(1),
+    idea: z.string().min(1),
+    built: z.string().min(1),
+    value: z.string().min(1),
+    currentStage: z.string().min(1),
+    evidenceIntroduction: z.string().min(1),
+  }),
   claims: z.array(claimSchema).min(1),
   evidence: z
     .array(
       z.object({
         evidenceId: stableIdSchema,
         label: z.string().min(1),
-        description: z.string().min(1).optional(),
+        description: z.string().min(1),
       }),
     )
     .min(1),
@@ -212,10 +220,12 @@ export const siteContentSchema = z.object({
   }),
   navigation: z.array(z.object({ page: pageIdSchema, label: z.string().min(1) })).min(1),
   portfolio: z.object({
+    eyebrow: z.string().min(1),
     headline: z.string().min(1),
     introduction: z.string().min(1),
     primaryCta: ctaSchema,
     secondaryCta: ctaSchema,
+    contactCta: ctaSchema,
     metadata: z.object({ title: z.string().min(1), description: z.string().min(1) }),
   }),
   projectExperience: z.object({
@@ -223,18 +233,23 @@ export const siteContentSchema = z.object({
       eyebrow: z.string().min(1),
       title: z.string().min(1),
       introduction: z.string().min(1),
-      allProjectsLabel: z.string().min(1),
     }),
     projects: z.object({
       eyebrow: z.string().min(1),
       title: z.string().min(1),
       introduction: z.string().min(1),
+      supportingText: z.string().min(1),
     }),
-    detail: z.object({
-      backLabel: z.string().min(1),
-      claimsTitle: z.string().min(1),
+    labels: z.object({
+      ideaLabel: z.string().min(1),
+      builtLabel: z.string().min(1),
+      valueLabel: z.string().min(1),
+      stageLabel: z.string().min(1),
+      evidenceLabel: z.string().min(1),
       repositoryLabel: z.string().min(1),
-      readProjectLabel: z.string().min(1),
+      detailCtaLabel: z.string().min(1),
+      projectsCtaLabel: z.string().min(1),
+      backToProjectsLabel: z.string().min(1),
     }),
   }),
   common: z.object({

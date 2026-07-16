@@ -9,12 +9,20 @@ import { usePortfolioContent } from '../content/context'
 import { ProjectArtwork } from '../features/projects/components/ProjectArtwork'
 import { getRoutePath } from '../routes/routeConfig'
 
+const narrativePlacement = [
+  { md: '1 / span 7' },
+  { md: '8 / span 5' },
+  { md: '1 / span 5' },
+  { md: '6 / span 7' },
+] as const
+
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const { getProjectBySlug, language, siteContent } = usePortfolioContent()
   const project = getProjectBySlug(slug)
   const headingId = 'project-detail-title'
   const projectsPath = getRoutePath('projects', language)
+  const labels = siteContent.projectExperience.labels
 
   if (!project) {
     return (
@@ -31,13 +39,20 @@ export function ProjectDetailPage() {
               to={projectsPath}
               variant="outlined"
             >
-              {siteContent.projectExperience.detail.backLabel}
+              {labels.backToProjectsLabel}
             </ButtonLink>
           </Stack>
         </PageContainer>
       </PageSection>
     )
   }
+
+  const narrativeSections = [
+    { label: labels.ideaLabel, body: project.narrative.idea },
+    { label: labels.builtLabel, body: project.narrative.built },
+    { label: labels.valueLabel, body: project.narrative.value },
+    { label: labels.stageLabel, body: project.narrative.currentStage },
+  ]
 
   return (
     <>
@@ -69,23 +84,24 @@ export function ProjectDetailPage() {
               >
                 <Stack spacing={1.5} sx={{ minWidth: 0 }}>
                   <Typography sx={{ letterSpacing: 0 }} variant="overline">
-                    {project.eyebrow}
+                    {project.detailEyebrow}
                   </Typography>
                   <Typography
                     component="h1"
                     id={headingId}
                     sx={{
-                      fontSize: { xs: '2.3rem', sm: '3.4rem', md: '4.25rem' },
+                      fontSize: { xs: '2.25rem', sm: '3.25rem', md: '4rem' },
                       hyphens: 'auto',
                       letterSpacing: 0,
+                      maxWidth: '14ch',
                       overflowWrap: 'break-word',
                     }}
                     variant="h2"
                   >
                     {project.title}
                   </Typography>
-                  <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '58ch' }}>
-                    {project.summary}
+                  <Typography sx={{ fontSize: { sm: '1.15rem' }, maxWidth: '68ch' }}>
+                    {project.narrative.heroSummary}
                   </Typography>
                 </Stack>
 
@@ -102,7 +118,7 @@ export function ProjectDetailPage() {
                   newTab
                   sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
                 >
-                  {siteContent.projectExperience.detail.repositoryLabel}
+                  {labels.repositoryLabel}
                 </ExternalLink>
               </CardContent>
               <Box sx={{ minWidth: 0, order: { xs: 1, md: 2 } }}>
@@ -119,46 +135,52 @@ export function ProjectDetailPage() {
             sx={{
               display: 'grid',
               gap: { xs: 4, md: 6 },
-              gridTemplateColumns: { md: 'repeat(2, minmax(0, 1fr))' },
+              gridTemplateColumns: { xs: 'minmax(0, 1fr)', md: 'repeat(12, minmax(0, 1fr))' },
               minWidth: 0,
             }}
           >
-            {project.sections.map((section, index) => (
-              <StudioCard
-                key={section.id}
-                component="section"
-                sx={{
-                  backgroundColor: index % 2 === 0 ? 'background.paper' : 'background.default',
-                  minWidth: 0,
-                  overflow: 'hidden',
-                }}
+            {narrativeSections.map((section, index) => (
+              <Box
+                key={section.label}
+                sx={{ gridColumn: { xs: '1', ...narrativePlacement[index] }, minWidth: 0 }}
               >
-                <CardContent sx={{ p: { xs: 3, sm: 5 }, '&:last-child': { pb: { xs: 3, sm: 5 } } }}>
-                  <Typography
-                    aria-hidden="true"
-                    sx={{
-                      color: index % 2 === 0 ? 'secondary.main' : 'info.main',
-                      fontFamily: '"Archivo Black", "Arial Black", sans-serif',
-                      fontSize: { xs: '3.5rem', sm: '4.5rem' },
-                      fontWeight: 900,
-                      letterSpacing: 0,
-                      lineHeight: 0.9,
-                    }}
+                <StudioCard
+                  component="section"
+                  sx={{
+                    backgroundColor: index % 2 === 0 ? 'background.paper' : 'background.default',
+                    minWidth: 0,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <CardContent
+                    sx={{ p: { xs: 3, sm: 5 }, '&:last-child': { pb: { xs: 3, sm: 5 } } }}
                   >
-                    {String(index + 1).padStart(2, '0')}
-                  </Typography>
-                  <Typography component="h2" sx={{ letterSpacing: 0, mt: 2 }} variant="h4">
-                    {section.label}
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>{section.body}</Typography>
-                </CardContent>
-              </StudioCard>
+                    <Typography
+                      aria-hidden="true"
+                      sx={{
+                        color: index % 2 === 0 ? 'secondary.main' : 'info.main',
+                        fontFamily: '"Archivo Black", "Arial Black", sans-serif',
+                        fontSize: { xs: '3.25rem', sm: '4.25rem' },
+                        fontWeight: 900,
+                        letterSpacing: 0,
+                        lineHeight: 0.9,
+                      }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </Typography>
+                    <Typography component="h2" sx={{ letterSpacing: 0, mt: 2 }} variant="h4">
+                      {section.label}
+                    </Typography>
+                    <Typography sx={{ maxWidth: '70ch', mt: 2 }}>{section.body}</Typography>
+                  </CardContent>
+                </StudioCard>
+              </Box>
             ))}
           </Box>
         </PageContainer>
       </PageSection>
 
-      <PageSection aria-labelledby="project-claims-title" spacing="spacious">
+      <PageSection aria-labelledby="project-evidence-title" spacing="spacious">
         <PageContainer>
           <Box
             sx={{
@@ -168,81 +190,65 @@ export function ProjectDetailPage() {
               minWidth: 0,
             }}
           >
-            <Stack spacing={2}>
-              <Typography sx={{ letterSpacing: 0 }} variant="overline">
-                {siteContent.common.evidenceLabel}
-              </Typography>
+            <Stack spacing={2} sx={{ minWidth: 0 }}>
               <Typography
                 component="h2"
-                id="project-claims-title"
+                id="project-evidence-title"
                 sx={{ fontSize: { xs: '2rem', sm: '2.75rem' }, letterSpacing: 0 }}
                 variant="h3"
               >
-                {siteContent.projectExperience.detail.claimsTitle}
+                {labels.evidenceLabel}
+              </Typography>
+              <Typography color="text.secondary" sx={{ maxWidth: '65ch' }}>
+                {project.narrative.evidenceIntroduction}
               </Typography>
             </Stack>
 
             <Stack spacing={0} sx={{ minWidth: 0 }}>
-              {project.claims.map((claim) => {
-                const evidence = project.evidence.filter((item) =>
-                  claim.evidenceIds.includes(item.id),
-                )
-
-                return (
-                  <Box
-                    key={claim.id}
-                    component="article"
-                    sx={{
-                      borderBlockStart: (theme) =>
-                        `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
-                      display: 'grid',
-                      gap: 2,
-                      gridTemplateColumns: { sm: 'minmax(120px, 2fr) minmax(0, 6fr)' },
-                      minWidth: 0,
-                      py: 4,
-                    }}
-                  >
-                    <Chip
-                      label={claim.statusLabel}
-                      size="small"
-                      sx={{ alignSelf: 'start', justifySelf: 'start' }}
-                    />
-                    <Stack spacing={2} sx={{ minWidth: 0 }}>
-                      <Typography sx={{ fontWeight: 800 }}>{claim.text}</Typography>
-                      {evidence.map((item) =>
-                        item.url ? (
-                          <ExternalLink
-                            key={item.id}
-                            href={item.url}
-                            language={language}
-                            newTab
-                            sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
-                          >
-                            {item.label}
-                          </ExternalLink>
-                        ) : null,
-                      )}
-                    </Stack>
-                  </Box>
-                )
-              })}
+              {project.evidence.map((evidence) => (
+                <Box
+                  key={evidence.id}
+                  component="article"
+                  sx={{
+                    borderBlockStart: (theme) =>
+                      `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
+                    minWidth: 0,
+                    py: 4,
+                  }}
+                >
+                  <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0 }}>
+                    {evidence.url ? (
+                      <ExternalLink
+                        href={evidence.url}
+                        language={language}
+                        newTab
+                        sx={{
+                          alignItems: 'center',
+                          display: 'inline-flex',
+                          fontSize: '1.15rem',
+                          minHeight: 44,
+                        }}
+                      >
+                        {evidence.label}
+                      </ExternalLink>
+                    ) : null}
+                    <Typography>{evidence.description}</Typography>
+                  </Stack>
+                </Box>
+              ))}
             </Stack>
           </Box>
         </PageContainer>
       </PageSection>
 
-      <PageSection
-        component="nav"
-        spacing="compact"
-        aria-label={siteContent.projectExperience.detail.backLabel}
-      >
+      <PageSection component="nav" spacing="compact" aria-label={labels.backToProjectsLabel}>
         <PageContainer>
           <ButtonLink
             startIcon={<ArrowBackRounded aria-hidden="true" />}
             to={projectsPath}
             variant="outlined"
           >
-            {siteContent.projectExperience.detail.backLabel}
+            {labels.backToProjectsLabel}
           </ButtonLink>
         </PageContainer>
       </PageSection>

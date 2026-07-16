@@ -3,19 +3,27 @@ import type { ContentRepository } from '../schema'
 export const sharedContent = {
   capabilities: [
     { id: 'embedded-firmware', category: 'embedded' },
+    { id: 'privacy-aware-design', category: 'security' },
     { id: 'technical-governance', category: 'architecture' },
     { id: 'laravel-api', category: 'backend' },
+    { id: 'sanctum-authentication', category: 'security' },
     { id: 'containerized-delivery', category: 'delivery' },
     { id: 'node-api', category: 'backend' },
+    { id: 'sqlite-persistence', category: 'backend' },
     { id: 'automated-testing', category: 'quality' },
   ],
   projects: [
     {
       id: 'homeedge-ai-platform',
-      capabilityIds: ['embedded-firmware', 'technical-governance'],
+      capabilityIds: ['embedded-firmware', 'privacy-aware-design', 'technical-governance'],
       evidence: [
         {
-          id: 'homeedge-readme',
+          id: 'homeedge-mvp-scope',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md',
+        },
+        {
+          id: 'homeedge-architecture-governance',
           type: 'documentation',
           url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md',
         },
@@ -34,10 +42,20 @@ export const sharedContent = {
     },
     {
       id: 'its-library-api-laravel',
-      capabilityIds: ['laravel-api', 'containerized-delivery'],
+      capabilityIds: ['laravel-api', 'sanctum-authentication', 'containerized-delivery'],
       evidence: [
         {
-          id: 'library-readme',
+          id: 'library-rest-endpoints',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/its-php-libreria/blob/main/README.md',
+        },
+        {
+          id: 'library-docker-setup',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/its-php-libreria/blob/main/README.md',
+        },
+        {
+          id: 'library-validation-tests',
           type: 'documentation',
           url: 'https://github.com/pianic2/its-php-libreria/blob/main/README.md',
         },
@@ -56,7 +74,7 @@ export const sharedContent = {
     },
     {
       id: 'node-list-manager',
-      capabilityIds: ['node-api', 'automated-testing'],
+      capabilityIds: ['node-api', 'sqlite-persistence', 'automated-testing'],
       evidence: [
         {
           id: 'node-server-source',
@@ -65,6 +83,11 @@ export const sharedContent = {
         },
         {
           id: 'node-package-manifest',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/package.json',
+        },
+        {
+          id: 'node-automated-tests',
           type: 'documentation',
           url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/package.json',
         },
