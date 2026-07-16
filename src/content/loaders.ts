@@ -3,8 +3,17 @@ import { validateContentRepository } from './validation'
 
 const repository = validateContentRepository()
 
+const projectSectionLabels = {
+  it: { problem: 'Problema', approach: 'Approccio', outcome: 'Risultato' },
+  en: { problem: 'Problem', approach: 'Approach', outcome: 'Outcome' },
+} satisfies Record<Language, Record<'problem' | 'approach' | 'outcome', string>>
+
 export function getSiteContent(language: Language) {
   return repository.locales[language]
+}
+
+export function getProjectSectionLabels(language: Language) {
+  return projectSectionLabels[language]
 }
 
 export function getProjectById(language: Language, projectId: string) {
