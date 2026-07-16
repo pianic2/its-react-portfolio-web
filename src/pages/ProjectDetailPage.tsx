@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ExternalLink } from '../components/actions/AppLink'
 import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
-import { getProjectBySlug, getSiteContent } from '../content/loaders'
+import { getProjectBySlug, getProjectSectionLabels, getSiteContent } from '../content/loaders'
 import type { Language } from '../routes/routeConfig'
 
 type ProjectDetailPageProps = {
@@ -13,6 +13,7 @@ type ProjectDetailPageProps = {
 export function ProjectDetailPage({ language }: ProjectDetailPageProps) {
   const { slug } = useParams()
   const content = getSiteContent(language)
+  const sectionLabels = getProjectSectionLabels(language)
   const project = getProjectBySlug(language, slug)
   const headingId = 'project-detail-title'
 
@@ -52,19 +53,19 @@ export function ProjectDetailPage({ language }: ProjectDetailPageProps) {
           <Stack spacing={3}>
             <section>
               <Typography component="h2" gutterBottom variant="h4">
-                Problem
+                {sectionLabels.problem}
               </Typography>
               <Typography>{project.problem}</Typography>
             </section>
             <section>
               <Typography component="h2" gutterBottom variant="h4">
-                Approach
+                {sectionLabels.approach}
               </Typography>
               <Typography>{project.approach}</Typography>
             </section>
             <section>
               <Typography component="h2" gutterBottom variant="h4">
-                Outcome
+                {sectionLabels.outcome}
               </Typography>
               <Typography>{project.outcome}</Typography>
             </section>
