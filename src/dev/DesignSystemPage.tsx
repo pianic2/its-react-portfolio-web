@@ -30,11 +30,20 @@ function ReviewPanel({ children, eyebrow, title, wide = false }: ReviewPanelProp
   return (
     <Paper
       component="section"
-      sx={{
-        boxShadow: (theme) => theme.digitalStudio.shadows.medium,
+      sx={(theme) => ({
+        boxShadow: theme.digitalStudio.shadows.large,
         gridColumn: wide ? { lg: '1 / -1' } : undefined,
-        p: { xs: 5, md: 7 },
-      }}
+        px: {
+          xs: `${theme.digitalStudio.layout.panelInset.compact}px`,
+          sm: `${theme.digitalStudio.layout.panelInset.regular}px`,
+          md: `${theme.digitalStudio.layout.panelInset.wide}px`,
+        },
+        py: {
+          xs: `${theme.digitalStudio.layout.panelInset.compact}px`,
+          sm: `${theme.digitalStudio.layout.panelInset.regular}px`,
+          md: `${theme.digitalStudio.layout.panelInset.wide}px`,
+        },
+      })}
     >
       <Stack spacing={4}>
         <Box>
@@ -72,19 +81,68 @@ const spacingSteps = [1, 2, 4, 6, 8, 12] as const
 const foundationSamples = [
   { label: 'Small', radius: 'sm', shadow: 'small' },
   { label: 'Large', radius: 'lg', shadow: 'medium' },
-  { label: 'Extra large', radius: 'xl', shadow: 'large' },
+  { label: 'XL', radius: 'xl', shadow: 'large' },
 ] as const
 
 export function DesignSystemPage() {
   const theme = useTheme()
   const { mode, toggleMode } = useDigitalStudioTheme()
-  const { borderWidths, colors, motion, patterns, radii, shadows } = theme.digitalStudio
+  const {
+    borderWidths,
+    colors,
+    layout,
+    motion,
+    patterns,
+    radii,
+    shadowOffsets,
+    shadows,
+    spacing,
+  } = theme.digitalStudio
   const nextMode = mode === 'light' ? 'dark' : 'light'
 
+  const panelInset = {
+    xs: `${layout.panelInset.compact}px`,
+    sm: `${layout.panelInset.regular}px`,
+    md: `${layout.panelInset.wide}px`,
+  }
+  const sectionGap = {
+    xs: `${layout.sectionGap.compact + layout.shadowClearance}px`,
+    sm: `${layout.sectionGap.regular + layout.shadowClearance}px`,
+    md: `${layout.sectionGap.wide + layout.shadowClearance}px`,
+  }
+
   return (
-    <Box component="main" sx={{ minHeight: '100vh', overflow: 'hidden', py: { xs: 6, md: 10 } }}>
-      <Container maxWidth="xl">
-        <Stack spacing={{ xs: 6, md: 8 }}>
+    <Box
+      component="main"
+      sx={{
+        minHeight: '100vh',
+        paddingBlockEnd: {
+          xs: `max(${layout.pageGutter.regular + layout.shadowClearance}px, calc(env(safe-area-inset-bottom) + ${layout.shadowClearance}px))`,
+          md: `max(${layout.pageGutter.wide + layout.shadowClearance}px, calc(env(safe-area-inset-bottom) + ${layout.shadowClearance}px))`,
+        },
+        paddingBlockStart: {
+          xs: `max(${layout.pageGutter.regular}px, env(safe-area-inset-top))`,
+          md: `max(${layout.pageGutter.wide}px, env(safe-area-inset-top))`,
+        },
+      }}
+    >
+      <Container
+        disableGutters
+        maxWidth="xl"
+        sx={{
+          paddingInlineEnd: {
+            xs: `max(${layout.pageGutter.compact + layout.shadowClearance}px, calc(env(safe-area-inset-right) + ${layout.shadowClearance}px))`,
+            sm: `max(${layout.pageGutter.regular + layout.shadowClearance}px, calc(env(safe-area-inset-right) + ${layout.shadowClearance}px))`,
+            md: `max(${layout.pageGutter.wide + layout.shadowClearance}px, calc(env(safe-area-inset-right) + ${layout.shadowClearance}px))`,
+          },
+          paddingInlineStart: {
+            xs: `max(${layout.pageGutter.compact}px, env(safe-area-inset-left))`,
+            sm: `max(${layout.pageGutter.regular}px, env(safe-area-inset-left))`,
+            md: `max(${layout.pageGutter.wide}px, env(safe-area-inset-left))`,
+          },
+        }}
+      >
+        <Stack sx={{ gap: sectionGap }}>
           <Paper
             component="header"
             sx={{
@@ -93,7 +151,12 @@ export function DesignSystemPage() {
               boxShadow: shadows.large,
               color: 'primary.contrastText',
               overflow: 'hidden',
-              p: { xs: 6, sm: 8, md: 12 },
+              px: panelInset,
+              py: {
+                xs: `${layout.panelInset.regular}px`,
+                sm: `${layout.panelInset.wide}px`,
+                md: `${layout.panelInset.wide + 16}px`,
+              },
               position: 'relative',
             }}
           >
@@ -118,12 +181,17 @@ export function DesignSystemPage() {
               >
                 <Chip
                   label="Development only · IRPW-15"
-                  sx={{ bgcolor: colors.warning, color: colors.onWarning }}
+                  sx={{ bgcolor: colors.warning, color: colors.onWarning, maxWidth: '100%' }}
                 />
                 <Button
                   onClick={toggleMode}
                   startIcon={mode === 'light' ? <DarkModeRounded /> : <LightModeRounded />}
-                  sx={{ bgcolor: colors.surface, color: colors.text }}
+                  sx={{
+                    alignSelf: { xs: 'flex-start', md: 'center' },
+                    bgcolor: colors.surface,
+                    color: colors.text,
+                    maxWidth: '100%',
+                  }}
                   variant="outlined"
                 >
                   Preview {nextMode} mode
@@ -162,7 +230,7 @@ export function DesignSystemPage() {
           <Box
             sx={{
               display: 'grid',
-              gap: { xs: 6, md: 8 },
+              gap: sectionGap,
               gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, minmax(0, 1fr))' },
             }}
           >
@@ -191,12 +259,21 @@ export function DesignSystemPage() {
                       borderRadius: `${radii.md}px`,
                       boxShadow: shadows.small,
                       color: colors[foreground],
+                      marginBlockEnd: `${shadowOffsets.small}px`,
+                      marginInlineEnd: `${shadowOffsets.small}px`,
                       minHeight: 128,
+                      minWidth: 0,
                       p: 4,
                     }}
                   >
                     <Typography sx={{ fontWeight: 900 }}>{label}</Typography>
-                    <Typography sx={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.78rem' }}>
+                    <Typography
+                      sx={{
+                        fontFamily: 'ui-monospace, monospace',
+                        fontSize: '0.78rem',
+                        overflowWrap: 'anywhere',
+                      }}
+                    >
                       {colors[role]}
                     </Typography>
                   </Box>
@@ -223,28 +300,50 @@ export function DesignSystemPage() {
               <Stack spacing={6}>
                 <Box>
                   <Typography gutterBottom sx={{ fontWeight: 900 }}>
-                    Spacing · 4 px base unit
+                    Spacing · {spacing.base} px base unit
                   </Typography>
-                  <Stack direction="row" sx={{ alignItems: 'flex-end', flexWrap: 'wrap', gap: 3 }}>
-                    {spacingSteps.map((step) => (
-                      <Box key={step} sx={{ textAlign: 'center' }}>
-                        <Box
-                          sx={{
-                            bgcolor: 'secondary.main',
-                            border: `${borderWidths.regular}px solid ${colors.border}`,
-                            height: theme.spacing(step),
-                            minHeight: 4,
-                            minWidth: 4,
-                            width: theme.spacing(step),
-                          }}
-                        />
-                        <Typography variant="caption">{theme.spacing(step)}</Typography>
-                      </Box>
-                    ))}
-                  </Stack>
+                  <Box
+                    sx={{
+                      alignItems: 'end',
+                      display: 'grid',
+                      gap: 4,
+                      gridTemplateColumns: {
+                        xs: 'repeat(2, minmax(0, 1fr))',
+                        sm: 'repeat(3, minmax(0, 1fr))',
+                      },
+                    }}
+                  >
+                    {spacingSteps.map((step) => {
+                      const size = step * spacing.base
+
+                      return (
+                        <Box key={step} sx={{ minWidth: 0 }}>
+                          <Box
+                            sx={{
+                              bgcolor: 'secondary.main',
+                              border: `${borderWidths.regular}px solid ${colors.border}`,
+                              height: `${size}px`,
+                              minHeight: spacing.base,
+                              minWidth: spacing.base,
+                              width: `${size}px`,
+                            }}
+                          />
+                          <Typography sx={{ mt: 1 }} variant="caption">
+                            {size}px
+                          </Typography>
+                        </Box>
+                      )
+                    })}
+                  </Box>
                 </Box>
 
-                <Box sx={{ display: 'grid', gap: 4, gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gap: 4,
+                    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                  }}
+                >
                   {foundationSamples.map(({ label, radius, shadow }) => (
                     <Box
                       key={label}
@@ -254,11 +353,16 @@ export function DesignSystemPage() {
                         borderRadius: `${radii[radius]}px`,
                         boxShadow: shadows[shadow],
                         color: 'info.contrastText',
+                        marginBlockEnd: `${shadowOffsets[shadow]}px`,
+                        marginInlineEnd: `${shadowOffsets[shadow]}px`,
                         minHeight: 112,
+                        minWidth: 0,
                         p: 3,
                       }}
                     >
-                      <Typography sx={{ fontWeight: 900 }}>{label}</Typography>
+                      <Typography noWrap sx={{ fontWeight: 900 }}>
+                        {label}
+                      </Typography>
                       <Typography variant="body2">{radii[radius]}px</Typography>
                     </Box>
                   ))}
@@ -274,7 +378,7 @@ export function DesignSystemPage() {
                   gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
                 }}
               >
-                <Stack spacing={5}>
+                <Stack spacing={5} sx={{ minWidth: 0 }}>
                   <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 4 }}>
                     <Button variant="contained">Primary action</Button>
                     <Button color="secondary" variant="contained">
@@ -305,8 +409,19 @@ export function DesignSystemPage() {
                   </Typography>
                 </Stack>
 
-                <Card>
-                  <CardContent sx={{ p: { xs: 5, md: 7 } }}>
+                <Card
+                  sx={{
+                    marginBlockEnd: `${shadowOffsets.medium}px`,
+                    marginInlineEnd: `${shadowOffsets.medium}px`,
+                    minWidth: 0,
+                  }}
+                >
+                  <CardContent
+                    sx={{
+                      p: { xs: panelInset.xs, md: panelInset.sm },
+                      '&:last-child': { pb: { xs: panelInset.xs, md: panelInset.sm } },
+                    }}
+                  >
                     <Stack spacing={4}>
                       <Chip color="warning" label="Case study" sx={{ alignSelf: 'flex-start' }} />
                       <Typography variant="h4">
@@ -339,7 +454,7 @@ export function DesignSystemPage() {
                   gridTemplateColumns: { xs: '1fr', md: '1fr minmax(260px, 0.7fr)' },
                 }}
               >
-                <Stack spacing={4}>
+                <Stack spacing={4} sx={{ minWidth: 0 }}>
                   <Typography>
                     Use Tab to inspect focus rings. Hover and press controls to inspect short
                     offset-shadow movement. Under <code>prefers-reduced-motion: reduce</code>,
@@ -359,7 +474,9 @@ export function DesignSystemPage() {
                     borderRadius: `${radii.lg}px`,
                     boxShadow: shadows.large,
                     color: 'info.contrastText',
-                    p: 7,
+                    marginBlockEnd: `${shadowOffsets.large}px`,
+                    marginInlineEnd: `${shadowOffsets.large}px`,
+                    p: { xs: panelInset.xs, md: panelInset.sm },
                     textAlign: 'center',
                     transition: theme.transitions.create(['transform', 'box-shadow'], {
                       duration: motion.duration.standard,
