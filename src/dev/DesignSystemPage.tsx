@@ -69,6 +69,12 @@ const colourRoles: Array<{
 
 const spacingSteps = [1, 2, 4, 6, 8, 12] as const
 
+const foundationSamples = [
+  { label: 'Small', radius: 'sm', shadow: 'small' },
+  { label: 'Large', radius: 'lg', shadow: 'medium' },
+  { label: 'Extra large', radius: 'xl', shadow: 'large' },
+] as const
+
 export function DesignSystemPage() {
   const theme = useTheme()
   const { mode, toggleMode } = useDigitalStudioTheme()
@@ -103,10 +109,12 @@ export function DesignSystemPage() {
             />
             <Stack spacing={6} sx={{ position: 'relative' }}>
               <Stack
-                alignItems={{ xs: 'flex-start', md: 'center' }}
                 direction={{ xs: 'column', md: 'row' }}
-                justifyContent="space-between"
                 spacing={4}
+                sx={{
+                  alignItems: { xs: 'flex-start', md: 'center' },
+                  justifyContent: 'space-between',
+                }}
               >
                 <Chip
                   label="Development only · IRPW-15"
@@ -126,14 +134,19 @@ export function DesignSystemPage() {
                 <Typography component="h1" variant="h1">
                   Pop! Digital Studio
                 </Typography>
-                <Typography sx={{ fontSize: { xs: '1.1rem', md: '1.35rem' }, mt: 5, maxWidth: 760 }}>
+                <Typography
+                  sx={{ fontSize: { xs: '1.1rem', md: '1.35rem' }, mt: 5, maxWidth: 760 }}
+                >
                   A loud, spacious and accessible visual language for a bilingual engineering
                   portfolio. This route is a review surface, not a public page.
                 </Typography>
               </Box>
 
-              <Stack direction="row" flexWrap="wrap" gap={3}>
-                <Chip label={`Mode: ${mode}`} sx={{ bgcolor: colors.accent, color: colors.onAccent }} />
+              <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 3 }}>
+                <Chip
+                  label={`Mode: ${mode}`}
+                  sx={{ bgcolor: colors.accent, color: colors.onAccent }}
+                />
                 <Chip
                   label="WCAG 2.2 AA baseline"
                   sx={{ bgcolor: colors.success, color: colors.onSuccess }}
@@ -153,7 +166,11 @@ export function DesignSystemPage() {
               gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, minmax(0, 1fr))' },
             }}
           >
-            <ReviewPanel eyebrow="01 · Semantic colour" title="Roles instead of random hex values" wide>
+            <ReviewPanel
+              eyebrow="01 · Semantic colour"
+              title="Roles instead of random hex values"
+              wide
+            >
               <Box
                 sx={{
                   display: 'grid',
@@ -178,7 +195,7 @@ export function DesignSystemPage() {
                       p: 4,
                     }}
                   >
-                    <Typography fontWeight={900}>{label}</Typography>
+                    <Typography sx={{ fontWeight: 900 }}>{label}</Typography>
                     <Typography sx={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.78rem' }}>
                       {colors[role]}
                     </Typography>
@@ -205,10 +222,10 @@ export function DesignSystemPage() {
             <ReviewPanel eyebrow="03 · Foundations" title="Spacing, shape and graphic elevation">
               <Stack spacing={6}>
                 <Box>
-                  <Typography fontWeight={900} gutterBottom>
+                  <Typography gutterBottom sx={{ fontWeight: 900 }}>
                     Spacing · 4 px base unit
                   </Typography>
-                  <Stack alignItems="flex-end" direction="row" flexWrap="wrap" gap={3}>
+                  <Stack direction="row" sx={{ alignItems: 'flex-end', flexWrap: 'wrap', gap: 3 }}>
                     {spacingSteps.map((step) => (
                       <Box key={step} sx={{ textAlign: 'center' }}>
                         <Box
@@ -228,25 +245,21 @@ export function DesignSystemPage() {
                 </Box>
 
                 <Box sx={{ display: 'grid', gap: 4, gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                  {[
-                    ['Small', radii.sm, shadows.small],
-                    ['Large', radii.lg, shadows.medium],
-                    ['Extra large', radii.xl, shadows.large],
-                  ].map(([label, radius, shadow]) => (
+                  {foundationSamples.map(({ label, radius, shadow }) => (
                     <Box
                       key={label}
                       sx={{
                         bgcolor: 'info.main',
                         border: `${borderWidths.bold}px solid ${colors.border}`,
-                        borderRadius: `${radius}px`,
-                        boxShadow: shadow,
+                        borderRadius: `${radii[radius]}px`,
+                        boxShadow: shadows[shadow],
                         color: 'info.contrastText',
                         minHeight: 112,
                         p: 3,
                       }}
                     >
-                      <Typography fontWeight={900}>{label}</Typography>
-                      <Typography variant="body2">{radius}px</Typography>
+                      <Typography sx={{ fontWeight: 900 }}>{label}</Typography>
+                      <Typography variant="body2">{radii[radius]}px</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -262,7 +275,7 @@ export function DesignSystemPage() {
                 }}
               >
                 <Stack spacing={5}>
-                  <Stack direction="row" flexWrap="wrap" gap={4}>
+                  <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 4 }}>
                     <Button variant="contained">Primary action</Button>
                     <Button color="secondary" variant="contained">
                       Secondary
@@ -272,7 +285,7 @@ export function DesignSystemPage() {
                       Disabled
                     </Button>
                   </Stack>
-                  <Stack direction="row" flexWrap="wrap" gap={2}>
+                  <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 2 }}>
                     <Chip color="primary" label="React" />
                     <Chip color="secondary" label="TypeScript" />
                     <Chip color="info" label="Material UI" />
@@ -312,7 +325,11 @@ export function DesignSystemPage() {
               </Box>
             </ReviewPanel>
 
-            <ReviewPanel eyebrow="05 · Focus and motion" title="Interaction stays visible and optional" wide>
+            <ReviewPanel
+              eyebrow="05 · Focus and motion"
+              title="Interaction stays visible and optional"
+              wide
+            >
               <Box
                 id="focus-and-motion"
                 sx={{
@@ -328,7 +345,7 @@ export function DesignSystemPage() {
                     offset-shadow movement. Under <code>prefers-reduced-motion: reduce</code>,
                     transforms and transitions are removed.
                   </Typography>
-                  <Stack direction="row" flexWrap="wrap" gap={4}>
+                  <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 4 }}>
                     <Button variant="contained">Tab to me</Button>
                     <Button color="secondary" variant="contained">
                       Then here
