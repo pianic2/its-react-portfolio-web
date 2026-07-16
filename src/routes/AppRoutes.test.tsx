@@ -30,7 +30,9 @@ describe('localized application routes', () => {
     renderRoute('/')
 
     expect(await screen.findByTestId('location')).toHaveTextContent('/it')
-    expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Portfolio di sviluppo software' }),
+    ).toBeInTheDocument()
   })
 
   it('uses a valid stored language preference for the root route', async () => {
@@ -38,19 +40,21 @@ describe('localized application routes', () => {
     renderRoute('/')
 
     expect(await screen.findByTestId('location')).toHaveTextContent('/en')
-    expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Software development portfolio' }),
+    ).toBeInTheDocument()
   })
 
   it.each([
-    ['/it', 'Home'],
-    ['/it/progetti', 'Progetti'],
+    ['/it', 'Portfolio di sviluppo software'],
+    ['/it/progetti', 'Prima le evidenze, poi gli aggettivi'],
     ['/it/competenze', 'Competenze'],
     ['/it/metodo', 'Metodo'],
     ['/it/profilo', 'Profilo'],
     ['/it/contatti', 'Contatti'],
     ['/it/privacy', 'Privacy'],
-    ['/en', 'Home'],
-    ['/en/projects', 'Projects'],
+    ['/en', 'Software development portfolio'],
+    ['/en/projects', 'Evidence before adjectives'],
     ['/en/skills', 'Skills'],
     ['/en/method', 'Method'],
     ['/en/profile', 'Profile'],
@@ -99,6 +103,18 @@ describe('localized application routes', () => {
     expect(
       screen.getByText('The requested slug does not match a published project.'),
     ).toBeInTheDocument()
+  })
+
+  it('renders Project Detail from the localized content context with claims and evidence', () => {
+    renderRoute('/en/projects/node-list-manager')
+
+    expect(screen.getByRole('heading', { name: 'ITS Node.js Project' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Claims and evidence' })).toBeInTheDocument()
+    expect(screen.getAllByText('Demonstrated')).toHaveLength(3)
+    expect(screen.getByRole('link', { name: /Open repository/ })).toHaveAttribute(
+      'href',
+      'https://github.com/pianic2/todo-list-manager-node',
+    )
   })
 
   it('exposes the complete design-system review surface only in development builds', () => {
