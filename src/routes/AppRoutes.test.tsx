@@ -66,7 +66,7 @@ describe('localized application routes', () => {
     const user = userEvent.setup()
     renderRoute('/it/progetti/domain-modeling')
 
-    await user.click(screen.getByRole('link', { name: 'English' }))
+    await user.click(screen.getByRole('link', { name: "Passa all'inglese", hidden: true }))
 
     expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
     expect(screen.getByRole('heading', { name: 'Project detail' })).toBeInTheDocument()
