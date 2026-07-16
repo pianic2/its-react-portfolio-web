@@ -79,7 +79,9 @@ export function AccessibilityShowcase({
             },
           }}
         >
-          <Typography variant="h4">Motion is enhancement.</Typography>
+          <Typography component="h3" variant="h4">
+            Motion is enhancement.
+          </Typography>
           <Typography sx={{ mt: 3 }}>
             Hover this sample with and without reduced motion.
           </Typography>
