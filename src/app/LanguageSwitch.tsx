@@ -1,5 +1,6 @@
 import { Button } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
+import { writeStoredLanguage } from '../preferences/preferences'
 import { getRoutePath, resolveLocalizedRoute, type Language } from '../routes/routeConfig'
 
 const alternativeLanguage: Record<Language, Language> = {
@@ -24,6 +25,7 @@ export function LanguageSwitch() {
       component={Link}
       hrefLang={targetLanguage}
       lang={targetLanguage}
+      onClick={() => writeStoredLanguage(targetLanguage)}
       size="small"
       to={getRoutePath(page, targetLanguage, slug ? { slug } : {})}
       variant="outlined"

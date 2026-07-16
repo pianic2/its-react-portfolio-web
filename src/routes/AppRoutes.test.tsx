@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { MemoryRouter, useLocation } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { DigitalStudioProvider } from '../theme'
 import { AppRoutes } from './AppRoutes'
 
 function LocationProbe() {
@@ -11,18 +12,32 @@ function LocationProbe() {
 
 function renderRoute(path: string) {
   return render(
-    <MemoryRouter initialEntries={[path]}>
-      <AppRoutes />
-      <LocationProbe />
-    </MemoryRouter>,
+    <DigitalStudioProvider>
+      <MemoryRouter initialEntries={[path]}>
+        <AppRoutes />
+        <LocationProbe />
+      </MemoryRouter>
+    </DigitalStudioProvider>,
   )
 }
 
 describe('localized application routes', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+  })
+
   it('redirects the root to the deterministic Italian default', async () => {
     renderRoute('/')
 
     expect(await screen.findByTestId('location')).toHaveTextContent('/it')
+    expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument()
+  })
+
+  it('uses a valid stored language preference for the root route', async () => {
+    window.localStorage.setItem('irpw.language-preference', 'en')
+    renderRoute('/')
+
+    expect(await screen.findByTestId('location')).toHaveTextContent('/en')
     expect(screen.getByRole('heading', { name: 'Home' })).toBeInTheDocument()
   })
 
@@ -47,7 +62,7 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument()
   })
 
-  it('switches to the equivalent localized project detail route', async () => {
+  it('switches to the equivalent localized project detail route and stores the preference', async () => {
     const user = userEvent.setup()
     renderRoute('/it/progetti/domain-modeling')
 
@@ -55,6 +70,7 @@ describe('localized application routes', () => {
 
     expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/domain-modeling')
     expect(screen.getByRole('heading', { name: 'Project detail' })).toBeInTheDocument()
+    expect(window.localStorage.getItem('irpw.language-preference')).toBe('en')
   })
 
   it('keeps privacy discoverable from the footer, not the main navigation', () => {
@@ -71,5 +87,12 @@ describe('localized application routes', () => {
 
     expect(screen.getByRole('heading', { name: 'Page not found' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/en')
+  })
+
+  it('exposes the design-system review surface only in development builds', () => {
+    renderRoute('/__dev/design-system')
+
+    expect(screen.getByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
+    expect(screen.getByText('Development only · IRPW-15')).toBeInTheDocument()
   })
 })
