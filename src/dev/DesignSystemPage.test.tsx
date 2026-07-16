@@ -20,7 +20,7 @@ describe('responsive design-system showcase', () => {
     window.localStorage.clear()
   })
 
-  it('renders the complete review matrix with shared primitives', () => {
+  it('renders the complete review matrix with shared and composed components', () => {
     renderShowcase()
 
     expect(screen.getByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
@@ -34,7 +34,14 @@ describe('responsive design-system showcase', () => {
     expect(
       screen.getByRole('heading', { name: 'Focus, disabled state and optional motion' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('article')).toHaveLength(2)
+    expect(
+      screen.getByRole('heading', { name: 'Composed components under realistic pressure' }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Edge telemetry decision lab' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Release readiness' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Start with the problem, not the pitch.' }),
+    ).toBeInTheDocument()
   })
 
   it('exposes active navigation and disabled interaction states', () => {
