@@ -2,7 +2,9 @@ import { styled } from '@mui/material/styles'
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const StyledNavigationLink = styled(NavLink)(({ theme }) => {
+const StyledNavigationLink = styled(NavLink, {
+  shouldForwardProp: (property) => property !== 'fullWidth',
+})<{ fullWidth: boolean }>(({ fullWidth, theme }) => {
   const { borderWidths, colors, focus, motion, radii, shadowOffsets, shadows } =
     theme.digitalStudio
 
@@ -15,7 +17,7 @@ const StyledNavigationLink = styled(NavLink)(({ theme }) => {
     color: colors.text,
     display: 'inline-flex',
     fontWeight: 900,
-    justifyContent: 'center',
+    justifyContent: fullWidth ? 'flex-start' : 'center',
     minHeight: theme.spacing(12),
     paddingInline: theme.spacing(4),
     position: 'relative',
@@ -24,6 +26,7 @@ const StyledNavigationLink = styled(NavLink)(({ theme }) => {
       duration: motion.duration.fast,
       easing: motion.easing.standard,
     }),
+    width: fullWidth ? '100%' : 'auto',
     '&:hover': {
       boxShadow: shadows.medium,
       transform: `translate(-${shadowOffsets.small}px, -${shadowOffsets.small}px)`,
@@ -63,6 +66,7 @@ const StyledNavigationLink = styled(NavLink)(({ theme }) => {
 type NavigationLinkProps = {
   children: ReactNode
   end?: boolean
+  fullWidth?: boolean
   onNavigate?: (() => void) | undefined
   to: string
 }
@@ -70,6 +74,7 @@ type NavigationLinkProps = {
 export function NavigationLink({
   children,
   end = false,
+  fullWidth = false,
   onNavigate,
   to,
 }: NavigationLinkProps) {
@@ -77,6 +82,7 @@ export function NavigationLink({
     <StyledNavigationLink
       className={({ isActive }) => (isActive ? 'is-active' : undefined)}
       end={end}
+      fullWidth={fullWidth}
       onClick={() => onNavigate?.()}
       to={to}
     >
