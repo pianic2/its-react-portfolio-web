@@ -1,5 +1,5 @@
 import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Chip, Stack, Typography } from '@mui/material'
 import { ButtonLink, ExternalButtonLink, ExternalLink } from '../../components/actions/AppLink'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
@@ -31,9 +31,12 @@ export function HomeHero() {
             }}
           />
           <Stack spacing={{ xs: 3, sm: 4 }} sx={{ maxWidth: '68rem', minWidth: 0 }}>
-            <Typography sx={{ letterSpacing: 0 }} variant="overline">
-              {copy.eyebrow}
-            </Typography>
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
+              <Chip label="FULL STACK DEVELOPER" size="medium" variant="outlined" />
+              <Typography component="span" sx={{ letterSpacing: 0 }} variant="overline">
+                {copy.eyebrow.replace('FULL STACK DEVELOPER', '').trim()}
+              </Typography>
+            </Stack>
             <Typography
               component="h1"
               id="home-page-title"
@@ -58,9 +61,6 @@ export function HomeHero() {
                 {copy.description.linkLabel}
               </ExternalLink>
               {copy.description.suffix}
-            </Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: '68ch' }}>
-              {copy.supportingText}
             </Typography>
             <Stack
               data-testid="home-hero-actions"

@@ -44,8 +44,6 @@ export const englishContent = {
           '. I work on web applications, backend systems and connected devices, turning what I learn into practical projects.',
         url: 'https://www.itsprodigi.it/',
       },
-      supportingText:
-        'Some of these projects were created during my ITS training. HomeEdge is different: it is the personal project I intend to develop and maintain over time.',
       primaryCtaLabel: 'View my projects',
       methodCtaLabel: 'See how I work',
       githubCtaLabel: 'GitHub',

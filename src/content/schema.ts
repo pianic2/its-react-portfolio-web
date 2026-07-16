@@ -273,7 +273,6 @@ export const siteContentSchema = z.object({
         suffix: z.string().min(1),
         url: httpsUrlSchema,
       }),
-      supportingText: z.string().min(1),
       primaryCtaLabel: z.string().min(1),
       methodCtaLabel: z.string().min(1),
       githubCtaLabel: z.string().min(1),

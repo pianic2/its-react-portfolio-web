@@ -47,8 +47,6 @@ export const italianContent = {
           '. Lavoro su applicazioni web, backend e dispositivi connessi, cercando sempre di trasformare quello che imparo in qualcosa di concreto.',
         url: 'https://www.itsprodigi.it/',
       },
-      supportingText:
-        'Alcuni progetti nascono durante il percorso ITS. HomeEdge, invece, è il progetto personale che porto avanti nel tempo per sperimentare con sensori, software e smart home.',
       primaryCtaLabel: 'Guarda i progetti',
       methodCtaLabel: 'Scopri il mio metodo',
       githubCtaLabel: 'GitHub',
