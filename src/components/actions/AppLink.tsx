@@ -46,8 +46,12 @@ export function ExternalLink({
               clip: 'rect(0 0 0 0)',
               clipPath: 'inset(50%)',
               height: 1,
+              left: 0,
+              margin: -1,
               overflow: 'hidden',
+              padding: 0,
               position: 'absolute',
+              top: 0,
               whiteSpace: 'nowrap',
               width: 1,
             }}
