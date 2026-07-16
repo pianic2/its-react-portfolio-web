@@ -26,7 +26,12 @@ export function AppLayout({ language }: AppLayoutProps) {
         <Box
           component="main"
           id="main-content"
-          sx={{ flex: 1, minWidth: 0, outline: 'none' }}
+          sx={{
+            flex: 1,
+            minWidth: 0,
+            outline: 'none',
+            scrollMarginTop: { xs: '128px', lg: '184px' },
+          }}
           tabIndex={-1}
         >
           <Outlet />

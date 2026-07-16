@@ -26,11 +26,15 @@ const PageSectionRoot = styled(Box, {
   return {
     minWidth: 0,
     paddingBlock: `${compact}px`,
+    scrollMarginTop: '128px',
     [theme.breakpoints.up('sm')]: {
       paddingBlock: `${regular}px`,
     },
     [theme.breakpoints.up('md')]: {
       paddingBlock: `${wide}px`,
+    },
+    [theme.breakpoints.up('lg')]: {
+      scrollMarginTop: '184px',
     },
   }
 })

@@ -26,6 +26,8 @@ export function SiteHeader({ language }: SiteHeaderProps) {
     <Box
       component="header"
       sx={(theme) => ({
+        backgroundColor: theme.digitalStudio.colors.canvas,
+        isolation: 'isolate',
         position: 'sticky',
         top: 0,
         zIndex: theme.zIndex.appBar,
