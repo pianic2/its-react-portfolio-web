@@ -1,7 +1,8 @@
 import MenuRounded from '@mui/icons-material/MenuRounded'
-import { Box, IconButton, Paper, Stack } from '@mui/material'
+import { Box, Paper, Stack } from '@mui/material'
 import { useState } from 'react'
 import type { Language } from '../../routes/routeConfig'
+import { StudioIconButton } from '../actions/StudioIconButton'
 import { PageContainer } from '../layout/PageContainer'
 import { LanguageSwitch } from './LanguageSwitch'
 import { MobileNavigationDrawer } from './MobileNavigationDrawer'
@@ -44,9 +45,9 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             alignItems: 'center',
             bgcolor: 'background.paper',
             boxShadow: theme.digitalStudio.shadows.large,
-            display: 'flex',
+            display: 'grid',
             gap: 4,
-            justifyContent: 'space-between',
+            gridTemplateColumns: { xs: 'minmax(0, 1fr) auto', lg: 'auto 1fr auto' },
             minWidth: 0,
             px: {
               xs: `${theme.digitalStudio.layout.panelInset.compact}px`,
@@ -57,30 +58,37 @@ export function SiteHeader({ language }: SiteHeaderProps) {
         >
           <SiteIdentity language={language} />
 
-          <Box sx={{ display: { xs: 'none', lg: 'block' }, minWidth: 0 }}>
+          <Box
+            sx={{
+              display: { xs: 'none', lg: 'block' },
+              gridColumn: { lg: '1 / -1', xl: 'auto' },
+              justifySelf: { lg: 'stretch', xl: 'center' },
+              minWidth: 0,
+            }}
+          >
             <PrimaryNavigation language={language} />
           </Box>
 
           <Stack
             direction="row"
-            sx={{ alignItems: 'center', display: { xs: 'none', lg: 'flex' }, gap: 2 }}
+            sx={{
+              alignItems: 'center',
+              display: { xs: 'none', lg: 'flex' },
+              gap: 2,
+              justifySelf: 'end',
+            }}
           >
             <LanguageSwitch />
             <ThemeToggle language={language} />
           </Stack>
 
-          <IconButton
+          <StudioIconButton
             aria-label={menuLabels[language]}
             onClick={() => setMobileNavigationOpen(true)}
-            sx={(theme) => ({
-              bgcolor: 'background.paper',
-              border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
-              boxShadow: theme.digitalStudio.shadows.small,
-              display: { xs: 'inline-flex', lg: 'none' },
-            })}
+            sx={{ display: { xs: 'inline-flex', lg: 'none' }, justifySelf: 'end' }}
           >
             <MenuRounded />
-          </IconButton>
+          </StudioIconButton>
         </Paper>
       </PageContainer>
 
