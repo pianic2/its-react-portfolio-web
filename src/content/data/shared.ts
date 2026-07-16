@@ -1,0 +1,83 @@
+import type { ContentRepository } from '../schema'
+
+export const sharedContent = {
+  capabilities: [
+    { id: 'embedded-firmware', category: 'embedded' },
+    { id: 'technical-governance', category: 'architecture' },
+    { id: 'laravel-api', category: 'backend' },
+    { id: 'containerized-delivery', category: 'delivery' },
+    { id: 'node-api', category: 'backend' },
+    { id: 'automated-testing', category: 'quality' },
+  ],
+  projects: [
+    {
+      id: 'homeedge-ai-platform',
+      capabilityIds: ['embedded-firmware', 'technical-governance'],
+      evidence: [
+        {
+          id: 'homeedge-readme',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md',
+        },
+      ],
+      links: [
+        {
+          id: 'homeedge-github',
+          kind: 'repository',
+          url: 'https://github.com/pianic2/homeedge-ai-platform',
+        },
+      ],
+      assetIds: [],
+      featured: true,
+      order: 0,
+    },
+    {
+      id: 'its-library-api-laravel',
+      capabilityIds: ['laravel-api', 'containerized-delivery'],
+      evidence: [
+        {
+          id: 'library-readme',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/its-php-libreria/blob/main/README.md',
+        },
+      ],
+      links: [
+        {
+          id: 'library-github',
+          kind: 'repository',
+          url: 'https://github.com/pianic2/its-php-libreria',
+        },
+      ],
+      assetIds: [],
+      featured: true,
+      order: 1,
+    },
+    {
+      id: 'node-list-manager',
+      capabilityIds: ['node-api', 'automated-testing'],
+      evidence: [
+        {
+          id: 'node-server-source',
+          type: 'repository',
+          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/src/server.js',
+        },
+        {
+          id: 'node-package-manifest',
+          type: 'documentation',
+          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/package.json',
+        },
+      ],
+      links: [
+        {
+          id: 'node-github',
+          kind: 'repository',
+          url: 'https://github.com/pianic2/todo-list-manager-node',
+        },
+      ],
+      assetIds: [],
+      featured: true,
+      order: 2,
+    },
+  ],
+  assets: [],
+} satisfies Pick<ContentRepository, 'capabilities' | 'projects' | 'assets'>

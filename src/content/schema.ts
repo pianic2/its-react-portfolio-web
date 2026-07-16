@@ -1,8 +1,6 @@
 import { z } from 'zod'
-import { supportedLanguages } from '../routes/routeConfig'
-
-export const languageSchema = z.enum(supportedLanguages)
-export const pageIdSchema = z.enum([
+export const supportedLanguages = ['it', 'en'] as const
+export const publicPageIds = [
   'home',
   'projects',
   'projectDetail',
@@ -11,9 +9,14 @@ export const pageIdSchema = z.enum([
   'profile',
   'contact',
   'privacy',
-])
+] as const
 
-const stableIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use a stable kebab-case identifier.')
+export const languageSchema = z.enum(supportedLanguages)
+export const pageIdSchema = z.enum(publicPageIds)
+
+const stableIdSchema = z
+  .string()
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use a stable kebab-case identifier.')
 const slugSchema = stableIdSchema
 const httpsUrlSchema = z
   .string()
@@ -22,14 +25,32 @@ const httpsUrlSchema = z
 
 export const capabilitySchema = z.object({
   id: stableIdSchema,
-  category: z.enum(['frontend', 'backend', 'architecture', 'delivery', 'quality', 'security', 'product', 'embedded']),
+  category: z.enum([
+    'frontend',
+    'backend',
+    'architecture',
+    'delivery',
+    'quality',
+    'security',
+    'product',
+    'embedded',
+  ]),
+})
+
+export const localizedCapabilitySchema = z.object({
+  capabilityId: stableIdSchema,
   label: z.string().min(1),
   description: z.string().min(1).optional(),
 })
 
 export const externalLinkSchema = z.object({
+  id: stableIdSchema,
   kind: z.enum(['repository', 'live-demo', 'documentation', 'jira', 'other']),
   url: httpsUrlSchema,
+})
+
+export const localizedExternalLinkSchema = z.object({
+  linkId: stableIdSchema,
   label: z.string().min(1),
   accessibilityLabel: z.string().min(1).optional(),
 })
@@ -38,33 +59,64 @@ export const assetReferenceSchema = z
   .object({
     id: stableIdSchema,
     src: z.string().min(1),
-    alt: z.string(),
-    decorative: z.boolean().default(false),
     width: z.number().int().positive().optional(),
     height: z.number().int().positive().optional(),
-    provenance: z.enum(['repository', 'project-screenshot', 'original', 'generated', 'third-party']),
+    provenance: z.enum([
+      'repository',
+      'project-screenshot',
+      'original',
+      'generated',
+      'third-party',
+    ]),
     credit: z.string().min(1).optional(),
   })
   .superRefine((asset, context) => {
+    if (asset.provenance === 'third-party' && !asset.credit) {
+      context.addIssue({
+        code: 'custom',
+        path: ['credit'],
+        message: 'Third-party assets require a credit.',
+      })
+    }
+  })
+
+export const localizedAssetSchema = z
+  .object({
+    assetId: stableIdSchema,
+    alt: z.string(),
+    decorative: z.boolean().default(false),
+  })
+  .superRefine((asset, context) => {
     if (asset.decorative && asset.alt !== '') {
-      context.addIssue({ code: 'custom', path: ['alt'], message: 'Decorative assets must use an empty alt value.' })
+      context.addIssue({
+        code: 'custom',
+        path: ['alt'],
+        message: 'Decorative assets must use an empty alt value.',
+      })
     }
     if (!asset.decorative && asset.alt.length === 0) {
-      context.addIssue({ code: 'custom', path: ['alt'], message: 'Informative assets require alternative text.' })
-    }
-    if (asset.provenance === 'third-party' && !asset.credit) {
-      context.addIssue({ code: 'custom', path: ['credit'], message: 'Third-party assets require a credit.' })
+      context.addIssue({
+        code: 'custom',
+        path: ['alt'],
+        message: 'Informative assets require alternative text.',
+      })
     }
   })
 
 export const evidenceSchema = z
   .object({
     id: stableIdSchema,
-    type: z.enum(['repository', 'pull-request', 'documentation', 'test', 'demo', 'screenshot', 'report']),
-    label: z.string().min(1),
+    type: z.enum([
+      'repository',
+      'pull-request',
+      'documentation',
+      'test',
+      'demo',
+      'screenshot',
+      'report',
+    ]),
     url: httpsUrlSchema.optional(),
     assetId: stableIdSchema.optional(),
-    description: z.string().min(1).optional(),
   })
   .refine((evidence) => evidence.url !== undefined || evidence.assetId !== undefined, {
     message: 'Evidence must reference either a URL or an asset.',
@@ -72,18 +124,26 @@ export const evidenceSchema = z
 
 export const claimSchema = z.discriminatedUnion('status', [
   z.object({
+    id: stableIdSchema,
+    text: z.string().min(1),
     status: z.literal('verified'),
     evidenceIds: z.array(stableIdSchema).min(1),
   }),
   z.object({
+    id: stableIdSchema,
+    text: z.string().min(1),
     status: z.literal('demonstrated'),
     evidenceIds: z.array(stableIdSchema).min(1),
   }),
   z.object({
+    id: stableIdSchema,
+    text: z.string().min(1),
     status: z.literal('declared'),
     evidenceIds: z.array(stableIdSchema).default([]),
   }),
   z.object({
+    id: stableIdSchema,
+    text: z.string().min(1),
     status: z.literal('planned'),
     evidenceIds: z.array(stableIdSchema).max(0).default([]),
   }),
@@ -91,7 +151,6 @@ export const claimSchema = z.discriminatedUnion('status', [
 
 export const projectCoreSchema = z.object({
   id: stableIdSchema,
-  status: z.enum(['active', 'completed', 'maintained', 'archived']),
   capabilityIds: z.array(stableIdSchema).min(1),
   evidence: z.array(evidenceSchema).min(1),
   links: z.array(externalLinkSchema).min(1),
@@ -106,17 +165,32 @@ export const localizedProjectSchema = z.object({
   title: z.string().min(1),
   eyebrow: z.string().min(1).optional(),
   summary: z.string().min(1),
-  problem: z.string().min(1),
-  approach: z.string().min(1),
-  outcome: z.string().min(1),
-  role: z.string().min(1).optional(),
-  claim: claimSchema,
+  sections: z
+    .array(z.object({ id: stableIdSchema, label: z.string().min(1), body: z.string().min(1) }))
+    .min(1),
+  claims: z.array(claimSchema).min(1),
+  evidence: z
+    .array(
+      z.object({
+        evidenceId: stableIdSchema,
+        label: z.string().min(1),
+        description: z.string().min(1).optional(),
+      }),
+    )
+    .min(1),
+  links: z.array(localizedExternalLinkSchema).min(1),
+  assets: z.array(localizedAssetSchema),
   metadata: z.object({
     title: z.string().min(1),
     description: z.string().min(1),
     noIndex: z.boolean().default(false),
   }),
 })
+
+export const ctaSchema = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('internal'), page: pageIdSchema, label: z.string().min(1) }),
+  z.object({ kind: z.literal('external'), url: httpsUrlSchema, label: z.string().min(1) }),
+])
 
 export const siteContentSchema = z.object({
   locale: languageSchema,
@@ -125,6 +199,13 @@ export const siteContentSchema = z.object({
     descriptor: z.string().min(1),
   }),
   navigation: z.array(z.object({ page: pageIdSchema, label: z.string().min(1) })).min(1),
+  portfolio: z.object({
+    headline: z.string().min(1),
+    introduction: z.string().min(1),
+    primaryCta: ctaSchema,
+    secondaryCta: ctaSchema,
+    metadata: z.object({ title: z.string().min(1), description: z.string().min(1) }),
+  }),
   common: z.object({
     projectLabel: z.string().min(1),
     repositoryLabel: z.string().min(1),
@@ -132,13 +213,18 @@ export const siteContentSchema = z.object({
     unknownProjectTitle: z.string().min(1),
     unknownProjectDescription: z.string().min(1),
     placeholderDescription: z.string().min(1),
+    claimStatusLabels: z.record(
+      z.enum(['verified', 'demonstrated', 'declared', 'planned']),
+      z.string().min(1),
+    ),
   }),
-  capabilities: z.array(capabilitySchema).min(1),
-  projects: z.array(localizedProjectSchema).length(4),
+  capabilities: z.array(localizedCapabilitySchema).min(1),
+  projects: z.array(localizedProjectSchema).min(1),
 })
 
 export const contentRepositorySchema = z.object({
-  projects: z.array(projectCoreSchema).length(4),
+  capabilities: z.array(capabilitySchema).min(1),
+  projects: z.array(projectCoreSchema).min(1),
   assets: z.array(assetReferenceSchema),
   locales: z.record(languageSchema, siteContentSchema),
 })
@@ -147,4 +233,6 @@ export type SiteContent = z.infer<typeof siteContentSchema>
 export type ProjectCore = z.infer<typeof projectCoreSchema>
 export type LocalizedProject = z.infer<typeof localizedProjectSchema>
 export type ContentRepository = z.infer<typeof contentRepositorySchema>
-export type ClaimStatus = LocalizedProject['claim']['status']
+export type Language = (typeof supportedLanguages)[number]
+export type PageId = (typeof publicPageIds)[number]
+export type ClaimStatus = LocalizedProject['claims'][number]['status']

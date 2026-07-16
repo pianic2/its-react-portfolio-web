@@ -1,19 +1,46 @@
 import { ZodError } from 'zod'
 import { rawContentRepository } from './data'
-import { contentRepositorySchema, type ContentRepository } from './schema'
-import type { Language, PageId } from '../routes/routeConfig'
+import {
+  contentRepositorySchema,
+  supportedLanguages,
+  type ContentRepository,
+  type Language,
+  type PageId,
+} from './schema'
 
 export class ContentValidationError extends Error {
-  constructor(readonly problems: string[]) {
+  readonly problems: string[]
+
+  constructor(problems: string[]) {
     super(`Content validation failed:\n${problems.map((problem) => `- ${problem}`).join('\n')}`)
     this.name = 'ContentValidationError'
+    this.problems = problems
   }
 }
 
-function formatZodError(error: ZodError) {
+function issueContext(input: unknown, path: PropertyKey[]) {
+  if (typeof input !== 'object' || input === null) return ''
+
+  const repository = input as Partial<ContentRepository>
+  if (path[0] === 'projects' && typeof path[1] === 'number') {
+    const id = repository.projects?.[path[1]]?.id ?? 'unknown'
+    return `entity=project id=${id} `
+  }
+  if (path[0] === 'locales' && typeof path[1] === 'string') {
+    const locale = path[1]
+    if (path[2] === 'projects' && typeof path[3] === 'number') {
+      const project = repository.locales?.[locale as Language]?.projects[path[3]]
+      return `locale=${locale} entity=project id=${project?.projectId ?? 'unknown'} `
+    }
+    return `locale=${locale} entity=site `
+  }
+  return 'entity=repository '
+}
+
+function formatZodError(error: ZodError, input: unknown) {
   return error.issues.map((issue) => {
     const path = issue.path.length > 0 ? issue.path.join('.') : 'repository'
-    return `${path}: ${issue.message}`
+    return `${issueContext(input, issue.path)}path=${path}: ${issue.message}`
   })
 }
 
@@ -21,70 +48,201 @@ function duplicates(values: string[]) {
   return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))]
 }
 
-export function validateContentRepository(input: unknown = rawContentRepository): ContentRepository {
+function sorted(values: string[]) {
+  return [...values].sort().join('|')
+}
+
+function addDuplicates(problems: string[], values: string[], context: string, entity: string) {
+  for (const duplicate of duplicates(values)) {
+    problems.push(`${context} path=${entity}: duplicate id "${duplicate}"`)
+  }
+}
+
+export function validateContentRepository(
+  input: unknown = rawContentRepository,
+): ContentRepository {
   const parsed = contentRepositorySchema.safeParse(input)
   if (!parsed.success) {
-    throw new ContentValidationError(formatZodError(parsed.error))
+    throw new ContentValidationError(formatZodError(parsed.error, input))
   }
 
   const repository = parsed.data
   const problems: string[] = []
   const coreIds = repository.projects.map((project) => project.id)
   const coreIdSet = new Set(coreIds)
-  const evidenceByProject = new Map(
-    repository.projects.map((project) => [project.id, new Set(project.evidence.map((evidence) => evidence.id))]),
-  )
+  const capabilityIds = repository.capabilities.map((capability) => capability.id)
+  const capabilityIdSet = new Set(capabilityIds)
+  const assetIds = repository.assets.map((asset) => asset.id)
+  const assetIdSet = new Set(assetIds)
 
-  for (const duplicate of duplicates(coreIds)) problems.push(`projects: duplicate project id "${duplicate}"`)
+  addDuplicates(problems, coreIds, 'entity=repository', 'projects')
+  addDuplicates(problems, capabilityIds, 'entity=repository', 'capabilities')
+  addDuplicates(problems, assetIds, 'entity=repository', 'assets')
 
-  for (const language of Object.keys(repository.locales) as Language[]) {
-    const locale = repository.locales[language]
-    const projectIds = locale.projects.map((project) => project.projectId)
-    const slugs = locale.projects.map((project) => project.slug)
-    const capabilityIds = new Set(locale.capabilities.map((capability) => capability.id))
-    const navigationPages = locale.navigation.map((item) => item.page)
+  for (const project of repository.projects) {
+    const context = `entity=project id=${project.id}`
+    addDuplicates(
+      problems,
+      project.evidence.map((evidence) => evidence.id),
+      context,
+      'evidence',
+    )
+    addDuplicates(
+      problems,
+      project.links.map((link) => link.id),
+      context,
+      'links',
+    )
 
-    if (locale.locale !== language) problems.push(`locales.${language}.locale: expected "${language}"`)
-    for (const duplicate of duplicates(projectIds)) problems.push(`locales.${language}.projects: duplicate project id "${duplicate}"`)
-    for (const duplicate of duplicates(slugs)) problems.push(`locales.${language}.projects: duplicate slug "${duplicate}"`)
-    for (const duplicate of duplicates(navigationPages)) problems.push(`locales.${language}.navigation: duplicate page "${duplicate}"`)
-
-    for (const project of locale.projects) {
-      if (!coreIdSet.has(project.projectId)) {
-        problems.push(`locales.${language}.projects.${project.projectId}: missing shared project record`)
-        continue
-      }
-      const evidenceIds = evidenceByProject.get(project.projectId) ?? new Set<string>()
-      for (const evidenceId of project.claim.evidenceIds) {
-        if (!evidenceIds.has(evidenceId)) {
-          problems.push(`locales.${language}.projects.${project.projectId}.claim: unknown evidence id "${evidenceId}"`)
-        }
+    for (const capabilityId of project.capabilityIds) {
+      if (!capabilityIdSet.has(capabilityId)) {
+        problems.push(`${context} path=capabilityIds: unknown capability id "${capabilityId}"`)
       }
     }
-
-    for (const project of repository.projects) {
-      if (!projectIds.includes(project.id)) problems.push(`locales.${language}.projects: missing project "${project.id}"`)
-      for (const capabilityId of project.capabilityIds) {
-        if (!capabilityIds.has(capabilityId)) {
-          problems.push(`locales.${language}.capabilities: missing capability "${capabilityId}" used by "${project.id}"`)
-        }
+    for (const assetId of project.assetIds) {
+      if (!assetIdSet.has(assetId)) {
+        problems.push(`${context} path=assetIds: unknown asset id "${assetId}"`)
+      }
+    }
+    for (const evidence of project.evidence) {
+      if (evidence.assetId && !assetIdSet.has(evidence.assetId)) {
+        problems.push(
+          `${context} path=evidence.${evidence.id}.assetId: unknown asset id "${evidence.assetId}"`,
+        )
       }
     }
   }
 
-  const italianIds = repository.locales.it.projects.map((project) => project.projectId).sort()
-  const englishIds = repository.locales.en.projects.map((project) => project.projectId).sort()
-  if (italianIds.join('|') !== englishIds.join('|')) problems.push('locales: Italian and English project sets are not equivalent')
+  for (const language of supportedLanguages) {
+    const locale = repository.locales[language]
+    const localeContext = `locale=${language}`
+    const projectIds = locale.projects.map((project) => project.projectId)
+    const slugs = locale.projects.map((project) => project.slug)
+    const localizedCapabilityIds = locale.capabilities.map((capability) => capability.capabilityId)
+    const navigationPages = locale.navigation.map((item) => item.page)
 
-  const italianPages = repository.locales.it.navigation.map((item) => item.page).sort()
-  const englishPages = repository.locales.en.navigation.map((item) => item.page).sort()
-  if (italianPages.join('|') !== englishPages.join('|')) problems.push('locales: Italian and English navigation sets are not equivalent')
+    if (locale.locale !== language) {
+      problems.push(`${localeContext} entity=site path=locale: expected "${language}"`)
+    }
+    addDuplicates(problems, projectIds, `${localeContext} entity=site`, 'projects')
+    for (const duplicate of duplicates(slugs)) {
+      problems.push(
+        `${localeContext} entity=site path=projects.slug: duplicate slug "${duplicate}"`,
+      )
+    }
+    addDuplicates(problems, localizedCapabilityIds, `${localeContext} entity=site`, 'capabilities')
+    addDuplicates(problems, navigationPages, `${localeContext} entity=site`, 'navigation')
+
+    if (sorted(projectIds) !== sorted(coreIds)) {
+      problems.push(
+        `${localeContext} entity=site path=projects: project set does not match shared records`,
+      )
+    }
+    if (sorted(localizedCapabilityIds) !== sorted(capabilityIds)) {
+      problems.push(
+        `${localeContext} entity=site path=capabilities: capability set does not match shared records`,
+      )
+    }
+
+    for (const localized of locale.projects) {
+      const core = repository.projects.find((project) => project.id === localized.projectId)
+      const context = `${localeContext} entity=project id=${localized.projectId}`
+      if (!coreIdSet.has(localized.projectId) || !core) {
+        problems.push(`${context} path=projectId: missing shared project record`)
+        continue
+      }
+
+      const evidenceIds = new Set(core.evidence.map((evidence) => evidence.id))
+      const linkIds = new Set(core.links.map((link) => link.id))
+      addDuplicates(
+        problems,
+        localized.sections.map((section) => section.id),
+        context,
+        'sections',
+      )
+      addDuplicates(
+        problems,
+        localized.claims.map((claim) => claim.id),
+        context,
+        'claims',
+      )
+      addDuplicates(
+        problems,
+        localized.evidence.map((evidence) => evidence.evidenceId),
+        context,
+        'evidence',
+      )
+      addDuplicates(
+        problems,
+        localized.links.map((link) => link.linkId),
+        context,
+        'links',
+      )
+      addDuplicates(
+        problems,
+        localized.assets.map((asset) => asset.assetId),
+        context,
+        'assets',
+      )
+
+      for (const claim of localized.claims) {
+        for (const evidenceId of claim.evidenceIds) {
+          if (!evidenceIds.has(evidenceId)) {
+            problems.push(
+              `${context} path=claims.${claim.id}.evidenceIds: unknown evidence id "${evidenceId}"`,
+            )
+          }
+        }
+      }
+      if (
+        sorted(localized.evidence.map((evidence) => evidence.evidenceId)) !==
+        sorted([...evidenceIds])
+      ) {
+        problems.push(
+          `${context} path=evidence: localized evidence set does not match shared evidence`,
+        )
+      }
+      if (sorted(localized.links.map((link) => link.linkId)) !== sorted([...linkIds])) {
+        problems.push(`${context} path=links: localized link set does not match shared links`)
+      }
+      if (sorted(localized.assets.map((asset) => asset.assetId)) !== sorted(core.assetIds)) {
+        problems.push(
+          `${context} path=assets: localized asset set does not match shared asset references`,
+        )
+      }
+    }
+  }
+
+  const italian = repository.locales.it
+  const english = repository.locales.en
+  if (
+    sorted(italian.navigation.map((item) => item.page)) !==
+    sorted(english.navigation.map((item) => item.page))
+  ) {
+    problems.push(
+      'entity=repository path=locales.navigation: Italian and English navigation sets differ',
+    )
+  }
 
   for (const projectId of coreIds) {
-    const italian = repository.locales.it.projects.find((project) => project.projectId === projectId)
-    const english = repository.locales.en.projects.find((project) => project.projectId === projectId)
-    if (italian && english && italian.claim.status !== english.claim.status) {
-      problems.push(`locales: claim status differs for project "${projectId}"`)
+    const it = italian.projects.find((project) => project.projectId === projectId)
+    const en = english.projects.find((project) => project.projectId === projectId)
+    if (!it || !en) continue
+    const context = `entity=project id=${projectId}`
+    if (
+      sorted(it.sections.map((section) => section.id)) !==
+      sorted(en.sections.map((section) => section.id))
+    ) {
+      problems.push(`${context} path=locales.sections: Italian and English section sets differ`)
+    }
+    const itClaims = it.claims.map(
+      (claim) => `${claim.id}:${claim.status}:${sorted(claim.evidenceIds)}`,
+    )
+    const enClaims = en.claims.map(
+      (claim) => `${claim.id}:${claim.status}:${sorted(claim.evidenceIds)}`,
+    )
+    if (sorted(itClaims) !== sorted(enClaims)) {
+      problems.push(`${context} path=locales.claims: Italian and English claim contracts differ`)
     }
   }
 
@@ -94,5 +252,7 @@ export function validateContentRepository(input: unknown = rawContentRepository)
 
 export function assertNavigationPage(page: string): asserts page is PageId {
   const pages = rawContentRepository.locales.it.navigation.map((item) => item.page)
-  if (!pages.includes(page as PageId)) throw new ContentValidationError([`navigation: unknown page "${page}"`])
+  if (!(pages as PageId[]).includes(page as PageId)) {
+    throw new ContentValidationError([`entity=navigation id=${page} path=page: unknown page`])
+  }
 }
