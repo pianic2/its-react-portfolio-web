@@ -92,10 +92,13 @@ describe('localized application routes', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
-  it('exposes the design-system review surface only in development builds', () => {
+  it('exposes the complete design-system review surface only in development builds', () => {
     renderRoute('/__dev/design-system')
 
     expect(screen.getByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
-    expect(screen.getByText('Development only · IRPW-15')).toBeInTheDocument()
+    expect(screen.getByText('Development only · IRPW-17')).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Focus, disabled state and optional motion' }),
+    ).toBeInTheDocument()
   })
 })
