@@ -17,7 +17,7 @@ const colourRoles = [
   { foreground: 'onWarning', label: 'Warning', role: 'warning' },
   { foreground: 'onError', label: 'Error', role: 'error' },
   { foreground: 'canvas', label: 'Focus inner', role: 'focusInner' },
-  { foreground: 'canvas', label: 'Focus outer', role: 'focusOuter' },
+  { foreground: 'onWarning', label: 'Focus outer', role: 'focusOuter' },
 ] as const satisfies ReadonlyArray<{
   foreground: keyof SemanticColors
   label: string
@@ -86,14 +86,24 @@ export function TokenShowcase() {
         title="Expressive hierarchy, readable content"
       >
         <Stack spacing={4} sx={{ minWidth: 0 }}>
-          <Typography sx={{ overflowWrap: 'anywhere' }} variant="h1">
+          <Typography component="p" sx={{ overflowWrap: 'anywhere' }} variant="h1">
             Visible systems.
           </Typography>
-          <Typography variant="h2">Evidence before claims.</Typography>
-          <Typography variant="h3">Reusable language scales.</Typography>
-          <Typography variant="h4">Accessible interaction stays predictable.</Typography>
-          <Typography variant="h5">Heading level five</Typography>
-          <Typography variant="h6">Heading level six</Typography>
+          <Typography component="p" variant="h2">
+            Evidence before claims.
+          </Typography>
+          <Typography component="p" variant="h3">
+            Reusable language scales.
+          </Typography>
+          <Typography component="p" variant="h4">
+            Accessible interaction stays predictable.
+          </Typography>
+          <Typography component="p" variant="h5">
+            Heading level five
+          </Typography>
+          <Typography component="p" variant="h6">
+            Heading level six
+          </Typography>
           <Typography>
             Body copy remains suitable for long-form engineering explanations, architecture decisions
             and concise portfolio narratives.
@@ -258,6 +268,7 @@ export function TokenShowcase() {
         description="Patterns are decorative only. They never carry status, hierarchy or interaction meaning."
         eyebrow="04 · Patterns"
         title="Halftone and diagonal texture"
+        wide
       >
         <Box
           sx={{
