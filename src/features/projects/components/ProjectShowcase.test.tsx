@@ -36,13 +36,61 @@ describe('ProjectShowcase', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'Tre progetti. Tre problemi concreti da risolvere.',
+        name: 'Origini diverse, un solo modo di lavorare.',
       }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Esplora tutti i progetti' })).toHaveAttribute(
       'href',
       '/it/progetti',
     )
+  })
+
+  it('keeps heading and description in two distinct structural areas', () => {
+    renderShowcase('en', 'home')
+
+    expect(screen.getByTestId('home-showcase-heading-area')).toContainElement(
+      screen.getByRole('heading', { name: 'Different origins, one way of working.' }),
+    )
+    expect(screen.getByTestId('home-showcase-description-area')).toHaveTextContent(
+      'Two projects were developed during my ITS training.',
+    )
+  })
+
+  it('keeps the Projects heading and description in distinct structural areas', () => {
+    renderShowcase('it', 'projects')
+
+    expect(screen.getByTestId('projects-showcase-heading-area')).toContainElement(
+      screen.getByRole('heading', { name: 'Progetti costruiti per imparare e per durare.' }),
+    )
+    expect(screen.getByTestId('projects-showcase-description-area')).toHaveTextContent(
+      'I progetti ITS mostrano come rispondo a requisiti didattici definiti.',
+    )
+  })
+
+  it('renders localized origin labels independently from claim status', () => {
+    renderShowcase('en', 'projects')
+
+    expect(screen.getByText('Personal long-term project')).toBeInTheDocument()
+    expect(screen.getAllByText('ITS training project')).toHaveLength(2)
+    expect(screen.getAllByText('Backed by evidence')).toHaveLength(3)
+  })
+
+  it('uses vertical full-width action zones on the Projects variant', () => {
+    renderShowcase('en', 'projects')
+
+    for (const id of ['homeedge-ai-platform', 'its-library-api-laravel', 'node-list-manager']) {
+      const actions = screen.getByTestId(`project-actions-${id}`)
+      expect(actions).toHaveAttribute('data-layout', 'vertical-full-width')
+      expect(within(actions).getAllByRole('link')).toHaveLength(2)
+    }
+  })
+
+  it('keeps repository actions in a new tab', () => {
+    renderShowcase('en', 'projects')
+
+    const repository = screen.getAllByRole('link', { name: /Open the repository/ })[0]
+    expect(repository).toHaveAttribute('target', '_blank')
+    expect(repository).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('renders localized detail paths, repository links and visible claim statuses', () => {

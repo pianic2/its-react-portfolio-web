@@ -1,6 +1,7 @@
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
+import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
 import { Box, CardContent, Chip, Stack, Typography } from '@mui/material'
-import { ButtonLink, ExternalLink } from '../../../components/actions/AppLink'
+import { ButtonLink, ExternalButtonLink } from '../../../components/actions/AppLink'
 import { StudioCard } from '../../../components/surfaces/StudioCard'
 import type { ProjectViewModel } from '../../../content/loaders'
 import type { Language } from '../../../content/schema'
@@ -67,6 +68,21 @@ export function ProjectShowcaseCard({
             </Typography>
             <Chip label={project.claimLabel} size="small" variant="outlined" />
           </Stack>
+          <Box
+            data-project-origin={project.origin}
+            sx={{
+              alignSelf: 'flex-start',
+              backgroundColor: 'text.primary',
+              color: 'background.paper',
+              maxWidth: '100%',
+              px: 1.5,
+              py: 0.75,
+            }}
+          >
+            <Typography component="p" sx={{ fontWeight: 900, letterSpacing: 0 }} variant="overline">
+              {project.originLabel}
+            </Typography>
+          </Box>
           <Typography
             component="h3"
             id={titleId}
@@ -95,6 +111,11 @@ export function ProjectShowcaseCard({
             {valueLabel}
           </Typography>
           <Typography sx={{ mt: 1 }}>{project.narrative.cardValue}</Typography>
+          {variant === 'home' && project.originDescription ? (
+            <Typography color="text.secondary" sx={{ mt: 1.5 }}>
+              {project.originDescription}
+            </Typography>
+          ) : null}
         </Box>
 
         <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
@@ -103,34 +124,45 @@ export function ProjectShowcaseCard({
           ))}
         </Stack>
 
-        <Box
+        <Stack
+          data-layout={variant === 'projects' ? 'vertical-full-width' : 'responsive'}
+          data-testid={`project-actions-${project.id}`}
           sx={{
-            alignItems: { xs: 'stretch', sm: 'center' },
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            gap: 2,
-            justifyContent: 'space-between',
+            alignItems: 'stretch',
+            flexDirection: variant === 'projects' ? 'column' : { xs: 'column', sm: 'row' },
+            gap: 1.5,
             marginBlockStart: 'auto',
             minWidth: 0,
+            width: '100%',
           }}
         >
           <ButtonLink
             endIcon={<ArrowForwardRounded aria-hidden="true" />}
-            sx={{ minWidth: 0 }}
+            sx={{
+              minHeight: variant === 'projects' ? 48 : 44,
+              minWidth: 0,
+              width: variant === 'projects' ? '100%' : { xs: '100%', sm: 'auto' },
+            }}
             to={project.detailPath}
             variant="contained"
           >
             {project.ctaLabel}
           </ButtonLink>
-          <ExternalLink
+          <ExternalButtonLink
+            endIcon={<OpenInNewRounded aria-hidden="true" />}
             href={project.repositoryUrl}
             language={language}
             newTab
-            sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
+            sx={{
+              minHeight: variant === 'projects' ? 48 : 44,
+              minWidth: 0,
+              width: variant === 'projects' ? '100%' : { xs: '100%', sm: 'auto' },
+            }}
+            variant="outlined"
           >
             {repositoryLabel}
-          </ExternalLink>
-        </Box>
+          </ExternalButtonLink>
+        </Stack>
       </CardContent>
     </StudioCard>
   )

@@ -50,7 +50,11 @@ export function ProjectDetailPage() {
   const narrativeSections = [
     { label: labels.ideaLabel, body: project.narrative.idea },
     { label: labels.builtLabel, body: project.narrative.built },
-    { label: labels.valueLabel, body: project.narrative.value },
+    {
+      label: labels.valueLabel,
+      body: project.narrative.value,
+      additionalBody: project.narrative.transparency,
+    },
     { label: labels.stageLabel, body: project.narrative.currentStage },
   ]
 
@@ -172,6 +176,11 @@ export function ProjectDetailPage() {
                       {section.label}
                     </Typography>
                     <Typography sx={{ maxWidth: '70ch', mt: 2 }}>{section.body}</Typography>
+                    {section.additionalBody ? (
+                      <Typography sx={{ maxWidth: '70ch', mt: 2 }}>
+                        {section.additionalBody}
+                      </Typography>
+                    ) : null}
                   </CardContent>
                 </StudioCard>
               </Box>
@@ -217,6 +226,17 @@ export function ProjectDetailPage() {
                   }}
                 >
                   <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0 }}>
+                    <Typography
+                      component="p"
+                      sx={{ fontWeight: 900, letterSpacing: 0 }}
+                      variant="overline"
+                    >
+                      {evidence.typeLabel}
+                    </Typography>
+                    <Typography component="h3" sx={{ letterSpacing: 0 }} variant="h5">
+                      {evidence.label}
+                    </Typography>
+                    <Typography>{evidence.description}</Typography>
                     {evidence.url ? (
                       <ExternalLink
                         href={evidence.url}
@@ -229,10 +249,9 @@ export function ProjectDetailPage() {
                           minHeight: 44,
                         }}
                       >
-                        {evidence.label}
+                        {evidence.linkLabel ?? evidence.label}
                       </ExternalLink>
                     ) : null}
-                    <Typography>{evidence.description}</Typography>
                   </Stack>
                 </Box>
               ))}

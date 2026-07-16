@@ -30,14 +30,21 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
         <Stack spacing={{ xs: 5, md: 7 }}>
           <Box
             sx={{
-              alignItems: { md: 'end' },
+              alignItems: { md: 'start' },
               display: 'grid',
               gap: 3,
-              gridTemplateColumns: { md: 'minmax(0, 7fr) minmax(0, 5fr)' },
+              gridTemplateColumns: {
+                xs: 'minmax(0, 1fr)',
+                md: 'minmax(0, 0.9fr) minmax(18rem, 1.1fr)',
+              },
               minWidth: 0,
             }}
           >
-            <Stack spacing={1.5} sx={{ minWidth: 0 }}>
+            <Stack
+              data-testid={`${variant}-showcase-heading-area`}
+              spacing={1.5}
+              sx={{ minWidth: 0 }}
+            >
               <Typography sx={{ letterSpacing: 0 }} variant="overline">
                 {copy.eyebrow}
               </Typography>
@@ -55,18 +62,20 @@ export function ProjectShowcase({ headingLevel = 'h2', variant }: ProjectShowcas
                 {copy.title}
               </Typography>
             </Stack>
-            <Stack spacing={2} sx={{ minWidth: 0 }}>
+            <Stack
+              data-testid={`${variant}-showcase-description-area`}
+              spacing={2}
+              sx={{ minWidth: 0, paddingBlockStart: { md: 3 } }}
+            >
               <Typography
                 color="text.secondary"
                 sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '55ch' }}
               >
                 {copy.introduction}
               </Typography>
-              {variant === 'projects' ? (
-                <Typography sx={{ fontWeight: 800, maxWidth: '55ch' }}>
-                  {siteContent.projectExperience.projects.supportingText}
-                </Typography>
-              ) : null}
+              <Typography sx={{ fontWeight: 800, maxWidth: '55ch' }}>
+                {copy.supportingText}
+              </Typography>
             </Stack>
           </Box>
 

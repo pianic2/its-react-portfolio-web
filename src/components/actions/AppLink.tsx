@@ -64,6 +64,50 @@ export function ExternalLink({
   )
 }
 
+export type ExternalButtonLinkProps = Omit<ButtonProps<'a'>, 'component' | 'href'> & {
+  href: string
+  language: Language
+  newTab?: boolean
+}
+
+export function ExternalButtonLink({
+  children,
+  href,
+  language,
+  newTab = false,
+  ...props
+}: ExternalButtonLinkProps) {
+  return (
+    <Button
+      component="a"
+      href={href}
+      rel={newTab ? 'noopener noreferrer' : undefined}
+      target={newTab ? '_blank' : undefined}
+      {...props}
+    >
+      {children}
+      {newTab ? (
+        <Box
+          component="span"
+          sx={{
+            clip: 'rect(0 0 0 0)',
+            clipPath: 'inset(50%)',
+            height: 1,
+            margin: -1,
+            overflow: 'hidden',
+            padding: 0,
+            position: 'absolute',
+            whiteSpace: 'nowrap',
+            width: 1,
+          }}
+        >
+          ({newTabCopy[language]})
+        </Box>
+      ) : null}
+    </Button>
+  )
+}
+
 export type ButtonLinkProps = Omit<ButtonProps<typeof Link>, 'component' | 'href'>
 
 export function ButtonLink(props: ButtonLinkProps) {

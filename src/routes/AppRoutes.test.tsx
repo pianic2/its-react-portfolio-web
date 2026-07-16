@@ -32,7 +32,7 @@ describe('localized application routes', () => {
     expect(await screen.findByTestId('location')).toHaveTextContent('/it')
     expect(
       screen.getByRole('heading', {
-        name: 'Trasformo idee complesse in prodotti utili e comprensibili.',
+        name: 'Creo prodotti digitali utili.',
       }),
     ).toBeInTheDocument()
   })
@@ -44,21 +44,21 @@ describe('localized application routes', () => {
     expect(await screen.findByTestId('location')).toHaveTextContent('/en')
     expect(
       screen.getByRole('heading', {
-        name: 'I turn complex ideas into useful, understandable products.',
+        name: 'I build useful digital products.',
       }),
     ).toBeInTheDocument()
   })
 
   it.each([
-    ['/it', 'Trasformo idee complesse in prodotti utili e comprensibili.'],
-    ['/it/progetti', 'Partiamo dal problema, non dalla tecnologia.'],
+    ['/it', 'Creo prodotti digitali utili.'],
+    ['/it/progetti', 'Progetti costruiti per imparare e per durare.'],
     ['/it/competenze', 'Competenze'],
     ['/it/metodo', 'Metodo'],
     ['/it/profilo', 'Profilo'],
     ['/it/contatti', 'Contatti'],
     ['/it/privacy', 'Privacy'],
-    ['/en', 'I turn complex ideas into useful, understandable products.'],
-    ['/en/projects', 'Start with the problem, not the technology.'],
+    ['/en', 'I build useful digital products.'],
+    ['/en/projects', 'Projects built for learning and for the long term.'],
     ['/en/skills', 'Skills'],
     ['/en/method', 'Method'],
     ['/en/profile', 'Profile'],
@@ -76,10 +76,17 @@ describe('localized application routes', () => {
     expect(screen.getByText('SOFTWARE, HARDWARE AND REAL PROBLEMS')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'I build projects that connect code, devices and people — from smart-home sensors to web APIs. Every project explains what works today, what still needs to be built and why the technical choices matter.',
+        'I design and build software that connects people, data and physical devices — from web APIs to smart-home systems.',
       ),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Explore the projects' })).toHaveAttribute(
+    const trainingLink = screen.getByRole('link', { name: /ITS Prodigi/ })
+    expect(trainingLink).toHaveAttribute('href', 'https://www.itsprodigi.it/')
+    expect(trainingLink).toHaveAttribute('target', '_blank')
+    expect(trainingLink).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(
+      screen.getByText(/I am currently training as a Full Stack Developer at/),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Explore my projects' })).toHaveAttribute(
       'href',
       '/en/projects',
     )
@@ -96,10 +103,11 @@ describe('localized application routes', () => {
     expect(screen.getByText('SOFTWARE, HARDWARE E PROBLEMI REALI')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Realizzo progetti che collegano codice, dispositivi e persone — dai sensori per la casa intelligente alle API web. Ogni progetto spiega cosa funziona oggi, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
+        'Progetto e realizzo software che collega persone, dati e dispositivi fisici — dalle API web ai sistemi per la casa intelligente.',
       ),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Esplora i progetti' })).toHaveAttribute(
+    expect(screen.getByText(/Sto completando il mio percorso di formazione/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Esplora i miei progetti' })).toHaveAttribute(
       'href',
       '/it/progetti',
     )
@@ -110,18 +118,35 @@ describe('localized application routes', () => {
     expect(screen.getByRole('link', { name: 'Parliamone' })).toHaveAttribute('href', '/it/contatti')
   })
 
+  it('renders hero actions after the introduction and ITS training text', () => {
+    renderRoute('/en')
+
+    const introduction = screen.getByText(
+      'I design and build software that connects people, data and physical devices — from web APIs to smart-home systems.',
+    )
+    const training = screen.getByText(/I am currently training as a Full Stack Developer at/)
+    const actions = screen.getByTestId('home-hero-actions')
+
+    expect(
+      introduction.compareDocumentPosition(training) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
+    expect(
+      training.compareDocumentPosition(actions) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
+  })
+
   it('renders the exact English and Italian Projects introductions', () => {
     const english = renderRoute('/en/projects')
 
     expect(screen.getByText('PROJECT INDEX')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'These projects are not presented as a list of frameworks. Each one starts from a concrete need and shows the solution, the decisions behind it and the current limits.',
+        'The ITS projects demonstrate how I respond to defined educational requirements. HomeEdge shows how I approach an independent product that must evolve through research, decisions, implementation and continuous review.',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Choose a project to understand what it is for, how it works and what stage it has reached.',
+        'Open a project to understand the problem, the implemented solution, its current stage and the evidence available today.',
       ),
     ).toBeInTheDocument()
 
@@ -131,12 +156,53 @@ describe('localized application routes', () => {
     expect(screen.getByText('INDICE DEI PROGETTI')).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Questi progetti non sono presentati come un elenco di framework. Ognuno parte da un bisogno concreto e mostra la soluzione, le decisioni adottate e i limiti attuali.',
+        'I progetti ITS mostrano come rispondo a requisiti didattici definiti. HomeEdge mostra invece come affronto un prodotto indipendente che deve evolvere attraverso ricerca, decisioni, implementazione e revisione continua.',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Scegli un progetto per capire a cosa serve, come funziona e a quale fase è arrivato.',
+        'Apri un progetto per comprenderne il problema, la soluzione implementata, la fase attuale e le evidenze disponibili oggi.',
+      ),
+    ).toBeInTheDocument()
+  })
+
+  it('renders the expanded HomeEdge evidence and transparency narrative in English', () => {
+    renderRoute('/en/projects/homeedge-ai-platform')
+
+    expect(
+      screen.getByRole('heading', { name: 'Product vision and MVP boundaries' }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Read the Product Vision/ })).toHaveAttribute(
+      'href',
+      'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
+    )
+    expect(
+      screen.getByRole('heading', { name: 'Project progress and stakeholder review' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /Open the HomeEdge stakeholder space/ }),
+    ).toHaveAttribute('href', 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview')
+    expect(
+      screen.getByText(/The project is managed transparently across GitHub, Jira and Confluence/),
+    ).toBeInTheDocument()
+  })
+
+  it('renders the expanded HomeEdge evidence and transparency narrative in Italian', () => {
+    renderRoute('/it/progetti/homeedge-ai-platform')
+
+    expect(
+      screen.getByRole('heading', { name: 'Visione del prodotto e confini dell’MVP' }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Leggi la Product Vision/ })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Avanzamento del progetto e stakeholder review' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /Apri lo spazio stakeholder di HomeEdge/ }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        /Il progetto viene gestito in modo trasparente attraverso GitHub, Jira e Confluence/,
       ),
     ).toBeInTheDocument()
   })
