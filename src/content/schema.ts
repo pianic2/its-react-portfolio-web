@@ -181,6 +181,10 @@ export const localizedProjectSchema = z.object({
   eyebrow: z.string().min(1),
   detailEyebrow: z.string().min(1),
   ctaLabel: z.string().min(1),
+  question: z.string().min(1),
+  supportingText: z.string().min(1),
+  whatIWorkedOn: z.string().min(1),
+  futureImprovement: z.string().min(1),
   originDescription: z.string().min(1).optional(),
   narrative: z.object({
     cardSummary: z.string().min(1),
@@ -218,6 +222,25 @@ export const ctaSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('external'), url: httpsUrlSchema, label: z.string().min(1) }),
 ])
 
+const editorialItemSchema = z.object({
+  id: stableIdSchema,
+  title: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const editorialSectionSchema = z.object({
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const comparisonAnswerSchema = z.object({
+  projectId: stableIdSchema,
+  type: z.string().min(1),
+  learning: z.string().min(1),
+  difficulty: z.string().min(1),
+})
+
 export const siteContentSchema = z.object({
   locale: languageSchema,
   identity: z.object({
@@ -239,6 +262,66 @@ export const siteContentSchema = z.object({
     secondaryCta: ctaSchema,
     contactCta: ctaSchema,
     metadata: z.object({ title: z.string().min(1), description: z.string().min(1) }),
+  }),
+  homePage: z.object({
+    hero: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      description: z.object({
+        prefix: z.string().min(1),
+        linkLabel: z.string().min(1),
+        suffix: z.string().min(1),
+        url: httpsUrlSchema,
+      }),
+      supportingText: z.string().min(1),
+      primaryCtaLabel: z.string().min(1),
+      methodCtaLabel: z.string().min(1),
+      githubCtaLabel: z.string().min(1),
+    }),
+    learning: editorialSectionSchema.extend({ items: z.array(editorialItemSchema).min(1) }),
+    selectedProjects: editorialSectionSchema,
+    skills: editorialSectionSchema.extend({ groups: z.array(editorialItemSchema).min(1) }),
+    process: editorialSectionSchema.extend({
+      steps: z
+        .array(
+          z.object({
+            id: stableIdSchema,
+            number: z.string().min(1),
+            title: z.string().min(1),
+            description: z.string().min(1),
+          }),
+        )
+        .min(1),
+      ctaLabel: z.string().min(1),
+    }),
+    contact: editorialSectionSchema.extend({
+      contactCtaLabel: z.string().min(1),
+      githubCtaLabel: z.string().min(1),
+    }),
+  }),
+  projectsPage: z.object({
+    hero: editorialSectionSchema.extend({ supportingText: z.string().min(1) }),
+    guide: z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+      note: z.string().min(1),
+    }),
+    comparison: editorialSectionSchema.extend({
+      questions: z.object({
+        type: z.string().min(1),
+        learning: z.string().min(1),
+        difficulty: z.string().min(1),
+      }),
+      projects: z.array(comparisonAnswerSchema).min(1),
+    }),
+    journey: editorialSectionSchema,
+    finalCta: z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+      homeEdgeLabel: z.string().min(1),
+      methodLabel: z.string().min(1),
+      contactLabel: z.string().min(1),
+    }),
   }),
   projectExperience: z.object({
     home: z.object({
@@ -264,6 +347,8 @@ export const siteContentSchema = z.object({
       projectsCtaLabel: z.string().min(1),
       backToProjectsLabel: z.string().min(1),
       projectOriginLabels: z.record(projectOriginSchema, z.string().min(1)),
+      whatIWorkedOnLabel: z.string().min(1),
+      futureImprovementLabel: z.string().min(1),
     }),
   }),
   common: z.object({

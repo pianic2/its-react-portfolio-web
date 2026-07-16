@@ -45,6 +45,37 @@ describe('content repository validation', () => {
     }
   })
 
+  it('keeps Home and Projects collection contracts aligned across locales', () => {
+    const repository = validateContentRepository()
+    expect(repository.locales.it.homePage.learning.items).toHaveLength(3)
+    expect(repository.locales.en.homePage.learning.items).toHaveLength(3)
+    expect(repository.locales.it.homePage.skills.groups).toHaveLength(5)
+    expect(repository.locales.en.homePage.skills.groups).toHaveLength(5)
+    expect(repository.locales.it.homePage.process.steps).toHaveLength(4)
+    expect(repository.locales.en.homePage.process.steps).toHaveLength(4)
+    expect(repository.locales.it.projectsPage.comparison.projects).toHaveLength(3)
+    expect(repository.locales.en.projectsPage.comparison.projects).toHaveLength(3)
+  })
+
+  it('requires explicit editorial fields for every localized project', () => {
+    const repository = validateContentRepository()
+    for (const language of ['it', 'en'] as const) {
+      for (const project of repository.locales[language].projects) {
+        expect(project.question).not.toHaveLength(0)
+        expect(project.supportingText).not.toHaveLength(0)
+        expect(project.whatIWorkedOn).not.toHaveLength(0)
+        expect(project.futureImprovement).not.toHaveLength(0)
+      }
+    }
+  })
+
+  it('rejects duplicate page-content ids', () => {
+    const repository = cloneRepository()
+    repository.locales.en.homePage.learning.items[1]!.id =
+      repository.locales.en.homePage.learning.items[0]!.id
+    expect(() => validateContentRepository(repository)).toThrow(/duplicate id "frontend"/)
+  })
+
   it('enforces one personal project and two ITS training projects by stable id', () => {
     const projects = validateContentRepository().projects
 
@@ -223,11 +254,11 @@ describe('content loaders', () => {
   it('exposes localized project-origin labels through the view model', () => {
     expect(getProjectById('en', 'homeedge-ai-platform')).toMatchObject({
       origin: 'personal-long-term',
-      originLabel: 'Personal long-term project',
+      originLabel: 'PERSONAL PROJECT',
     })
     expect(getProjectById('it', 'its-library-api-laravel')).toMatchObject({
       origin: 'its-training',
-      originLabel: 'Progetto del percorso ITS',
+      originLabel: 'PROGETTO ITS',
     })
   })
 

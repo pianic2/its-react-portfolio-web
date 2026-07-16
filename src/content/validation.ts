@@ -239,6 +239,35 @@ export function validateContentRepository(
 
   const italian = repository.locales.it
   const english = repository.locales.en
+  const parallelCollections = [
+    ['homePage.learning.items', italian.homePage.learning.items, english.homePage.learning.items],
+    ['homePage.skills.groups', italian.homePage.skills.groups, english.homePage.skills.groups],
+    ['homePage.process.steps', italian.homePage.process.steps, english.homePage.process.steps],
+    [
+      'projectsPage.comparison.projects',
+      italian.projectsPage.comparison.projects,
+      english.projectsPage.comparison.projects,
+    ],
+  ] as const
+
+  for (const [path, italianItems, englishItems] of parallelCollections) {
+    const italianIds = italianItems.map((item) => ('projectId' in item ? item.projectId : item.id))
+    const englishIds = englishItems.map((item) => ('projectId' in item ? item.projectId : item.id))
+    addDuplicates(problems, italianIds, 'locale=it entity=site', path)
+    addDuplicates(problems, englishIds, 'locale=en entity=site', path)
+    if (sorted(italianIds) !== sorted(englishIds)) {
+      problems.push(`entity=repository path=locales.${path}: Italian and English item sets differ`)
+    }
+  }
+
+  if (
+    italian.homePage.hero.description.url !== 'https://www.itsprodigi.it/' ||
+    english.homePage.hero.description.url !== 'https://www.itsprodigi.it/'
+  ) {
+    problems.push(
+      'entity=repository path=locales.homePage.hero.description.url: expected the official HTTPS ITS Prodigi URL',
+    )
+  }
   if (
     sorted(italian.navigation.map((item) => item.page)) !==
     sorted(english.navigation.map((item) => item.page))

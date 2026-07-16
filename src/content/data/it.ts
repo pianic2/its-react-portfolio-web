@@ -4,7 +4,7 @@ export const italianContent = {
   locale: 'it',
   identity: {
     name: 'Niccolò Piazzi',
-    descriptor: 'Sviluppatore full-stack e progettista di sistemi',
+    descriptor: 'Full Stack Developer in formazione',
   },
   navigation: [
     { page: 'home', label: 'Home' },
@@ -36,14 +36,203 @@ export const italianContent = {
         'Realizzo progetti che collegano codice, dispositivi e persone — dai sensori per la casa intelligente alle API web. Ogni progetto spiega cosa funziona oggi, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
     },
   },
+  homePage: {
+    hero: {
+      eyebrow: 'FULL STACK DEVELOPER IN FORMAZIONE',
+      title: 'Costruisco progetti per capire come funzionano davvero le cose.',
+      description: {
+        prefix: 'Mi chiamo Niccolò e studio sviluppo Full Stack presso ',
+        linkLabel: 'ITS Prodigi',
+        suffix:
+          '. Lavoro su applicazioni web, backend e dispositivi connessi, cercando sempre di trasformare quello che imparo in qualcosa di concreto.',
+        url: 'https://www.itsprodigi.it/',
+      },
+      supportingText:
+        'Alcuni progetti nascono durante il percorso ITS. HomeEdge, invece, è il progetto personale che porto avanti nel tempo per sperimentare con sensori, software e smart home.',
+      primaryCtaLabel: 'Guarda i progetti',
+      methodCtaLabel: 'Scopri il mio metodo',
+      githubCtaLabel: 'GitHub',
+    },
+    learning: {
+      eyebrow: 'COSA STO IMPARANDO',
+      title: 'Dal codice al prodotto completo.',
+      description:
+        'Durante il percorso ITS sto imparando a collegare frontend, backend, database e strumenti di delivery. Nei miei progetti provo a non fermarmi al “funziona”: curo anche struttura, test, documentazione e facilità di utilizzo.',
+      items: [
+        {
+          id: 'frontend',
+          title: 'Frontend',
+          description:
+            'Interfacce responsive con React e TypeScript, pensate per essere semplici da usare anche su mobile.',
+        },
+        {
+          id: 'backend',
+          title: 'Backend',
+          description:
+            'API, autenticazione, validazione e persistenza dei dati con tecnologie diverse a seconda del progetto.',
+        },
+        {
+          id: 'product-design',
+          title: 'Progettazione',
+          description:
+            'Definizione dell’MVP, organizzazione del lavoro e documentazione delle decisioni più importanti.',
+        },
+      ],
+    },
+    selectedProjects: {
+      eyebrow: 'PROGETTI SELEZIONATI',
+      title: 'Tre progetti che raccontano parti diverse del mio percorso.',
+      description:
+        'La Library API e il progetto Node.js sono nati durante il corso ITS. HomeEdge è il progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
+    },
+    skills: {
+      eyebrow: 'STRUMENTI E COMPETENZE',
+      title: 'Tecnologie diverse, scelte in base al progetto.',
+      description:
+        'Non tutti i problemi richiedono lo stesso stack. Questi sono gli ambiti su cui sto lavorando con maggiore continuità.',
+      groups: [
+        {
+          id: 'frontend',
+          title: 'Frontend',
+          description: 'React, TypeScript, Material UI, responsive design e accessibilità.',
+        },
+        {
+          id: 'backend',
+          title: 'Backend',
+          description: 'Java, Spring Boot, PHP, Laravel, Node.js, Express e API REST.',
+        },
+        {
+          id: 'data',
+          title: 'Dati',
+          description: 'PostgreSQL, MySQL, SQLite, validazione e modellazione delle relazioni.',
+        },
+        {
+          id: 'delivery',
+          title: 'Delivery',
+          description: 'Git, GitHub Actions, Docker, testing automatico e documentazione tecnica.',
+        },
+        {
+          id: 'embedded',
+          title: 'Embedded',
+          description: 'ESP32-C3, firmware in C, sensori ambientali e progettazione edge-first.',
+        },
+      ],
+    },
+    process: {
+      eyebrow: 'IL MIO APPROCCIO',
+      title: 'Prima capire, poi costruire.',
+      description:
+        'Quando inizio un progetto cerco di evitare due errori: scrivere codice prima di avere chiarito il problema e aggiungere complessità che non serve.',
+      steps: [
+        {
+          id: 'define-problem',
+          number: '01',
+          title: 'Definisco il problema',
+          description:
+            'Chiarisco a chi serve il progetto, cosa deve fare davvero e quali limiti deve rispettare.',
+        },
+        {
+          id: 'first-result',
+          number: '02',
+          title: 'Scelgo un primo risultato concreto',
+          description:
+            'Individuo una versione ridotta ma utile, che possa essere costruita e verificata.',
+        },
+        {
+          id: 'small-increments',
+          number: '03',
+          title: 'Procedo per piccoli incrementi',
+          description:
+            'Mantengo codice, test e documentazione allineati mentre il progetto cresce.',
+        },
+        {
+          id: 'check-claims',
+          number: '04',
+          title: 'Controllo ciò che dichiaro',
+          description:
+            'Distinguo chiaramente tra ciò che funziona, ciò che è soltanto documentato e ciò che è ancora pianificato.',
+        },
+      ],
+      ctaLabel: 'Leggi il mio metodo',
+    },
+    contact: {
+      eyebrow: 'CONTATTI',
+      title: 'Sto cercando occasioni per imparare, contribuire e mettermi alla prova.',
+      description:
+        'Sono disponibile a confrontarmi su stage, collaborazioni, progetti formativi e opportunità junior nel mondo dello sviluppo software.',
+      contactCtaLabel: 'Contattami',
+      githubCtaLabel: 'Apri GitHub',
+    },
+  },
+  projectsPage: {
+    hero: {
+      eyebrow: 'I MIEI PROGETTI',
+      title: 'Cosa ho costruito e cosa ho imparato.',
+      description:
+        'Questa pagina raccoglie tre progetti con obiettivi molto diversi: un prodotto personale ancora in evoluzione e due lavori sviluppati durante il percorso ITS.',
+      supportingText:
+        'Per ogni progetto trovi il problema di partenza, ciò che è stato realizzato, lo stato attuale e i collegamenti per approfondire.',
+    },
+    guide: {
+      title: 'Progetti con obiettivi diversi',
+      description:
+        'Il badge presente su ogni scheda indica l’origine del progetto. HomeEdge è un progetto personale che continuerò a sviluppare; gli altri due sono lavori nati da esercitazioni e consegne ITS.',
+      note: 'Lo stato delle evidenze indica invece se una caratteristica è già visibile nel codice o nella documentazione, oppure se rappresenta un passo futuro.',
+    },
+    comparison: {
+      eyebrow: 'A CONFRONTO',
+      title: 'Cosa cambia da un progetto all’altro?',
+      description: 'Ogni progetto mi ha costretto a concentrarmi su un tipo diverso di problema.',
+      questions: {
+        type: 'Che tipo di progetto è?',
+        learning: 'Cosa sto approfondendo?',
+        difficulty: 'Qual è la difficoltà principale?',
+      },
+      projects: [
+        {
+          projectId: 'homeedge-ai-platform',
+          type: 'Un prodotto personale a lungo termine.',
+          learning: 'Sistemi embedded, smart home, architettura e gestione responsabile dei dati.',
+          difficulty:
+            'Far crescere molte parti diverse senza perdere chiarezza sui limiti del sistema.',
+        },
+        {
+          projectId: 'its-library-api-laravel',
+          type: 'Un backend completo realizzato durante il percorso ITS.',
+          learning: 'API REST, autenticazione, database relazionali e Docker.',
+          difficulty:
+            'Mantenere coerenti dati, relazioni, regole di validazione e accessi protetti.',
+        },
+        {
+          projectId: 'node-list-manager',
+          type: 'Un backend didattico piccolo e focalizzato.',
+          learning: 'Express, SQLite, organizzazione delle route e test.',
+          difficulty: 'Evitare di rendere complesso un problema che può restare semplice.',
+        },
+      ],
+    },
+    journey: {
+      eyebrow: 'UN PERCORSO IN CRESCITA',
+      title: 'Non sono progetti perfetti. Sono progetti che mi stanno facendo crescere.',
+      description:
+        'Ognuno mette in evidenza una parte diversa del lavoro di sviluppo: partire da un’idea, modellare i dati, costruire un backend, integrare hardware e documentare decisioni. Mostrano anche gli errori, i limiti e le parti ancora da completare.',
+    },
+    finalCta: {
+      title: 'Vuoi vedere il lavoro dietro ai progetti?',
+      description:
+        'Puoi aprire le pagine di dettaglio, consultare i repository oppure leggere il metodo che uso per organizzare il lavoro.',
+      homeEdgeLabel: 'Apri HomeEdge',
+      methodLabel: 'Scopri il mio metodo',
+      contactLabel: 'Contattami',
+    },
+  },
   projectExperience: {
     home: {
       eyebrow: 'PROGETTI SELEZIONATI',
-      title: 'Origini diverse, un solo modo di lavorare.',
+      title: 'Tre progetti che raccontano parti diverse del mio percorso.',
       introduction:
-        'Due progetti sono stati sviluppati durante il mio percorso ITS. HomeEdge è invece il mio progetto portfolio personale a lungo termine: una piattaforma in evoluzione che intendo mantenere ed estendere oltre il corso.',
-      supportingText:
-        'Insieme mostrano come lavoro all’interno di requisiti didattici e come sviluppo nel tempo un prodotto indipendente.',
+        'La Library API e il progetto Node.js sono nati durante il corso ITS. HomeEdge è il progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
+      supportingText: 'PROGETTO PERSONALE · PROGETTO ITS',
     },
     projects: {
       eyebrow: 'INDICE DEI PROGETTI',
@@ -64,9 +253,11 @@ export const italianContent = {
       projectsCtaLabel: 'Esplora tutti i progetti',
       backToProjectsLabel: 'Torna ai progetti',
       projectOriginLabels: {
-        'personal-long-term': 'Progetto personale a lungo termine',
-        'its-training': 'Progetto del percorso ITS',
+        'personal-long-term': 'PROGETTO PERSONALE',
+        'its-training': 'PROGETTO ITS',
       },
+      whatIWorkedOnLabel: 'Cosa ho curato',
+      futureImprovementLabel: 'Cosa vorrei migliorare',
     },
   },
   common: {
@@ -112,11 +303,19 @@ export const italianContent = {
       eyebrow: 'SMART HOME · SISTEMI EMBEDDED',
       detailEyebrow: 'SMART HOME · EDGE COMPUTING · GOVERNANCE',
       ctaLabel: 'Scopri HomeEdge',
+      question:
+        'Come raccogliere informazioni utili da una stanza senza rendere la casa un sistema poco trasparente?',
+      supportingText:
+        'Il progetto è ancora nelle prime fasi, ma non è pensato come un esercizio isolato: voglio continuare a svilupparlo aggiungendo backend, applicazione mobile e nuove funzionalità solo dopo averne verificato i confini.',
+      whatIWorkedOn:
+        'Ho definito la visione, i confini dell’MVP, la struttura del repository, la governance tecnica e il percorso di validazione dei componenti hardware.',
+      futureImprovement:
+        'Il prossimo obiettivo è trasformare le decisioni e i test hardware in un nodo funzionante e collegarlo progressivamente a un backend e a un’applicazione mobile.',
       originDescription:
         'HomeEdge non è un esercizio didattico isolato. È il progetto con cui approfondisco nel tempo sistemi embedded, architettura di prodotto e governance tecnica responsabile.',
       narrative: {
         cardSummary:
-          'Una piattaforma smart home modulare pensata per capire cosa accade in una stanza, mantenendo la raccolta dei dati locale, limitata e trasparente.',
+          'HomeEdge parte da piccoli nodi ESP32-C3 che rilevano temperatura, umidità, presenza locale e stato della porta.',
         cardValue:
           'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
         heroSummary:
@@ -142,7 +341,7 @@ export const italianContent = {
         },
         {
           id: 'target-services-unvalidated',
-          text: 'I confini backend, mobile e AI restano esplicitamente [UNVALIDATED].',
+          text: 'Backend, applicazione mobile e funzionalità AI restano direzioni future, non funzionalità già completate.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-architecture-governance'],
         },
@@ -200,12 +399,20 @@ export const italianContent = {
       projectId: 'its-library-api-laravel',
       slug: 'api-libreria-its-laravel',
       title: 'ITS Library API',
-      eyebrow: 'LIBRERIA DIGITALE · API LARAVEL',
+      eyebrow: 'LARAVEL · API REST',
       detailEyebrow: 'LARAVEL · API REST · LIBRERIA DIGITALE',
-      ctaLabel: 'Esplora la Library API',
+      ctaLabel: 'Scopri la Library API',
+      question:
+        'Come organizzare libri, autori e categorie in un backend che sia semplice da provare e da mantenere?',
+      supportingText:
+        'È il progetto in cui ho lavorato maggiormente sull’integrazione tra API, database, relazioni tra entità e protezione delle operazioni di modifica.',
+      whatIWorkedOn:
+        'Ho lavorato sulla struttura delle API, sulle relazioni tra libri, autori e categorie, sull’autenticazione e sulla riproducibilità dell’ambiente Docker.',
+      futureImprovement:
+        'Una possibile evoluzione è aggiungere un’interfaccia frontend e ampliare la gestione dei file e dei permessi.',
       narrative: {
         cardSummary:
-          'Un backend didattico completo per organizzare libri, autori e categorie attraverso una API REST documentata e protetta.',
+          'Una API realizzata con Laravel per gestire una libreria digitale, con autenticazione tramite token, validazione dei dati, MySQL e supporto Docker.',
         cardValue:
           'Mostra come autenticazione, validazione, relazioni tra dati e gestione dei file lavorano insieme in un backend reale.',
         heroSummary:
@@ -267,12 +474,19 @@ export const italianContent = {
       projectId: 'node-list-manager',
       slug: 'gestore-liste-node',
       title: 'Progetto ITS Node.js',
-      eyebrow: 'GESTIONE ATTIVITÀ · BACKEND NODE.JS',
+      eyebrow: 'NODE.JS · EXPRESS · SQLITE',
       detailEyebrow: 'NODE.JS · EXPRESS · SQLITE',
-      ctaLabel: 'Esplora il progetto Node.js',
+      ctaLabel: 'Scopri il progetto Node.js',
+      question: 'Quanto deve essere complesso un backend per gestire liste e attività?',
+      supportingText:
+        'Qui l’obiettivo non era costruire una grande architettura, ma mantenere il codice leggibile e il progetto facile da verificare.',
+      whatIWorkedOn:
+        'Ho organizzato le route, la persistenza SQLite e i test, cercando di mantenere il progetto piccolo e leggibile.',
+      futureImprovement:
+        'Potrei estendere la validazione degli input e aggiungere un’interfaccia semplice per utilizzare il backend dal browser.',
       narrative: {
         cardSummary:
-          'Un backend compatto per gestire liste e attività, costruito con route Express chiare, dati persistenti in SQLite e test automatici.',
+          'Un progetto compatto basato su Express e SQLite, con route separate e test automatici sui comportamenti principali.',
         cardValue:
           'Mostra come mantenere una piccola applicazione ordinata, verificabile e facile da estendere senza introdurre complessità inutile.',
         heroSummary:

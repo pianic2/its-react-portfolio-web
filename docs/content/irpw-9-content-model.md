@@ -38,7 +38,7 @@ Each project has a stable, non-localized `id`. Localized records refer to it thr
 
 Language switching on Project Detail resolves the current slug to a stable project ID and then asks the target locale for its path. Copying the source slug into the target route is not supported.
 
-Italian and English must have equivalent project, capability, navigation, narrative, evidence, link, asset and claim contracts. Text may differ as a translation, but narrative fields, claim IDs, status and evidence references must remain equivalent.
+Italian and English must have equivalent Home learning items, skill groups, process steps, Projects comparison entries, project, capability, navigation, narrative, evidence, link, asset and claim contracts. Text may differ as a translation, but IDs, narrative fields, claim IDs, status and evidence references must remain equivalent.
 
 Project origin is invariant and does not depend on localized titles. `personal-long-term` identifies HomeEdge; `its-training` identifies the Laravel and Node.js projects. The view model resolves localized origin labels for rendering.
 
@@ -93,6 +93,8 @@ Validation rejects:
 - localized evidence, link or asset sets that do not match shared facts;
 - verified or demonstrated claims without evidence;
 - Italian and English navigation, narrative or claim-contract drift.
+- Home or Projects collection ID drift and duplicate editorial IDs;
+- any Home hero ITS Prodigi URL other than the official HTTPS address.
 
 Errors include locale, entity type, stable ID and data path whenever that context is available.
 
