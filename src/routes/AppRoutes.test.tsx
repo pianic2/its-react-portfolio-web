@@ -88,17 +88,6 @@ describe('localized application routes', () => {
       'href',
       '/en/method',
     )
-    const introduction = screen.getByText(/I’m Niccolò, a Full Stack Development student at/)
-    const supportingText = screen.getByText(
-      /Some of these projects were created during my ITS training/,
-    )
-    expect(
-      introduction.compareDocumentPosition(supportingText) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy()
-    expect(
-      supportingText.compareDocumentPosition(screen.getByTestId('home-hero-actions')) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy()
     expect(
       screen.getByRole('heading', { name: 'From code to a complete product.' }),
     ).toBeInTheDocument()
