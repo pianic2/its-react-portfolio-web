@@ -48,7 +48,8 @@ export function SiteHeader({ language }: SiteHeaderProps) {
 
             return {
               alignItems: 'center',
-              bgcolor: colors.surfaceStrong,
+              bgcolor: colors.surface,
+              color: theme.palette.getContrastText(colors.surface),
               backgroundImage: patterns.diagonal,
               borderRadius: `${radii.lg}px`,
               boxShadow: shadows.medium,

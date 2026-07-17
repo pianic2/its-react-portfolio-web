@@ -33,7 +33,9 @@ export function MobileNavigationDrawer({ language, onClose, open }: MobileNaviga
             const maximumWidth = theme.breakpoints.values.sm - pageGutter.compact * 2
 
             return {
-              bgcolor: 'background.paper',
+              bgcolor: theme.digitalStudio.colors.surface,
+              backgroundImage: theme.digitalStudio.patterns.diagonal,
+              color: theme.palette.getContrastText(theme.digitalStudio.colors.surface),
               border: `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.border}`,
               borderRadius: `${theme.digitalStudio.radii.lg}px`,
               bottom: `max(${pageGutter.compact + shadowClearance}px, calc(env(safe-area-inset-bottom) + ${shadowClearance}px))`,
