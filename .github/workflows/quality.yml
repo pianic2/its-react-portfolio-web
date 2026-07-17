@@ -4,21 +4,28 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  format-baseline:
-    if: github.actor == 'pianic2' && github.head_ref == 'agent/irpw-21-pr-quality-checks'
+  quality:
+    name: Quality gates
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
-      - name: Check out branch
+      - name: Check out repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          ref: ${{ github.head_ref }}
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -27,22 +34,28 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Report runtime versions
+        run: |
+          node --version
+          npm --version
+
       - name: Install dependencies
         run: npm ci
 
-      - name: Apply canonical formatting
-        run: npm run format
+      - name: Check formatting
+        run: npm run format:check
 
-      - name: Commit formatting baseline
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/components/navigation/SiteHeader.tsx
-          git add src/content/data/en.ts
-          git add src/content/data/it.ts
-          git add src/content/schema.ts
-          git add src/features/home/ContactSection.tsx
-          git add src/features/home/HomeHero.tsx
-          git add src/features/home/SkillsSection.tsx
-          git diff --cached --quiet || git commit -m "style(IRPW-21): restore formatting baseline"
-          git push
+      - name: Lint source
+        run: npm run lint
+
+      - name: Type-check project
+        run: npm run typecheck
+
+      - name: Validate content
+        run: npm run content:validate
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build production bundle
+        run: npm run build
