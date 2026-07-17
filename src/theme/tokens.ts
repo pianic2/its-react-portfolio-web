@@ -222,7 +222,7 @@ export function createDigitalStudioTokens(mode: ThemeMode): DigitalStudioThemeTo
     },
     patterns: {
       halftone: `radial-gradient(circle at 25% 25%, ${colors.border} 0 1.25px, transparent 1.5px), radial-gradient(circle at 75% 75%, ${colors.border} 0 1.25px, transparent 1.5px)`,
-      diagonal: `repeating-linear-gradient(135deg, ${colors.border} 0 2px, transparent 2px 10px)`,
+      diagonal: `repeating-linear-gradient(135deg, ${colors.border}65 0 2px, transparent 2px 10px)`,
     },
     layout,
     motion,
