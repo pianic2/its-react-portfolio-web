@@ -62,8 +62,8 @@ tests and the production build as separate, visible gates.
 The workflow uses the repository token only with `contents: read`, does not use
 secrets and does not publish or deploy artifacts. Superseded runs for the same
 pull request or branch are cancelled, and the quality job has a bounded timeout.
-GitHub-owned actions are referenced by their reviewed major release line. Major
-version changes require an explicit pull-request review before adoption.
+GitHub-owned actions are pinned to reviewed full commit SHAs, with a readable
+major-version comment. Action updates require an explicit pull-request review.
 
 GitHub Pages publishing is intentionally handled by a separate delivery package
 and must only deploy reviewed changes from `main`.
