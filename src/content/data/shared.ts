@@ -96,12 +96,12 @@ export const sharedContent = {
         {
           id: 'node-package-manifest',
           type: 'documentation',
-          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/package.json',
+          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/README.md',
         },
         {
           id: 'node-automated-tests',
-          type: 'documentation',
-          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/package.json',
+          type: 'test',
+          url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/.github/workflows/ci.yml',
         },
       ],
       links: [
