@@ -13,7 +13,7 @@ without publishing private contact details or unverified claims.
 - Vitest and React Testing Library
 
 Later delivery packages add the validated content model, complete page set,
-accessibility checks, end-to-end tests and GitHub Pages deployment.
+accessibility checks and end-to-end tests.
 
 ## Local development
 
@@ -52,6 +52,9 @@ To inspect that bundle locally:
 npm run preview
 ```
 
+The production preview uses `/its-react-portfolio-web/`, matching the GitHub
+Pages project-site path.
+
 ## Continuous integration
 
 The `Quality` GitHub Actions workflow runs for pull requests targeting `main`
@@ -65,8 +68,45 @@ pull request or branch are cancelled, and the quality job has a bounded timeout.
 GitHub-owned actions are pinned to reviewed full commit SHAs, with a readable
 major-version comment. Action updates require an explicit pull-request review.
 
-GitHub Pages publishing is intentionally handled by a separate delivery package
-and must only deploy reviewed changes from `main`.
+## GitHub Pages deployment
+
+The public project-site URL is:
+
+```text
+https://pianic2.github.io/its-react-portfolio-web/
+```
+
+The separate `Pages` workflow deploys only after `Quality` succeeds on `main`,
+or through a manual dispatch restricted to `main`. It reruns `npm run check`,
+uploads only `dist/`, uses no repository secrets and grants only
+`contents: read` during build plus `pages: write` and `id-token: write` during
+deployment.
+
+Repository settings must use **GitHub Actions** as the Pages source. The
+`github-pages` environment must allow deployments only from `main`.
+
+### Base path and nested-route recovery
+
+Production assets use `/its-react-portfolio-web/`, and React Router uses the
+same value as its browser-router basename. Development and tests continue from
+`/`.
+
+GitHub Pages does not provide SPA rewrites. A direct nested-route request reaches
+`public/404.html`, which preserves path, query and hash in session storage and
+redirects to the project root. The bootstrap script in `index.html` restores the
+original URL with `history.replaceState` before React Router starts.
+
+Production smoke tests must cover root loading, Italian and English routes,
+direct nested-route opening, refresh, a valid project detail, asset requests,
+console errors and an intentionally unknown route.
+
+### Rollback
+
+Rollback uses a dedicated revert pull request. The revert must pass quality
+checks, be reviewed and merge into `main`; the resulting successful `Quality`
+run authorizes the replacement deployment. A failed deployment with unchanged
+valid code may be rerun manually from `main`. Arbitrary branches and unreviewed
+revisions must not be deployed.
 
 ## Environment configuration
 
