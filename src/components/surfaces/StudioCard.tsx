@@ -9,14 +9,14 @@ const StudioCardRoot = styled(Card, {
 })<{ studioVariant: StudioCardVariant }>(({ studioVariant, theme }) => {
   const featured = studioVariant === 'featured'
   const shadowOffset = featured
-    ? theme.digitalStudio.shadowOffsets.large
-    : theme.digitalStudio.shadowOffsets.medium
+    ? theme.digitalStudio.shadowOffsets.medium
+    : theme.digitalStudio.shadowOffsets.small
 
   return {
     backgroundColor: featured
       ? theme.digitalStudio.colors.surfaceStrong
       : theme.digitalStudio.colors.surface,
-    boxShadow: featured ? theme.digitalStudio.shadows.large : theme.digitalStudio.shadows.medium,
+    boxShadow: featured ? theme.digitalStudio.shadows.medium : theme.digitalStudio.shadows.small,
     marginBlockEnd: shadowOffset,
     marginInlineEnd: shadowOffset,
     minWidth: 0,

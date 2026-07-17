@@ -69,7 +69,7 @@ export function ProjectArtwork({ number, variant }: ProjectArtworkProps) {
       <Box
         component="span"
         sx={{
-          color: 'common.black',
+          color: 'text.contrastText',
           fontFamily: '"Archivo Black", "Arial Black", sans-serif',
           fontSize: { xs: '4.5rem', sm: '6.25rem' },
           fontWeight: 900,

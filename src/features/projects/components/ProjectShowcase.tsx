@@ -15,9 +15,9 @@ type ProjectShowcaseProps = {
 }
 
 const placementByVariant = {
-  'signal-yellow': { md: '1 / span 7' },
-  'studio-pink': { md: '8 / span 5' },
-  'electric-cyan': { md: '3 / span 8' },
+  'signal-yellow': { md: '1 / span 12' },
+  'studio-pink': { md: '1 / span 6' },
+  'electric-cyan': { md: '7 / span 6' },
 } as const
 
 export function ProjectShowcase({
