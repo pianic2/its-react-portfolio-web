@@ -69,7 +69,8 @@ describe('localized application routes', () => {
   it('renders the exact English Home narrative and actions', () => {
     renderRoute('/en')
 
-    expect(screen.getByText('FULL STACK DEVELOPER IN TRAINING')).toBeInTheDocument()
+    expect(screen.getByText('FULL STACK DEVELOPER')).toBeInTheDocument()
+    expect(screen.getByText('IN TRAINING')).toBeInTheDocument()
     expect(screen.getByText(/I’m Niccolò, a Full Stack Development student at/)).toBeInTheDocument()
     const trainingLink = screen.getByRole('link', { name: /ITS Prodigi/ })
     expect(trainingLink).toHaveAttribute('href', 'https://www.itsprodigi.it/')
@@ -101,7 +102,7 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'From code to a complete product.' }),
     ).toBeInTheDocument()
-    expect(screen.getByTestId('learning-items').children).toHaveLength(3)
+    expect(screen.getByTestId('learning-items').children).toHaveLength(6)
     expect(
       screen.getByRole('heading', { name: 'Three projects from different parts of my journey.' }),
     ).toBeInTheDocument()
@@ -124,7 +125,8 @@ describe('localized application routes', () => {
   it('renders the exact Italian Home narrative and actions', () => {
     renderRoute('/it')
 
-    expect(screen.getByText('FULL STACK DEVELOPER IN FORMAZIONE')).toBeInTheDocument()
+    expect(screen.getByText('FULL STACK DEVELOPER')).toBeInTheDocument()
+    expect(screen.getByText('IN FORMAZIONE')).toBeInTheDocument()
     expect(
       screen.getByText(/Mi chiamo Niccolò e studio sviluppo Full Stack presso/),
     ).toBeInTheDocument()
