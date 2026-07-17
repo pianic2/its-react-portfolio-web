@@ -47,8 +47,8 @@ describe('content repository validation', () => {
 
   it('keeps Home and Projects collection contracts aligned across locales', () => {
     const repository = validateContentRepository()
-    expect(repository.locales.it.homePage.learning.items).toHaveLength(3)
-    expect(repository.locales.en.homePage.learning.items).toHaveLength(3)
+    expect(repository.locales.it.homePage.learning.items).toHaveLength(6)
+    expect(repository.locales.en.homePage.learning.items).toHaveLength(6)
     expect(repository.locales.it.homePage.skills.groups).toHaveLength(5)
     expect(repository.locales.en.homePage.skills.groups).toHaveLength(5)
     expect(repository.locales.it.homePage.process.steps).toHaveLength(4)

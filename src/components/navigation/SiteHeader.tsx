@@ -9,7 +9,6 @@ import { MobileNavigationDrawer } from './MobileNavigationDrawer'
 import { PrimaryNavigation } from './PrimaryNavigation'
 import { SiteIdentity } from './SiteIdentity'
 import { ThemeToggle } from './ThemeToggle'
-import { CardContent } from '@mui/material'
 
 const menuLabels: Record<Language, string> = {
   it: 'Apri navigazione',
@@ -66,52 +65,51 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             }
           }}
         >
-            <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0, size: {xs: '2'} }}>
-              <SiteIdentity language={language} />
-            </Box>
+          <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0, size: { xs: '2' } }}>
+            <SiteIdentity language={language} />
+          </Box>
 
-            <Box
-              sx={{
-                display: { xs: 'none', xl: 'block' },
-                gridColumn: { xl: '2' },
-                gridRow: { xl: '1' },
-                justifySelf: { xl: 'center' },
-                minWidth: 0,
-              }}
-            >
-              <PrimaryNavigation language={language} />
-            </Box>
+          <Box
+            sx={{
+              display: { xs: 'none', xl: 'block' },
+              gridColumn: { xl: '2' },
+              gridRow: { xl: '1' },
+              justifySelf: { xl: 'center' },
+              minWidth: 0,
+            }}
+          >
+            <PrimaryNavigation language={language} />
+          </Box>
 
-            <Stack
-              direction="row"
-              sx={{
-                alignItems: 'center',
-                display: { xs: 'none', xl: 'flex' },
-                gap: 2,
-                gridColumn: '3',
-                gridRow: '1',
-                justifySelf: 'end',
-              }}
-            >
-              <LanguageSwitch />
-              <ThemeToggle language={language} />
-            </Stack>
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: 'center',
+              display: { xs: 'none', xl: 'flex' },
+              gap: 2,
+              gridColumn: '3',
+              gridRow: '1',
+              justifySelf: 'end',
+            }}
+          >
+            <LanguageSwitch />
+            <ThemeToggle language={language} />
+          </Stack>
 
-            <StudioIconButton
-              aria-label={menuLabels[language]}
-              onClick={() => setMobileNavigationOpen(true)}
-              sx={{
-                bgcolor: 'primary.main',
-                color: 'primary.contrastText',
-                display: { xs: 'inline-flex', xl: 'none' },
-                gridColumn: '2',
-                gridRow: '1',
-                justifySelf: 'end',
-              }}
-            >
-              <MenuRounded />
-            </StudioIconButton>
-
+          <StudioIconButton
+            aria-label={menuLabels[language]}
+            onClick={() => setMobileNavigationOpen(true)}
+            sx={{
+              bgcolor: 'primary.main',
+              color: 'primary.contrastText',
+              display: { xs: 'inline-flex', xl: 'none' },
+              gridColumn: '2',
+              gridRow: '1',
+              justifySelf: 'end',
+            }}
+          >
+            <MenuRounded />
+          </StudioIconButton>
         </Paper>
       </PageContainer>
 
@@ -120,6 +118,6 @@ export function SiteHeader({ language }: SiteHeaderProps) {
         onClose={() => setMobileNavigationOpen(false)}
         open={mobileNavigationOpen}
       />
-    </Box >
+    </Box>
   )
 }

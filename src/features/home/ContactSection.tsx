@@ -5,7 +5,7 @@ import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 export function ContactSection() {
   const { language, siteContent } = usePortfolioContent()

@@ -125,7 +125,7 @@ export const englishContent = {
             { text: 'Laravel', icon: 'devicon:laravel' },
             { text: 'Node.js', icon: 'devicon:nodejs' },
             { text: 'Express', icon: 'devicon:javascript' },
-            { text: 'REST API', icon: 'mdi:api' }
+            { text: 'REST API', icon: 'mdi:api' },
           ],
         },
         {
@@ -141,7 +141,8 @@ export const englishContent = {
         {
           id: 'delivery',
           title: 'Delivery',
-          description: 'Git, GitHub Actions, Docker, automated testing and technical documentation.',
+          description:
+            'Git, GitHub Actions, Docker, automated testing and technical documentation.',
           stack: [
             { text: 'Git', icon: 'devicon:git' },
             { text: 'GitHub Actions', icon: 'devicon:github' },

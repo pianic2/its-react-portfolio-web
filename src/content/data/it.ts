@@ -130,7 +130,7 @@ export const italianContent = {
             { text: 'Laravel', icon: 'devicon:laravel' },
             { text: 'Node.js', icon: 'devicon:nodejs' },
             { text: 'Express', icon: 'devicon:javascript' },
-            { text: 'REST API', icon: 'mdi:api' }
+            { text: 'REST API', icon: 'mdi:api' },
           ],
         },
         {
