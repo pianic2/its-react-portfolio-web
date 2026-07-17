@@ -43,15 +43,20 @@ jobs:
         run: npm ci
 
       - name: Generate formatting diagnostic
-        run: |
-          npm run format
-          git diff > /tmp/formatting.patch
+        run: npm run format
 
-      - name: Upload formatting diagnostic
+      - name: Upload formatted files
         uses: actions/upload-artifact@v4
         with:
-          name: formatting-diagnostic
-          path: /tmp/formatting.patch
+          name: formatted-files
+          path: |
+            src/components/navigation/SiteHeader.tsx
+            src/content/data/en.ts
+            src/content/data/it.ts
+            src/content/schema.ts
+            src/features/home/ContactSection.tsx
+            src/features/home/HomeHero.tsx
+            src/features/home/SkillsSection.tsx
           if-no-files-found: error
           retention-days: 1
 
