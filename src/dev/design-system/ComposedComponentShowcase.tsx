@@ -57,7 +57,12 @@ function ProjectPreviewCard() {
         <Stack spacing={5}>
           <Stack direction="row" sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
             <Chip color="success" label="Validated" size="small" />
-            <Chip icon={<CodeRounded />} label="React · TypeScript" size="small" variant="outlined" />
+            <Chip
+              icon={<CodeRounded />}
+              label="React · TypeScript"
+              size="small"
+              variant="outlined"
+            />
           </Stack>
 
           <Box>
@@ -65,8 +70,8 @@ function ProjectPreviewCard() {
               Edge telemetry decision lab
             </Typography>
             <Typography color="text.secondary" sx={{ mt: 3 }}>
-              A composed project-card candidate for evidence-rich case studies, technical decisions and
-              concise delivery outcomes.
+              A composed project-card candidate for evidence-rich case studies, technical decisions
+              and concise delivery outcomes.
             </Typography>
           </Box>
 
@@ -127,7 +132,11 @@ function DeliveryStatusPanel() {
               <Typography sx={{ fontWeight: 900 }}>Portfolio foundation</Typography>
               <Typography>76%</Typography>
             </Stack>
-            <LinearProgress aria-label="Portfolio foundation progress" value={76} variant="determinate" />
+            <LinearProgress
+              aria-label="Portfolio foundation progress"
+              value={76}
+              variant="determinate"
+            />
           </Box>
 
           <Stack divider={<Divider flexItem />} spacing={0}>
@@ -146,7 +155,9 @@ function DeliveryStatusPanel() {
                     py: 3,
                   }}
                 >
-                  <Typography sx={{ minWidth: 0, overflowWrap: 'anywhere' }}>{check.label}</Typography>
+                  <Typography sx={{ minWidth: 0, overflowWrap: 'anywhere' }}>
+                    {check.label}
+                  </Typography>
                   <Chip
                     color={presentation.color}
                     icon={presentation.icon}
@@ -188,8 +199,8 @@ function ContactPanelPreview() {
               Start with the problem, not the pitch.
             </Typography>
             <Typography color="text.secondary" sx={{ mt: 3 }}>
-              This compact panel tests long copy, form alignment and a strong action without becoming a
-              final public contact section.
+              This compact panel tests long copy, form alignment and a strong action without
+              becoming a final public contact section.
             </Typography>
           </Box>
 

@@ -2,19 +2,20 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '../app/AppLayout'
 import { DesignSystemPage } from '../dev/DesignSystemPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { HomePage } from '../pages/HomePage'
 import { PagePlaceholder } from '../pages/PagePlaceholder'
 import { ProjectDetailPage } from '../pages/ProjectDetailPage'
+import { ProjectsPage } from '../pages/ProjectsPage'
 import { readStoredLanguage } from '../preferences/preferences'
 import { routeDefinitions, supportedLanguages, type Language, type PageId } from './routeConfig'
 
 const pageIds = Object.keys(routeDefinitions) as PageId[]
 
 function pageElement(page: PageId, language: Language) {
-  return page === 'projectDetail' ? (
-    <ProjectDetailPage language={language} />
-  ) : (
-    <PagePlaceholder language={language} page={page} />
-  )
+  if (page === 'home') return <HomePage />
+  if (page === 'projects') return <ProjectsPage />
+  if (page === 'projectDetail') return <ProjectDetailPage />
+  return <PagePlaceholder language={language} page={page} />
 }
 
 function RootLanguageRedirect() {

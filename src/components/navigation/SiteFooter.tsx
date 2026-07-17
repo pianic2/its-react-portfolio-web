@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material'
-import { getRoutePath, routeDefinitions, type Language } from '../../routes/routeConfig'
+import { getPageLabel, getSiteContent } from '../../content/loaders'
+import { getRoutePath, type Language } from '../../routes/routeConfig'
 import { InternalLink } from '../actions/AppLink'
 import { PageContainer } from '../layout/PageContainer'
 
@@ -14,6 +15,7 @@ type SiteFooterProps = {
 
 export function SiteFooter({ language }: SiteFooterProps) {
   const currentYear = new Date().getFullYear()
+  const content = getSiteContent(language)
 
   return (
     <Box
@@ -37,9 +39,11 @@ export function SiteFooter({ language }: SiteFooterProps) {
             justifyContent: 'space-between',
           }}
         >
-          <Typography>© {currentYear} Niccolò Piazzi</Typography>
+          <Typography>
+            © {currentYear} {content.identity.name}
+          </Typography>
           <InternalLink to={getRoutePath('privacy', language)}>
-            {routeDefinitions.privacy.labels[language]}
+            {getPageLabel(language, 'privacy')}
           </InternalLink>
         </Stack>
       </PageContainer>

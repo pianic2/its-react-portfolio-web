@@ -51,9 +51,10 @@ export function DesignSystemPage() {
               scrollBehavior: 'auto !important',
               transitionDuration: '0.01ms !important',
             },
-            '.MuiButton-root:hover, .MuiButton-root:active, .MuiIconButton-root:hover, .MuiIconButton-root:active, a:hover, a:active, .is-active, [data-motion-sensitive="true"]:hover': {
-              transform: 'none !important',
-            },
+            '.MuiButton-root:hover, .MuiButton-root:active, .MuiIconButton-root:hover, .MuiIconButton-root:active, a:hover, a:active, .is-active, [data-motion-sensitive="true"]:hover':
+              {
+                transform: 'none !important',
+              },
           }}
         />
       ) : null}
@@ -110,8 +111,8 @@ export function DesignSystemPage() {
                     </Typography>
                     <Typography sx={{ fontSize: { xs: '1.1rem', md: '1.35rem' }, mt: 5 }}>
                       A systematic, repeatable review surface for the application-local tokens,
-                      primitives, states, responsive behaviour and accessibility contract. This route
-                      is not a public component-library product.
+                      primitives, states, responsive behaviour and accessibility contract. This
+                      route is not a public component-library product.
                     </Typography>
                   </Box>
 

@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import { SiteFooter } from '../components/navigation/SiteFooter'
 import { SiteHeader } from '../components/navigation/SiteHeader'
+import { PortfolioContentProvider } from '../content/context'
 import type { Language } from '../routes/routeConfig'
 import { RouteFocusManager } from './RouteFocusManager'
 import { SkipLink } from './SkipLink'
@@ -17,19 +18,26 @@ const skipLabels: Record<Language, string> = {
 
 export function AppLayout({ language }: AppLayoutProps) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
-      <SkipLink label={skipLabels[language]} targetId="main-content" />
-      <RouteFocusManager targetId="main-content" />
-      <SiteHeader language={language} />
-      <Box
-        component="main"
-        id="main-content"
-        sx={{ flex: 1, minWidth: 0, outline: 'none' }}
-        tabIndex={-1}
-      >
-        <Outlet />
+    <PortfolioContentProvider language={language}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
+        <SkipLink label={skipLabels[language]} targetId="main-content" />
+        <RouteFocusManager targetId="main-content" />
+        <SiteHeader language={language} />
+        <Box
+          component="main"
+          id="main-content"
+          sx={{
+            flex: 1,
+            minWidth: 0,
+            outline: 'none',
+            scrollMarginTop: { xs: '128px', lg: '184px' },
+          }}
+          tabIndex={-1}
+        >
+          <Outlet />
+        </Box>
+        <SiteFooter language={language} />
       </Box>
-      <SiteFooter language={language} />
-    </Box>
+    </PortfolioContentProvider>
   )
 }

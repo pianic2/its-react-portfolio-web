@@ -1,10 +1,6 @@
 import { Box, Stack } from '@mui/material'
-import {
-  getRoutePath,
-  mainNavigationPages,
-  routeDefinitions,
-  type Language,
-} from '../../routes/routeConfig'
+import { getNavigation } from '../../content/loaders'
+import { mainNavigationPages, type Language } from '../../routes/routeConfig'
 import { NavigationLink } from './NavigationLink'
 
 const navigationLabels: Record<Language, string> = {
@@ -24,6 +20,9 @@ export function PrimaryNavigation({
   orientation = 'horizontal',
 }: PrimaryNavigationProps) {
   const vertical = orientation === 'vertical'
+  const navigation = getNavigation(language).filter((item) =>
+    mainNavigationPages.includes(item.page),
+  )
 
   return (
     <Box aria-label={navigationLabels[language]} component="nav">
@@ -38,19 +37,19 @@ export function PrimaryNavigation({
           p: 0,
         }}
       >
-        {mainNavigationPages.map((page) => (
+        {navigation.map((item) => (
           <Box
             component="li"
-            key={page}
+            key={item.page}
             sx={{ minWidth: 0, width: vertical ? '100%' : 'auto' }}
           >
             <NavigationLink
-              end={page === 'home'}
+              end={item.page === 'home'}
               fullWidth={vertical}
               onNavigate={onNavigate}
-              to={getRoutePath(page, language)}
+              to={item.href}
             >
-              {routeDefinitions[page].labels[language]}
+              {item.label}
             </NavigationLink>
           </Box>
         ))}

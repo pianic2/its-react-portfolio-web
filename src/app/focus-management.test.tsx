@@ -33,7 +33,9 @@ describe('application focus management', () => {
       </DigitalStudioProvider>,
     )
 
-    await user.click(screen.getByRole('link', { name: 'Skip to content' }))
+    await user.tab()
+    expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveFocus()
+    await user.keyboard('{Enter}')
     expect(document.getElementById('main-content')).toHaveFocus()
   })
 

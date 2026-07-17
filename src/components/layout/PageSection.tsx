@@ -26,11 +26,15 @@ const PageSectionRoot = styled(Box, {
   return {
     minWidth: 0,
     paddingBlock: `${compact}px`,
+    scrollMarginTop: '128px',
     [theme.breakpoints.up('sm')]: {
       paddingBlock: `${regular}px`,
     },
     [theme.breakpoints.up('md')]: {
       paddingBlock: `${wide}px`,
+    },
+    [theme.breakpoints.up('lg')]: {
+      scrollMarginTop: '184px',
     },
   }
 })
@@ -40,6 +44,10 @@ export type PageSectionProps = Omit<BoxProps, 'component'> & {
   spacing?: SectionSpacing
 }
 
-export function PageSection({ component = 'section', spacing = 'regular', ...props }: PageSectionProps) {
-  return <PageSectionRoot component={component} sectionSpacing={spacing} {...props} />
+export function PageSection({
+  component = 'section',
+  spacing = 'regular',
+  ...props
+}: PageSectionProps) {
+  return <PageSectionRoot as={component} sectionSpacing={spacing} {...props} />
 }

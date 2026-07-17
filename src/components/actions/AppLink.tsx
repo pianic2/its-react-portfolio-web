@@ -3,7 +3,7 @@ import { Box, Button, Link as MuiLink, type ButtonProps, type LinkProps } from '
 import { Link, type LinkProps as RouterLinkProps } from 'react-router-dom'
 import type { Language } from '../../routes/routeConfig'
 
-export type InternalLinkProps = Omit<LinkProps, 'href'> & {
+export type InternalLinkProps = Omit<LinkProps, 'component' | 'href'> & {
   to: RouterLinkProps['to']
 }
 
@@ -46,8 +46,12 @@ export function ExternalLink({
               clip: 'rect(0 0 0 0)',
               clipPath: 'inset(50%)',
               height: 1,
+              left: 0,
+              margin: -1,
               overflow: 'hidden',
+              padding: 0,
               position: 'absolute',
+              top: 0,
               whiteSpace: 'nowrap',
               width: 1,
             }}
@@ -60,10 +64,52 @@ export function ExternalLink({
   )
 }
 
-export type ButtonLinkProps = Omit<ButtonProps, 'href'> & {
-  to: RouterLinkProps['to']
+export type ExternalButtonLinkProps = Omit<ButtonProps<'a'>, 'component' | 'href'> & {
+  href: string
+  language: Language
+  newTab?: boolean
 }
 
-export function ButtonLink({ to, ...props }: ButtonLinkProps) {
-  return <Button component={Link} to={to} {...props} />
+export function ExternalButtonLink({
+  children,
+  href,
+  language,
+  newTab = false,
+  ...props
+}: ExternalButtonLinkProps) {
+  return (
+    <Button
+      component="a"
+      href={href}
+      rel={newTab ? 'noopener noreferrer' : undefined}
+      target={newTab ? '_blank' : undefined}
+      {...props}
+    >
+      {children}
+      {newTab ? (
+        <Box
+          component="span"
+          sx={{
+            clip: 'rect(0 0 0 0)',
+            clipPath: 'inset(50%)',
+            height: 1,
+            margin: -1,
+            overflow: 'hidden',
+            padding: 0,
+            position: 'absolute',
+            whiteSpace: 'nowrap',
+            width: 1,
+          }}
+        >
+          ({newTabCopy[language]})
+        </Box>
+      ) : null}
+    </Button>
+  )
+}
+
+export type ButtonLinkProps = Omit<ButtonProps<typeof Link>, 'component' | 'href'>
+
+export function ButtonLink(props: ButtonLinkProps) {
+  return <Button component={Link} {...props} />
 }

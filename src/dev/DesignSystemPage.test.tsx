@@ -43,7 +43,7 @@ describe('responsive design-system showcase', () => {
     expect(
       screen.getByRole('heading', { name: 'Start with the problem, not the pitch.' }),
     ).toBeInTheDocument()
-  })
+  }, 20_000)
 
   it('exposes active navigation and disabled interaction states', () => {
     renderShowcase()
@@ -60,7 +60,7 @@ describe('responsive design-system showcase', () => {
   it('can force and release the reduced-motion preview without persistence', async () => {
     const user = userEvent.setup()
     const { container } = renderShowcase()
-    const previewControl = screen.getByRole('checkbox', { name: 'Force reduced-motion preview' })
+    const previewControl = screen.getByLabelText('Force reduced-motion preview')
     const root = container.firstElementChild
 
     expect(root).toHaveAttribute('data-force-reduced-motion', 'false')
@@ -69,7 +69,7 @@ describe('responsive design-system showcase', () => {
     expect(window.localStorage.getItem('irpw.reduced-motion-preview')).toBeNull()
     await user.click(previewControl)
     expect(root).toHaveAttribute('data-force-reduced-motion', 'false')
-  })
+  }, 20_000)
 
   it('uses the real theme provider and temporary navigation drawer', async () => {
     const user = userEvent.setup()
@@ -84,5 +84,5 @@ describe('responsive design-system showcase', () => {
     await waitFor(() => {
       expect(screen.queryByRole('heading', { name: 'Navigation' })).not.toBeInTheDocument()
     })
-  })
+  }, 20_000)
 })

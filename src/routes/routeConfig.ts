@@ -1,49 +1,37 @@
 import { matchPath } from 'react-router-dom'
+import { publicPageIds, supportedLanguages, type Language, type PageId } from '../content/schema'
 
-export const supportedLanguages = ['it', 'en'] as const
-
-export type Language = (typeof supportedLanguages)[number]
-
-export type PageId =
-  'home' | 'projects' | 'projectDetail' | 'skills' | 'method' | 'profile' | 'contact' | 'privacy'
+export { supportedLanguages }
+export type { Language, PageId }
 
 type RouteDefinition = {
   paths: Record<Language, string>
-  labels: Record<Language, string>
 }
 
 export const routeDefinitions: Record<PageId, RouteDefinition> = {
   home: {
     paths: { it: '', en: '' },
-    labels: { it: 'Home', en: 'Home' },
   },
   projects: {
     paths: { it: 'progetti', en: 'projects' },
-    labels: { it: 'Progetti', en: 'Projects' },
   },
   projectDetail: {
     paths: { it: 'progetti/:slug', en: 'projects/:slug' },
-    labels: { it: 'Dettaglio progetto', en: 'Project detail' },
   },
   skills: {
     paths: { it: 'competenze', en: 'skills' },
-    labels: { it: 'Competenze', en: 'Skills' },
   },
   method: {
     paths: { it: 'metodo', en: 'method' },
-    labels: { it: 'Metodo', en: 'Method' },
   },
   profile: {
     paths: { it: 'profilo', en: 'profile' },
-    labels: { it: 'Profilo', en: 'Profile' },
   },
   contact: {
     paths: { it: 'contatti', en: 'contact' },
-    labels: { it: 'Contatti', en: 'Contact' },
   },
   privacy: {
     paths: { it: 'privacy', en: 'privacy' },
-    labels: { it: 'Privacy', en: 'Privacy' },
   },
 }
 
@@ -71,7 +59,7 @@ export function getRoutePath(page: PageId, language: Language, params: { slug?: 
 
 export function resolveLocalizedRoute(pathname: string) {
   for (const language of supportedLanguages) {
-    for (const page of Object.keys(routeDefinitions) as PageId[]) {
+    for (const page of publicPageIds) {
       const relativePath = routeDefinitions[page].paths[language]
       const pattern = relativePath ? `/${language}/${relativePath}` : `/${language}`
       const match = matchPath({ path: pattern, end: true }, pathname)

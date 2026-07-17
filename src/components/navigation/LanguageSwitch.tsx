@@ -1,6 +1,7 @@
 import { Button } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import { writeStoredLanguage } from '../../preferences/preferences'
+import { getLocalizedProjectPath, getProjectBySlug } from '../../content/loaders'
 import { getRoutePath, resolveLocalizedRoute, type Language } from '../../routes/routeConfig'
 import { LanguageFlag } from './LanguageFlag'
 
@@ -35,6 +36,10 @@ export function LanguageSwitch({ presentation = 'compact' }: LanguageSwitchProps
   const targetLanguage = alternativeLanguage[language]
   const visibleLabel =
     presentation === 'compact' ? targetLanguage.toUpperCase() : languageNames[targetLanguage]
+  const project = page === 'projectDetail' ? getProjectBySlug(language, slug) : null
+  const targetPath = project
+    ? getLocalizedProjectPath(project.projectId, targetLanguage)
+    : getRoutePath(page, targetLanguage, slug ? { slug } : {})
 
   return (
     <Button
@@ -58,7 +63,7 @@ export function LanguageSwitch({ presentation = 'compact' }: LanguageSwitchProps
         },
       })}
       title={switchLabels[language]}
-      to={getRoutePath(page, targetLanguage, slug ? { slug } : {})}
+      to={targetPath ?? getRoutePath('projects', targetLanguage)}
       variant="outlined"
     >
       {visibleLabel}
