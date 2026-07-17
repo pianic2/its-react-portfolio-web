@@ -55,8 +55,9 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
                     {group.description}
                   </Typography>
                   {group.stack &&
-                    group.stack.map((item, index) => (
+                    group.stack.map((item) => (
                       <Chip
+                        key={`${group.id}-${item.text}`}
                         icon={item.icon ? <Icon icon={item.icon} color="text" /> : undefined}
                         label={item.text}
                         size="small"
