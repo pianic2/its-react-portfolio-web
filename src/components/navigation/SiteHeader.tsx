@@ -9,7 +9,6 @@ import { MobileNavigationDrawer } from './MobileNavigationDrawer'
 import { PrimaryNavigation } from './PrimaryNavigation'
 import { SiteIdentity } from './SiteIdentity'
 import { ThemeToggle } from './ThemeToggle'
-import { CardContent } from '@mui/material'
 
 const menuLabels: Record<Language, string> = {
   it: 'Apri navigazione',
