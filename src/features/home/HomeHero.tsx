@@ -1,5 +1,5 @@
 import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
-import { Box, Chip, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography } from '@mui/material'
 import { ButtonLink, ExternalButtonLink, ExternalLink } from '../../components/actions/AppLink'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
@@ -22,7 +22,7 @@ export function HomeHero() {
       <PageContainer>
         <Box sx={{ position: 'relative' }}>
 
-          <StudioCard component="header" variant="featured" sx={{ backgroundColor: 'surface.main', color: 'surface.contrastText' }}>
+          <StudioCard component="header" variant="featured" sx={{ backgroundColor: 'surfaceStrong.main', color: 'surface.contrastText', m: 0 }}>
             <CardContent
               sx={(theme) => ({
                 overflow: 'hidden',
