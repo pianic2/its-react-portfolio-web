@@ -6,6 +6,7 @@ import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
+import { StudioCard } from '../../components/surfaces/StudioCard'
 
 export function ProcessSection() {
   const { language, siteContent } = usePortfolioContent()
@@ -28,14 +29,29 @@ export function ProcessSection() {
             }}
           >
             {copy.steps.map((step) => (
-              <Box
-                component="li"
-                key={step.id}
+              <StudioCard
+                aria-labelledby={`process-step-title-${step.id}`}
+                component="article"
                 sx={{
-                  border: (theme) =>
-                    `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
+                  blockSize: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
                   minWidth: 0,
-                  p: 3,
+                  p: {
+                    xs: 6,
+                    lg: 8
+                  },
+                  overflow: 'hidden',
+                  transition: (theme) =>
+                    `transform ${theme.digitalStudio.motion.duration.fast}ms ${theme.digitalStudio.motion.easing.standard}`,
+                  '&:focus-within': { outline: 'none' },
+                  '@media (hover: hover)': {
+                    '&:hover': { transform: 'translateY(-4px)' },
+                  },
+                  '@media (prefers-reduced-motion: reduce)': {
+                    transition: 'none',
+                    '&:hover': { transform: 'none' },
+                  },
                 }}
               >
                 <Typography
@@ -44,23 +60,23 @@ export function ProcessSection() {
                 >
                   {step.number}
                 </Typography>
-                <Typography component="h3" sx={{ mt: 2 }} variant="h4">
+                <Typography component="h3" id={`process-step-title-${step.id}`} sx={{ mt: 2 }} variant="h4">
                   {step.title}
                 </Typography>
                 <Typography color="text.secondary" sx={{ mt: 1.5 }}>
                   {step.description}
                 </Typography>
-              </Box>
+              </StudioCard>
             ))}
+            <ButtonLink
+              endIcon={<ArrowForwardRounded aria-hidden="true" />}
+              sx={{ alignSelf: { xs: 'stretch', sm: 'flex-start' }, minHeight: 44 }}
+              to={getRoutePath('method', language)}
+              variant="outlined"
+            >
+              {copy.ctaLabel}
+            </ButtonLink>
           </Box>
-          <ButtonLink
-            endIcon={<ArrowForwardRounded aria-hidden="true" />}
-            sx={{ alignSelf: { xs: 'stretch', sm: 'flex-start' }, minHeight: 44 }}
-            to={getRoutePath('method', language)}
-            variant="outlined"
-          >
-            {copy.ctaLabel}
-          </ButtonLink>
         </Stack>
       </PageContainer>
     </PageSection>
