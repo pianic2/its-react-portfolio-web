@@ -5,6 +5,11 @@ import type { Language, PageId } from './schema'
 
 const repository = validateContentRepository()
 
+const utilityPageLabels: Record<Language, Partial<Record<PageId, string>>> = {
+  it: { privacy: 'Privacy' },
+  en: { privacy: 'Privacy' },
+}
+
 function loadProject(language: Language, projectId: string) {
   const project = buildProjectViewModel(repository, language, projectId)
   if (!project) return null
@@ -84,5 +89,9 @@ export function getNavigation(language: Language) {
 }
 
 export function getPageLabel(language: Language, page: PageId) {
-  return repository.locales[language].navigation.find((item) => item.page === page)?.label ?? page
+  return (
+    repository.locales[language].navigation.find((item) => item.page === page)?.label ??
+    utilityPageLabels[language][page] ??
+    page
+  )
 }
