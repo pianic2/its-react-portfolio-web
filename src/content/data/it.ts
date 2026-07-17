@@ -49,7 +49,7 @@ export const italianContent = {
       },
       primaryCtaLabel: 'Guarda i progetti',
       methodCtaLabel: 'Scopri il mio metodo',
-      githubCtaLabel: 'GitHub',
+      githubCtaLabel: 'Apri GitHub',
     },
     learning: {
       eyebrow: 'COSA STO IMPARANDO',
@@ -110,29 +110,66 @@ export const italianContent = {
         {
           id: 'frontend',
           title: 'Frontend',
-          description: 'React, TypeScript, Material UI, responsive design e accessibilità.',
+          description: 'React, TypeScript, Material UI, design adattivo e accessibilità.',
+          stack: [
+            { text: 'React', icon: 'devicon:react' },
+            { text: 'TypeScript', icon: 'devicon:typescript' },
+            { text: 'Material UI', icon: 'mdi:material-ui' },
+            { text: 'accessibility', icon: 'mdi:accessibility' },
+            { text: 'Design adattivo', icon: 'mdi:design' },
+          ],
         },
         {
           id: 'backend',
           title: 'Backend',
           description: 'Java, Spring Boot, PHP, Laravel, Node.js, Express e API REST.',
+          stack: [
+            { text: 'Java', icon: 'devicon:java' },
+            { text: 'Spring Boot', icon: 'devicon:spring' },
+            { text: 'PHP', icon: 'devicon:php' },
+            { text: 'Laravel', icon: 'devicon:laravel' },
+            { text: 'Node.js', icon: 'devicon:nodejs' },
+            { text: 'Express', icon: 'devicon:javascript' },
+            { text: 'REST API', icon: 'mdi:api' }
+          ],
         },
         {
           id: 'data',
           title: 'Dati',
           description: 'PostgreSQL, MySQL, SQLite, validazione e modellazione delle relazioni.',
+          stack: [
+            { text: 'PostgreSQL', icon: 'devicon:postgresql' },
+            { text: 'MySQL', icon: 'devicon:mysql' },
+            { text: 'SQLite', icon: 'devicon:sqlite' },
+          ],
         },
         {
           id: 'delivery',
           title: 'Delivery',
           description: 'Git, GitHub Actions, Docker, testing automatico e documentazione tecnica.',
+          stack: [
+            { text: 'Git', icon: 'devicon:git' },
+            { text: 'GitHub Actions', icon: 'devicon:github' },
+            { text: 'Docker', icon: 'devicon:docker' },
+            { text: 'Documentazione tecnica', icon: 'material-symbols:docs' },
+            { text: 'Testing automatico', icon: 'streamline-ultimate:ab-testing-monitors' },
+          ],
         },
         {
           id: 'embedded',
           title: 'Embedded',
           description: 'ESP32-C3, firmware in C, sensori ambientali e progettazione edge-first.',
+          stack: [
+            { text: 'ESP32', icon: 'mdi:react' },
+            { text: 'C', icon: 'devicon:c' },
+            { text: 'Sensori', icon: 'mdi:proximity-sensors' },
+            { text: 'Edge', icon: 'carbon:iot-connect' },
+          ],
         },
       ],
+      labels: {
+        skillCtaLabel: 'Esplora le mie competenze',
+      },
     },
     process: {
       eyebrow: 'IL MIO APPROCCIO',
@@ -176,7 +213,7 @@ export const italianContent = {
       title: 'Sto cercando occasioni per imparare, contribuire e mettermi alla prova.',
       description:
         'Sono disponibile a confrontarmi su stage, collaborazioni, progetti formativi e opportunità junior nel mondo dello sviluppo software.',
-      contactCtaLabel: 'Contattami',
+      contactCtaLabel: 'Rimaniamo in contatto',
       githubCtaLabel: 'Apri GitHub',
     },
   },

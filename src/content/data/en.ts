@@ -46,7 +46,7 @@ export const englishContent = {
       },
       primaryCtaLabel: 'View my projects',
       methodCtaLabel: 'See how I work',
-      githubCtaLabel: 'GitHub',
+      githubCtaLabel: 'Look at GitHub',
     },
     learning: {
       eyebrow: 'WHAT I’M LEARNING',
@@ -107,30 +107,64 @@ export const englishContent = {
         {
           id: 'frontend',
           title: 'Frontend',
-          description: 'React, TypeScript, Material UI, responsive design and accessibility.',
+          stack: [
+            { text: 'React', icon: 'devicon:react' },
+            { text: 'TypeScript', icon: 'devicon:typescript' },
+            { text: 'Material UI', icon: 'mdi:material-ui' },
+            { text: 'accessibility', icon: 'mdi:accessibility' },
+            { text: 'responsive design', icon: 'mdi:design' },
+          ],
         },
         {
           id: 'backend',
           title: 'Backend',
-          description: 'Java, Spring Boot, PHP, Laravel, Node.js, Express and REST APIs.',
+          stack: [
+            { text: 'Java', icon: 'devicon:java' },
+            { text: 'Spring Boot', icon: 'devicon:spring' },
+            { text: 'PHP', icon: 'devicon:php' },
+            { text: 'Laravel', icon: 'devicon:laravel' },
+            { text: 'Node.js', icon: 'devicon:nodejs' },
+            { text: 'Express', icon: 'devicon:javascript' },
+            { text: 'REST API', icon: 'mdi:api' }
+          ],
         },
         {
           id: 'data',
           title: 'Data',
           description: 'PostgreSQL, MySQL, SQLite, validation and relationship modelling.',
+          stack: [
+            { text: 'PostgreSQL', icon: 'devicon:postgresql' },
+            { text: 'MySQL', icon: 'devicon:mysql' },
+            { text: 'SQLite', icon: 'devicon:sqlite' },
+          ],
         },
         {
           id: 'delivery',
           title: 'Delivery',
-          description:
-            'Git, GitHub Actions, Docker, automated testing and technical documentation.',
+          description: 'Git, GitHub Actions, Docker, automated testing and technical documentation.',
+          stack: [
+            { text: 'Git', icon: 'devicon:git' },
+            { text: 'GitHub Actions', icon: 'devicon:github' },
+            { text: 'Docker', icon: 'devicon:docker' },
+            { text: 'Technical Documentation', icon: 'material-symbols:docs' },
+            { text: 'Automated Testing', icon: 'streamline-ultimate:ab-testing-monitors' },
+          ],
         },
         {
           id: 'embedded',
           title: 'Embedded',
           description: 'ESP32-C3, C firmware, environmental sensors and edge-first design.',
+          stack: [
+            { text: 'ESP32', icon: 'mdi:react' },
+            { text: 'C', icon: 'devicon:c' },
+            { text: 'Sensors', icon: 'mdi:proximity-sensors' },
+            { text: 'Edge', icon: 'carbon:iot-connect' },
+          ],
         },
       ],
+      labels: {
+        skillCtaLabel: 'View my skill',
+      },
     },
     process: {
       eyebrow: 'MY APPROACH',

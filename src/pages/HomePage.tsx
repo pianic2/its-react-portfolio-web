@@ -11,7 +11,7 @@ export function HomePage() {
       <HomeHero />
       <LearningSection />
       <ProjectShowcase variant="home" />
-      <SkillsSection />
+      <SkillsSection variant="home" />
       <ProcessSection />
       <ContactSection />
     </>
