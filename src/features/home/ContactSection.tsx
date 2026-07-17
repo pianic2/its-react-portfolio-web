@@ -5,6 +5,7 @@ import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export function ContactSection() {
   const { language, siteContent } = usePortfolioContent()
@@ -13,7 +14,7 @@ export function ContactSection() {
     <PageSection
       aria-labelledby="home-contact-title"
       spacing="spacious"
-      sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
+      sx={{ backgroundColor: 'warning.main', color: 'warning.contrastText' }}
     >
       <PageContainer>
         <Stack spacing={3} sx={{ maxWidth: '60rem' }}>
@@ -26,7 +27,7 @@ export function ContactSection() {
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} sx={{ gap: 2 }}>
             <ButtonLink
-              color="inherit"
+              color="primary"
               sx={{ minHeight: 44 }}
               to={getRoutePath('contact', language)}
               variant="contained"
@@ -34,7 +35,7 @@ export function ContactSection() {
               {copy.contactCtaLabel}
             </ButtonLink>
             <ExternalButtonLink
-              color="inherit"
+              color="primary"
               endIcon={<OpenInNewRounded aria-hidden="true" />}
               href="https://github.com/pianic2"
               language={language}
@@ -42,6 +43,7 @@ export function ContactSection() {
               sx={{ minHeight: 44 }}
               variant="outlined"
             >
+              <GitHubIcon sx={{ mr: 1 }} />
               {copy.githubCtaLabel}
             </ExternalButtonLink>
           </Stack>
