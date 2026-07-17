@@ -4,38 +4,58 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  repair-route-tests:
-    if: github.actor == 'pianic2' && github.head_ref == 'agent/irpw-21-pr-quality-checks'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  quality:
+    name: Quality gates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
 
     steps:
-      - name: Check out branch
+      - name: Check out repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          ref: ${{ github.head_ref }}
+          persist-credentials: false
 
-      - name: Remove obsolete Home ordering assertion
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('src/routes/AppRoutes.test.tsx')
-          content = path.read_text()
-          obsolete = """    const introduction = screen.getByText(/I’m Niccolò, a Full Stack Development student at/)\n    const supportingText = screen.getByText(\n      /Some of these projects were created during my ITS training/,\n    )\n    expect(\n      introduction.compareDocumentPosition(supportingText) & Node.DOCUMENT_POSITION_FOLLOWING,\n    ).toBeTruthy()\n    expect(\n      supportingText.compareDocumentPosition(screen.getByTestId('home-hero-actions')) &\n        Node.DOCUMENT_POSITION_FOLLOWING,\n    ).toBeTruthy()\n"""
-          if obsolete not in content:
-              raise SystemExit('Obsolete assertion block was not found')
-          path.write_text(content.replace(obsolete, ''))
-          PY
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Commit repaired route tests
+      - name: Report runtime versions
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/routes/AppRoutes.test.tsx
-          git diff --cached --quiet || git commit -m "test(IRPW-21): remove obsolete Home ordering assertion"
-          git push
+          node --version
+          npm --version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint source
+        run: npm run lint
+
+      - name: Type-check project
+        run: npm run typecheck
+
+      - name: Validate content
+        run: npm run content:validate
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build production bundle
+        run: npm run build
