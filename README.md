@@ -19,7 +19,7 @@ accessibility checks, end-to-end tests and GitHub Pages deployment.
 
 Requirements:
 
-- Node.js 24 LTS
+- Node.js 24 LTS, declared in `.node-version` and `package.json`
 - npm 11 or a version compatible with the lockfile
 
 Install the exact dependency tree and start the development server:
@@ -40,17 +40,33 @@ Run the complete local quality gate:
 npm run check
 ```
 
-It verifies formatting, lint rules, strict type checking, automated tests and
-the production build. Each check is also available independently through
-`format:check`, `lint`, `typecheck`, `test` and `build`. `npm run build`
-performs the TypeScript project build before creating the production bundle in
-`dist/`.
+It verifies formatting, lint rules, strict type checking, content validation,
+automated tests and the production build. Each check is also available
+independently through `format:check`, `lint`, `typecheck`, `content:validate`,
+`test` and `build`. `npm run build` performs the TypeScript project build before
+creating the production bundle in `dist/`.
 
 To inspect that bundle locally:
 
 ```bash
 npm run preview
 ```
+
+## Continuous integration
+
+The `Quality` GitHub Actions workflow runs for pull requests targeting `main`
+and for updates to `main`. It installs the dependency tree with `npm ci` on
+Node.js 24 and executes formatting, lint, type-checking, content validation,
+tests and the production build as separate, visible gates.
+
+The workflow uses the repository token only with `contents: read`, does not use
+secrets and does not publish or deploy artifacts. Superseded runs for the same
+pull request or branch are cancelled, and the quality job has a bounded timeout.
+GitHub-owned actions are referenced by their reviewed major release line. Major
+version changes require an explicit pull-request review before adoption.
+
+GitHub Pages publishing is intentionally handled by a separate delivery package
+and must only deploy reviewed changes from `main`.
 
 ## Environment configuration
 
