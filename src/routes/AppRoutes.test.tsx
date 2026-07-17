@@ -98,7 +98,7 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Different tools for different projects.' }),
     ).toBeInTheDocument()
-    expect(screen.getByTestId('skill-groups').children).toHaveLength(5)
+    expect(screen.getByTestId('skill-groups').children).toHaveLength(6)
     expect(
       screen.getByRole('heading', { name: 'Understand first, then build.' }),
     ).toBeInTheDocument()
