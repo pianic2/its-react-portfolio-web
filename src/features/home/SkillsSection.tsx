@@ -6,7 +6,7 @@ import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { StudioCard } from '../../components/surfaces/StudioCard'
 import { usePortfolioContent } from '../../content/context'
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react'
 import { getRoutePath } from '../../routes/routeConfig'
 
 export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
@@ -43,7 +43,7 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
                   p: {
                     xs: 3,
                     md: 6,
-                    lg: 8
+                    lg: 8,
                   },
                 }}
               >
@@ -54,17 +54,16 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
                   <Typography color="text.secondary" sx={{ mt: 2 }}>
                     {group.description}
                   </Typography>
-                  {group.stack && (
+                  {group.stack &&
                     group.stack.map((item, index) => (
                       <Chip
-                        icon={item.icon ? <Icon icon={item.icon} color='text' /> : undefined}
+                        icon={item.icon ? <Icon icon={item.icon} color="text" /> : undefined}
                         label={item.text}
                         size="small"
                         variant="outlined"
                         sx={{ px: 3, py: 4, mr: 2, mt: 2, fontSize: '1.1rem', fontWeight: 700 }}
                       />
-                    ))
-                  )}
+                    ))}
                 </CardContent>
               </StudioCard>
             ))}

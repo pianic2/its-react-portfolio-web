@@ -226,10 +226,20 @@ const editorialItemSchema = z.object({
   id: stableIdSchema,
   title: z.string().min(1),
   description: z.string().optional(),
-  stack: z.array(z.object({ text: z.string().min(1), color: z.string().optional(), icon: z.string().min(1).optional() })).optional(),
-  labels: z.object({
-    ctaLabel: z.string().optional(),
-  }).optional(),
+  stack: z
+    .array(
+      z.object({
+        text: z.string().min(1),
+        color: z.string().optional(),
+        icon: z.string().min(1).optional(),
+      }),
+    )
+    .optional(),
+  labels: z
+    .object({
+      ctaLabel: z.string().optional(),
+    })
+    .optional(),
 })
 
 const editorialSectionSchema = z.object({
@@ -283,7 +293,10 @@ export const siteContentSchema = z.object({
     }),
     learning: editorialSectionSchema.extend({ items: z.array(editorialItemSchema).min(1) }),
     selectedProjects: editorialSectionSchema,
-    skills: editorialSectionSchema.extend({ groups: z.array(editorialItemSchema).min(1), labels: z.object({ skillCtaLabel: z.string().optional() }) }),
+    skills: editorialSectionSchema.extend({
+      groups: z.array(editorialItemSchema).min(1),
+      labels: z.object({ skillCtaLabel: z.string().optional() }),
+    }),
     process: editorialSectionSchema.extend({
       steps: z
         .array(

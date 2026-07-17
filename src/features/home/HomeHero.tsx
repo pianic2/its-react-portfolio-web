@@ -7,7 +7,7 @@ import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
 import { CardContent } from '@mui/material'
 import { StudioCard } from '../../components/surfaces/StudioCard'
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 const githubUrl = 'https://github.com/pianic2'
 
@@ -16,13 +16,14 @@ export function HomeHero() {
   const copy = siteContent.homePage.hero
 
   return (
-    <PageSection
-      aria-labelledby="home-page-title" 
-      spacing="spacious">
+    <PageSection aria-labelledby="home-page-title" spacing="spacious">
       <PageContainer>
         <Box sx={{ position: 'relative' }}>
-
-          <StudioCard component="header" variant="featured" sx={{ backgroundColor: 'surfaceStrong.main', color: 'surface.contrastText', m: 0 }}>
+          <StudioCard
+            component="header"
+            variant="featured"
+            sx={{ backgroundColor: 'surfaceStrong.main', color: 'surface.contrastText', m: 0 }}
+          >
             <CardContent
               sx={(theme) => ({
                 overflow: 'hidden',
@@ -53,8 +54,21 @@ export function HomeHero() {
             >
               <Stack spacing={{ xs: 3, sm: 4 }} sx={{ maxWidth: '68rem', minWidth: 0 }}>
                 <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
-                  <Typography component="span" sx={{ letterSpacing: 0, borderBottom: '4px solid', borderColor: 'primary.main' }} variant="overline">
-                    <Typography component="span" sx={{ letterSpacing: 0, marginRight: '0.5rem' }} variant="overline" color="primary.contrastText">
+                  <Typography
+                    component="span"
+                    sx={{
+                      letterSpacing: 0,
+                      borderBottom: '4px solid',
+                      borderColor: 'primary.main',
+                    }}
+                    variant="overline"
+                  >
+                    <Typography
+                      component="span"
+                      sx={{ letterSpacing: 0, marginRight: '0.5rem' }}
+                      variant="overline"
+                      color="primary.contrastText"
+                    >
                       FULL STACK DEVELOPER
                     </Typography>
                     {'   '}
