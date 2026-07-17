@@ -20,9 +20,7 @@ export function LearningSection() {
             <Typography component="h2" id="home-learning-title" variant="h2">
               {copy.title}
             </Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: '68ch' }}>
-              {copy.description}
-            </Typography>
+            <Typography sx={{ maxWidth: '68ch' }}>{copy.description}</Typography>
           </Stack>
           <Box
             data-testid="learning-items"
@@ -38,9 +36,29 @@ export function LearningSection() {
                 component="article"
                 sx={{
                   backgroundColor:
-                    index === 0 ? 'warning.main' : index === 1 ? 'secondary.main' : index === 2 ? 'info.main' : index === 3 ? 'success.main' : index === 4 ? 'canvas.main' : 'error.main',
+                    index === 0
+                      ? 'warning.main'
+                      : index === 1
+                        ? 'secondary.main'
+                        : index === 2
+                          ? 'info.main'
+                          : index === 3
+                            ? 'success.main'
+                            : index === 4
+                              ? 'canvas.main'
+                              : 'error.main',
                   color:
-                    index === 0 ? 'warning.contrastText' : index === 1 ? 'secondary.contrastText' : index === 2 ? 'info.contrastText' : index === 3 ? 'success.contrastText' : index === 4 ? 'canvas.contrastText' : 'error.contrastText',
+                    index === 0
+                      ? 'warning.contrastText'
+                      : index === 1
+                        ? 'secondary.contrastText'
+                        : index === 2
+                          ? 'info.contrastText'
+                          : index === 3
+                            ? 'success.contrastText'
+                            : index === 4
+                              ? 'canvas.contrastText'
+                              : 'error.contrastText',
                 }}
               >
                 <CardContent sx={{ p: 8, '&:last-child': { pb: 8 } }}>
@@ -54,6 +72,6 @@ export function LearningSection() {
           </Box>
         </Stack>
       </PageContainer>
-    </PageSection >
+    </PageSection>
   )
 }
