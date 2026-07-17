@@ -8,6 +8,24 @@
       content="Portfolio bilingue di Niccolò Piazzi: progetti, competenze e metodo di lavoro full stack."
     />
     <title>Niccolò Piazzi | Full Stack Developer</title>
+    <script>
+      ;(() => {
+        const recoveryKey = 'irpw:pages-route-recovery'
+        const basePath = '%BASE_URL%'
+
+        try {
+          const recoveredLocation = window.sessionStorage.getItem(recoveryKey)
+          window.sessionStorage.removeItem(recoveryKey)
+
+          if (recoveredLocation?.startsWith(basePath)) {
+            window.history.replaceState(null, '', recoveredLocation)
+          }
+        } catch {
+          // Storage can be unavailable in hardened browser contexts. The app still
+          // starts at the project root and keeps normal client-side navigation.
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
