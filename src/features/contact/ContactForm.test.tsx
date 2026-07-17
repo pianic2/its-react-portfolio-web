@@ -1,0 +1,118 @@
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { DigitalStudioProvider } from '../../theme'
+import type { ContactSubmissionResult, SubmitContactMessage } from '../../services/contact'
+import { ContactForm } from './ContactForm'
+
+const { submitContactMessage } = vi.hoisted(() => ({
+  submitContactMessage:
+    vi.fn<
+      (command: SubmitContactMessage, signal?: AbortSignal) => Promise<ContactSubmissionResult>
+    >(),
+}))
+
+vi.mock('../../services/contact', async () => {
+  const actual =
+    await vi.importActual<typeof import('../../services/contact')>('../../services/contact')
+  return { ...actual, submitContactMessage }
+})
+
+const copy = {
+  nameLabel: 'Name',
+  emailLabel: 'Email',
+  messageLabel: 'Message',
+  submitLabel: 'Send message',
+  submittingLabel: 'Sending…',
+  sendAnotherLabel: 'Send another message',
+  requiredError: 'This field is required.',
+  nameLengthError: 'Name too long.',
+  emailError: 'Email invalid.',
+  messageLengthError: 'Message length invalid.',
+  configurationError: 'Form unavailable.',
+  submissionError: 'Could not send.',
+  successMessage: 'Sent.',
+  privacyNotice: 'Do not send sensitive data.',
+}
+
+function renderForm() {
+  return render(
+    <DigitalStudioProvider>
+      <ContactForm copy={copy} locale="en" />
+    </DigitalStudioProvider>,
+  )
+}
+
+describe('ContactForm', () => {
+  beforeEach(() => {
+    submitContactMessage.mockReset()
+  })
+
+  it('focuses the first invalid field and exposes its error', () => {
+    renderForm()
+    fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
+
+    expect(screen.getByRole('textbox', { name: /Name/ })).toHaveFocus()
+    expect(screen.getByText('This field is required.')).toBeInTheDocument()
+    expect(screen.getByRole('textbox', { name: /Name/ })).toHaveAttribute('aria-invalid', 'true')
+  })
+
+  it('prevents duplicate submissions and offers an explicit reset after success', async () => {
+    let resolveSubmission: (() => void) | undefined
+    submitContactMessage.mockImplementation(
+      () =>
+        new Promise<ContactSubmissionResult>((resolve) => {
+          resolveSubmission = () => resolve({ delivered: true })
+        }),
+    )
+    renderForm()
+    fireEvent.change(screen.getByRole('textbox', { name: /Name/ }), {
+      target: { value: 'Niccolò' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Email/ }), {
+      target: { value: 'niccolo@example.com' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Message/ }), {
+      target: { value: 'A message that is long enough.' },
+    })
+    const form = screen.getByRole('button', { name: 'Send message' }).closest('form')!
+    fireEvent.submit(form)
+    fireEvent.submit(form)
+
+    expect(submitContactMessage).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('button', { name: 'Sending…' })).toBeDisabled()
+    resolveSubmission?.()
+    await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Sent.'))
+    fireEvent.click(screen.getByRole('button', { name: 'Send another message' }))
+    expect(screen.getByRole('textbox', { name: /Name/ })).toHaveValue('')
+  })
+
+  it('keeps values after a failed submission and does not reveal provider details', async () => {
+    submitContactMessage.mockRejectedValue(new Error('provider body should stay private'))
+    renderForm()
+    fireEvent.change(screen.getByRole('textbox', { name: /Name/ }), {
+      target: { value: 'Niccolò' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Email/ }), {
+      target: { value: 'niccolo@example.com' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Message/ }), {
+      target: { value: 'A message that is long enough.' },
+    })
+    fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
+
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('Could not send.'))
+    expect(screen.getByRole('alert')).not.toHaveTextContent('provider body')
+    expect(screen.getByRole('textbox', { name: /Message/ })).toHaveValue(
+      'A message that is long enough.',
+    )
+  })
+
+  it('does not call the provider when the separate honeypot is filled', () => {
+    renderForm()
+    const honeypot = document.querySelector('input[name="botcheck"]')!
+    fireEvent.change(honeypot, { target: { value: 'spam' } })
+    fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
+
+    expect(submitContactMessage).not.toHaveBeenCalled()
+  })
+})

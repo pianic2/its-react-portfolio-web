@@ -1,4 +1,5 @@
 import type { SiteContent } from '../schema'
+import { italianProfileContactLegalContent } from './profile-contact-legal.it'
 
 export const italianContent = {
   locale: 'it',
@@ -217,6 +218,7 @@ export const italianContent = {
       githubCtaLabel: 'Apri GitHub',
     },
   },
+  ...italianProfileContactLegalContent,
   projectsPage: {
     hero: {
       eyebrow: 'I MIEI PROGETTI',

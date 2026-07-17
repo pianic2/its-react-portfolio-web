@@ -24,6 +24,8 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+    env:
+      VITE_WEB3FORMS_ACCESS_KEY: ${{ vars.VITE_WEB3FORMS_ACCESS_KEY }}
 
     steps:
       - name: Check out authorized revision

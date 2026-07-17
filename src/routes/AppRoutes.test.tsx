@@ -52,14 +52,14 @@ describe('localized application routes', () => {
   it.each([
     ['/it/competenze', 'Competenze'],
     ['/it/metodo', 'Metodo'],
-    ['/it/profilo', 'Profilo'],
-    ['/it/contatti', 'Contatti'],
-    ['/it/privacy', 'Privacy'],
+    ['/it/profilo', 'Un percorso tecnico costruito progetto dopo progetto.'],
+    ['/it/contatti', 'Raccontami su cosa stai lavorando.'],
+    ['/it/privacy', 'Informazioni sul form di contatto.'],
     ['/en/skills', 'Skills'],
     ['/en/method', 'Method'],
-    ['/en/profile', 'Profile'],
-    ['/en/contact', 'Contact'],
-    ['/en/privacy', 'Privacy'],
+    ['/en/profile', 'A technical path built one project at a time.'],
+    ['/en/contact', 'Tell me what you are working on.'],
+    ['/en/privacy', 'How the contact form handles your data.'],
   ])('renders %s as %s', (path, heading) => {
     renderRoute(path)
 

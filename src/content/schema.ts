@@ -255,6 +255,24 @@ const comparisonAnswerSchema = z.object({
   difficulty: z.string().min(1),
 })
 
+const editorialPageSchema = z.object({
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const localizedContentSectionSchema = z.object({
+  id: stableIdSchema,
+  title: z.string().min(1),
+  paragraphs: z.array(z.string().min(1)).min(1),
+})
+
+const pageCtasSchema = z.object({
+  projectsLabel: z.string().min(1),
+  contactLabel: z.string().min(1),
+  githubLabel: z.string().min(1),
+})
+
 export const siteContentSchema = z.object({
   locale: languageSchema,
   identity: z.object({
@@ -338,6 +356,45 @@ export const siteContentSchema = z.object({
       methodLabel: z.string().min(1),
       contactLabel: z.string().min(1),
     }),
+  }),
+  profilePage: z.object({
+    hero: editorialPageSchema,
+    sections: z.array(localizedContentSectionSchema).min(1),
+    ctas: pageCtasSchema,
+  }),
+  contactPage: z.object({
+    hero: editorialPageSchema,
+    appropriateRequests: z.array(z.string().min(1)).min(1),
+    messageGuidance: z.array(z.string().min(1)).min(1),
+    afterSubmit: z.string().min(1),
+    form: z.object({
+      nameLabel: z.string().min(1),
+      emailLabel: z.string().min(1),
+      messageLabel: z.string().min(1),
+      submitLabel: z.string().min(1),
+      submittingLabel: z.string().min(1),
+      sendAnotherLabel: z.string().min(1),
+      requiredError: z.string().min(1),
+      nameLengthError: z.string().min(1),
+      emailError: z.string().min(1),
+      messageLengthError: z.string().min(1),
+      configurationError: z.string().min(1),
+      submissionError: z.string().min(1),
+      successMessage: z.string().min(1),
+      privacyNotice: z.string().min(1),
+    }),
+    githubLabel: z.string().min(1),
+  }),
+  privacyPage: z.object({
+    hero: editorialPageSchema,
+    updatedLabel: z.string().min(1),
+    updatedAt: z.string().min(1),
+    intro: z.string().min(1),
+    sections: z.array(localizedContentSectionSchema).min(1),
+    providerLabel: z.string().min(1),
+    providerUrl: httpsUrlSchema,
+    ownerContactLabel: z.string().min(1),
+    ownerContactUrl: httpsUrlSchema,
   }),
   projectExperience: z.object({
     home: z.object({
