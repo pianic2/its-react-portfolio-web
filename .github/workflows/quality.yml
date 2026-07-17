@@ -42,10 +42,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check formatting
+      - name: Generate formatting diagnostic
         run: |
           npm run format
-          git diff --exit-code
+          git diff > /tmp/formatting.patch
+
+      - name: Upload formatting diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatting-diagnostic
+          path: /tmp/formatting.patch
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Check formatting
+        run: git diff --exit-code
 
       - name: Lint source
         run: npm run lint
