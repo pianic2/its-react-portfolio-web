@@ -17,8 +17,6 @@ type SkillsGroupsProps = {
   language: Language
 }
 
-const groupColors = ['info', 'secondary', 'primary', 'warning'] as const
-
 export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
   return (
     <>
@@ -30,17 +28,21 @@ export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
           spacing="spacious"
           sx={(theme) => {
             return {
-              backgroundColor: index % 2 === 0 ? theme.digitalStudio.colors.surface : theme.digitalStudio.colors.surfaceStrong,
-              color: index % 2 === 0 ? theme.digitalStudio.colors.text : theme.digitalStudio.colors.textMuted,
+              backgroundColor:
+                index % 2 === 0
+                  ? theme.digitalStudio.colors.surface
+                  : theme.digitalStudio.colors.surfaceStrong,
+              color:
+                index % 2 === 0
+                  ? theme.digitalStudio.colors.text
+                  : theme.digitalStudio.colors.textMuted,
               backgroundImage: index % 2 === 0 ? theme.digitalStudio.patterns.halftone : null,
               backgroundSize: '18px 18px',
             }
           }}
         >
           <PageContainer>
-            <Box
-              component="section"
-            >
+            <Box component="section">
               <Stack spacing={{ xs: 4, md: 6 }}>
                 <Typography component="h2" id={`skills-group-title-${group.id}`} variant="h2">
                   {group.title}
@@ -57,7 +59,10 @@ export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
                     },
                   }}
                 >
-                  <Stack spacing={{ xs: 4, md: 6 }} sx={{ order: { md: index % 2 === 0 ? 1 : -1 } }}>
+                  <Stack
+                    spacing={{ xs: 4, md: 6 }}
+                    sx={{ order: { md: index % 2 === 0 ? 1 : -1 } }}
+                  >
                     <StudioCard
                       component="section"
                       sx={(theme) => ({
@@ -126,7 +131,9 @@ export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
                       {group.tools.map((tool) => (
                         <Chip
                           key={`${group.id}-${tool}`}
-                          icon={<Icon icon={`devicon:${tool.toLowerCase().replace(/\s+/g, '-')}`} />}
+                          icon={
+                            <Icon icon={`devicon:${tool.toLowerCase().replace(/\s+/g, '-')}`} />
+                          }
                           label={tool}
                           size="small"
                           sx={{ fontWeight: 800, minHeight: 36, px: 3 }}
