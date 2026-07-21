@@ -50,13 +50,13 @@ describe('localized application routes', () => {
   })
 
   it.each([
-    ['/it/competenze', 'Competenze'],
-    ['/it/metodo', 'Metodo'],
+    ['/it/competenze', 'Progetto software che resta leggibile mentre cresce.'],
+    ['/it/metodo', 'Prima la direzione. Poi la velocità.'],
     ['/it/profilo', 'Profilo'],
     ['/it/contatti', 'Contatti'],
     ['/it/privacy', 'Privacy'],
-    ['/en/skills', 'Skills'],
-    ['/en/method', 'Method'],
+    ['/en/skills', 'From a problem to a verifiable solution.'],
+    ['/en/method', 'Direction first. Then speed.'],
     ['/en/profile', 'Profile'],
     ['/en/contact', 'Contact'],
     ['/en/privacy', 'Privacy'],
@@ -93,7 +93,7 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
     expect(screen.getByTestId('learning-items').children).toHaveLength(6)
     expect(
-      screen.getByRole('heading', { name: 'Three projects from different parts of my journey.' }),
+      screen.getByRole('heading', { name: 'Three projects from different stages of my journey.' }),
     ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Different tools for different projects.' }),

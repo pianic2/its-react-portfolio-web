@@ -221,8 +221,8 @@ export function createDigitalStudioTokens(mode: ThemeMode): DigitalStudioThemeTo
       large: `${shadowOffsets.large}px ${shadowOffsets.large}px 0 ${shadowColor}`,
     },
     patterns: {
-      halftone: `radial-gradient(circle at 25% 25%, ${colors.border} 0 1.25px, transparent 1.5px), radial-gradient(circle at 75% 75%, ${colors.border} 0 1.25px, transparent 1.5px)`,
-      diagonal: `repeating-linear-gradient(135deg, ${colors.border}65 0 2px, transparent 2px 10px)`,
+      halftone: `radial-gradient(circle at 25% 25%, ${colors.border}20 0 1.25px, transparent 1.5px), radial-gradient(circle at 75% 75%, ${colors.border}20 0 1.25px, transparent 1.5px)`,
+      diagonal: `repeating-linear-gradient(135deg, ${colors.border}20 0 1.25px, transparent 1.5px 6px)`,
     },
     layout,
     motion,
