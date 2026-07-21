@@ -50,12 +50,12 @@ describe('localized application routes', () => {
   })
 
   it.each([
-    ['/it/competenze', 'Progetto software che resta leggibile mentre cresce.'],
+    ['/it/competenze', 'Dal problema al software che puoi usare, capire e verificare.'],
     ['/it/metodo', 'Prima la direzione. Poi la velocità.'],
     ['/it/profilo', 'Profilo'],
     ['/it/contatti', 'Contatti'],
     ['/it/privacy', 'Privacy'],
-    ['/en/skills', 'From a problem to a verifiable solution.'],
+    ['/en/skills', 'From a problem to software people can use, understand and verify.'],
     ['/en/method', 'Direction first. Then speed.'],
     ['/en/profile', 'Profile'],
     ['/en/contact', 'Contact'],

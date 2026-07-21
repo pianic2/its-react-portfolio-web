@@ -29,20 +29,20 @@ describe('Skills and Method pages', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'Progetto software che resta leggibile mentre cresce.',
+        name: 'Dal problema al software che puoi usare, capire e verificare.',
       }),
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Parliamo del tuo progetto/ })).toHaveAttribute(
       'href',
       '/it/contatti',
     )
-    expect(screen.getByRole('link', { name: /Esamina il mio lavoro/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Guarda cosa ho costruito/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2',
     )
     expect(
       screen.getByRole('heading', {
-        name: 'La tecnologia conta. Il controllo del sistema conta di più.',
+        name: 'La tecnologia serve. Il valore nasce da come viene usata.',
       }),
     ).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-frontend-interfaces')).toBeInTheDocument()
@@ -50,14 +50,14 @@ describe('Skills and Method pages', () => {
     expect(screen.getByTestId('skills-group-section-connected-embedded')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-delivery-quality')).toBeInTheDocument()
     for (const title of [
-      'Cosa puoi verificare',
-      'Implementazioni consultabili',
-      'Progetto e decisioni disponibili',
-      'Qualità e processo verificabili',
+      'Interfaccia e struttura verificabili',
+      'Regole e implementazioni consultabili',
+      'Test, decisioni e stato del progetto',
+      'Processo e controlli automatici',
     ]) {
       expect(screen.getAllByRole('heading', { name: title })).toHaveLength(1)
     }
-    expect(screen.getByRole('link', { name: /Esamina il frontend del portfolio/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Esplora il frontend del portfolio/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/its-react-portfolio-web',
     )
@@ -231,7 +231,7 @@ describe('Skills and Method pages', () => {
     renderPage('en', 'skills')
 
     const primary = screen.getByRole('link', { name: /Let’s discuss your project/ })
-    const github = screen.getByRole('link', { name: /Explore my GitHub/ })
+    const github = screen.getByRole('link', { name: /See what I have built/ })
 
     expect(primary).toHaveAttribute('href', '/en/contact')
     expect(primary).toHaveAttribute('data-analytics-id', 'skills-hero-contact')
