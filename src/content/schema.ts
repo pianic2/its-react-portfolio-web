@@ -218,8 +218,24 @@ export const localizedProjectSchema = z.object({
 })
 
 export const ctaSchema = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('internal'), page: pageIdSchema, label: z.string().min(1) }),
-  z.object({ kind: z.literal('external'), url: httpsUrlSchema, label: z.string().min(1) }),
+  z.object({
+    kind: z.literal('internal'),
+    page: pageIdSchema,
+    label: z.string().min(1),
+    analyticsId: stableIdSchema.optional(),
+  }),
+  z.object({
+    kind: z.literal('external'),
+    url: httpsUrlSchema,
+    label: z.string().min(1),
+    analyticsId: stableIdSchema.optional(),
+  }),
+  z.object({
+    kind: z.literal('anchor'),
+    href: z.string().regex(/^#[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    label: z.string().min(1),
+    analyticsId: stableIdSchema.optional(),
+  }),
 ])
 
 const editorialItemSchema = z.object({
@@ -253,6 +269,199 @@ const comparisonAnswerSchema = z.object({
   type: z.string().min(1),
   learning: z.string().min(1),
   difficulty: z.string().min(1),
+})
+
+const pageEvidenceCopySchema = z.object({
+  evidenceId: stableIdSchema,
+  label: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const curatedEvidenceIdsSchema = z.array(stableIdSchema).max(2)
+
+const competenceReferenceSchema = z.object({
+  id: stableIdSchema,
+  kind: z.enum(['certification', 'course', 'reference']),
+  label: z.string().min(1),
+  issuer: z.string().min(1),
+  description: z.string().min(1),
+  url: httpsUrlSchema.optional(),
+})
+
+const skillsGroupSchema = z.object({
+  id: stableIdSchema,
+  title: z.string().min(1),
+  problem: z.string().min(1),
+  description: z.string().min(1),
+  tools: z.array(z.string().min(1)).min(1),
+  evidenceIds: curatedEvidenceIdsSchema,
+  references: z.array(competenceReferenceSchema).max(2).default([]),
+  cta: ctaSchema,
+})
+
+const skillsPageSchema = z.object({
+  hero: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    description: z.string().min(1),
+    primaryCta: ctaSchema,
+    secondaryCta: ctaSchema,
+  }),
+  groups: z.array(skillsGroupSchema).min(1),
+  labels: z.object({
+    pageIndexLabel: z.string().min(1),
+    groupsIndexLabel: z.string().min(1),
+    evidenceIndexLabel: z.string().min(1),
+    contactIndexLabel: z.string().min(1),
+    groupsTitle: z.string().min(1),
+    evidenceTitle: z.string().min(1),
+    referencesTitle: z.string().min(1),
+  }),
+  closing: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    primaryCta: ctaSchema,
+    secondaryCta: ctaSchema,
+  }),
+})
+
+const methodResourceSchema = z.object({
+  id: stableIdSchema,
+  label: z.string().min(1),
+  url: httpsUrlSchema,
+  language: z.enum(['it', 'en']).optional(),
+  note: z.string().min(1).optional(),
+})
+
+const methodEvidenceLinkSchema = z.object({
+  evidenceId: stableIdSchema,
+  label: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const methodExampleSchema = z.object({
+  id: stableIdSchema,
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  body: z.string().min(1),
+  decision: z.string().min(1),
+  result: z.string().min(1),
+  evidenceLinks: z.array(methodEvidenceLinkSchema).max(2),
+  diagram: z
+    .object({
+      kind: z.enum(['quality-pipeline', 'content-contract']),
+      labels: z.array(z.string().min(1)).min(2),
+      title: z.string().min(1),
+    })
+    .optional(),
+  cta: ctaSchema,
+})
+
+const methodPageSchema = z.object({
+  hero: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    subtitle: z.string().min(1),
+    description: z.string().min(1),
+    primaryCta: ctaSchema,
+    secondaryCta: ctaSchema,
+  }),
+  foundations: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    body: z.string().min(1),
+    status: z.string().min(1),
+    closing: z.string().min(1),
+    resources: z.array(methodResourceSchema).min(1),
+  }),
+  principles: z
+    .array(
+      z.object({
+        id: stableIdSchema,
+        number: z.string().regex(/^0[1-5]$/),
+        question: z.string().min(1),
+        title: z.string().min(1),
+        description: z.string().min(1),
+        activities: z.array(z.string().min(1)).min(1),
+        output: z.string().min(1),
+        visual: z.enum(['problem', 'increment', 'decision', 'verification', 'state']),
+        visualLabel: z.string().min(1),
+      }),
+    )
+    .length(5),
+  value: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    introduction: z.string().min(1),
+    items: z.array(z.string().min(1)).length(6),
+    closing: z.string().min(1),
+  }),
+  tools: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    introduction: z.string().min(1),
+    closing: z.string().min(1),
+    flowTitle: z.string().min(1),
+    resourcesTitle: z.string().optional(),
+    resources: z.array(methodResourceSchema).optional(),
+    items: z
+      .array(
+        z.object({
+          id: stableIdSchema,
+          title: z.string().min(1),
+          question: z.string().min(1),
+          role: z.string().min(1),
+          contents: z.string().min(1),
+          example: z.string().min(1),
+          link: z
+            .object({
+              id: stableIdSchema,
+              label: z.string().min(1),
+              url: httpsUrlSchema,
+            })
+            .optional(),
+        }),
+      )
+      .length(3),
+  }),
+  examples: z.array(methodExampleSchema).min(1),
+  agenticDelivery: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    subtitle: z.string().min(1),
+    responseLabel: z.string().min(1),
+    paragraphs: z.array(z.string().min(1)).length(3),
+    concepts: z
+      .array(
+        z.object({
+          id: stableIdSchema,
+          title: z.string().min(1),
+          description: z.string().min(1),
+        }),
+      )
+      .length(7),
+    workflowTitle: z.string().min(1),
+    workflow: z.array(z.string().min(1)).length(5),
+    workflowDescriptions: z.array(z.string().min(1)).length(5),
+    closing: z.string().min(1),
+    resource: methodResourceSchema,
+    resourceTitle: z.string().min(1),
+  }),
+  labels: z.object({
+    examplesTitle: z.string().min(1),
+    decisionLabel: z.string().min(1),
+    resultLabel: z.string().min(1),
+    outputLabel: z.string().min(1),
+    evidenceTitle: z.string().min(1),
+    resourcesTitle: z.string().min(1),
+  }),
+  closing: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    microcopy: z.string().min(1),
+    primaryCta: ctaSchema,
+    secondaryCta: ctaSchema,
+  }),
 })
 
 export const siteContentSchema = z.object({
@@ -315,6 +524,9 @@ export const siteContentSchema = z.object({
       githubCtaLabel: z.string().min(1),
     }),
   }),
+  publicEvidence: z.array(pageEvidenceCopySchema).min(1),
+  skillsPage: skillsPageSchema,
+  methodPage: methodPageSchema,
   projectsPage: z.object({
     hero: editorialSectionSchema.extend({ supportingText: z.string().min(1) }),
     guide: z.object({
@@ -385,6 +597,7 @@ export const siteContentSchema = z.object({
 })
 
 export const contentRepositorySchema = z.object({
+  publicEvidence: z.array(evidenceSchema).min(1),
   capabilities: z.array(capabilitySchema).min(1),
   projects: z.array(projectCoreSchema).min(1),
   assets: z.array(assetReferenceSchema),

@@ -31,10 +31,10 @@ describe('ProjectShowcase', () => {
   it('keeps the selected-project heading in two structural blocks', () => {
     renderShowcase('en', 'home')
     expect(screen.getByTestId('home-showcase-heading')).toContainElement(
-      screen.getByRole('heading', { name: 'Three projects from different parts of my journey.' }),
+      screen.getByRole('heading', { name: 'Three projects from different stages of my journey.' }),
     )
     expect(screen.getByTestId('home-showcase-description')).toHaveTextContent(
-      'The Library API and the Node.js project were developed during my ITS course.',
+      'During the Full Stack Dev. course at ITS Prodigi, I developed several projects for my portfolio, including "Library API" (a REST backend with Laravel) and a "ToDo list" in Node.js.',
     )
   })
 

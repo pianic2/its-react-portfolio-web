@@ -58,6 +58,20 @@ function addDuplicates(problems: string[], values: string[], context: string, en
   }
 }
 
+function validateMethodResourceUrl(problems: string[], url: string, path: string) {
+  const hostname = new URL(url).hostname.replace(/^www\./, '')
+  const allowedHosts = new Set([
+    'agilemanifesto.org',
+    'scrumguides.org',
+    'atlassian.com',
+    'github.com',
+    'openai.com',
+  ])
+  if (!allowedHosts.has(hostname) || hostname === 'atlassian.net') {
+    problems.push(`entity=repository path=${path}: unsupported public resource host "${hostname}"`)
+  }
+}
+
 export function validateContentRepository(
   input: unknown = rawContentRepository,
 ): ContentRepository {
@@ -74,10 +88,13 @@ export function validateContentRepository(
   const capabilityIdSet = new Set(capabilityIds)
   const assetIds = repository.assets.map((asset) => asset.id)
   const assetIdSet = new Set(assetIds)
+  const publicEvidenceIds = repository.publicEvidence.map((evidence) => evidence.id)
+  const publicEvidenceIdSet = new Set(publicEvidenceIds)
 
   addDuplicates(problems, coreIds, 'entity=repository', 'projects')
   addDuplicates(problems, capabilityIds, 'entity=repository', 'capabilities')
   addDuplicates(problems, assetIds, 'entity=repository', 'assets')
+  addDuplicates(problems, publicEvidenceIds, 'entity=repository', 'publicEvidence')
 
   const personalProjects = repository.projects.filter(
     (project) => project.origin === 'personal-long-term',
@@ -150,6 +167,7 @@ export function validateContentRepository(
     const slugs = locale.projects.map((project) => project.slug)
     const localizedCapabilityIds = locale.capabilities.map((capability) => capability.capabilityId)
     const navigationPages = locale.navigation.map((item) => item.page)
+    const localizedPublicEvidenceIds = locale.publicEvidence.map((evidence) => evidence.evidenceId)
 
     if (locale.locale !== language) {
       problems.push(`${localeContext} entity=site path=locale: expected "${language}"`)
@@ -162,6 +180,12 @@ export function validateContentRepository(
     }
     addDuplicates(problems, localizedCapabilityIds, `${localeContext} entity=site`, 'capabilities')
     addDuplicates(problems, navigationPages, `${localeContext} entity=site`, 'navigation')
+    addDuplicates(
+      problems,
+      localizedPublicEvidenceIds,
+      `${localeContext} entity=site`,
+      'publicEvidence',
+    )
 
     if (sorted(projectIds) !== sorted(coreIds)) {
       problems.push(
@@ -172,6 +196,64 @@ export function validateContentRepository(
       problems.push(
         `${localeContext} entity=site path=capabilities: capability set does not match shared records`,
       )
+    }
+    if (sorted(localizedPublicEvidenceIds) !== sorted(publicEvidenceIds)) {
+      problems.push(
+        `${localeContext} entity=site path=publicEvidence: localized evidence set does not match shared records`,
+      )
+    }
+
+    for (const evidence of locale.publicEvidence) {
+      if (!publicEvidenceIdSet.has(evidence.evidenceId)) {
+        problems.push(
+          `${localeContext} entity=site path=publicEvidence.${evidence.evidenceId}: unknown public evidence id`,
+        )
+      }
+    }
+
+    for (const group of locale.skillsPage.groups) {
+      addDuplicates(
+        problems,
+        group.references.map((reference) => reference.id),
+        `${localeContext} entity=site`,
+        `skillsPage.groups.${group.id}.references`,
+      )
+      for (const evidenceId of group.evidenceIds) {
+        if (!publicEvidenceIdSet.has(evidenceId)) {
+          problems.push(
+            `${localeContext} entity=site path=skillsPage.groups.${group.id}.evidenceIds: unknown public evidence id "${evidenceId}"`,
+          )
+        }
+      }
+    }
+    for (const example of locale.methodPage.examples) {
+      addDuplicates(
+        problems,
+        example.evidenceLinks.map((link) => link.evidenceId),
+        `${localeContext} entity=site`,
+        `methodPage.examples.${example.id}.evidenceLinks`,
+      )
+      for (const evidenceLink of example.evidenceLinks) {
+        const evidenceId = evidenceLink.evidenceId
+        if (!publicEvidenceIdSet.has(evidenceId)) {
+          problems.push(
+            `${localeContext} entity=site path=methodPage.examples.${example.id}.evidenceLinks: unknown public evidence id "${evidenceId}"`,
+          )
+        }
+      }
+    }
+
+    const methodResources = [
+      ...locale.methodPage.foundations.resources.map(
+        (resource) => [`methodPage.foundations.resources.${resource.id}`, resource.url] as const,
+      ),
+      [
+        `methodPage.agenticDelivery.resource.${locale.methodPage.agenticDelivery.resource.id}`,
+        locale.methodPage.agenticDelivery.resource.url,
+      ] as const,
+    ]
+    for (const [path, url] of methodResources) {
+      validateMethodResourceUrl(problems, url, `${localeContext} ${path}`)
     }
 
     for (const localized of locale.projects) {
@@ -243,6 +325,15 @@ export function validateContentRepository(
     ['homePage.learning.items', italian.homePage.learning.items, english.homePage.learning.items],
     ['homePage.skills.groups', italian.homePage.skills.groups, english.homePage.skills.groups],
     ['homePage.process.steps', italian.homePage.process.steps, english.homePage.process.steps],
+    ['skillsPage.groups', italian.skillsPage.groups, english.skillsPage.groups],
+    ['methodPage.examples', italian.methodPage.examples, english.methodPage.examples],
+    ['methodPage.principles', italian.methodPage.principles, english.methodPage.principles],
+    [
+      'methodPage.agenticDelivery.concepts',
+      italian.methodPage.agenticDelivery.concepts,
+      english.methodPage.agenticDelivery.concepts,
+    ],
+    ['methodPage.tools.items', italian.methodPage.tools.items, english.methodPage.tools.items],
     [
       'projectsPage.comparison.projects',
       italian.projectsPage.comparison.projects,
@@ -258,6 +349,99 @@ export function validateContentRepository(
     if (sorted(italianIds) !== sorted(englishIds)) {
       problems.push(`entity=repository path=locales.${path}: Italian and English item sets differ`)
     }
+  }
+
+  const ctaContracts = [
+    ['skillsPage.hero', italian.skillsPage.hero, english.skillsPage.hero],
+    ['skillsPage.closing', italian.skillsPage.closing, english.skillsPage.closing],
+    ['methodPage.hero', italian.methodPage.hero, english.methodPage.hero],
+    ['methodPage.closing', italian.methodPage.closing, english.methodPage.closing],
+  ] as const
+  for (const [path, italianBlock, englishBlock] of ctaContracts) {
+    const italianCtas = [italianBlock.primaryCta, italianBlock.secondaryCta].map(
+      (cta) => `${cta.kind}:${cta.analyticsId ?? 'none'}`,
+    )
+    const englishCtas = [englishBlock.primaryCta, englishBlock.secondaryCta].map(
+      (cta) => `${cta.kind}:${cta.analyticsId ?? 'none'}`,
+    )
+    if (sorted(italianCtas) !== sorted(englishCtas)) {
+      problems.push(
+        `entity=repository path=locales.${path}: Italian and English CTA contracts differ`,
+      )
+    }
+  }
+
+  for (const groupId of italian.skillsPage.groups.map((group) => group.id)) {
+    const italianGroup = italian.skillsPage.groups.find((group) => group.id === groupId)
+    const englishGroup = english.skillsPage.groups.find((group) => group.id === groupId)
+    if (!italianGroup || !englishGroup) continue
+    const italianReferences = italianGroup.references.map(
+      (reference) => `${reference.id}:${reference.kind}:${Boolean(reference.url)}`,
+    )
+    const englishReferences = englishGroup.references.map(
+      (reference) => `${reference.id}:${reference.kind}:${Boolean(reference.url)}`,
+    )
+    if (sorted(italianReferences) !== sorted(englishReferences)) {
+      problems.push(
+        `entity=repository path=locales.skillsPage.groups.${groupId}.references: Italian and English reference contracts differ`,
+      )
+    }
+  }
+
+  if (
+    italian.methodPage.agenticDelivery.workflow.length !==
+    english.methodPage.agenticDelivery.workflow.length
+  ) {
+    problems.push(
+      'entity=repository path=methodPage.agenticDelivery.workflow: Italian and English workflow lengths differ',
+    )
+  }
+
+  const italianExamplesById = new Map(
+    italian.methodPage.examples.map((example) => [example.id, example]),
+  )
+  for (const englishExample of english.methodPage.examples) {
+    const italianExample = italianExamplesById.get(englishExample.id)
+    if (!italianExample) continue
+    if (italianExample.diagram?.kind !== englishExample.diagram?.kind) {
+      problems.push(
+        `entity=repository path=methodPage.examples.${englishExample.id}.diagram.kind: Italian and English diagram kinds differ`,
+      )
+    }
+    if (italianExample.diagram?.labels.length !== englishExample.diagram?.labels.length) {
+      problems.push(
+        `entity=repository path=methodPage.examples.${englishExample.id}.diagram.labels: Italian and English diagram structures differ`,
+      )
+    }
+  }
+
+  for (const exampleId of italian.methodPage.examples.map((example) => example.id)) {
+    const italianExample = italian.methodPage.examples.find((example) => example.id === exampleId)
+    const englishExample = english.methodPage.examples.find((example) => example.id === exampleId)
+    if (!italianExample || !englishExample) continue
+    const italianEvidenceIds = italianExample.evidenceLinks.map((link) => link.evidenceId)
+    const englishEvidenceIds = englishExample.evidenceLinks.map((link) => link.evidenceId)
+    if (sorted(italianEvidenceIds) !== sorted(englishEvidenceIds)) {
+      problems.push(
+        `entity=repository path=methodPage.examples.${exampleId}.evidenceLinks: Italian and English evidence sets differ`,
+      )
+    }
+  }
+
+  const pageEvidenceUrls = repository.publicEvidence.map((evidence) => evidence.url)
+  const competenceReferenceUrls = supportedLanguages.flatMap((language) =>
+    repository.locales[language].skillsPage.groups.flatMap((group) =>
+      group.references.map((reference) => reference.url),
+    ),
+  )
+  if (
+    [...pageEvidenceUrls, ...competenceReferenceUrls].some(
+      (url) => url !== undefined && url.includes('atlassian.net'),
+    )
+  ) {
+    problems.push(
+      'entity=repository path=publicEvidence: Jira and Confluence URLs are not allowed in public page evidence',
+    )
   }
 
   if (

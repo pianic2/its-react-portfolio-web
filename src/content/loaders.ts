@@ -1,7 +1,7 @@
 import { getRoutePath } from '../routes/routeConfig'
 import { buildProjectViewModel } from './viewModels'
 import { validateContentRepository } from './validation'
-import type { Language, PageId } from './schema'
+import type { Language, PageId, SiteContent } from './schema'
 
 const repository = validateContentRepository()
 
@@ -44,13 +44,90 @@ export function getPortfolio(language: Language) {
   const resolveCta = (cta: typeof portfolio.primaryCta) =>
     cta.kind === 'internal'
       ? { ...cta, href: getRoutePath(cta.page, language) }
-      : { ...cta, href: cta.url }
+      : cta.kind === 'external'
+        ? { ...cta, href: cta.url }
+        : cta
 
   return {
     ...portfolio,
     primaryCta: resolveCta(portfolio.primaryCta),
     secondaryCta: resolveCta(portfolio.secondaryCta),
     contactCta: resolveCta(portfolio.contactCta),
+  }
+}
+
+function resolvePageCta(language: Language, cta: SiteContent['skillsPage']['hero']['primaryCta']) {
+  return cta.kind === 'internal'
+    ? { ...cta, href: getRoutePath(cta.page, language) }
+    : cta.kind === 'external'
+      ? { ...cta, href: cta.url }
+      : cta
+}
+
+function getPublicEvidence(language: Language) {
+  const sharedEvidence = new Map(repository.publicEvidence.map((item) => [item.id, item]))
+  const evidence = new Map(
+    getSiteContent(language).publicEvidence.map((item) => [item.evidenceId, item]),
+  )
+  return new Map(
+    [...evidence].map(([evidenceId, localized]) => {
+      const shared = sharedEvidence.get(evidenceId)
+      if (!shared?.url) {
+        throw new Error(`Public evidence "${evidenceId}" has no external URL.`)
+      }
+      return [evidenceId, { ...shared, ...localized, url: shared.url }] as const
+    }),
+  )
+}
+
+export function getSkillsPage(language: Language) {
+  const page = getSiteContent(language).skillsPage
+  const evidence = getPublicEvidence(language)
+  return {
+    ...page,
+    hero: {
+      ...page.hero,
+      primaryCta: resolvePageCta(language, page.hero.primaryCta),
+      secondaryCta: resolvePageCta(language, page.hero.secondaryCta),
+    },
+    groups: page.groups.map((group) => ({
+      ...group,
+      evidence: group.evidenceIds.map((evidenceId) => evidence.get(evidenceId)),
+      cta: resolvePageCta(language, group.cta),
+    })),
+    closing: {
+      ...page.closing,
+      primaryCta: resolvePageCta(language, page.closing.primaryCta),
+      secondaryCta: resolvePageCta(language, page.closing.secondaryCta),
+    },
+  }
+}
+
+export function getMethodPage(language: Language) {
+  const page = getSiteContent(language).methodPage
+  const evidence = getPublicEvidence(language)
+  return {
+    ...page,
+    hero: {
+      ...page.hero,
+      primaryCta: resolvePageCta(language, page.hero.primaryCta),
+      secondaryCta: resolvePageCta(language, page.hero.secondaryCta),
+    },
+    examples: page.examples.map((example) => ({
+      ...example,
+      evidence: example.evidenceLinks
+        .map((link) => {
+          const resolved = evidence.get(link.evidenceId)
+          return resolved ? { ...resolved, ...link } : undefined
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== undefined),
+      cta: resolvePageCta(language, example.cta),
+    })),
+    closing: {
+      ...page.closing,
+      primaryCta: resolvePageCta(language, page.closing.primaryCta),
+      secondaryCta: resolvePageCta(language, page.closing.secondaryCta),
+    },
   }
 }
 

@@ -1,6 +1,68 @@
 import type { ContentRepository } from '../schema'
 
 export const sharedContent = {
+  publicEvidence: [
+    {
+      id: 'portfolio-repository',
+      type: 'repository',
+      url: 'https://github.com/pianic2/its-react-portfolio-web',
+    },
+    {
+      id: 'portfolio-quality-workflow',
+      type: 'test',
+      url: 'https://github.com/pianic2/its-react-portfolio-web/blob/main/.github/workflows/quality.yml',
+    },
+    {
+      id: 'portfolio-content-model',
+      type: 'documentation',
+      url: 'https://github.com/pianic2/its-react-portfolio-web/blob/main/docs/content/irpw-9-content-model.md',
+    },
+    {
+      id: 'portfolio-pages-documentation',
+      type: 'documentation',
+      url: 'https://github.com/pianic2/its-react-portfolio-web/blob/main/docs/deployment/github-pages.md',
+    },
+    {
+      id: 'homeedge-repository',
+      type: 'repository',
+      url: 'https://github.com/pianic2/homeedge-ai-platform',
+    },
+    {
+      id: 'homeedge-readme',
+      type: 'documentation',
+      url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/README.md',
+    },
+    {
+      id: 'homeedge-product-vision',
+      type: 'documentation',
+      url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
+    },
+    {
+      id: 'laravel-repository',
+      type: 'repository',
+      url: 'https://github.com/pianic2/its-php-libreria',
+    },
+    {
+      id: 'laravel-readme',
+      type: 'documentation',
+      url: 'https://github.com/pianic2/its-php-libreria/blob/main/README.md',
+    },
+    {
+      id: 'node-repository',
+      type: 'repository',
+      url: 'https://github.com/pianic2/todo-list-manager-node',
+    },
+    {
+      id: 'node-server-source',
+      type: 'repository',
+      url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/src/server.js',
+    },
+    {
+      id: 'node-ci-workflow',
+      type: 'test',
+      url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/.github/workflows/ci.yml',
+    },
+  ],
   capabilities: [
     { id: 'embedded-firmware', category: 'embedded' },
     { id: 'privacy-aware-design', category: 'security' },
@@ -119,4 +181,4 @@ export const sharedContent = {
     },
   ],
   assets: [],
-} satisfies Pick<ContentRepository, 'capabilities' | 'projects' | 'assets'>
+} satisfies Pick<ContentRepository, 'publicEvidence' | 'capabilities' | 'projects' | 'assets'>

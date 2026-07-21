@@ -148,3 +148,15 @@ The `todo-list-manager-node` README currently contains a `Code` link that points
 ## Asset references
 
 The schema supports shared asset provenance plus localized alternative text. The current canonical dataset intentionally contains no public portfolio assets because no reviewed asset was required for IRPW-9. Adding a project asset requires both a shared asset record and matching localized asset copy; dangling references fail validation.
+
+## Supporting page content
+
+Skills and Method use the same validated content repository as Home and Projects. Their localized records keep page copy, conversion CTAs, stable analytics IDs and curated public evidence outside React components.
+
+Each Skills group and Method example may reference at most two public evidence records. Public page evidence is restricted to HTTPS GitHub URLs; Jira and Confluence workspace URLs are not accepted by validation because they may require authentication or expose private project context. Method resources are a separate localized structure for public reference pages such as the Agile Manifesto, Scrum Guide, Jira, Confluence and official agent guidance. Internal CTAs resolve through the localized route loader, while external CTAs retain their HTTPS destination and accessible new-tab announcement.
+
+The Italian and English Skills and Method structures must keep equivalent group, workflow, example and CTA contracts. The copy may be translated and adapted for natural language, but IDs, CTA roles, analytics IDs and evidence references remain aligned.
+
+Skills groups also expose an optional, capped list of competence references. Certifications, courses and other references remain empty until a real source, issuer and (when public) HTTPS URL are available. Empty references are intentional and must not be replaced with inferred levels or unsupported credentials.
+
+Method content can describe learning in progress separately from verified delivery practice. The Method page models foundations, narrative problem-solving sections, work infrastructure, autonomous case studies and Human–Agent Delivery as separate localized blocks. Agile and Scrum references are presented as practical foundations, not as a certification or a claim of completed Scrum practice. External resource links remain in the content model so components do not hardcode source URLs.
