@@ -1,5 +1,6 @@
 import type { SiteContent } from '../schema'
 import { italianSupportingContent } from './supporting.it'
+import { italianProfileContactLegalContent } from './profile-contact-legal.it'
 
 export const italianContent = {
   locale: 'it',
@@ -221,6 +222,7 @@ export const italianContent = {
     },
   },
   ...italianSupportingContent,
+  ...italianProfileContactLegalContent,
   projectsPage: {
     hero: {
       eyebrow: 'I MIEI PROGETTI',

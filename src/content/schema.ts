@@ -465,6 +465,27 @@ const methodPageSchema = z.object({
   }),
 })
 
+const supportingHeroSchema = z.object({
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+})
+
+const localizedProfileSectionSchema = z.object({
+  id: stableIdSchema,
+  number: z.string().min(1),
+  eyebrow: z.string().min(1),
+  title: z.string().min(1),
+  paragraphs: z.array(z.string().min(1)).min(1),
+  highlights: z.array(z.string().min(1)).min(1),
+})
+
+const localizedPrivacySectionSchema = z.object({
+  id: stableIdSchema,
+  title: z.string().min(1),
+  paragraphs: z.array(z.string().min(1)).min(1),
+})
+
 export const siteContentSchema = z.object({
   locale: languageSchema,
   identity: z.object({
@@ -528,6 +549,65 @@ export const siteContentSchema = z.object({
   publicEvidence: z.array(pageEvidenceCopySchema).min(1),
   skillsPage: skillsPageSchema,
   methodPage: methodPageSchema,
+  profilePage: z.object({
+    hero: supportingHeroSchema,
+    sections: z.array(localizedProfileSectionSchema).min(1),
+    highlightsLabel: z.string().min(1),
+    ctas: z.object({
+      projectsLabel: z.string().min(1),
+      contactLabel: z.string().min(1),
+      githubLabel: z.string().min(1),
+    }),
+    closing: z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+    }),
+  }),
+  contactPage: z.object({
+    hero: supportingHeroSchema,
+    requestsTitle: z.string().min(1),
+    guidanceTitle: z.string().min(1),
+    formTitle: z.string().min(1),
+    formDescription: z.string().min(1),
+    appropriateRequests: z.array(z.string().min(1)).min(1),
+    messageGuidance: z.array(z.string().min(1)).min(1),
+    afterSubmit: z.string().min(1),
+    form: z.object({
+      requiredHint: z.string().min(1),
+      nameLabel: z.string().min(1),
+      nameHelper: z.string().min(1),
+      emailLabel: z.string().min(1),
+      emailHelper: z.string().min(1),
+      messageLabel: z.string().min(1),
+      messageHelper: z.string().min(1),
+      submitLabel: z.string().min(1),
+      submittingLabel: z.string().min(1),
+      sendAnotherLabel: z.string().min(1),
+      requiredError: z.string().min(1),
+      nameLengthError: z.string().min(1),
+      emailError: z.string().min(1),
+      messageLengthError: z.string().min(1),
+      configurationError: z.string().min(1),
+      submissionError: z.string().min(1),
+      successMessage: z.string().min(1),
+      privacyNotice: z.string().min(1),
+    }),
+    githubLabel: z.string().min(1),
+  }),
+  privacyPage: z.object({
+    hero: supportingHeroSchema,
+    updatedLabel: z.string().min(1),
+    updatedAt: z.string().min(1),
+    intro: z.string().min(1),
+    indexLabel: z.string().min(1),
+    sections: z.array(localizedPrivacySectionSchema).min(1),
+    providerHeading: z.string().min(1),
+    providerLabel: z.string().min(1),
+    providerUrl: httpsUrlSchema,
+    ownerContactHeading: z.string().min(1),
+    ownerContactLabel: z.string().min(1),
+    ownerContactUrl: httpsUrlSchema,
+  }),
   projectsPage: z.object({
     hero: editorialSectionSchema.extend({ supportingText: z.string().min(1) }),
     guide: z.object({
