@@ -3,7 +3,10 @@ import { AppLayout } from '../app/AppLayout'
 import { DesignSystemPage } from '../dev/DesignSystemPage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { HomePage } from '../pages/HomePage'
+import { ContactPage } from '../pages/ContactPage'
 import { PagePlaceholder } from '../pages/PagePlaceholder'
+import { PrivacyPage } from '../pages/PrivacyPage'
+import { ProfilePage } from '../pages/ProfilePage'
 import { ProjectDetailPage } from '../pages/ProjectDetailPage'
 import { ProjectsPage } from '../pages/ProjectsPage'
 import { SkillsPage } from '../pages/SkillsPage'
@@ -19,6 +22,9 @@ function pageElement(page: PageId, language: Language) {
   if (page === 'skills') return <SkillsPage />
   if (page === 'method') return <MethodPage />
   if (page === 'projectDetail') return <ProjectDetailPage />
+  if (page === 'profile') return <ProfilePage />
+  if (page === 'contact') return <ContactPage />
+  if (page === 'privacy') return <PrivacyPage />
   return <PagePlaceholder language={language} page={page} />
 }
 
