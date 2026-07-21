@@ -22,4 +22,3 @@ The review covered desktop and mobile composition, light and dark themes,
 localized copy length, form hierarchy, visible labels and helper text, section
 anchors, external links, and horizontal overflow. Automated DOM measurements
 reported no horizontal overflow on any of the six routes.
-

@@ -43,12 +43,12 @@ export function ContactPage() {
           backgroundSize: '18px 18px',
         })}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+        <PageContainer>
           <Box
             sx={{
               alignItems: 'start',
               display: 'grid',
-              gap: { xs: 7, lg: 10 },
+              gap: { xs: 8, lg: 10 },
               gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 0.8fr) minmax(30rem, 1.2fr)' },
             }}
           >
@@ -81,7 +81,7 @@ export function ContactPage() {
                   theme.digitalStudio.colors.border,
                 borderRadius: theme.digitalStudio.radii.lg + 'px',
                 boxShadow: theme.digitalStudio.shadows.large,
-                p: { xs: 3, sm: 5, md: 6 },
+                p: { xs: 6, md: 8 },
               })}
             >
               <Stack spacing={4}>
@@ -103,37 +103,50 @@ export function ContactPage() {
 
 function ContactList({ items, title }: { items: string[]; title: string }) {
   return (
-    <Stack spacing={3}>
+    <Stack spacing={6}>
       <Typography component="h2" variant="h3">
         {title}
       </Typography>
-      <Stack component="ol" spacing={0} sx={{ m: 0, p: 0 }}>
+      <Stack component="ol" spacing={4} sx={{ m: 0, p: 0 }}>
         {items.map((item, index) => (
           <Box
             component="li"
             key={item}
             sx={(theme) => ({
-              alignItems: 'start',
-              display: 'grid',
-              gap: 2,
-              gridTemplateColumns: '2.5rem 1fr',
+              backgroundColor:
+                index === 0
+                  ? theme.palette.success.main
+                  : index === 1
+                    ? theme.palette.info.main
+                    : theme.palette.warning.main,
+              color:
+                index === 0
+                  ? theme.palette.success.contrastText
+                  : index === 1
+                    ? theme.palette.info.contrastText
+                    : theme.palette.warning.contrastText,
               listStyle: 'none',
-              py: 2.5,
-              '& + &': {
-                borderTop:
-                  theme.digitalStudio.borderWidths.regular +
-                  'px solid ' +
-                  theme.digitalStudio.colors.border,
+              border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
+              borderRadius: `${theme.digitalStudio.radii.lg}px`,
+              boxShadow: theme.digitalStudio.shadows.medium,
+              marginBlockEnd: `${theme.digitalStudio.shadowOffsets.large}px`,
+              marginInlineEnd: `${theme.digitalStudio.shadowOffsets.large}px`,
+              p: 6,
+              textAlign: 'center',
+              transition: theme.transitions.create(['box-shadow', 'transform'], {
+                duration: theme.transitions.duration.standard,
+                easing: theme.transitions.easing.easeIn,
+              }),
+              '&:hover': {
+                boxShadow: theme.digitalStudio.shadows.small,
+                transform: `translate(${theme.digitalStudio.shadowOffsets.medium}px, ${theme.digitalStudio.shadowOffsets.medium}px) rotate(${index % 2 === 0 ? 1 : -1}deg)`,
+              },
+              '@media (prefers-reduced-motion: reduce)': {
+                transition: 'none',
+                '&:hover': { transform: 'none' },
               },
             })}
           >
-            <Typography
-              aria-hidden="true"
-              color="secondary.main"
-              sx={{ fontSize: '1.15rem', fontWeight: 950 }}
-            >
-              {String(index + 1).padStart(2, '0')}
-            </Typography>
             <Typography sx={{ fontWeight: 800 }}>{item}</Typography>
           </Box>
         ))}

@@ -210,7 +210,7 @@ function PrivacyLinkPanel({
         boxShadow: theme.digitalStudio.shadows.medium,
         color:
           tone === 'info' ? theme.palette.info.contrastText : theme.palette.warning.contrastText,
-        p: 3,
+        p: { xs: 4, md: 6 },
       })}
     >
       <Typography sx={{ fontWeight: 950 }} variant="overline">
