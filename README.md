@@ -121,8 +121,18 @@ public at build time and must never contain passwords, API secrets, access
 tokens or private contact data. Local `.env` variants are ignored by Git; the
 empty `.env.example` contract remains tracked.
 
-The contact form and analytics identifiers stay unset until the project owner
-approves their provider and configuration.
+The contact form uses Web3Forms through the typed adapter in
+`src/services/contact`. Set `VITE_WEB3FORMS_ACCESS_KEY` in `.env.local`
+for local development. The value is public frontend configuration and is
+embedded in the browser bundle; do not treat it as a server-side secret.
+
+For GitHub Pages, create the repository Actions variable
+`VITE_WEB3FORMS_ACCESS_KEY`. The Pages workflow injects it only into the
+validated build job. If the variable is missing, the form fails closed and
+shows a localized configuration message without attempting a request.
+
+The analytics identifier stays unset until the project owner approves its
+provider and configuration.
 
 ## Delivery traceability
 
