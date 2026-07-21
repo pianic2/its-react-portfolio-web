@@ -49,6 +49,14 @@ describe('Skills and Method pages', () => {
     expect(screen.getByTestId('skills-group-section-backend-data')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-connected-embedded')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-delivery-quality')).toBeInTheDocument()
+    for (const title of [
+      'Cosa puoi verificare',
+      'Implementazioni consultabili',
+      'Progetto e decisioni disponibili',
+      'Qualità e processo verificabili',
+    ]) {
+      expect(screen.getAllByRole('heading', { name: title })).toHaveLength(1)
+    }
     expect(screen.getByRole('link', { name: /Esamina il frontend del portfolio/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/its-react-portfolio-web',

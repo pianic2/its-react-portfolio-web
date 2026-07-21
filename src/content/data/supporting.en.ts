@@ -66,9 +66,9 @@ export const englishSupportingContent = {
   skillsPage: {
     hero: {
       eyebrow: 'APPLIED SKILLS',
-      title: 'From a problem to a verifiable solution.',
+      title: 'From a problem to software people can use, understand and verify.',
       description:
-        'I design interfaces, APIs and connected systems using tools that fit the actual context. Here you can see what I can contribute to a project and the public work that supports it.',
+        'I work across interfaces, backend systems and connected devices, keeping user experience, application rules and delivery quality aligned. This page is not only a list of technologies: it shows how I can contribute and the public work available to support each claim.',
       primaryCta: {
         kind: 'internal',
         page: 'contact',
@@ -78,7 +78,7 @@ export const englishSupportingContent = {
       secondaryCta: {
         kind: 'external',
         url: 'https://github.com/pianic2',
-        label: 'Explore my GitHub',
+        label: 'See what I have built',
         analyticsId: 'skills-hero-github',
       },
     },
@@ -86,64 +86,72 @@ export const englishSupportingContent = {
       {
         id: 'frontend-interfaces',
         title: 'Frontend and interfaces',
-        problem: 'Make content and application flows clear and usable across viewport sizes.',
+        problem:
+          'Keep a product easy to use even as its content, actions and application states become more complex.',
         description:
-          'I turn content and application flows into responsive, readable interfaces. I work on component structure, visual consistency and the interactions needed to guide users towards the main action.',
+          'I design interfaces that help people understand where they are, what they can do and what will happen next. I organise components, content and behaviour so the product remains consistent across mobile and desktop and can evolve without becoming confusing.',
+        evidenceTitle: 'Verifiable interface and structure',
         tools: ['React', 'TypeScript', 'Material UI', 'Vite', 'responsive design', 'accessibility'],
         evidenceIds: ['portfolio-repository', 'portfolio-content-model'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/its-react-portfolio-web',
-          label: 'Verify the portfolio frontend',
+          label: 'Explore the portfolio frontend',
           analyticsId: 'skills-frontend-repository',
         },
       },
       {
         id: 'backend-data',
         title: 'APIs, backend and data',
-        problem: 'Keep application rules, data and persistence aligned as a product grows.',
+        problem:
+          'Keep product rules, data and access behaviour correct as the system gains new features.',
         description:
-          'I design APIs and application logic with clear responsibilities for validation, authentication and persistence. The goal is not only to expose endpoints, but to build a data model that matches the product rules.',
+          'I build APIs and backend logic by translating product rules into explicit responsibilities. Validation, authentication, persistence and data modelling must work together to prevent inconsistent information, unintended access and features that become difficult to change.',
+        evidenceTitle: 'Inspectable rules and implementations',
         tools: ['Laravel', 'Sanctum', 'Node.js', 'Express', 'SQLite', 'PostgreSQL', 'MySQL'],
         evidenceIds: ['laravel-readme', 'node-server-source'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2',
-          label: 'Explore the backend repositories',
+          label: 'Explore the backend projects',
           analyticsId: 'skills-backend-github',
         },
       },
       {
         id: 'connected-embedded',
         title: 'Connected and embedded systems',
-        problem: 'Explore physical signals and product boundaries when software meets devices.',
+        problem:
+          'Turn signals from the physical world into useful information without hiding system limits and uncertainty.',
         description:
-          'I am building skills in firmware, sensors and edge-first architectures through HomeEdge. The public work shows hardware decisions, constraints, reproducible tests and the distinction between validated capabilities and future development.',
+          'Through HomeEdge, I am working on the connection between firmware, sensors, edge devices and application software. I test real hardware behaviour, document decisions and clearly separate validated results from work that is still in progress: a useful prototype should also explain where it may fail.',
+        evidenceTitle: 'Tests, decisions and project state',
         tools: ['ESP32-C3', 'C', 'sensors', 'edge systems'],
         evidenceIds: ['homeedge-repository', 'homeedge-readme'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/homeedge-ai-platform',
-          label: 'Explore HomeEdge on GitHub',
+          label: 'Explore the HomeEdge work',
           analyticsId: 'skills-homeedge-repository',
         },
       },
       {
         id: 'delivery-quality',
         title: 'Delivery, quality and documentation',
-        problem: 'Make code, tests, documentation and automation describe the same project state.',
+        problem:
+          'Keep code, tests, documentation and project status aligned so the work can be verified and continued.',
         description:
-          'I use CI/CD, incremental review and traceability to reduce regressions and make the result verifiable. Code, tests, documentation and automation should support the same honest account of the work.',
+          'I organise development so each change can be traced, reviewed and released through repeatable controls. Version control, automated tests, CI/CD pipelines and documentation reduce late-stage errors and help new contributors understand what changed, why it changed and how it was verified.',
+        evidenceTitle: 'Process and automated controls',
         tools: ['Git', 'GitHub Actions', 'Docker', 'automated testing', 'CI/CD'],
         evidenceIds: ['portfolio-quality-workflow', 'portfolio-pages-documentation'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/its-react-portfolio-web/blob/main/.github/workflows/quality.yml',
-          label: 'Inspect the CI/CD pipeline',
+          label: 'Inspect the quality pipeline',
           analyticsId: 'skills-quality-workflow',
         },
       },
@@ -153,18 +161,18 @@ export const englishSupportingContent = {
       groupsIndexLabel: 'Skills',
       evidenceIndexLabel: 'Evidence',
       contactIndexLabel: 'Contact',
-      groupsTitle: 'Where I can contribute',
-      evidenceTitle: 'Public evidence',
-      referencesTitle: 'Certifications and references',
+      groupsTitle: 'How I can contribute',
+      evidenceTitle: 'Verifiable work',
+      referencesTitle: 'Training and references',
     },
     closing: {
-      title: 'Do you have a concrete problem to turn into a product?',
+      title: 'Technology is a tool. Value comes from how it is used.',
       description:
-        'I can contribute to the design and development of interfaces, backend systems and connected products while keeping decisions, limits and the real state of the work visible.',
+        'I can contribute to a project by building interfaces, backend systems and connected products without losing sight of the people using them, the rules they must respect and the evidence needed to show that they actually work.',
       primaryCta: {
         kind: 'internal',
         page: 'contact',
-        label: 'Contact me',
+        label: 'Tell me about the project',
         analyticsId: 'skills-closing-contact',
       },
       secondaryCta: {

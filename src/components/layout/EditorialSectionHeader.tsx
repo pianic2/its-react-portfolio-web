@@ -25,6 +25,7 @@ export function EditorialSectionHeader({
   supportingContent,
   subtitle,
   testId,
+  titleMaxWidth,
   title,
 }: EditorialSectionHeaderProps) {
   return (
@@ -56,7 +57,9 @@ export function EditorialSectionHeader({
             fontSize: { xs: '2rem', sm: '2.75rem', md: '3.75rem' },
             lineHeight: { xs: 1.05, md: 1.08 },
             letterSpacing: 0,
+            maxWidth: titleMaxWidth,
             overflowWrap: 'break-word',
+            textWrap: 'balance',
           }}
           variant={headingLevel === 'h1' ? 'h1' : 'h2'}
         >

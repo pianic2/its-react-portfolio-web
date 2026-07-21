@@ -19,10 +19,12 @@ type SupportingPageCtaProps = {
   cta: ResolvedCta
   language: Language
   emphasis?: 'primary' | 'secondary' | 'link'
+  fullWidth?: boolean
 }
 
 export function SupportingPageCta({
   cta,
+  fullWidth = false,
   language,
   emphasis = 'secondary',
 }: SupportingPageCtaProps) {
@@ -46,6 +48,8 @@ export function SupportingPageCta({
   const props = {
     'data-analytics-id': cta.analyticsId,
     endIcon: <ArrowForwardRounded aria-hidden="true" />,
+    fullWidth,
+    size: fullWidth ? 'large' : 'medium',
     variant,
   } as const
 

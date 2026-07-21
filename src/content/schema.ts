@@ -293,6 +293,7 @@ const skillsGroupSchema = z.object({
   title: z.string().min(1),
   problem: z.string().min(1),
   description: z.string().min(1),
+  evidenceTitle: z.string().min(1),
   tools: z.array(z.string().min(1)).min(1),
   evidenceIds: curatedEvidenceIdsSchema,
   references: z.array(competenceReferenceSchema).max(2).default([]),

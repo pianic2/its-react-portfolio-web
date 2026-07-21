@@ -76,9 +76,9 @@ export const italianSupportingContent = {
   skillsPage: {
     hero: {
       eyebrow: 'COMPETENZE APPLICATE',
-      title: 'Progetto software che resta leggibile mentre cresce.',
+      title: 'Dal problema al software che puoi usare, capire e verificare.',
       description:
-        'Intervengo su interfacce, API e sistemi connessi con un criterio preciso: separare le responsabilità, rendere esplicite le decisioni e lasciare evidenze verificabili dello stato reale del lavoro.',
+        'Lavoro su interfacce, backend e sistemi connessi cercando di tenere insieme esperienza d’uso, regole applicative e qualità del processo. Qui non trovi soltanto tecnologie: trovi il contributo che posso portare e il lavoro pubblico con cui verificarlo.',
       primaryCta: {
         kind: 'internal',
         page: 'contact',
@@ -88,7 +88,7 @@ export const italianSupportingContent = {
       secondaryCta: {
         kind: 'external',
         url: 'https://github.com/pianic2',
-        label: 'Esamina il mio lavoro',
+        label: 'Guarda cosa ho costruito',
         analyticsId: 'skills-hero-github',
       },
     },
@@ -97,16 +97,17 @@ export const italianSupportingContent = {
         id: 'frontend-interfaces',
         title: 'Frontend e interfacce',
         problem:
-          'Trasformare contenuti e flussi complessi in esperienze comprensibili, coerenti e utilizzabili.',
+          'Rendere semplice da usare un prodotto, anche quando contenuti, azioni e stati diventano complessi.',
         description:
-          'Progetto interfacce responsive organizzando componenti, gerarchie informative e stati dell’applicazione. Non mi limito alla resa visiva: curo la relazione tra contenuto, comportamento e azione attesa, così l’interfaccia rimane estendibile senza perdere chiarezza.',
+          'Progetto interfacce che aiutano le persone a capire subito dove si trovano, cosa possono fare e quale sarà il risultato delle loro azioni. Organizzo componenti, contenuti e comportamenti affinché il prodotto rimanga coerente su mobile e desktop e possa evolvere senza diventare confuso.',
+        evidenceTitle: 'Interfaccia e struttura verificabili',
         tools: ['React', 'TypeScript', 'Material UI', 'Vite', 'responsive design', 'accessibility'],
         evidenceIds: ['portfolio-repository', 'portfolio-content-model'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/its-react-portfolio-web',
-          label: 'Esamina il frontend del portfolio',
+          label: 'Esplora il frontend del portfolio',
           analyticsId: 'skills-frontend-repository',
         },
       },
@@ -114,16 +115,17 @@ export const italianSupportingContent = {
         id: 'backend-data',
         title: 'API, backend e dati',
         problem:
-          'Mantenere coerenti regole applicative, accesso ai dati e confini del sistema durante l’evoluzione del prodotto.',
+          'Fare in modo che dati, accessi e regole del prodotto continuino a comportarsi correttamente mentre il sistema cresce.',
         description:
-          'Progetto API e logica backend partendo dal dominio, non dagli endpoint. Definisco responsabilità, validazione, autenticazione e persistenza in modo che il modello dati rappresenti le regole del prodotto e non diventi un vincolo opaco quando il sistema cresce.',
+          'Costruisco API e logica backend traducendo le regole del prodotto in responsabilità esplicite. Validazione, autenticazione, persistenza e modellazione dei dati non sono parti isolate: devono collaborare per evitare informazioni incoerenti, accessi non previsti e funzionalità difficili da modificare.',
+        evidenceTitle: 'Regole e implementazioni consultabili',
         tools: ['Laravel', 'Sanctum', 'Node.js', 'Express', 'SQLite', 'PostgreSQL', 'MySQL'],
         evidenceIds: ['laravel-readme', 'node-server-source'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2',
-          label: 'Esplora i repository backend',
+          label: 'Esplora i progetti backend',
           analyticsId: 'skills-backend-github',
         },
       },
@@ -131,16 +133,17 @@ export const italianSupportingContent = {
         id: 'connected-embedded',
         title: 'Sistemi connessi ed embedded',
         problem:
-          'Governare l’incontro tra software, segnali fisici e vincoli operativi senza confondere prototipo e prodotto.',
+          'Trasformare segnali provenienti dal mondo fisico in informazioni utilizzabili, senza nascondere limiti e incertezze del sistema.',
         description:
-          'Sto consolidando competenze su firmware, sensori e architetture edge-first attraverso HomeEdge. Il progetto rende pubblici limiti, ipotesi, decisioni hardware e confini dell’MVP, distinguendo con precisione ciò che è stato validato da ciò che appartiene alla roadmap.',
+          'Con HomeEdge sto lavorando sul collegamento tra firmware, sensori, dispositivi edge e software applicativo. Verifico il comportamento reale dell’hardware, documento le decisioni e separo chiaramente ciò che è stato provato da ciò che è ancora in sviluppo: un prototipo utile deve dichiarare anche dove può fallire.',
+        evidenceTitle: 'Test, decisioni e stato del progetto',
         tools: ['ESP32-C3', 'C', 'sensors', 'edge systems'],
         evidenceIds: ['homeedge-repository', 'homeedge-readme'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/homeedge-ai-platform',
-          label: 'Esamina HomeEdge',
+          label: 'Scopri il lavoro su HomeEdge',
           analyticsId: 'skills-homeedge-repository',
         },
       },
@@ -148,16 +151,17 @@ export const italianSupportingContent = {
         id: 'delivery-quality',
         title: 'Delivery, qualità e documentazione',
         problem:
-          'Evitare che pianificazione, codice, test e documentazione raccontino versioni diverse dello stesso progetto.',
+          'Mantenere allineati codice, test, documentazione e stato del lavoro, così che il progetto possa essere verificato e continuato.',
         description:
-          'Collego implementazione, controlli automatici e documentazione per rendere lo stato del lavoro verificabile. Uso repository, revisioni incrementali e pipeline CI/CD per intercettare incoerenze prima del rilascio e ridurre la dipendenza da aggiornamenti informali.',
+          'Organizzo il lavoro affinché ogni modifica possa essere ricostruita, revisionata e rilasciata con controlli ripetibili. Versionamento, test automatici, pipeline CI/CD e documentazione riducono gli errori tardivi e permettono a chi entra nel progetto di capire cosa è cambiato, perché e con quali verifiche.',
+        evidenceTitle: 'Processo e controlli automatici',
         tools: ['Git', 'GitHub Actions', 'Docker', 'automated testing', 'CI/CD'],
         evidenceIds: ['portfolio-quality-workflow', 'portfolio-pages-documentation'],
         references: [],
         cta: {
           kind: 'external',
           url: 'https://github.com/pianic2/its-react-portfolio-web/blob/main/.github/workflows/quality.yml',
-          label: 'Verifica la pipeline di qualità',
+          label: 'Esamina la pipeline di qualità',
           analyticsId: 'skills-quality-workflow',
         },
       },
@@ -167,18 +171,18 @@ export const italianSupportingContent = {
       groupsIndexLabel: 'Competenze',
       evidenceIndexLabel: 'Evidenze',
       contactIndexLabel: 'Contatto',
-      groupsTitle: 'Dove porto valore',
-      evidenceTitle: 'Evidenze verificabili',
+      groupsTitle: 'Come posso contribuire',
+      evidenceTitle: 'Lavoro verificabile',
       referencesTitle: 'Formazione e riferimenti',
     },
     closing: {
-      title: 'La tecnologia conta. Il controllo del sistema conta di più.',
+      title: 'La tecnologia serve. Il valore nasce da come viene usata.',
       description:
-        'Posso contribuire alla progettazione e allo sviluppo di prodotti web, backend e connessi mantenendo leggibili architettura, decisioni, limiti e avanzamento reale.',
+        'Posso contribuire a un progetto costruendo interfacce, backend e sistemi connessi senza perdere di vista chi li userà, le regole che devono rispettare e le prove necessarie per capire se funzionano davvero.',
       primaryCta: {
         kind: 'internal',
         page: 'contact',
-        label: 'Confrontiamoci sul progetto',
+        label: 'Raccontami il progetto',
         analyticsId: 'skills-closing-contact',
       },
       secondaryCta: {
