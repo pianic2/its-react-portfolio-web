@@ -30,7 +30,7 @@ export function AppLayout({ language }: AppLayoutProps) {
             flex: 1,
             minWidth: 0,
             outline: 'none',
-            scrollMarginTop: { xs: '128px', lg: '184px' },
+            scrollMarginTop: { xs: '104px', lg: '160px' },
           }}
           tabIndex={-1}
         >

@@ -46,9 +46,9 @@ export function SiteIdentity({ language }: SiteIdentityProps) {
           flex: '0 0 auto',
           fontFamily: theme.typography.h4.fontFamily,
           fontWeight: 900,
-          height: theme.spacing(12),
+          height: { xs: theme.spacing(8), md: theme.spacing(12) },
           justifyContent: 'center',
-          width: theme.spacing(12),
+          width: { xs: theme.spacing(8), md: theme.spacing(12) },
         })}
       >
         NP

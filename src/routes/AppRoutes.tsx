@@ -6,6 +6,8 @@ import { HomePage } from '../pages/HomePage'
 import { PagePlaceholder } from '../pages/PagePlaceholder'
 import { ProjectDetailPage } from '../pages/ProjectDetailPage'
 import { ProjectsPage } from '../pages/ProjectsPage'
+import { SkillsPage } from '../pages/SkillsPage'
+import { MethodPage } from '../pages/MethodPage'
 import { readStoredLanguage } from '../preferences/preferences'
 import { routeDefinitions, supportedLanguages, type Language, type PageId } from './routeConfig'
 
@@ -14,6 +16,8 @@ const pageIds = Object.keys(routeDefinitions) as PageId[]
 function pageElement(page: PageId, language: Language) {
   if (page === 'home') return <HomePage />
   if (page === 'projects') return <ProjectsPage />
+  if (page === 'skills') return <SkillsPage />
+  if (page === 'method') return <MethodPage />
   if (page === 'projectDetail') return <ProjectDetailPage />
   return <PagePlaceholder language={language} page={page} />
 }

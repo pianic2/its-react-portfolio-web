@@ -35,14 +35,17 @@ export function SiteFooter({ language }: SiteFooterProps) {
           direction={{ xs: 'column', sm: 'row' }}
           sx={{
             alignItems: { xs: 'flex-start', sm: 'center' },
-            gap: 3,
+            gap: { xs: 4, sm: 3 },
             justifyContent: 'space-between',
           }}
         >
           <Typography>
             © {currentYear} {content.identity.name}
           </Typography>
-          <InternalLink to={getRoutePath('privacy', language)}>
+          <InternalLink
+            sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
+            to={getRoutePath('privacy', language)}
+          >
             {getPageLabel(language, 'privacy')}
           </InternalLink>
         </Stack>

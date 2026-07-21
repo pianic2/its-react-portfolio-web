@@ -1,4 +1,5 @@
 import type { SiteContent } from '../schema'
+import { englishSupportingContent } from './supporting.en'
 
 export const englishContent = {
   locale: 'en',
@@ -94,21 +95,23 @@ export const englishContent = {
     },
     selectedProjects: {
       eyebrow: 'SELECTED PROJECTS',
-      title: 'Three projects from different parts of my journey.',
+      title: 'Three projects from different stages of my journey.',
       description:
-        'The Library API and the Node.js project were developed during my ITS course. HomeEdge is my personal project, where I’m exploring smart-home systems, embedded development and long-term product design.',
+        'During the Full Stack Dev. course at ITS Prodigi, I developed several projects for my portfolio, including "Library API" (a REST backend with Laravel) and a "ToDo list" in Node.js. On the other hand, HomeEdge is an on-going personal project where I’m exploring smart-home systems, embedded development and long-term product design.',
     },
     skills: {
       eyebrow: 'TOOLS AND SKILLS',
       title: 'Different tools for different projects.',
       description:
-        'Not every problem needs the same stack. These are the areas I am currently working with most often.',
+        'Not every problem needs the same stack to be resolved. These are the parts I am currently working on most often.',
       groups: [
         {
           id: 'frontend',
           title: 'Frontend',
           stack: [
             { text: 'React', icon: 'devicon:react' },
+            { text: 'React Native', icon: 'devicon:reactnative' },
+            { text: 'Expo', icon: 'devicon:expo' },
             { text: 'TypeScript', icon: 'devicon:typescript' },
             { text: 'Material UI', icon: 'mdi:material-ui' },
             { text: 'accessibility', icon: 'mdi:accessibility' },
@@ -212,6 +215,7 @@ export const englishContent = {
       githubCtaLabel: 'Open GitHub',
     },
   },
+  ...englishSupportingContent,
   projectsPage: {
     hero: {
       eyebrow: 'MY PROJECTS',
@@ -277,7 +281,7 @@ export const englishContent = {
   projectExperience: {
     home: {
       eyebrow: 'SELECTED PROJECTS',
-      title: 'Three projects from different parts of my journey.',
+      title: 'Three projects from different stages of my journey.',
       introduction:
         'The Library API and the Node.js project were developed during my ITS course. HomeEdge is my personal project, where I’m exploring smart-home systems, embedded development and long-term product design.',
       supportingText: 'PERSONAL PROJECT · ITS PROJECT',

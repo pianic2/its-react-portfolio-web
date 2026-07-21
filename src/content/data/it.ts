@@ -1,4 +1,5 @@
 import type { SiteContent } from '../schema'
+import { italianSupportingContent } from './supporting.it'
 
 export const italianContent = {
   locale: 'it',
@@ -97,15 +98,15 @@ export const italianContent = {
     },
     selectedProjects: {
       eyebrow: 'PROGETTI SELEZIONATI',
-      title: 'Tre progetti che raccontano parti diverse del mio percorso.',
+      title: 'Tre progetti che raccontano tappe diverse del mio percorso.',
       description:
-        'La Library API e il progetto Node.js sono nati durante il corso ITS. HomeEdge è il progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
+        'Durante il corso Full Stack Dev. in ITS Prodigi, ho realizzato diversi progetti portfolio, tra cui "Library API" (un backend REST con Laravel) e una "ToDo list" in Node.js. HomeEdge è un progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
     },
     skills: {
       eyebrow: 'STRUMENTI E COMPETENZE',
       title: 'Tecnologie diverse, scelte in base al progetto.',
       description:
-        'Non tutti i problemi richiedono lo stesso stack. Questi sono gli ambiti su cui sto lavorando con maggiore continuità.',
+        'Non tutti i problemi richiedono lo stesso stack. Questi sono gli ambiti e gli strumenti con cui sto lavorando con maggiore continuità.',
       groups: [
         {
           id: 'frontend',
@@ -113,10 +114,12 @@ export const italianContent = {
           description: 'React, TypeScript, Material UI, design adattivo e accessibilità.',
           stack: [
             { text: 'React', icon: 'devicon:react' },
+            { text: 'React Native', icon: 'devicon:reactnative' },
+            { text: 'Expo', icon: 'devicon:expo' },
             { text: 'TypeScript', icon: 'devicon:typescript' },
             { text: 'Material UI', icon: 'mdi:material-ui' },
             { text: 'accessibility', icon: 'mdi:accessibility' },
-            { text: 'Design adattivo', icon: 'mdi:design' },
+            { text: 'responsive design', icon: 'mdi:design' },
           ],
         },
         {
@@ -217,6 +220,7 @@ export const italianContent = {
       githubCtaLabel: 'Apri GitHub',
     },
   },
+  ...italianSupportingContent,
   projectsPage: {
     hero: {
       eyebrow: 'I MIEI PROGETTI',

@@ -4,8 +4,10 @@ import {
   getAllProjects,
   getFeaturedProjects,
   getLocalizedProjectPath,
+  getMethodPage,
   getProjectById,
   getProjectBySlug,
+  getSkillsPage,
 } from './loaders'
 import type { ContentRepository } from './schema'
 import { validateContentRepository } from './validation'
@@ -55,6 +57,31 @@ describe('content repository validation', () => {
     expect(repository.locales.en.homePage.process.steps).toHaveLength(4)
     expect(repository.locales.it.projectsPage.comparison.projects).toHaveLength(3)
     expect(repository.locales.en.projectsPage.comparison.projects).toHaveLength(3)
+  })
+
+  it('keeps supporting-page evidence curated and competence references explicit', () => {
+    for (const language of ['it', 'en'] as const) {
+      const skills = getSkillsPage(language)
+      const method = getMethodPage(language)
+
+      expect(skills.groups).toHaveLength(4)
+      expect(skills.groups.every((group) => group.evidence.length <= 2)).toBe(true)
+      expect(skills.groups.every((group) => group.references.length <= 2)).toBe(true)
+      expect(method.foundations.resources).toHaveLength(2)
+      expect(method.tools.items).toHaveLength(3)
+      expect(method.principles).toHaveLength(5)
+      expect(method.value.items).toHaveLength(6)
+      expect(method.agenticDelivery.concepts).toHaveLength(7)
+      expect(method.agenticDelivery.workflow).toHaveLength(5)
+      expect(method.agenticDelivery.workflowDescriptions).toHaveLength(5)
+      expect(method.agenticDelivery.workflow).toEqual(
+        language === 'it'
+          ? ['INTENTO', 'CONTESTO', 'DELEGA', 'VERIFICA', 'INTEGRAZIONE']
+          : ['INTENT', 'CONTEXT', 'DELEGATION', 'VERIFICATION', 'INTEGRATION'],
+      )
+      expect(method.examples).toHaveLength(3)
+      expect(method.examples.every((example) => example.evidence.length <= 2)).toBe(true)
+    }
   })
 
   it('requires explicit editorial fields for every localized project', () => {

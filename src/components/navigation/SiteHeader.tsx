@@ -26,6 +26,7 @@ export function SiteHeader({ language }: SiteHeaderProps) {
     <Box
       component="header"
       sx={(theme) => ({
+        backgroundColor: theme.digitalStudio.colors.canvas,
         isolation: 'isolate',
         position: 'sticky',
         top: 0,
@@ -34,10 +35,11 @@ export function SiteHeader({ language }: SiteHeaderProps) {
     >
       <PageContainer
         sx={(theme) => ({
-          paddingBlockEnd: `${theme.digitalStudio.layout.shadowClearance}px`,
-          paddingBlockStart: `max(${theme.digitalStudio.layout.pageGutter.compact}px, env(safe-area-inset-top))`,
+          paddingBlockEnd: `${theme.digitalStudio.layout.shadowClearance / 2}px`,
+          paddingBlockStart: `max(${theme.digitalStudio.layout.pageGutter.compact / 2}px, env(safe-area-inset-top))`,
           [theme.breakpoints.up('md')]: {
             paddingBlockStart: `max(${theme.digitalStudio.layout.pageGutter.regular}px, env(safe-area-inset-top))`,
+            paddingBlockEnd: `${theme.digitalStudio.layout.shadowClearance}px`,
           },
         })}
       >
@@ -51,12 +53,12 @@ export function SiteHeader({ language }: SiteHeaderProps) {
               color: theme.palette.getContrastText(colors.surface),
               backgroundImage: patterns.diagonal,
               borderRadius: `${radii.lg}px`,
-              boxShadow: shadows.medium,
+              boxShadow: { xs: shadows.small, md: shadows.medium },
               minWidth: 0,
               overflow: 'hidden',
-              pb: 4,
+              pb: { xs: 1.25, md: 4 },
               position: 'relative',
-              pt: 4,
+              pt: { xs: 1.25, md: 4 },
               px: {
                 xs: `${layout.panelInset.compact}px`,
                 lg: `${layout.panelInset.regular}px`,
@@ -65,7 +67,7 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             }
           }}
         >
-          <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0, size: { xs: '2' } }}>
+          <Box sx={{ gridColumn: '1', gridRow: '1', minWidth: 0 }}>
             <SiteIdentity language={language} />
           </Box>
 
