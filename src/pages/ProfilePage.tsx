@@ -94,7 +94,13 @@ export function ProfilePage() {
                   alignItems: 'center',
                   display: 'grid',
                   gap: { xs: 5, md: 10 },
-                  gridTemplateColumns: { xs: '1fr', md: index % 2 === 0 ? 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)' : 'minmax(18rem, 0.75fr) minmax(0, 1.25fr)' },
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    md:
+                      index % 2 === 0
+                        ? 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)'
+                        : 'minmax(18rem, 0.75fr) minmax(0, 1.25fr)',
+                  },
                 }}
               >
                 <Stack spacing={3} sx={{ order: { xs: 1, md: reverse ? 2 : 1 } }}>
