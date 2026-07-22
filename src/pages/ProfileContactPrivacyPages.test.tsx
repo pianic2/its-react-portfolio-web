@@ -21,24 +21,36 @@ function renderPage(language: 'it' | 'en', page: 'profile' | 'contact' | 'privac
 }
 
 describe('Profile, Contact and Privacy pages', () => {
-  it('builds the English profile as a navigable professional narrative', () => {
+  it('builds the English profile as a chronological narrative with conversion and external evidence', () => {
     renderPage('en', 'profile')
 
     expect(
-      screen.getByRole('heading', { name: 'A technical path built one project at a time.' }),
+      screen.getByRole('heading', {
+        name: 'I found in software the way to turn curiosity and logic into something concrete.',
+      }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('navigation', { name: 'What this means in practice' }),
+      screen.getByRole('heading', { name: 'Before the code, there was a need to understand.' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(4)
-    expect(screen.getByRole('link', { name: 'Explore my projects' })).toHaveAttribute(
+    expect(
+      screen.getByRole('heading', {
+        name: 'I started with what I had: limited time, online resources and a lot of practice.',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
+        name: 'Today I am turning individual learning into professional preparation.',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Other places where you can follow my progress.' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(5)
+    expect(screen.getAllByRole('link', { name: 'Contact me' })).toHaveLength(2)
+    expect(screen.getAllByRole('link', { name: /Explore GitHub/ })).toHaveLength(2)
+    expect(screen.getByRole('link', { name: /Open my LeetCode profile/ })).toHaveAttribute(
       'href',
-      '/en/projects',
-    )
-    expect(screen.getByRole('link', { name: 'Let’s talk' })).toHaveAttribute('href', '/en/contact')
-    expect(screen.getByRole('link', { name: /View GitHub/ })).toHaveAttribute(
-      'href',
-      'https://github.com/pianic2',
+      'https://leetcode.com/u/pianic2',
     )
   }, 20_000)
 
