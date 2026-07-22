@@ -23,7 +23,7 @@ export function ContactPage() {
           paddingBlockStart: 'clamp(112px, 14vw, 176px)',
         }}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+        <PageContainer>
           <EditorialSectionHeader
             description={page.hero.description}
             eyebrow={page.hero.eyebrow}

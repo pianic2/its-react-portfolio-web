@@ -27,7 +27,7 @@ export function ProfilePage() {
           paddingBlockStart: 'clamp(112px, 14vw, 176px)',
         }}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1440 } }}>
+        <PageContainer>
           <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
               description={page.hero.description}
@@ -88,7 +88,7 @@ export function ProfilePage() {
               scrollMarginTop: 112,
             })}
           >
-            <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+            <PageContainer>
               <Box
                 sx={{
                   alignItems: 'center',
@@ -183,7 +183,7 @@ export function ProfilePage() {
         spacing="spacious"
         sx={(theme) => ({ backgroundColor: theme.digitalStudio.colors.surfaceStrong })}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+        <PageContainer>
           <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
               description={links.description}
