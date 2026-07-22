@@ -30,6 +30,7 @@ export function ContactPage() {
             headingLevel="h1"
             id="contact-page-title"
             title={page.hero.title}
+            layout="single"
           />
         </PageContainer>
       </PageSection>
@@ -56,9 +57,6 @@ export function ContactPage() {
               <ContactList title={page.requestsTitle} items={page.appropriateRequests} />
               <ContactList title={page.guidanceTitle} items={page.messageGuidance} />
               <Stack spacing={2}>
-                <Typography color="text.secondary" sx={{ maxWidth: '54ch' }}>
-                  {page.afterSubmit}
-                </Typography>
                 <ExternalButtonLink
                   href="https://github.com/pianic2"
                   language={language}
