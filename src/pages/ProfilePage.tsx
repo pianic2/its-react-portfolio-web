@@ -1,4 +1,3 @@
-import GitHubIcon from '@mui/icons-material/GitHub'
 import LaunchIcon from '@mui/icons-material/Launch'
 import { Box, Stack, Typography } from '@mui/material'
 import { EditorialSectionHeader } from '../components/layout/EditorialSectionHeader'
@@ -7,6 +6,7 @@ import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
 import { PopArtConversionSection } from '../features/supporting-pages/PopArtConversionSection'
 import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
+import { getRoutePath } from '../routes/routeConfig'
 
 const usefulLinks = {
   it: {
@@ -47,6 +47,7 @@ export function ProfilePage() {
   const { language, siteContent } = usePortfolioContent()
   const page = siteContent.profilePage
   const links = usefulLinks[language]
+  const contactPath = getRoutePath('contact', language)
 
   return (
     <>
@@ -84,7 +85,7 @@ export function ProfilePage() {
               <SupportingPageCta
                 cta={{
                   kind: 'internal',
-                  page: 'contact',
+                  href: contactPath,
                   label: page.ctas.contactLabel,
                   analyticsId: 'profile-hero-contact',
                 }}
@@ -94,7 +95,7 @@ export function ProfilePage() {
               <SupportingPageCta
                 cta={{
                   kind: 'external',
-                  url: 'https://github.com/pianic2',
+                  href: 'https://github.com/pianic2',
                   label: page.ctas.githubLabel,
                   analyticsId: 'profile-hero-github',
                 }}
@@ -283,7 +284,7 @@ export function ProfilePage() {
         language={language}
         primaryCta={{
           kind: 'internal',
-          href: language === 'it' ? '/it/contatti' : '/en/contact',
+          href: contactPath,
           label: page.ctas.contactLabel,
           analyticsId: 'profile-closing-contact',
         }}
