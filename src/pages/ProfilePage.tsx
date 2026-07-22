@@ -147,10 +147,7 @@ export function ProfilePage() {
                     {section.title}
                   </Typography>
                   {section.paragraphs.map((paragraph) => (
-                    <Typography
-                      key={paragraph}
-                      sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}
-                    >
+                    <Typography key={paragraph} sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}>
                       {paragraph}
                     </Typography>
                   ))}
@@ -262,12 +259,7 @@ export function ProfilePage() {
                     component="img"
                     src="https://leetcode.com/static/images/LeetCode_logo_rvs.png"
                     alt=""
-                    sx={{
-                      height: 48,
-                      objectFit: 'contain',
-                      objectPosition: 'left center',
-                      width: 48,
-                    }}
+                    sx={{ height: 48, objectFit: 'contain', objectPosition: 'left center', width: 48 }}
                   />
                   <Stack spacing={1.5} sx={{ flexGrow: 1 }}>
                     <Typography component="h3" variant="h4">

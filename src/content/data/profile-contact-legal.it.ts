@@ -4,8 +4,7 @@ export const italianProfileContactLegalContent = {
   profilePage: {
     hero: {
       eyebrow: 'PROFILO',
-      title:
-        'Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.',
+      title: 'Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.',
       description:
         'Il mio percorso non è iniziato da una linea retta, ma da una domanda ricorrente: come funzionano davvero le cose? Oggi porto quella curiosità nello sviluppo software, costruendo progetti e competenze con metodo, trasparenza e continuità.',
     },
@@ -30,27 +29,18 @@ export const italianProfileContactLegalContent = {
           'Durante gli studi universitari e mentre lavoravo ho iniziato a formarmi da autodidatta. Ho seguito documentazione, corsi e guide, ma soprattutto ho cercato di trasformare ogni concetto in un esercizio o in un piccolo progetto che mi costringesse a confrontarmi con problemi reali.',
           'È stata una fase umile e disordinata, ma fondamentale. Mi ha insegnato a cercare informazioni, riconoscere ciò che non capivo, procedere per tentativi controllati e non aspettare condizioni perfette per iniziare.',
         ],
-        highlights: [
-          'Studio autonomo',
-          'Università e lavoro',
-          'Apprendimento attraverso la pratica',
-        ],
+        highlights: ['Studio autonomo', 'Università e lavoro', 'Apprendimento attraverso la pratica'],
       },
       {
         id: 'profile-its',
         number: '03',
         eyebrow: 'ITS PRODIGI',
-        title:
-          'Oggi sto trasformando l’apprendimento individuale in una preparazione professionale.',
+        title: 'Oggi sto trasformando l’apprendimento individuale in una preparazione professionale.',
         paragraphs: [
           'Il percorso Full Stack Developer presso ITS Prodigi mi sta dando una struttura più solida. Lavoro su frontend, backend, database, testing e delivery, confrontandomi con vincoli, scadenze, revisioni e progetti che richiedono continuità.',
           'Sto imparando anche a rendere il lavoro comprensibile agli altri: organizzare il backlog, documentare le decisioni, raccogliere evidenze e distinguere chiaramente ciò che è già realizzato da ciò che è ancora pianificato.',
         ],
-        highlights: [
-          'Formazione Full Stack',
-          'Progetti strutturati',
-          'Collaborazione e tracciabilità',
-        ],
+        highlights: ['Formazione Full Stack', 'Progetti strutturati', 'Collaborazione e tracciabilità'],
       },
     ],
     highlightsLabel: 'Punti chiave',
