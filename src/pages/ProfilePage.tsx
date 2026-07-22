@@ -1,15 +1,52 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
+import LaunchIcon from '@mui/icons-material/Launch'
 import { Box, Stack, Typography } from '@mui/material'
-import { ButtonLink, ExternalButtonLink } from '../components/actions/AppLink'
 import { EditorialSectionHeader } from '../components/layout/EditorialSectionHeader'
 import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
-import { getRoutePath } from '../routes/routeConfig'
+import { PopArtConversionSection } from '../features/supporting-pages/PopArtConversionSection'
+import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
+
+const usefulLinks = {
+  it: {
+    eyebrow: 'LINK UTILI',
+    title: 'Altri luoghi in cui puoi seguire il mio percorso.',
+    description:
+      'Profili esterni ed evidenze che completano il portfolio. Questa raccolta crescerà insieme alle piattaforme su cui studio, pubblico e metto alla prova le mie competenze.',
+    items: [
+      {
+        id: 'leetcode',
+        label: 'LeetCode',
+        description:
+          'Il profilo dove raccolgo la pratica su algoritmi, strutture dati e problem solving.',
+        url: 'https://leetcode.com/u/pianic2',
+        ctaLabel: 'Apri il profilo LeetCode',
+      },
+    ],
+  },
+  en: {
+    eyebrow: 'USEFUL LINKS',
+    title: 'Other places where you can follow my progress.',
+    description:
+      'External profiles and evidence that complement this portfolio. This collection will grow with the platforms where I study, publish and test my skills.',
+    items: [
+      {
+        id: 'leetcode',
+        label: 'LeetCode',
+        description:
+          'The profile where I collect my practice with algorithms, data structures and problem solving.',
+        url: 'https://leetcode.com/u/pianic2',
+        ctaLabel: 'Open my LeetCode profile',
+      },
+    ],
+  },
+} as const
 
 export function ProfilePage() {
   const { language, siteContent } = usePortfolioContent()
   const page = siteContent.profilePage
+  const links = usefulLinks[language]
 
   return (
     <>
@@ -19,19 +56,13 @@ export function ProfilePage() {
         sx={{
           alignItems: 'center',
           display: 'flex',
-          minHeight: '68vh',
+          minHeight: '58vh',
+          paddingBlockEnd: 'clamp(88px, 10vw, 144px)',
           paddingBlockStart: 'clamp(112px, 14vw, 176px)',
         }}
       >
         <PageContainer sx={{ maxInlineSize: { lg: 1440 } }}>
-          <Box
-            sx={{
-              alignItems: 'end',
-              display: 'grid',
-              gap: { xs: 6, md: 10 },
-              gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.45fr) minmax(18rem, 0.55fr)' },
-            }}
-          >
+          <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
               description={page.hero.description}
               eyebrow={page.hero.eyebrow}
@@ -41,57 +72,37 @@ export function ProfilePage() {
               title={page.hero.title}
             />
             <Stack
-              component="nav"
-              aria-label={page.highlightsLabel}
-              spacing={0}
-              sx={(theme) => ({
-                backgroundColor: theme.palette.warning.main,
-                border:
-                  theme.digitalStudio.borderWidths.bold +
-                  'px solid ' +
-                  theme.digitalStudio.colors.border,
-                borderRadius: theme.digitalStudio.radii.lg + 'px',
-                boxShadow: theme.digitalStudio.shadows.large,
-                overflow: 'hidden',
-              })}
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={2.5}
+              sx={{
+                '& > a, & > button': {
+                  minHeight: 52,
+                  width: { xs: '100%', sm: 'auto' },
+                },
+              }}
             >
-              {page.sections.map((section) => (
-                <Box
-                  component="a"
-                  href={'#' + section.id}
-                  key={section.id}
-                  sx={(theme) => ({
-                    alignItems: 'baseline',
-                    color: theme.palette.warning.contrastText,
-                    display: 'grid',
-                    gap: 2,
-                    gridTemplateColumns: '2rem 1fr',
-                    p: 2.5,
-                    textDecoration: 'none',
-                    '& + &': {
-                      borderTop:
-                        theme.digitalStudio.borderWidths.regular +
-                        'px solid ' +
-                        theme.digitalStudio.colors.border,
-                    },
-                    '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.2)' },
-                    '&:focus-visible': {
-                      outline:
-                        theme.digitalStudio.focus.width +
-                        'px solid ' +
-                        theme.digitalStudio.colors.focusInner,
-                      outlineOffset: -6,
-                    },
-                  })}
-                >
-                  <Typography aria-hidden="true" sx={{ fontWeight: 950 }}>
-                    {section.number}
-                  </Typography>
-                  <Typography sx={{ fontWeight: 900 }}>{section.title}</Typography>
-                </Box>
-              ))}
+              <SupportingPageCta
+                cta={{
+                  kind: 'internal',
+                  page: 'contact',
+                  label: page.ctas.contactLabel,
+                  analyticsId: 'profile-hero-contact',
+                }}
+                emphasis="primary"
+                language={language}
+              />
+              <SupportingPageCta
+                cta={{
+                  kind: 'external',
+                  url: 'https://github.com/pianic2',
+                  label: page.ctas.githubLabel,
+                  analyticsId: 'profile-hero-github',
+                }}
+                emphasis="secondary"
+                language={language}
+              />
             </Stack>
-          </Box>
+          </Stack>
         </PageContainer>
       </PageSection>
 
@@ -135,10 +146,7 @@ export function ProfilePage() {
                     {section.title}
                   </Typography>
                   {section.paragraphs.map((paragraph) => (
-                    <Typography
-                      key={paragraph}
-                      sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}
-                    >
+                    <Typography key={paragraph} sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}>
                       {paragraph}
                     </Typography>
                   ))}
@@ -185,43 +193,108 @@ export function ProfilePage() {
       })}
 
       <PageSection
-        aria-labelledby="profile-closing-title"
+        aria-labelledby="profile-useful-links-title"
         spacing="spacious"
-        sx={(theme) => ({
-          backgroundColor: theme.palette.warning.main,
-          backgroundImage: 'radial-gradient(circle, rgba(0, 0, 0, 0.16) 1.5px, transparent 1.5px)',
-          backgroundSize: '18px 18px',
-          color: theme.palette.warning.contrastText,
-        })}
+        sx={(theme) => ({ backgroundColor: theme.palette.background.paper })}
       >
         <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
-          <Stack spacing={3} sx={{ maxWidth: '68rem' }}>
-            <Typography component="h2" id="profile-closing-title" variant="h2">
-              {page.closing.title}
-            </Typography>
-            <Typography sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '62ch' }}>
-              {page.closing.description}
-            </Typography>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              <ButtonLink to={getRoutePath('projects', language)} variant="contained">
-                {page.ctas.projectsLabel}
-              </ButtonLink>
-              <ButtonLink to={getRoutePath('contact', language)} variant="outlined">
-                {page.ctas.contactLabel}
-              </ButtonLink>
-              <ExternalButtonLink
-                href="https://github.com/pianic2"
-                language={language}
-                newTab
-                startIcon={<GitHubIcon aria-hidden="true" />}
-                variant="outlined"
-              >
-                {page.ctas.githubLabel}
-              </ExternalButtonLink>
-            </Stack>
+          <Stack spacing={{ xs: 5, md: 7 }}>
+            <EditorialSectionHeader
+              description={links.description}
+              eyebrow={links.eyebrow}
+              headingLevel="h2"
+              id="profile-useful-links-title"
+              layout="split"
+              title={links.title}
+            />
+            <Box
+              sx={{
+                display: 'grid',
+                gap: 3,
+                gridTemplateColumns: {
+                  xs: '1fr',
+                  md: 'repeat(2, minmax(0, 1fr))',
+                  lg: 'repeat(3, minmax(0, 1fr))',
+                },
+              }}
+            >
+              {links.items.map((item) => (
+                <Box
+                  component="a"
+                  href={item.url}
+                  key={item.id}
+                  rel="noreferrer"
+                  target="_blank"
+                  sx={(theme) => ({
+                    backgroundColor: theme.digitalStudio.colors.surfaceStrong,
+                    border:
+                      theme.digitalStudio.borderWidths.bold +
+                      'px solid ' +
+                      theme.digitalStudio.colors.border,
+                    borderRadius: theme.digitalStudio.radii.lg + 'px',
+                    boxShadow: theme.digitalStudio.shadows.medium,
+                    color: theme.palette.text.primary,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 3,
+                    minHeight: 260,
+                    p: { xs: 3, sm: 4 },
+                    textDecoration: 'none',
+                    transition: 'transform 160ms ease, box-shadow 160ms ease',
+                    '&:hover': {
+                      boxShadow: theme.digitalStudio.shadows.large,
+                      transform: 'translate(-4px, -4px)',
+                    },
+                    '&:focus-visible': {
+                      outline:
+                        theme.digitalStudio.focus.width +
+                        'px solid ' +
+                        theme.digitalStudio.colors.focusInner,
+                      outlineOffset: 4,
+                    },
+                  })}
+                >
+                  <Box
+                    component="img"
+                    src="https://leetcode.com/static/images/LeetCode_logo_rvs.png"
+                    alt=""
+                    sx={{ height: 48, objectFit: 'contain', objectPosition: 'left center', width: 48 }}
+                  />
+                  <Stack spacing={1.5} sx={{ flexGrow: 1 }}>
+                    <Typography component="h3" variant="h4">
+                      {item.label}
+                    </Typography>
+                    <Typography sx={{ maxWidth: '48ch' }}>{item.description}</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={1} sx={{ alignItems: 'center', fontWeight: 900 }}>
+                    <Typography sx={{ fontWeight: 900 }}>{item.ctaLabel}</Typography>
+                    <LaunchIcon aria-hidden="true" fontSize="small" />
+                  </Stack>
+                </Box>
+              ))}
+            </Box>
           </Stack>
         </PageContainer>
       </PageSection>
+
+      <PopArtConversionSection
+        description={page.closing.description}
+        id="profile-closing-title"
+        language={language}
+        primaryCta={{
+          kind: 'internal',
+          href: language === 'it' ? '/it/contatti' : '/en/contact',
+          label: page.ctas.contactLabel,
+          analyticsId: 'profile-closing-contact',
+        }}
+        secondaryCta={{
+          kind: 'external',
+          href: 'https://github.com/pianic2',
+          label: page.ctas.githubLabel,
+          analyticsId: 'profile-closing-github',
+        }}
+        title={page.closing.title}
+      />
     </>
   )
 }
