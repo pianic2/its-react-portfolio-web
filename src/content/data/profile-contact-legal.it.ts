@@ -54,6 +54,22 @@ export const italianProfileContactLegalContent = {
       },
     ],
     highlightsLabel: 'Punti chiave',
+    usefulLinks: {
+      eyebrow: 'LINK UTILI',
+      title: 'Altri luoghi in cui puoi seguire il mio percorso.',
+      description:
+        'Profili esterni ed evidenze che completano il portfolio. Questa raccolta crescerà insieme alle piattaforme su cui studio, pubblico e metto alla prova le mie competenze.',
+      items: [
+        {
+          id: 'leetcode',
+          label: 'LeetCode',
+          description:
+            'Il profilo dove raccolgo la pratica su algoritmi, strutture dati e problem solving.',
+          url: 'https://leetcode.com/u/pianic2',
+          ctaLabel: 'Apri il profilo LeetCode',
+        },
+      ],
+    },
     ctas: {
       projectsLabel: 'Apri LeetCode',
       contactLabel: 'Contattami',
@@ -87,8 +103,6 @@ export const italianProfileContactLegalContent = {
       'descrivi il progetto, l’opportunità o il problema da discutere',
       'spiega quale tipo di collaborazione o risposta stai cercando',
     ],
-    afterSubmit:
-      'Web3Forms inoltra il messaggio all’indirizzo configurato per il portfolio. Il sito non dispone di un backend applicativo e non salva direttamente le richieste.',
     form: {
       requiredHint: 'I campi contrassegnati da * sono obbligatori.',
       nameLabel: 'Nome',

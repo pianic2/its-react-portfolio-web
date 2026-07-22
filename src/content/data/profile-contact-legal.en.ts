@@ -48,6 +48,22 @@ export const englishProfileContactLegalContent = {
       },
     ],
     highlightsLabel: 'Key points',
+    usefulLinks: {
+      eyebrow: 'USEFUL LINKS',
+      title: 'Other places where you can follow my progress.',
+      description:
+        'External profiles and evidence that complement this portfolio. This collection will grow with the platforms where I study, publish and test my skills.',
+      items: [
+        {
+          id: 'leetcode',
+          label: 'LeetCode',
+          description:
+            'The profile where I collect my practice with algorithms, data structures and problem solving.',
+          url: 'https://leetcode.com/u/pianic2',
+          ctaLabel: 'Open my LeetCode profile',
+        },
+      ],
+    },
     ctas: {
       projectsLabel: 'Open LeetCode',
       contactLabel: 'Contact me',
@@ -81,8 +97,6 @@ export const englishProfileContactLegalContent = {
       'describe the project, opportunity or problem you want to discuss',
       'explain what kind of collaboration or answer you are looking for',
     ],
-    afterSubmit:
-      'Web3Forms forwards the message to the address configured for this portfolio. The site has no application backend and does not directly store submissions.',
     form: {
       requiredHint: 'Fields marked with * are required.',
       nameLabel: 'Name',

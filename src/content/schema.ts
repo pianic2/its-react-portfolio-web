@@ -553,6 +553,22 @@ export const siteContentSchema = z.object({
     hero: supportingHeroSchema,
     sections: z.array(localizedProfileSectionSchema).min(1),
     highlightsLabel: z.string().min(1),
+    usefulLinks: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      description: z.string().min(1),
+      items: z
+        .array(
+          z.object({
+            id: stableIdSchema,
+            label: z.string().min(1),
+            description: z.string().min(1),
+            url: z.url(),
+            ctaLabel: z.string().min(1),
+          }),
+        )
+        .min(1),
+    }),
     ctas: z.object({
       projectsLabel: z.string().min(1),
       contactLabel: z.string().min(1),
@@ -571,7 +587,6 @@ export const siteContentSchema = z.object({
     formDescription: z.string().min(1),
     appropriateRequests: z.array(z.string().min(1)).min(1),
     messageGuidance: z.array(z.string().min(1)).min(1),
-    afterSubmit: z.string().min(1),
     form: z.object({
       requiredHint: z.string().min(1),
       nameLabel: z.string().min(1),

@@ -8,45 +8,10 @@ import { PopArtConversionSection } from '../features/supporting-pages/PopArtConv
 import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
 import { getRoutePath } from '../routes/routeConfig'
 
-const usefulLinks = {
-  it: {
-    eyebrow: 'LINK UTILI',
-    title: 'Altri luoghi in cui puoi seguire il mio percorso.',
-    description:
-      'Profili esterni ed evidenze che completano il portfolio. Questa raccolta crescerà insieme alle piattaforme su cui studio, pubblico e metto alla prova le mie competenze.',
-    items: [
-      {
-        id: 'leetcode',
-        label: 'LeetCode',
-        description:
-          'Il profilo dove raccolgo la pratica su algoritmi, strutture dati e problem solving.',
-        url: 'https://leetcode.com/u/pianic2',
-        ctaLabel: 'Apri il profilo LeetCode',
-      },
-    ],
-  },
-  en: {
-    eyebrow: 'USEFUL LINKS',
-    title: 'Other places where you can follow my progress.',
-    description:
-      'External profiles and evidence that complement this portfolio. This collection will grow with the platforms where I study, publish and test my skills.',
-    items: [
-      {
-        id: 'leetcode',
-        label: 'LeetCode',
-        description:
-          'The profile where I collect my practice with algorithms, data structures and problem solving.',
-        url: 'https://leetcode.com/u/pianic2',
-        ctaLabel: 'Open my LeetCode profile',
-      },
-    ],
-  },
-} as const
-
 export function ProfilePage() {
   const { language, siteContent } = usePortfolioContent()
   const page = siteContent.profilePage
-  const links = usefulLinks[language]
+  const links = page.usefulLinks
   const contactPath = getRoutePath('contact', language)
 
   return (
