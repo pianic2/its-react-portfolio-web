@@ -8,45 +8,10 @@ import { PopArtConversionSection } from '../features/supporting-pages/PopArtConv
 import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
 import { getRoutePath } from '../routes/routeConfig'
 
-const usefulLinks = {
-  it: {
-    eyebrow: 'LINK UTILI',
-    title: 'Altri luoghi in cui puoi seguire il mio percorso.',
-    description:
-      'Profili esterni ed evidenze che completano il portfolio. Questa raccolta crescerà insieme alle piattaforme su cui studio, pubblico e metto alla prova le mie competenze.',
-    items: [
-      {
-        id: 'leetcode',
-        label: 'LeetCode',
-        description:
-          'Il profilo dove raccolgo la pratica su algoritmi, strutture dati e problem solving.',
-        url: 'https://leetcode.com/u/pianic2',
-        ctaLabel: 'Apri il profilo LeetCode',
-      },
-    ],
-  },
-  en: {
-    eyebrow: 'USEFUL LINKS',
-    title: 'Other places where you can follow my progress.',
-    description:
-      'External profiles and evidence that complement this portfolio. This collection will grow with the platforms where I study, publish and test my skills.',
-    items: [
-      {
-        id: 'leetcode',
-        label: 'LeetCode',
-        description:
-          'The profile where I collect my practice with algorithms, data structures and problem solving.',
-        url: 'https://leetcode.com/u/pianic2',
-        ctaLabel: 'Open my LeetCode profile',
-      },
-    ],
-  },
-} as const
-
 export function ProfilePage() {
   const { language, siteContent } = usePortfolioContent()
   const page = siteContent.profilePage
-  const links = usefulLinks[language]
+  const links = page.usefulLinks
   const contactPath = getRoutePath('contact', language)
 
   return (
@@ -129,7 +94,7 @@ export function ProfilePage() {
                   alignItems: 'center',
                   display: 'grid',
                   gap: { xs: 5, md: 10 },
-                  gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)' },
+                  gridTemplateColumns: { xs: '1fr', md: index % 2 === 0 ? 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)' : 'minmax(18rem, 0.75fr) minmax(0, 1.25fr)' },
                 }}
               >
                 <Stack spacing={3} sx={{ order: { xs: 1, md: reverse ? 2 : 1 } }}>
@@ -147,7 +112,10 @@ export function ProfilePage() {
                     {section.title}
                   </Typography>
                   {section.paragraphs.map((paragraph) => (
-                    <Typography key={paragraph} sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}>
+                    <Typography
+                      key={paragraph}
+                      sx={{ fontSize: { sm: '1.1rem' }, maxWidth: '66ch' }}
+                    >
                       {paragraph}
                     </Typography>
                   ))}
@@ -259,7 +227,12 @@ export function ProfilePage() {
                     component="img"
                     src="https://leetcode.com/static/images/LeetCode_logo_rvs.png"
                     alt=""
-                    sx={{ height: 48, objectFit: 'contain', objectPosition: 'left center', width: 48 }}
+                    sx={{
+                      height: 48,
+                      objectFit: 'contain',
+                      objectPosition: 'left center',
+                      width: 48,
+                    }}
                   />
                   <Stack spacing={1.5} sx={{ flexGrow: 1 }}>
                     <Typography component="h3" variant="h4">

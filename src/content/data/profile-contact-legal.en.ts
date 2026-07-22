@@ -40,10 +40,30 @@ export const englishProfileContactLegalContent = {
           'The Full Stack Developer programme at ITS Prodigi is giving my path a stronger structure. I work across frontend, backend, databases, testing and delivery while dealing with constraints, deadlines, reviews and projects that require continuity.',
           'I am also learning to make the work understandable to others: organise a backlog, document decisions, collect evidence and distinguish clearly between what has already been delivered and what is still planned.',
         ],
-        highlights: ['Full Stack training', 'Structured projects', 'Collaboration and traceability'],
+        highlights: [
+          'Full Stack training',
+          'Structured projects',
+          'Collaboration and traceability',
+        ],
       },
     ],
     highlightsLabel: 'Key points',
+    usefulLinks: {
+      eyebrow: 'USEFUL LINKS',
+      title: 'Other places where you can follow my progress.',
+      description:
+        'External profiles and evidence that complement this portfolio. This collection will grow with the platforms where I study, publish and test my skills.',
+      items: [
+        {
+          id: 'leetcode',
+          label: 'LeetCode',
+          description:
+            'The profile where I collect my practice with algorithms, data structures and problem solving.',
+          url: 'https://leetcode.com/u/pianic2',
+          ctaLabel: 'Open my LeetCode profile',
+        },
+      ],
+    },
     ctas: {
       projectsLabel: 'Open LeetCode',
       contactLabel: 'Contact me',
