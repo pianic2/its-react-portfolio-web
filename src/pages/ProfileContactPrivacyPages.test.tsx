@@ -79,9 +79,7 @@ describe('Profile, Contact and Privacy pages', () => {
     expect(
       screen.getByRole('heading', { name: 'How the contact form handles your data.' }),
     ).toBeInTheDocument()
-    const index = screen.getByRole('navigation', { name: 'On this page' })
-    expect(index).toBeInTheDocument()
-    expect(index.querySelectorAll('a')).toHaveLength(4)
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(4)
     expect(
       screen.getByRole('link', { name: /Read the Web3Forms privacy information/ }),
     ).toHaveAttribute('href', 'https://web3forms.com/privacy')
