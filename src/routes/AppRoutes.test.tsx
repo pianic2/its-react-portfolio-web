@@ -52,12 +52,18 @@ describe('localized application routes', () => {
   it.each([
     ['/it/competenze', 'Dal problema al software che puoi usare, capire e verificare.'],
     ['/it/metodo', 'Prima la direzione. Poi la velocità.'],
-    ['/it/profilo', 'Un percorso tecnico costruito progetto dopo progetto.'],
+    [
+      '/it/profilo',
+      'Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.',
+    ],
     ['/it/contatti', 'Raccontami su cosa stai lavorando.'],
     ['/it/privacy', 'Informazioni sul form di contatto.'],
     ['/en/skills', 'From a problem to software people can use, understand and verify.'],
     ['/en/method', 'Direction first. Then speed.'],
-    ['/en/profile', 'A technical path built one project at a time.'],
+    [
+      '/en/profile',
+      'I found in software the way to turn curiosity and logic into something concrete.',
+    ],
     ['/en/contact', 'Tell me what you are working on.'],
     ['/en/privacy', 'How the contact form handles your data.'],
   ])('renders %s as %s', (path, heading) => {

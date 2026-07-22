@@ -27,7 +27,7 @@ export function ProfilePage() {
           paddingBlockStart: 'clamp(112px, 14vw, 176px)',
         }}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1440 } }}>
+        <PageContainer>
           <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
               description={page.hero.description}
@@ -88,13 +88,19 @@ export function ProfilePage() {
               scrollMarginTop: 112,
             })}
           >
-            <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+            <PageContainer>
               <Box
                 sx={{
                   alignItems: 'center',
                   display: 'grid',
                   gap: { xs: 5, md: 10 },
-                  gridTemplateColumns: { xs: '1fr', md: index % 2 === 0 ? 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)' : 'minmax(18rem, 0.75fr) minmax(0, 1.25fr)' },
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    md:
+                      index % 2 === 0
+                        ? 'minmax(0, 1.25fr) minmax(18rem, 0.75fr)'
+                        : 'minmax(18rem, 0.75fr) minmax(0, 1.25fr)',
+                  },
                 }}
               >
                 <Stack spacing={3} sx={{ order: { xs: 1, md: reverse ? 2 : 1 } }}>
@@ -141,19 +147,30 @@ export function ProfilePage() {
                           ? theme.palette.secondary.contrastText
                           : theme.palette.text.primary,
                     order: { xs: 2, md: reverse ? 1 : 2 },
-                    p: { xs: 3, sm: 4 },
+                    p: { xs: 4, sm: 6 },
+                    transition: theme.transitions.create(['box-shadow', 'transform'], {
+                      duration: theme.transitions.duration.standard,
+                      easing: theme.transitions.easing.easeIn,
+                    }),
+                    '&:hover': {
+                      boxShadow: theme.digitalStudio.shadows.small,
+                      transform: `translate(${theme.digitalStudio.shadowOffsets.medium}px, ${theme.digitalStudio.shadowOffsets.medium}px) rotate(${index % 2 === 0 ? 1 : -1}deg)`,
+                    },
+                    '@media (prefers-reduced-motion: reduce)': {
+                      transition: 'none',
+                      '&:hover': { transform: 'none' },
+                    },
                   })}
                 >
                   <Typography sx={{ fontWeight: 900 }} variant="overline">
                     {page.highlightsLabel}
                   </Typography>
-                  <Stack component="ul" spacing={2} sx={{ m: 0, mt: 3, pl: 2.5 }}>
-                    {section.highlights.map((highlight) => (
-                      <Typography component="li" key={highlight} sx={{ fontWeight: 850 }}>
-                        {highlight}
-                      </Typography>
-                    ))}
-                  </Stack>
+                  <Typography>
+                    {section.highlights.map(
+                      (highlight, index) =>
+                        highlight + (index !== section.highlights.length - 1 ? ' • ' : ''),
+                    )}
+                  </Typography>
                 </Box>
               </Box>
             </PageContainer>
@@ -164,16 +181,16 @@ export function ProfilePage() {
       <PageSection
         aria-labelledby="profile-useful-links-title"
         spacing="spacious"
-        sx={(theme) => ({ backgroundColor: theme.palette.background.paper })}
+        sx={(theme) => ({ backgroundColor: theme.digitalStudio.colors.surfaceStrong })}
       >
-        <PageContainer sx={{ maxInlineSize: { lg: 1320 } }}>
+        <PageContainer>
           <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
               description={links.description}
               eyebrow={links.eyebrow}
               headingLevel="h2"
               id="profile-useful-links-title"
-              layout="split"
+              layout="single"
               title={links.title}
             />
             <Box
@@ -195,7 +212,7 @@ export function ProfilePage() {
                   rel="noreferrer"
                   target="_blank"
                   sx={(theme) => ({
-                    backgroundColor: theme.digitalStudio.colors.surfaceStrong,
+                    backgroundColor: theme.digitalStudio.colors.surface,
                     border:
                       theme.digitalStudio.borderWidths.bold +
                       'px solid ' +
@@ -207,7 +224,7 @@ export function ProfilePage() {
                     flexDirection: 'column',
                     gap: 3,
                     minHeight: 260,
-                    p: { xs: 3, sm: 4 },
+                    p: { xs: 4, sm: 6 },
                     textDecoration: 'none',
                     transition: 'transform 160ms ease, box-shadow 160ms ease',
                     '&:hover': {

@@ -103,8 +103,6 @@ export const italianProfileContactLegalContent = {
       'descrivi il progetto, l’opportunità o il problema da discutere',
       'spiega quale tipo di collaborazione o risposta stai cercando',
     ],
-    afterSubmit:
-      'Web3Forms inoltra il messaggio all’indirizzo configurato per il portfolio. Il sito non dispone di un backend applicativo e non salva direttamente le richieste.',
     form: {
       requiredHint: 'I campi contrassegnati da * sono obbligatori.',
       nameLabel: 'Nome',

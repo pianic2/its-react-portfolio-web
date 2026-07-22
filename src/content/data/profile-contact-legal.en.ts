@@ -97,8 +97,6 @@ export const englishProfileContactLegalContent = {
       'describe the project, opportunity or problem you want to discuss',
       'explain what kind of collaboration or answer you are looking for',
     ],
-    afterSubmit:
-      'Web3Forms forwards the message to the address configured for this portfolio. The site has no application backend and does not directly store submissions.',
     form: {
       requiredHint: 'Fields marked with * are required.',
       nameLabel: 'Name',

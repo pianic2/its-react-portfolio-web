@@ -587,7 +587,6 @@ export const siteContentSchema = z.object({
     formDescription: z.string().min(1),
     appropriateRequests: z.array(z.string().min(1)).min(1),
     messageGuidance: z.array(z.string().min(1)).min(1),
-    afterSubmit: z.string().min(1),
     form: z.object({
       requiredHint: z.string().min(1),
       nameLabel: z.string().min(1),
