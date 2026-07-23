@@ -27,9 +27,9 @@ describe('SeoMetadata integration', () => {
     expect(document.title).toContain('Software development portfolio')
     await user.click(screen.getByRole('link', { name: 'View my projects' }))
     expect(document.title).toContain('Projects')
-    expect(document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content).toContain(
-      'Selected software projects',
-    )
+    expect(
+      document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content,
+    ).toContain('Selected software projects')
     expect(document.head.querySelectorAll('link[rel="canonical"]')).toHaveLength(1)
     expect(document.head.querySelectorAll('link[rel="alternate"]')).toHaveLength(2)
     expect(document.documentElement.lang).toBe('en')
@@ -43,7 +43,9 @@ describe('SeoMetadata integration', () => {
         </MemoryRouter>
       </DigitalStudioProvider>,
     )
-    expect(document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')?.content).toBe('noindex, nofollow')
+    expect(document.head.querySelector<HTMLMetaElement>('meta[name="robots"]')?.content).toBe(
+      'noindex, nofollow',
+    )
     expect(document.head.querySelector('link[rel="canonical"]')).toBeNull()
   })
 })
