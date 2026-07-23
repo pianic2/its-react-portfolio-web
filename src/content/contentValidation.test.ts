@@ -149,7 +149,15 @@ describe('content repository validation', () => {
     expect(
       english.evidence.find((item) => item.evidenceId === 'homeedge-product-vision')?.linkLabel,
     ).toBe('Read the Product Vision')
-    expect(shared.evidence.some((evidence) => evidence.url?.includes('atlassian.net'))).toBe(false)
+    expect(
+      shared.evidence.some((evidence) => {
+        try {
+          return new URL(evidence.url ?? '').hostname.endsWith('atlassian.net')
+        } catch {
+          return false
+        }
+      }),
+    ).toBe(false)
     expect(english.evidence).toHaveLength(3)
     expect(italian.evidence).toHaveLength(3)
   })
