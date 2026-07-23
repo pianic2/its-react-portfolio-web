@@ -20,9 +20,10 @@
     "architecture:check": "node scripts/architecture-check.mjs",
     "release:config": "node scripts/release-pages.mjs",
     "release:bundle": "node scripts/verify-pages-bundle.mjs",
+    "performance:check": "node scripts/performance-check.mjs",
     "check:static": "npm run format:check && npm run lint && npm run typecheck && npm run architecture:check && npm run content:validate",
     "check:test": "npm run test",
-    "check:release": "npm run build && npm run release:bundle",
+    "check:release": "npm run build && npm run release:bundle && npm run performance:check",
     "check": "npm run check:static && npm run check:test && npm run check:release",
     "release:pages": "npm run release:config && npm run check"
   },
