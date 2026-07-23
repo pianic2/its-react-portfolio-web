@@ -49,7 +49,6 @@ export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramPr
         {title}
       </Typography>
       <Box
-        aria-label={title}
         sx={{
           border: '3px solid',
           borderColor: 'text.primary',

@@ -6,6 +6,7 @@ import {
   type ContactSubmissionResult,
   type SubmitContactMessage,
 } from '../../services/contact'
+import { italianContent } from '../../content/data/it'
 import { ContactForm } from './ContactForm'
 
 const { submitContactMessage } = vi.hoisted(() => ({
@@ -61,7 +62,26 @@ describe('ContactForm', () => {
 
     expect(screen.getByRole('textbox', { name: /Name/ })).toHaveFocus()
     expect(screen.getByText('This field is required.')).toBeInTheDocument()
-    expect(screen.getByRole('textbox', { name: /Name/ })).toHaveAttribute('aria-invalid', 'true')
+    const name = screen.getByRole('textbox', { name: /Name/ })
+    expect(name).toHaveAttribute('aria-invalid', 'true')
+    expect(name).toHaveAttribute('aria-describedby', 'contact-name-error')
+    expect(document.getElementById('contact-name-error')).toHaveTextContent(
+      'This field is required.',
+    )
+  })
+
+  it('keeps validation feedback localized without contacting the provider', () => {
+    render(
+      <DigitalStudioProvider>
+        <ContactForm copy={italianContent.contactPage.form} locale="it" />
+      </DigitalStudioProvider>,
+    )
+
+    fireEvent.submit(screen.getByRole('button', { name: 'Invia messaggio' }).closest('form')!)
+
+    expect(screen.getByRole('textbox', { name: 'Nome' })).toHaveFocus()
+    expect(screen.getByText('Questo campo è obbligatorio.')).toBeInTheDocument()
+    expect(submitContactMessage).not.toHaveBeenCalled()
   })
 
   it('prevents duplicate submissions and offers an explicit reset after success', async () => {

@@ -29,8 +29,6 @@ export function EvidenceLinks({
 
   return (
     <Box
-      component="section"
-      aria-labelledby={`${heading}-evidence-title`}
       sx={(theme) => ({
         ...(skillsVariant
           ? {
@@ -41,7 +39,7 @@ export function EvidenceLinks({
           : { mt: 1 }),
       })}
     >
-      <Typography component="h4" id={`${heading}-evidence-title`} variant="h6">
+      <Typography component="h3" id={`${heading}-evidence-title`} variant="h6">
         {title}
       </Typography>
       <Stack

@@ -67,6 +67,7 @@ export function EditorialSectionHeader({
         </Typography>
         {subtitle ? (
           <Typography
+            component="p"
             color="text.secondary"
             sx={{ fontSize: { sm: '1.6rem' }, fontWeight: 800, maxWidth: '66ch' }}
             variant="subtitle1"

@@ -6,6 +6,7 @@ import { PageSection } from '../../components/layout/PageSection'
 import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { externalLinks } from '../../config/externalLinks'
 
 export function ContactSection() {
   const { language, siteContent } = usePortfolioContent()
@@ -37,7 +38,7 @@ export function ContactSection() {
             <ExternalButtonLink
               color="primary"
               endIcon={<OpenInNewRounded aria-hidden="true" />}
-              href="https://github.com/pianic2"
+              href={externalLinks.githubProfile}
               language={language}
               newTab
               sx={{ minHeight: 44 }}

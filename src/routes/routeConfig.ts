@@ -5,34 +5,51 @@ export { supportedLanguages }
 export type { Language, PageId }
 
 type RouteDefinition = {
+  indexable: boolean
   paths: Record<Language, string>
 }
 
 export const routeDefinitions: Record<PageId, RouteDefinition> = {
   home: {
+    indexable: true,
     paths: { it: '', en: '' },
   },
   projects: {
+    indexable: true,
     paths: { it: 'progetti', en: 'projects' },
   },
   projectDetail: {
+    indexable: true,
     paths: { it: 'progetti/:slug', en: 'projects/:slug' },
   },
   skills: {
+    indexable: true,
     paths: { it: 'competenze', en: 'skills' },
   },
   method: {
+    indexable: true,
     paths: { it: 'metodo', en: 'method' },
   },
   profile: {
+    indexable: true,
     paths: { it: 'profilo', en: 'profile' },
   },
   contact: {
+    indexable: true,
     paths: { it: 'contatti', en: 'contact' },
   },
   privacy: {
+    indexable: true,
     paths: { it: 'privacy', en: 'privacy' },
   },
+}
+
+export function getIndexableStaticRoutePaths() {
+  return supportedLanguages.flatMap((language) =>
+    publicPageIds
+      .filter((page) => page !== 'projectDetail' && routeDefinitions[page].indexable)
+      .map((page) => getRoutePath(page, language)),
+  )
 }
 
 export const mainNavigationPages: PageId[] = [

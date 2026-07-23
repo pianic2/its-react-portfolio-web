@@ -6,6 +6,7 @@ import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
 import { ContactForm } from '../features/contact/ContactForm'
+import { externalLinks } from '../config/externalLinks'
 
 export function ContactPage() {
   const { language, siteContent } = usePortfolioContent()
@@ -58,7 +59,7 @@ export function ContactPage() {
               <ContactList title={page.guidanceTitle} items={page.messageGuidance} />
               <Stack spacing={2}>
                 <ExternalButtonLink
-                  href="https://github.com/pianic2"
+                  href={externalLinks.githubProfile}
                   language={language}
                   newTab
                   startIcon={<GitHubIcon aria-hidden="true" />}

@@ -6,6 +6,7 @@ import { PortfolioContentProvider } from '../content/context'
 import type { Language } from '../routes/routeConfig'
 import { RouteFocusManager } from './RouteFocusManager'
 import { SkipLink } from './SkipLink'
+import { SeoMetadata } from '../seo/SeoMetadata'
 
 type AppLayoutProps = {
   language: Language
@@ -19,6 +20,7 @@ const skipLabels: Record<Language, string> = {
 export function AppLayout({ language }: AppLayoutProps) {
   return (
     <PortfolioContentProvider language={language}>
+      <SeoMetadata />
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
         <SkipLink label={skipLabels[language]} targetId="main-content" />
         <RouteFocusManager targetId="main-content" />
