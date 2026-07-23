@@ -388,7 +388,7 @@ export function validateContentRepository(
 
   const italian = repository.locales.it
   const english = repository.locales.en
-  const parallelCollections = [
+  const parallelCollections: [string, Array<{ id: string }>, Array<{ id: string }>][] = [
     ['homePage.learning.items', italian.homePage.learning.items, english.homePage.learning.items],
     ['homePage.skills.groups', italian.homePage.skills.groups, english.homePage.skills.groups],
     ['homePage.process.steps', italian.homePage.process.steps, english.homePage.process.steps],
@@ -401,16 +401,11 @@ export function validateContentRepository(
       english.methodPage.agenticDelivery.concepts,
     ],
     ['methodPage.tools.items', italian.methodPage.tools.items, english.methodPage.tools.items],
-    [
-      'projectsPage.comparison.projects',
-      italian.projectsPage.comparison.projects,
-      english.projectsPage.comparison.projects,
-    ],
-  ] as const
+  ]
 
   for (const [path, italianItems, englishItems] of parallelCollections) {
-    const italianIds = italianItems.map((item) => ('projectId' in item ? item.projectId : item.id))
-    const englishIds = englishItems.map((item) => ('projectId' in item ? item.projectId : item.id))
+    const italianIds = italianItems.map((item) => item.id)
+    const englishIds = englishItems.map((item) => item.id)
     addDuplicates(problems, italianIds, 'locale=it entity=site', path)
     addDuplicates(problems, englishIds, 'locale=en entity=site', path)
     if (sorted(italianIds) !== sorted(englishIds)) {

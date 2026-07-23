@@ -27,11 +27,16 @@ export function ProjectShowcaseCard({
   const titleId = `showcase-${project.id}-title`
 
   return (
-    <StudioCard
+    <Box
       aria-labelledby={titleId}
       component="article"
       sx={{
+        backgroundColor: (theme) =>
+          variant === 'projects'
+            ? theme.digitalStudio.colors.canvas
+            : theme.digitalStudio.colors.surface,
         blockSize: '100%',
+        boxShadow: (theme) => (variant === 'projects' ? 'none' : theme.digitalStudio.shadows.small),
         display: 'flex',
         flexDirection: 'column',
         minWidth: 0,
@@ -40,7 +45,7 @@ export function ProjectShowcaseCard({
           `transform ${theme.digitalStudio.motion.duration.fast}ms ${theme.digitalStudio.motion.easing.standard}`,
         '&:focus-within': { outline: 'none' },
         '@media (hover: hover)': {
-          '&:hover': { transform: 'translateY(-4px)' },
+          '&:hover': { transform: variant === 'projects' ? 'none' : 'translateY(-4px)' },
         },
         '@media (prefers-reduced-motion: reduce)': {
           transition: 'none',
@@ -110,30 +115,30 @@ export function ProjectShowcaseCard({
 
         {variant === 'projects' ? (
           <Stack spacing={2.5}>
-            <Box
+            <StudioCard
               sx={{
                 borderInlineStart: (theme) =>
                   `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
-                paddingInlineStart: 2,
+                p: 2.5,
               }}
             >
               <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
                 {whatIWorkedOnLabel}
               </Typography>
               <Typography sx={{ mt: 1 }}>{project.whatIWorkedOn}</Typography>
-            </Box>
-            <Box
+            </StudioCard>
+            <StudioCard
               sx={{
                 borderInlineStart: (theme) =>
                   `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.accent}`,
-                paddingInlineStart: 2,
+                p: 2.5,
               }}
             >
               <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
                 {futureImprovementLabel}
               </Typography>
               <Typography sx={{ mt: 1 }}>{project.futureImprovement}</Typography>
-            </Box>
+            </StudioCard>
           </Stack>
         ) : null}
 
@@ -183,6 +188,6 @@ export function ProjectShowcaseCard({
           </ExternalButtonLink>
         </Stack>
       </CardContent>
-    </StudioCard>
+    </Box>
   )
 }

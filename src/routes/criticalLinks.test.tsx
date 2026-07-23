@@ -55,7 +55,11 @@ describe('critical CTA and link behaviour', () => {
     profile.unmount()
     renderRoute('/en/projects/homeedge-ai-platform')
     expect(
-      screen.getByRole('link', { name: /Open the HomeEdge stakeholder space/ }),
-    ).toHaveAttribute('href', externalLinks.homeEdgeConfluence)
+      screen.queryByRole('link', { name: /HomeEdge stakeholder space/ }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /GitHub repository/ })).toHaveAttribute(
+      'href',
+      'https://github.com/pianic2/homeedge-ai-platform',
+    )
   })
 })

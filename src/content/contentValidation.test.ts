@@ -59,8 +59,6 @@ describe('content repository validation', () => {
     expect(repository.locales.en.homePage.skills.groups).toHaveLength(5)
     expect(repository.locales.it.homePage.process.steps).toHaveLength(4)
     expect(repository.locales.en.homePage.process.steps).toHaveLength(4)
-    expect(repository.locales.it.projectsPage.comparison.projects).toHaveLength(3)
-    expect(repository.locales.en.projectsPage.comparison.projects).toHaveLength(3)
   })
 
   it('keeps supporting-page evidence curated and competence references explicit', () => {
@@ -132,7 +130,7 @@ describe('content repository validation', () => {
     )
   })
 
-  it('validates HomeEdge transparency evidence and localized link labels', () => {
+  it('keeps HomeEdge public evidence on anonymously accessible GitHub pages', () => {
     const repository = validateContentRepository()
     const shared = repository.projects.find((project) => project.id === 'homeedge-ai-platform')!
     const english = repository.locales.en.projects.find(
@@ -149,17 +147,21 @@ describe('content repository validation', () => {
       url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
     })
     expect(
-      shared.evidence.find((evidence) => evidence.id === 'homeedge-stakeholder-review'),
-    ).toMatchObject({
-      type: 'report',
-      url: 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview',
-    })
-    expect(
       english.evidence.find((item) => item.evidenceId === 'homeedge-product-vision')?.linkLabel,
     ).toBe('Read the Product Vision')
     expect(
-      italian.evidence.find((item) => item.evidenceId === 'homeedge-stakeholder-review')?.linkLabel,
-    ).toBe('Apri lo spazio stakeholder di HomeEdge')
+      shared.evidence.some((evidence) => {
+        if (!evidence.url) return false
+        try {
+          const { hostname } = new URL(evidence.url)
+          return hostname === 'atlassian.net' || hostname.endsWith('.atlassian.net')
+        } catch {
+          return false
+        }
+      }),
+    ).toBe(false)
+    expect(english.evidence).toHaveLength(3)
+    expect(italian.evidence).toHaveLength(3)
   })
 
   it('localizes the public claim taxonomy without changing internal statuses', () => {
