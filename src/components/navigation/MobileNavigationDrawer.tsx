@@ -42,7 +42,7 @@ export function MobileNavigationDrawer({ language, onClose, open }: MobileNaviga
               border: `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.border}`,
               borderRadius: `${theme.digitalStudio.radii.lg}px`,
               bottom: `max(${pageGutter.compact + shadowClearance}px, calc(env(safe-area-inset-bottom) + ${shadowClearance}px))`,
-              boxShadow: theme.digitalStudio.shadows.large,
+              boxShadow: theme.digitalStudio.shadows.small,
               height: 'auto',
               maxWidth: '100%',
               overflowX: 'hidden',

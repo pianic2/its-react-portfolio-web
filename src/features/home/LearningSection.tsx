@@ -1,7 +1,7 @@
 import { Box, CardContent, Stack, Typography } from '@mui/material'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
-import { StudioCard } from '../../components/surfaces/StudioCard'
+import { StudioMotionCard } from '../../components/surfaces/StudioMotionCard'
 import { usePortfolioContent } from '../../content/context'
 
 export function LearningSection() {
@@ -11,7 +11,10 @@ export function LearningSection() {
     <PageSection
       aria-labelledby="home-learning-title"
       spacing="spacious"
-      sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
+      sx={(theme) => ({
+        backgroundColor: theme.palette.info.main,
+        color: theme.palette.info.contrastText,
+      })}
     >
       <PageContainer>
         <Stack spacing={5}>
@@ -31,34 +34,23 @@ export function LearningSection() {
             }}
           >
             {copy.items.map((item, index) => (
-              <StudioCard
+              <StudioMotionCard
                 key={item.id}
                 component="article"
-                sx={{
-                  backgroundColor:
-                    index === 0
-                      ? 'warning.main'
-                      : index === 1
-                        ? 'secondary.main'
-                        : index === 2
-                          ? 'info.main'
-                          : index === 3
-                            ? 'success.main'
-                            : index === 4
-                              ? 'canvas.main'
-                              : 'error.main',
-                  color:
-                    index === 0
-                      ? 'warning.contrastText'
-                      : index === 1
-                        ? 'secondary.contrastText'
-                        : index === 2
-                          ? 'info.contrastText'
-                          : index === 3
-                            ? 'success.contrastText'
-                            : index === 4
-                              ? 'canvas.contrastText'
-                              : 'error.contrastText',
+                rotation={index % 2 === 0 ? 1 : -1}
+                sx={(theme) => {
+                  const tone = index % 3
+                  const backgroundColor =
+                    tone === 0
+                      ? theme.digitalStudio.colors.surface
+                      : tone === 1
+                        ? theme.digitalStudio.colors.canvas
+                        : theme.digitalStudio.colors.surfaceStrong
+
+                  return {
+                    backgroundColor,
+                    color: theme.digitalStudio.colors.text,
+                  }
                 }}
               >
                 <CardContent sx={{ p: 8, '&:last-child': { pb: 8 } }}>
@@ -67,7 +59,7 @@ export function LearningSection() {
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{item.description}</Typography>
                 </CardContent>
-              </StudioCard>
+              </StudioMotionCard>
             ))}
           </Box>
         </Stack>

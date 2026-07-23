@@ -8,6 +8,7 @@ import { ButtonLink, ExternalLink, InternalLink } from './actions/AppLink'
 import { PageContainer } from './layout/PageContainer'
 import { PageSection } from './layout/PageSection'
 import { StudioCard } from './surfaces/StudioCard'
+import { StudioMotionCard } from './surfaces/StudioMotionCard'
 
 function renderWithProviders(children: ReactNode) {
   return render(
@@ -33,6 +34,19 @@ describe('shared layout and interaction primitives', () => {
 
     expect(screen.getByRole('region', { name: 'Evidence section' })).toBeInTheDocument()
     expect(screen.getByRole('article')).toHaveTextContent('Architecture evidence')
+  })
+
+  it('preserves semantic card content when applying the shared motion treatment', () => {
+    renderWithProviders(
+      <StudioMotionCard component="article" rotation={1}>
+        <CardContent>
+          <Typography>Learning milestone</Typography>
+        </CardContent>
+      </StudioMotionCard>,
+    )
+
+    expect(screen.getByRole('article')).toHaveTextContent('Learning milestone')
+    expect(document.head).toHaveTextContent('prefers-reduced-motion')
   })
 
   it('keeps navigation links distinct from action buttons', () => {
