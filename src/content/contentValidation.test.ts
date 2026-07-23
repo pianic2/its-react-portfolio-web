@@ -10,7 +10,11 @@ import {
   getSkillsPage,
 } from './loaders'
 import type { ContentRepository } from './schema'
-import { validateContentRepository } from './validation'
+import {
+  findContentStringProblems,
+  validateContentRepository,
+  validateStaticSeoDescriptions,
+} from './validation'
 
 function cloneRepository() {
   return structuredClone(rawContentRepository) as ContentRepository
@@ -249,6 +253,41 @@ describe('content repository validation', () => {
 
     expect(() => validateContentRepository(repository)).toThrow(
       /entity=project id=homeedge-ai-platform.*Projects require exactly one repository link/,
+    )
+  })
+
+  it('reports whitespace-only and placeholder content without touching repository files', () => {
+    expect(findContentStringProblems({ title: '   ', body: 'TODO: write this' })).toEqual([
+      'entity=content path=title: empty string after trim',
+      'entity=content path=body: known placeholder text',
+    ])
+    expect(findContentStringProblems({ image: { alt: '' } })).toEqual([])
+  })
+
+  it('rejects missing and duplicated static SEO descriptions in an isolated fixture', () => {
+    const descriptions = {
+      it: {
+        projects: 'Duplicata',
+        skills: 'Duplicata',
+        method: 'Metodo',
+        profile: 'Profilo',
+        contact: 'Contatti',
+        privacy: 'Privacy',
+      },
+      en: {
+        projects: 'Projects',
+        skills: 'Skills',
+        method: 'Method',
+        profile: 'Profile',
+        contact: 'Contact',
+      },
+    }
+
+    expect(validateStaticSeoDescriptions(descriptions)).toEqual(
+      expect.arrayContaining([
+        'locale=it entity=seo path=description: duplicate description "Duplicata"',
+        'locale=en entity=seo path=privacy.description: missing description',
+      ]),
     )
   })
 })

@@ -1,5 +1,6 @@
 import { ZodError } from 'zod'
 import { rawContentRepository } from './data'
+import { staticSeoDescriptions } from './seo'
 import {
   contentRepositorySchema,
   supportedLanguages,
@@ -72,6 +73,72 @@ function validateMethodResourceUrl(problems: string[], url: string, path: string
   }
 }
 
+const requiredStaticSeoPages = [
+  'projects',
+  'skills',
+  'method',
+  'profile',
+  'contact',
+  'privacy',
+] as const
+const placeholderPattern = /\b(?:TODO|TBD|Lorem ipsum|Replace me)\b/
+
+export function findContentStringProblems(input: unknown): string[] {
+  const problems: string[] = []
+
+  function visit(value: unknown, path: string[]) {
+    if (typeof value === 'string') {
+      const key = path.at(-1)
+      if (key !== 'alt' && value.trim().length === 0) {
+        problems.push(`entity=content path=${path.join('.')}: empty string after trim`)
+      }
+      if (key !== 'alt' && key !== 'url' && key !== 'src' && placeholderPattern.test(value)) {
+        problems.push(`entity=content path=${path.join('.')}: known placeholder text`)
+      }
+      return
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => visit(item, [...path, String(index)]))
+      return
+    }
+    if (typeof value === 'object' && value !== null) {
+      Object.entries(value).forEach(([key, item]) => visit(item, [...path, key]))
+    }
+  }
+
+  visit(input, [])
+  return problems
+}
+
+export function validateStaticSeoDescriptions(
+  descriptions: Record<Language, Partial<Record<PageId, string>>> = staticSeoDescriptions,
+): string[] {
+  const problems: string[] = []
+  for (const language of supportedLanguages) {
+    const localized = descriptions[language]
+    const values: string[] = []
+    for (const page of requiredStaticSeoPages) {
+      const description = localized[page]
+      if (!description || description.trim().length === 0) {
+        problems.push(`locale=${language} entity=seo path=${page}.description: missing description`)
+        continue
+      }
+      if (placeholderPattern.test(description)) {
+        problems.push(
+          `locale=${language} entity=seo path=${page}.description: known placeholder text`,
+        )
+      }
+      values.push(description.trim())
+    }
+    for (const duplicate of duplicates(values)) {
+      problems.push(
+        `locale=${language} entity=seo path=description: duplicate description "${duplicate}"`,
+      )
+    }
+  }
+  return problems
+}
+
 export function validateContentRepository(
   input: unknown = rawContentRepository,
 ): ContentRepository {
@@ -81,7 +148,7 @@ export function validateContentRepository(
   }
 
   const repository = parsed.data
-  const problems: string[] = []
+  const problems = [...findContentStringProblems(repository), ...validateStaticSeoDescriptions()]
   const coreIds = repository.projects.map((project) => project.id)
   const coreIdSet = new Set(coreIds)
   const capabilityIds = repository.capabilities.map((capability) => capability.id)
