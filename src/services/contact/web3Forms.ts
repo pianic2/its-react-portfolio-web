@@ -3,8 +3,9 @@ import {
   type ContactSubmissionResult,
   type SubmitContactMessage,
 } from './types'
+import { externalLinks } from '../../config/externalLinks'
 
-const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ENDPOINT = externalLinks.web3FormsEndpoint
 
 type Web3FormsEnvironment = Record<string, unknown>
 

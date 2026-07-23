@@ -8,8 +8,9 @@ import { getRoutePath } from '../../routes/routeConfig'
 import { CardContent } from '@mui/material'
 import { StudioCard } from '../../components/surfaces/StudioCard'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { externalLinks } from '../../config/externalLinks'
 
-const githubUrl = 'https://github.com/pianic2'
+const githubUrl = externalLinks.githubProfile
 
 export function HomeHero() {
   const { language, siteContent } = usePortfolioContent()

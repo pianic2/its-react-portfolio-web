@@ -7,6 +7,7 @@ import { usePortfolioContent } from '../content/context'
 import { PopArtConversionSection } from '../features/supporting-pages/PopArtConversionSection'
 import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
 import { getRoutePath } from '../routes/routeConfig'
+import { externalLinks } from '../config/externalLinks'
 
 export function ProfilePage() {
   const { language, siteContent } = usePortfolioContent()
@@ -60,7 +61,7 @@ export function ProfilePage() {
               <SupportingPageCta
                 cta={{
                   kind: 'external',
-                  href: 'https://github.com/pianic2',
+                  href: externalLinks.githubProfile,
                   label: page.ctas.githubLabel,
                   analyticsId: 'profile-hero-github',
                 }}
@@ -280,7 +281,7 @@ export function ProfilePage() {
         }}
         secondaryCta={{
           kind: 'external',
-          href: 'https://github.com/pianic2',
+          href: externalLinks.githubProfile,
           label: page.ctas.githubLabel,
           analyticsId: 'profile-closing-github',
         }}
