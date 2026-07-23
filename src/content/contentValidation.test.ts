@@ -151,8 +151,10 @@ describe('content repository validation', () => {
     ).toBe('Read the Product Vision')
     expect(
       shared.evidence.some((evidence) => {
+        if (!evidence.url) return false
         try {
-          return new URL(evidence.url ?? '').hostname.endsWith('atlassian.net')
+          const { hostname } = new URL(evidence.url)
+          return hostname === 'atlassian.net' || hostname.endsWith('.atlassian.net')
         } catch {
           return false
         }
