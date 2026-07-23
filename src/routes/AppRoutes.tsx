@@ -40,7 +40,7 @@ function RouteLoadingFallback({ language }: { language: Language }) {
       aria-label={loadingLabels[language]}
       sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', minBlockSize: '50vh' }}
     >
-      <CircularProgress color="primary" />
+      <CircularProgress aria-hidden="true" color="primary" />
     </Box>
   )
 }
