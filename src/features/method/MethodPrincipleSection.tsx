@@ -60,7 +60,7 @@ export function MethodPrincipleSection({
             >
               {principle.number}
             </Typography>
-            <Typography color="text.secondary" sx={{ fontWeight: 700 }} variant="h6">
+            <Typography component="p" color="text.secondary" sx={{ fontWeight: 700 }} variant="h6">
               {principle.question}
             </Typography>
             <Typography component="h2" id={`method-principle-${principle.id}-title`} variant="h3">

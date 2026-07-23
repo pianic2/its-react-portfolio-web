@@ -27,6 +27,9 @@ export function MobileNavigationDrawer({ language, onClose, open }: MobileNaviga
       open={open}
       slotProps={{
         paper: {
+          'aria-labelledby': 'mobile-navigation-title',
+          'aria-modal': true,
+          role: 'dialog',
           sx: (theme) => {
             const { pageGutter, panelInset, shadowClearance } = theme.digitalStudio.layout
             const compactViewportReservation = pageGutter.compact * 2 + shadowClearance
@@ -56,7 +59,7 @@ export function MobileNavigationDrawer({ language, onClose, open }: MobileNaviga
     >
       <Stack spacing={5} sx={{ minWidth: 0 }}>
         <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography component="h2" variant="h5">
+          <Typography component="h2" id="mobile-navigation-title" variant="h5">
             {labels.title}
           </Typography>
           <StudioIconButton aria-label={labels.close} onClick={onClose}>

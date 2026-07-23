@@ -27,7 +27,7 @@ export function MethodResourceLinks({
   sx,
 }: MethodResourceLinksProps) {
   return (
-    <Box component="section" aria-labelledby={`${id}-title`} sx={sx}>
+    <Box sx={sx}>
       <Typography component="h3" id={`${id}-title`} variant="h6">
         {title}
       </Typography>

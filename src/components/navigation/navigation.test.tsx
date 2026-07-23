@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import type { ReactNode } from 'react'
@@ -63,16 +63,20 @@ describe('shared navigation primitives', () => {
     )
   })
 
-  it('opens and closes the mobile navigation drawer', async () => {
+  it('opens an accessible mobile navigation dialog and restores focus after Escape', async () => {
     const user = userEvent.setup()
     renderWithProviders(<SiteHeader language="it" />)
 
-    fireEvent.click(screen.getByRole('button', { name: 'Apri navigazione', hidden: true }))
+    const trigger = screen.getByRole('button', { name: 'Apri navigazione', hidden: true })
+    await user.click(trigger)
 
-    expect(screen.getByRole('heading', { name: 'Navigazione' })).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: 'Chiudi navigazione' }))
+    const dialog = screen.getByRole('dialog', { name: 'Navigazione' })
+    expect(dialog).toHaveAttribute('aria-modal', 'true')
+    expect(dialog).toHaveFocus()
+    await user.keyboard('{Escape}')
     await waitFor(() => {
-      expect(screen.queryByRole('heading', { name: 'Navigazione' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('dialog', { name: 'Navigazione' })).not.toBeInTheDocument()
     })
+    expect(trigger).toHaveFocus()
   })
 })
