@@ -30,6 +30,7 @@ function loadProject(language: Language, projectId: string) {
     detailPath: getRoutePath('projectDetail', language, { slug: project.slug }),
     path: getRoutePath('projectDetail', language, { slug: project.slug }),
     repositoryUrl: repositoryLink.url,
+    repositoryLabel: repositoryLink.label,
     claimStatus: primaryClaim.status,
     claimLabel: primaryClaim.statusLabel,
   }
