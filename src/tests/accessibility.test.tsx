@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { AppRoutes } from '../routes/AppRoutes'
 import { DigitalStudioProvider } from '../theme'
 
-const axeOptions = {
+const axeOptions: axe.RunOptions = {
   resultTypes: ['violations'],
   rules: { 'color-contrast': { enabled: false } },
 }
