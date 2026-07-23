@@ -1,4 +1,5 @@
 import { getLocalizedProjectPath, getProjectBySlug, getSiteContent } from '../content/loaders'
+import { staticSeoDescriptions } from '../content/seo'
 import {
   getRoutePath,
   resolveLocalizedRoute,
@@ -44,16 +45,14 @@ export function getSeoMetadata(pathname: string): SeoMetadata {
     (resolved.page === 'home'
       ? content.portfolio.metadata.title
       : `${content.navigation.find((item) => item.page === resolved.page)?.label ?? resolved.page} | ${content.identity.name}`)
-  const description = project?.metadata.description ?? content.portfolio.metadata.description
+  const description =
+    project?.metadata.description ??
+    staticSeoDescriptions[language][resolved.page] ??
+    content.portfolio.metadata.description
   const alternates = Object.fromEntries(
     supportedLanguages.map((locale) => {
-    const localizedPath = project ? getLocalizedProjectPath(project.id, locale) : null
-    return [
-      locale,
-      absolute(
-        localizedPath ?? getRoutePath(resolved.page, locale),
-      ),
-      ]
+      const localizedPath = project ? getLocalizedProjectPath(project.id, locale) : null
+      return [locale, absolute(localizedPath ?? getRoutePath(resolved.page, locale))]
     }),
   ) as Record<Language, string>
   return {
