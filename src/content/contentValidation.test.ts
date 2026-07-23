@@ -152,8 +152,12 @@ describe('content repository validation', () => {
     expect(
       shared.evidence.some((evidence) => {
         if (!evidence.url) return false
-        const { hostname } = new URL(evidence.url)
-        return hostname === 'atlassian.net' || hostname.endsWith('.atlassian.net')
+        try {
+          const { hostname } = new URL(evidence.url)
+          return hostname === 'atlassian.net' || hostname.endsWith('.atlassian.net')
+        } catch {
+          return false
+        }
       }),
     ).toBe(false)
     expect(english.evidence).toHaveLength(3)
