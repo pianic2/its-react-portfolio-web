@@ -1,8 +1,8 @@
 {
-  "observedOn": "Node 24.17.0 / Vite 8.1.4",
+  "observedOn": "Node 24.18.0 / Vite 8.1.4",
   "assets": {
-    "assets/index-CEYdN1m7.js": { "bytes": 992362, "gzipBytes": 302660 },
-    "assets/index-DtJaIMXA.css": { "bytes": 11304, "gzipBytes": 2120 }
+    "assets/index-Bt0igvA0.js": { "bytes": 995760, "gzipBytes": 301231 },
+    "assets/index-DtJaIMXA.css": { "bytes": 11304, "gzipBytes": 2112 }
   },
   "allowance": { "absoluteBytes": 51200, "relative": 0.05 }
 }
