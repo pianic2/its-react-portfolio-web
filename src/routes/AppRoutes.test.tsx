@@ -66,10 +66,10 @@ describe('localized application routes', () => {
     ],
     ['/en/contact', 'Tell me what you are working on.'],
     ['/en/privacy', 'How the contact form handles your data.'],
-  ])('renders %s as %s', (path, heading) => {
+  ])('renders %s as %s', async (path, heading) => {
     renderRoute(path)
 
-    expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: heading })).toBeInTheDocument()
   })
 
   it('renders the exact English Home narrative and actions', () => {
@@ -362,10 +362,10 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
   })
 
-  it('exposes the complete design-system review surface only in development builds', () => {
+  it('exposes the complete design-system review surface only in development builds', async () => {
     renderRoute('/__dev/design-system')
 
-    expect(screen.getByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
     expect(screen.getByText('Development only · IRPW-17')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Focus, disabled state and optional motion' }),
