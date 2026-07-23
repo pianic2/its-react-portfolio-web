@@ -65,7 +65,9 @@ describe('ContactForm', () => {
     const name = screen.getByRole('textbox', { name: /Name/ })
     expect(name).toHaveAttribute('aria-invalid', 'true')
     expect(name).toHaveAttribute('aria-describedby', 'contact-name-error')
-    expect(document.getElementById('contact-name-error')).toHaveTextContent('This field is required.')
+    expect(document.getElementById('contact-name-error')).toHaveTextContent(
+      'This field is required.',
+    )
   })
 
   it('keeps validation feedback localized without contacting the provider', () => {
