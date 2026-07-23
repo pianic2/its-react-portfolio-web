@@ -57,7 +57,7 @@ export function MethodFoundationsSection({
             language={language}
             resources={foundation.resources}
             title={resourcesTitle}
-            sx={{ justifySelf: 'flex-end' }}
+            sx={{ justifySelf: { md: 'flex-end' } }}
           />
         </Box>
       </MethodPageContainer>

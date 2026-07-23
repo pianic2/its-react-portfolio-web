@@ -170,4 +170,9 @@ export const englishProfileContactLegalContent = {
     ownerContactLabel: 'Contact the site owner on GitHub',
     ownerContactUrl: 'https://github.com/pianic2',
   },
-} satisfies Pick<SiteContent, 'profilePage' | 'contactPage' | 'privacyPage'>
+  notFoundPage: {
+    title: 'Page not found',
+    description: 'The requested page does not exist or is no longer available.',
+    ctaLabel: 'Back to home',
+  },
+} satisfies Pick<SiteContent, 'profilePage' | 'contactPage' | 'privacyPage' | 'notFoundPage'>

@@ -623,6 +623,11 @@ export const siteContentSchema = z.object({
     ownerContactLabel: z.string().min(1),
     ownerContactUrl: httpsUrlSchema,
   }),
+  notFoundPage: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    ctaLabel: z.string().min(1),
+  }),
   projectsPage: z.object({
     hero: editorialSectionSchema.extend({ supportingText: z.string().min(1) }),
     guide: z.object({
