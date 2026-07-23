@@ -36,8 +36,7 @@ export function ProjectShowcaseCard({
             ? theme.digitalStudio.colors.canvas
             : theme.digitalStudio.colors.surface,
         blockSize: '100%',
-        boxShadow: (theme) =>
-          variant === 'projects' ? 'none' : theme.digitalStudio.shadows.small,
+        boxShadow: (theme) => (variant === 'projects' ? 'none' : theme.digitalStudio.shadows.small),
         display: 'flex',
         flexDirection: 'column',
         minWidth: 0,

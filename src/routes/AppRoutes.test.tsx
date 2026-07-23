@@ -241,9 +241,7 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Leggi la Product Vision/ })).toBeInTheDocument()
     expect(
-      screen.getByText(
-        /Il repository pubblico è la fonte tecnica di riferimento/,
-      ),
+      screen.getByText(/Il repository pubblico è la fonte tecnica di riferimento/),
     ).toBeInTheDocument()
   })
 
@@ -296,7 +294,7 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: 'Where it stands today' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'What you can verify' })).toBeInTheDocument()
     expect(screen.getAllByText('Backed by evidence')).toHaveLength(1)
-    expect(screen.getByRole('link', { name: /Open the repository/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /GitHub repository/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node',
     )
