@@ -241,9 +241,7 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Leggi la Product Vision/ })).toBeInTheDocument()
     expect(
-      screen.getByText(
-        /Il repository pubblico è la fonte tecnica di riferimento/,
-      ),
+      screen.getByText(/Il repository pubblico è la fonte tecnica di riferimento/),
     ).toBeInTheDocument()
   })
 

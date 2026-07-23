@@ -404,8 +404,12 @@ export function validateContentRepository(
   ] as const
 
   for (const [path, italianItems, englishItems] of parallelCollections) {
-    const italianIds = italianItems.map((item) => ('projectId' in item ? item.projectId : item.id))
-    const englishIds = englishItems.map((item) => ('projectId' in item ? item.projectId : item.id))
+    const italianIds = italianItems.map((item) =>
+      'projectId' in item ? item.projectId : item.id,
+    ) as string[]
+    const englishIds = englishItems.map((item) =>
+      'projectId' in item ? item.projectId : item.id,
+    ) as string[]
     addDuplicates(problems, italianIds, 'locale=it entity=site', path)
     addDuplicates(problems, englishIds, 'locale=en entity=site', path)
     if (sorted(italianIds) !== sorted(englishIds)) {

@@ -57,7 +57,7 @@ describe('critical CTA and link behaviour', () => {
     expect(
       screen.queryByRole('link', { name: /HomeEdge stakeholder space/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /GitHub repository/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Open the repository/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/homeedge-ai-platform',
     )
