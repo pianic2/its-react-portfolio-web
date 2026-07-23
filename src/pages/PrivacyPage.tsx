@@ -74,7 +74,7 @@ export function PrivacyPage() {
                   display: 'grid',
                   gap: { xs: 2, sm: 4 },
                   gridTemplateColumns: { xs: '1fr', sm: '4rem 1fr' },
-                  py: { xs: 5, md: 7 },
+                  py: { xs: 7, md: 8 },
                   scrollMarginTop: 112,
                 })}
               >
