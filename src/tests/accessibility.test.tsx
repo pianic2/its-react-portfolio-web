@@ -5,6 +5,11 @@ import { describe, expect, it } from 'vitest'
 import { AppRoutes } from '../routes/AppRoutes'
 import { DigitalStudioProvider } from '../theme'
 
+const axeOptions = {
+  resultTypes: ['violations'],
+  rules: { 'color-contrast': { enabled: false } },
+}
+
 async function getAxeViolations(path: string) {
   const view = render(
     <DigitalStudioProvider>
@@ -13,9 +18,7 @@ async function getAxeViolations(path: string) {
       </MemoryRouter>
     </DigitalStudioProvider>,
   )
-  const result = await axe.run(view.container, {
-    rules: { 'color-contrast': { enabled: false } },
-  })
+  const result = await axe.run(view.container, axeOptions)
   return result.violations
 }
 
@@ -41,9 +44,7 @@ describe('representative public accessibility surfaces', () => {
       'aria-describedby',
       'contact-name-error',
     )
-    expect(
-      await axe.run(view.container, { rules: { 'color-contrast': { enabled: false } } }),
-    ).toMatchObject({
+    expect(await axe.run(view.container, axeOptions)).toMatchObject({
       violations: [],
     })
   })
