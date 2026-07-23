@@ -55,6 +55,7 @@ export type DigitalStudioThemeTokens = {
   patterns: {
     halftone: string
     diagonal: string
+    conversionHalftone: string
   }
   layout: {
     pageGutter: {
@@ -73,6 +74,7 @@ export type DigitalStudioThemeTokens = {
       wide: number
     }
     shadowClearance: number
+    diagramViewportPadding: number
   }
   motion: {
     duration: {
@@ -188,6 +190,7 @@ const layout = {
     wide: 40,
   },
   shadowClearance: shadowOffsets.large,
+  diagramViewportPadding: 0.18,
 } as const
 
 const motion = {
@@ -223,6 +226,7 @@ export function createDigitalStudioTokens(mode: ThemeMode): DigitalStudioThemeTo
     },
     patterns: {
       halftone: `radial-gradient(circle at 25% 25%, ${patternsColor} 0 1.25px, transparent 1.5px), radial-gradient(circle at 75% 75%, ${patternsColor} 0 1.25px, transparent 1.5px)`,
+      conversionHalftone: 'radial-gradient(circle, rgba(0, 0, 0, 0.16) 1.5px, transparent 1.5px)',
       diagonal: `repeating-linear-gradient(135deg, ${colors.border}20 0 2px, transparent 2px 12.75px)`,
     },
     layout,

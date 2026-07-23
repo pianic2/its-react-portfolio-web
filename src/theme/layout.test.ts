@@ -26,4 +26,11 @@ describe('Digital Studio optical layout tokens', () => {
 
     expect(spacing.base).toBe(4)
   })
+
+  it('owns shared diagram and conversion treatments in semantic tokens', () => {
+    const { layout, patterns } = createDigitalStudioTokens('light')
+
+    expect(layout.diagramViewportPadding).toBe(0.18)
+    expect(patterns.conversionHalftone).toContain('radial-gradient')
+  })
 })
