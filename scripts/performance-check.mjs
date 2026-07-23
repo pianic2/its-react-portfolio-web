@@ -4,7 +4,7 @@ import { compareBudget, summarizeAssets } from './release-contract.mjs'
 
 const baseline = JSON.parse(readFileSync('scripts/performance-budget.json', 'utf8'))
 const files = readdirSync('dist/assets').map((name) => ({
-  path: `assets/${name}`,
+  path: `assets/${name.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:css|js)$)/, '')}`,
   contents: readFileSync(join('dist/assets', name)),
 }))
 const measured = summarizeAssets(files)
