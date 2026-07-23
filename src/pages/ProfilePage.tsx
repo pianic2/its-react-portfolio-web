@@ -210,7 +210,7 @@ export function ProfilePage() {
                   component="a"
                   href={item.url}
                   key={item.id}
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   target="_blank"
                   sx={(theme) => ({
                     backgroundColor: theme.digitalStudio.colors.surface,
