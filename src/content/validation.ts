@@ -401,11 +401,6 @@ export function validateContentRepository(
       english.methodPage.agenticDelivery.concepts,
     ],
     ['methodPage.tools.items', italian.methodPage.tools.items, english.methodPage.tools.items],
-    [
-      'projectsPage.comparison.projects',
-      italian.projectsPage.comparison.projects,
-      english.projectsPage.comparison.projects,
-    ],
   ] as const
 
   for (const [path, italianItems, englishItems] of parallelCollections) {

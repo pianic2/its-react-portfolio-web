@@ -233,38 +233,6 @@ export const englishContent = {
         'The badge on each card explains where the project comes from. HomeEdge is a personal project I intend to keep developing; the other two were created through ITS assignments and exercises.',
       note: 'The evidence status explains whether a feature can already be inspected in code or documentation, or whether it represents a future direction.',
     },
-    comparison: {
-      eyebrow: 'COMPARISON',
-      title: 'What changes from one project to another?',
-      description: 'Each project pushed me to focus on a different kind of problem.',
-      questions: {
-        type: 'What kind of project is it?',
-        learning: 'What am I exploring?',
-        difficulty: 'What is the main challenge?',
-      },
-      projects: [
-        {
-          projectId: 'homeedge-ai-platform',
-          type: 'A long-term personal product.',
-          learning: 'Embedded systems, smart homes, architecture and responsible data use.',
-          difficulty:
-            'Growing different parts of the system without losing clarity about its current limits.',
-        },
-        {
-          projectId: 'its-library-api-laravel',
-          type: 'A complete backend developed during my ITS training.',
-          learning: 'REST APIs, authentication, relational databases and Docker.',
-          difficulty:
-            'Keeping data, relationships, validation rules and protected operations consistent.',
-        },
-        {
-          projectId: 'node-list-manager',
-          type: 'A small and focused educational backend.',
-          learning: 'Express, SQLite, route organisation and testing.',
-          difficulty: 'Avoiding unnecessary complexity in a problem that can remain simple.',
-        },
-      ],
-    },
     journey: {
       eyebrow: 'A LEARNING JOURNEY',
       title: 'These are not perfect projects. They are projects that are helping me grow.',
@@ -275,9 +243,9 @@ export const englishContent = {
       title: 'Want to see the work behind the projects?',
       description:
         'Open a project page, inspect the repositories or read more about how I organise my work.',
-      homeEdgeLabel: 'Open HomeEdge',
       methodLabel: 'Read about my approach',
       contactLabel: 'Contact me',
+      githubLabel: 'Visit my GitHub profile',
     },
   },
   projectExperience: {
@@ -383,7 +351,7 @@ export const englishContent = {
         evidenceIntroduction:
           'The public repository allows visitors to inspect the MVP boundaries, the included sensor signals, the architectural direction and the rules used to prevent unsupported claims.',
         transparency:
-          'The project is managed transparently across GitHub, Jira and Confluence. GitHub contains the technical source of truth, Jira tracks planned and completed work, and Confluence presents project context and review material to stakeholders.',
+          'The public repository is the technical source of truth for the current MVP boundaries, architecture notes and product direction.',
       },
       claims: [
         {
@@ -403,12 +371,6 @@ export const englishContent = {
           text: 'The Product Vision explains what HomeEdge is intended to become, which capabilities belong to the current MVP and which ideas remain outside its present scope.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-product-vision'],
-        },
-        {
-          id: 'project-progress-stakeholder-review',
-          text: 'HomeEdge uses Jira to track work and review status, while Confluence provides a stakeholder-facing space for project context, reports and review material.',
-          status: 'demonstrated',
-          evidenceIds: ['homeedge-stakeholder-review'],
         },
       ],
       evidence: [
@@ -430,13 +392,6 @@ export const englishContent = {
           description:
             'The Product Vision explains what HomeEdge is intended to become, which capabilities belong to the current MVP and which ideas remain outside its present scope.',
           linkLabel: 'Read the Product Vision',
-        },
-        {
-          evidenceId: 'homeedge-stakeholder-review',
-          label: 'Project progress and stakeholder review',
-          description:
-            'HomeEdge uses Jira to track work and review status, while Confluence provides a stakeholder-facing space for project context, reports and review material.',
-          linkLabel: 'Open the HomeEdge stakeholder space',
         },
       ],
       links: [{ linkId: 'homeedge-github', label: 'GitHub repository' }],

@@ -1,13 +1,14 @@
 import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
 import { Stack, Typography } from '@mui/material'
-import { ButtonLink } from '../../../components/actions/AppLink'
+import { ButtonLink, ExternalButtonLink } from '../../../components/actions/AppLink'
+import { externalLinks } from '../../../config/externalLinks'
 import { PageContainer } from '../../../components/layout/PageContainer'
 import { PageSection } from '../../../components/layout/PageSection'
 import { usePortfolioContent } from '../../../content/context'
 import { getRoutePath } from '../../../routes/routeConfig'
 
 export function ProjectsClosingSection() {
-  const { getProjectPath, language, siteContent } = usePortfolioContent()
+  const { language, siteContent } = usePortfolioContent()
   const copy = siteContent.projectsPage.finalCta
   return (
     <PageSection aria-labelledby="projects-closing-title" spacing="spacious">
@@ -23,10 +24,10 @@ export function ProjectsClosingSection() {
             <ButtonLink
               endIcon={<ArrowForwardRounded aria-hidden="true" />}
               sx={{ minHeight: 44 }}
-              to={getProjectPath('homeedge-ai-platform') ?? getRoutePath('projects', language)}
+              to={getRoutePath('contact', language)}
               variant="contained"
             >
-              {copy.homeEdgeLabel}
+              {copy.contactLabel}
             </ButtonLink>
             <ButtonLink
               sx={{ minHeight: 44 }}
@@ -35,13 +36,15 @@ export function ProjectsClosingSection() {
             >
               {copy.methodLabel}
             </ButtonLink>
-            <ButtonLink
+            <ExternalButtonLink
+              href={externalLinks.githubProfile}
+              language={language}
+              newTab
               sx={{ minHeight: 44 }}
-              to={getRoutePath('contact', language)}
               variant="text"
             >
-              {copy.contactLabel}
-            </ButtonLink>
+              {copy.githubLabel}
+            </ExternalButtonLink>
           </Stack>
         </Stack>
       </PageContainer>

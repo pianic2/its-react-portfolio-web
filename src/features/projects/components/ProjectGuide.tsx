@@ -11,12 +11,19 @@ export function ProjectGuide() {
       <PageContainer>
         <Box
           sx={{
-            backgroundColor: 'warning.main',
+            backgroundColor: (theme) => theme.digitalStudio.colors.surfaceStrong,
+            backgroundImage: (theme) => theme.digitalStudio.patterns.halftone,
             border: (theme) =>
               `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.border}`,
             boxShadow: (theme) => theme.digitalStudio.shadows.large,
-            color: 'common.black',
             p: { xs: 3, md: 5 },
+            transition: (theme) =>
+              `transform ${theme.digitalStudio.motion.duration.fast}ms ${theme.digitalStudio.motion.easing.standard}`,
+            '@media (hover: hover)': { '&:hover': { transform: 'translateY(-2px)' } },
+            '@media (prefers-reduced-motion: reduce)': {
+              transition: 'none',
+              '&:hover': { transform: 'none' },
+            },
           }}
         >
           <Stack spacing={2} sx={{ maxWidth: '70rem' }}>
@@ -26,7 +33,8 @@ export function ProjectGuide() {
             <Typography sx={{ maxWidth: '72ch' }}>{copy.description}</Typography>
             <Typography
               sx={{
-                borderInlineStart: '5px solid currentColor',
+                borderInlineStart: (theme) =>
+                  `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
                 fontWeight: 800,
                 maxWidth: '72ch',
                 pl: 2,
