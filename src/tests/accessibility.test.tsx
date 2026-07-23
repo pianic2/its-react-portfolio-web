@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { AppRoutes } from '../routes/AppRoutes'
 import { DigitalStudioProvider } from '../theme'
 
-async function expectNoAxeViolations(path: string) {
+async function getAxeViolations(path: string) {
   const view = render(
     <DigitalStudioProvider>
       <MemoryRouter initialEntries={[path]}>
@@ -16,12 +16,14 @@ async function expectNoAxeViolations(path: string) {
   const result = await axe.run(view.container, {
     rules: { 'color-contrast': { enabled: false } },
   })
-  expect(result.violations).toEqual([])
+  return result.violations
 }
 
 describe('representative public accessibility surfaces', () => {
   it.each(['/en', '/en/projects/homeedge-ai-platform', '/en/contact', '/en/privacy'])(
     '%s has no deterministic axe violations',
-    async (path) => expectNoAxeViolations(path),
+    async (path) => {
+      expect(await getAxeViolations(path)).toEqual([])
+    },
   )
 })

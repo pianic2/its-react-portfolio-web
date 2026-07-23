@@ -10,7 +10,9 @@ export default defineConfig(({ command }) => ({
   test: {
     environment: 'jsdom',
     globals: true,
-    maxWorkers: 4,
+    // MUI portals and shared document state are not isolated reliably across
+    // concurrent JSDOM workers. A single worker keeps the quality gate deterministic.
+    maxWorkers: 1,
     pool: 'threads',
     setupFiles: ['./src/tests/setup.ts'],
     css: true,
