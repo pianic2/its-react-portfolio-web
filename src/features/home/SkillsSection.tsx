@@ -73,7 +73,7 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
               <ButtonLink
                 endIcon={<ArrowForwardRounded aria-hidden="true" />}
                 sx={{ alignSelf: 'flex-start', gridColumn: { xs: 'span 6', md: 'auto' } }}
-                to={getRoutePath('projects', language)}
+                to={getRoutePath('skills', language)}
                 variant="outlined"
               >
                 {copy.labels.skillCtaLabel}
