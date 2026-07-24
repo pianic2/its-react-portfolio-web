@@ -105,6 +105,10 @@ describe('localized application routes', () => {
       screen.getByRole('heading', { name: 'Different tools for different projects.' }),
     ).toBeInTheDocument()
     expect(screen.getByTestId('skill-groups').children).toHaveLength(6)
+    expect(screen.getByRole('link', { name: 'View my skill' })).toHaveAttribute(
+      'href',
+      '/en/skills',
+    )
     expect(
       screen.getByRole('heading', { name: 'Understand first, then build.' }),
     ).toBeInTheDocument()
@@ -143,6 +147,10 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Tecnologie diverse, scelte in base al progetto.' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Esplora le mie competenze' })).toHaveAttribute(
+      'href',
+      '/it/competenze',
+    )
     expect(
       screen.getByRole('heading', { name: 'Prima capire, poi costruire.' }),
     ).toBeInTheDocument()
