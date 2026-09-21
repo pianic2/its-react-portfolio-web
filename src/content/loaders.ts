@@ -1,7 +1,7 @@
 import { getRoutePath } from '../routes/routeConfig'
 import { buildProjectViewModel } from './viewModels'
 import { validateContentRepository } from './validation'
-import type { Language, PageId, SiteContent } from './schema'
+import type { ContentRepository, Language, PageId, SiteContent } from './schema'
 
 const repository = validateContentRepository()
 
@@ -10,8 +10,8 @@ const utilityPageLabels: Record<Language, Partial<Record<PageId, string>>> = {
   en: { privacy: 'Privacy' },
 }
 
-function loadProject(language: Language, projectId: string) {
-  const project = buildProjectViewModel(repository, language, projectId)
+function loadProject(contentRepository: ContentRepository, language: Language, projectId: string) {
+  const project = buildProjectViewModel(contentRepository, language, projectId)
   if (!project) return null
 
   const primaryClaim = project.claims.at(0)
@@ -35,12 +35,12 @@ function loadProject(language: Language, projectId: string) {
   }
 }
 
-export function getSiteContent(language: Language) {
-  return repository.locales[language]
+export function getSiteContent(language: Language, contentRepository = repository) {
+  return contentRepository.locales[language]
 }
 
-export function getPortfolio(language: Language) {
-  const portfolio = repository.locales[language].portfolio
+export function getPortfolio(language: Language, contentRepository = repository) {
+  const portfolio = contentRepository.locales[language].portfolio
   const resolveCta = (cta: typeof portfolio.primaryCta) =>
     cta.kind === 'internal'
       ? { ...cta, href: getRoutePath(cta.page, language) }
@@ -64,10 +64,13 @@ function resolvePageCta(language: Language, cta: SiteContent['skillsPage']['hero
       : cta
 }
 
-function getPublicEvidence(language: Language) {
-  const sharedEvidence = new Map(repository.publicEvidence.map((item) => [item.id, item]))
+function getPublicEvidence(language: Language, contentRepository = repository) {
+  const sharedEvidence = new Map(contentRepository.publicEvidence.map((item) => [item.id, item]))
   const evidence = new Map(
-    getSiteContent(language).publicEvidence.map((item) => [item.evidenceId, item]),
+    getSiteContent(language, contentRepository).publicEvidence.map((item) => [
+      item.evidenceId,
+      item,
+    ]),
   )
   return new Map(
     [...evidence].map(([evidenceId, localized]) => {
@@ -80,9 +83,9 @@ function getPublicEvidence(language: Language) {
   )
 }
 
-export function getSkillsPage(language: Language) {
-  const page = getSiteContent(language).skillsPage
-  const evidence = getPublicEvidence(language)
+export function getSkillsPage(language: Language, contentRepository = repository) {
+  const page = getSiteContent(language, contentRepository).skillsPage
+  const evidence = getPublicEvidence(language, contentRepository)
   return {
     ...page,
     hero: {
@@ -103,9 +106,9 @@ export function getSkillsPage(language: Language) {
   }
 }
 
-export function getMethodPage(language: Language) {
-  const page = getSiteContent(language).methodPage
-  const evidence = getPublicEvidence(language)
+export function getMethodPage(language: Language, contentRepository = repository) {
+  const page = getSiteContent(language, contentRepository).methodPage
+  const evidence = getPublicEvidence(language, contentRepository)
   return {
     ...page,
     hero: {
@@ -131,43 +134,57 @@ export function getMethodPage(language: Language) {
   }
 }
 
-export function getProjectById(language: Language, projectId: string) {
-  return loadProject(language, projectId)
+export function getProjectById(
+  language: Language,
+  projectId: string,
+  contentRepository = repository,
+) {
+  return loadProject(contentRepository, language, projectId)
 }
 
-export function getProjectBySlug(language: Language, slug: string | undefined) {
+export function getProjectBySlug(
+  language: Language,
+  slug: string | undefined,
+  contentRepository = repository,
+) {
   if (!slug) return null
-  const localized = repository.locales[language].projects.find((project) => project.slug === slug)
-  return localized ? loadProject(language, localized.projectId) : null
+  const localized = contentRepository.locales[language].projects.find(
+    (project) => project.slug === slug,
+  )
+  return localized ? loadProject(contentRepository, language, localized.projectId) : null
 }
 
-export function getAllProjects(language: Language) {
-  return repository.projects
-    .map((project) => loadProject(language, project.id))
+export function getAllProjects(language: Language, contentRepository = repository) {
+  return contentRepository.projects
+    .map((project) => loadProject(contentRepository, language, project.id))
     .filter((project): project is NonNullable<typeof project> => project !== null)
     .sort((left, right) => left.order - right.order)
 }
 
-export function getFeaturedProjects(language: Language) {
-  return getAllProjects(language).filter((project) => project.featured)
+export function getFeaturedProjects(language: Language, contentRepository = repository) {
+  return getAllProjects(language, contentRepository).filter((project) => project.featured)
 }
 
-export function getLocalizedProjectPath(projectId: string, language: Language) {
-  return loadProject(language, projectId)?.detailPath ?? null
+export function getLocalizedProjectPath(
+  projectId: string,
+  language: Language,
+  contentRepository = repository,
+) {
+  return loadProject(contentRepository, language, projectId)?.detailPath ?? null
 }
 
 export type ProjectViewModel = NonNullable<ReturnType<typeof loadProject>>
 
-export function getNavigation(language: Language) {
-  return repository.locales[language].navigation.map((item) => ({
+export function getNavigation(language: Language, contentRepository = repository) {
+  return contentRepository.locales[language].navigation.map((item) => ({
     ...item,
     href: getRoutePath(item.page, language),
   }))
 }
 
-export function getPageLabel(language: Language, page: PageId) {
+export function getPageLabel(language: Language, page: PageId, contentRepository = repository) {
   return (
-    repository.locales[language].navigation.find((item) => item.page === page)?.label ??
+    contentRepository.locales[language].navigation.find((item) => item.page === page)?.label ??
     utilityPageLabels[language][page] ??
     page
   )
