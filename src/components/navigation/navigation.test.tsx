@@ -37,6 +37,14 @@ describe('shared navigation primitives', () => {
     expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
   })
 
+  it('exposes the canonical localized home link and shared brand asset', () => {
+    renderWithProviders(<SiteHeader language="en" />, '/en')
+
+    const identity = screen.getByRole('link', { name: 'Niccolò Piazzi — Home' })
+    expect(identity).toHaveAttribute('href', '/en')
+    expect(identity.querySelector('img')).toHaveAttribute('src', '/brand-mark.svg')
+  })
+
   it('switches through one destination-language flag control and stores the preference', async () => {
     const user = userEvent.setup()
     renderWithProviders(<LanguageSwitch />, '/it/progetti/gestore-liste-node')

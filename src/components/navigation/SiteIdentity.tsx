@@ -1,7 +1,7 @@
-import { Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import { getRoutePath, type Language } from '../../routes/routeConfig'
+import { BrandLogo } from './BrandLogo'
 
 const IdentityLink = styled(Link)(({ theme }) => {
   const { colors, focus, radii } = theme.digitalStudio
@@ -33,26 +33,7 @@ type SiteIdentityProps = {
 export function SiteIdentity({ language }: SiteIdentityProps) {
   return (
     <IdentityLink aria-label={identityLabels[language]} to={getRoutePath('home', language)}>
-      <Box
-        aria-hidden="true"
-        sx={(theme) => ({
-          alignItems: 'center',
-          bgcolor: 'secondary.main',
-          border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
-          borderRadius: `${theme.digitalStudio.radii.sm}px`,
-          boxShadow: theme.digitalStudio.shadows.small,
-          color: 'secondary.contrastText',
-          display: 'inline-flex',
-          flex: '0 0 auto',
-          fontFamily: theme.typography.h4.fontFamily,
-          fontWeight: 900,
-          height: { xs: theme.spacing(8), md: theme.spacing(12) },
-          justifyContent: 'center',
-          width: { xs: theme.spacing(8), md: theme.spacing(12) },
-        })}
-      >
-        NP
-      </Box>
+      <BrandLogo size="regular" />
     </IdentityLink>
   )
 }
