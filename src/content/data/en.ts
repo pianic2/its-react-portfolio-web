@@ -12,6 +12,7 @@ export const englishContent = {
     { page: 'method', label: 'Method' },
     { page: 'profile', label: 'Profile' },
     { page: 'contact', label: 'Contact' },
+    { page: 'blog', label: 'Blog' },
     { page: 'privacy', label: 'Privacy' },
   ],
   portfolio: {

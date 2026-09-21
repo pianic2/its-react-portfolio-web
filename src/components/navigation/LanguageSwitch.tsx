@@ -1,9 +1,12 @@
 import { Button } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { writeStoredLanguage } from '../../preferences/preferences'
 import { getLocalizedProjectPath, getProjectBySlug } from '../../content/loaders'
 import { getRoutePath, resolveLocalizedRoute, type Language } from '../../routes/routeConfig'
 import { LanguageFlag } from './LanguageFlag'
+import { usePortfolioBackend } from '../../services/backend'
+import { loadBlogPost, loadTranslatedBlogPost } from '../../features/blog/blogContent'
 
 const alternativeLanguage: Record<Language, Language> = {
   it: 'en',
@@ -27,6 +30,34 @@ type LanguageSwitchProps = {
 export function LanguageSwitch({ presentation = 'compact' }: LanguageSwitchProps) {
   const { pathname } = useLocation()
   const currentRoute = resolveLocalizedRoute(pathname)
+  const backend = usePortfolioBackend()
+  const [targetBlogPath, setTargetBlogPath] = useState<string | null>(null)
+
+  useEffect(() => {
+    let active = true
+    if (currentRoute?.page !== 'blogDetail' || !currentRoute.slug) {
+      setTargetBlogPath(null)
+      return () => {
+        active = false
+      }
+    }
+    const targetLanguage = alternativeLanguage[currentRoute.language]
+    void loadBlogPost(backend, currentRoute.language, currentRoute.slug).then(async (post) => {
+      const translated = post
+        ? await loadTranslatedBlogPost(backend, targetLanguage, post.stable_id)
+        : null
+      if (active) {
+        setTargetBlogPath(
+          translated?.meta?.slug
+            ? getRoutePath('blogDetail', targetLanguage, { slug: translated.meta.slug })
+            : getRoutePath('blog', targetLanguage),
+        )
+      }
+    })
+    return () => {
+      active = false
+    }
+  }, [backend, currentRoute?.language, currentRoute?.page, currentRoute?.slug])
 
   if (!currentRoute) {
     return null
@@ -37,9 +68,12 @@ export function LanguageSwitch({ presentation = 'compact' }: LanguageSwitchProps
   const visibleLabel =
     presentation === 'compact' ? targetLanguage.toUpperCase() : languageNames[targetLanguage]
   const project = page === 'projectDetail' ? getProjectBySlug(language, slug) : null
-  const targetPath = project
-    ? getLocalizedProjectPath(project.projectId, targetLanguage)
-    : getRoutePath(page, targetLanguage, slug ? { slug } : {})
+  const targetPath =
+    page === 'blogDetail'
+      ? (targetBlogPath ?? getRoutePath('blog', targetLanguage))
+      : project
+        ? getLocalizedProjectPath(project.projectId, targetLanguage)
+        : getRoutePath(page, targetLanguage, slug ? { slug } : {})
 
   return (
     <Button
