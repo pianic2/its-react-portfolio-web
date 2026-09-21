@@ -9,6 +9,8 @@ export const publicPageIds = [
   'profile',
   'contact',
   'privacy',
+  'blog',
+  'blogDetail',
 ] as const
 
 export const languageSchema = z.enum(supportedLanguages)

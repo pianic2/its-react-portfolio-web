@@ -11,8 +11,8 @@ export const staticSeoDescriptions: Record<Language, Partial<Record<PageId, stri
     profile: 'Background, learning path and public profiles of Niccolò Piazzi.',
     contact:
       'Contact Niccolò Piazzi for junior software opportunities, internships and focused collaborations.',
-    privacy:
-      'Privacy information for the portfolio contact form and its Web3Forms delivery provider.',
+    privacy: 'Privacy information for the portfolio contact form and its delivery provider.',
+    blog: 'Notes about software delivery, frontend, backend and ongoing portfolio work.',
   },
   it: {
     projects: 'Progetti software selezionati con perimetro, evidenze, stato attuale e repository.',
@@ -22,6 +22,7 @@ export const staticSeoDescriptions: Record<Language, Partial<Record<PageId, stri
     profile: 'Percorso, formazione e profili pubblici di Niccolò Piazzi.',
     contact:
       'Contatta Niccolò Piazzi per opportunità junior, tirocini e collaborazioni circoscritte.',
-    privacy: 'Informazioni privacy del form di contatto e del provider Web3Forms.',
+    privacy: 'Informazioni privacy del form di contatto e del provider di consegna.',
+    blog: 'Note su delivery software, frontend, backend e lavoro del portfolio.',
   },
 }

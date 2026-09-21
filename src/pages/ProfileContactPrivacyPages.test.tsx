@@ -81,8 +81,8 @@ describe('Profile, Contact and Privacy pages', () => {
     ).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(4)
     expect(
-      screen.getByRole('link', { name: /Read the Web3Forms privacy information/ }),
-    ).toHaveAttribute('href', 'https://web3forms.com/privacy')
+      screen.getByRole('link', { name: /Read the portfolio backend privacy information/ }),
+    ).toHaveAttribute('href', 'https://github.com/pianic2/its-react-portfolio-web')
     expect(screen.getByRole('link', { name: /Contact the site owner on GitHub/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2',

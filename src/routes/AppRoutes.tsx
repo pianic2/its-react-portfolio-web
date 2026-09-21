@@ -11,6 +11,7 @@ import { ProjectDetailPage } from '../pages/ProjectDetailPage'
 import { ProjectsPage } from '../pages/ProjectsPage'
 import { SkillsPage } from '../pages/SkillsPage'
 import { MethodPage } from '../pages/MethodPage'
+import { BlogPage } from '../pages/BlogPage'
 import { readStoredLanguage } from '../preferences/preferences'
 import { routeDefinitions, supportedLanguages, type Language, type PageId } from './routeConfig'
 
@@ -25,6 +26,7 @@ function pageElement(page: PageId, language: Language) {
   if (page === 'profile') return <ProfilePage />
   if (page === 'contact') return <ContactPage />
   if (page === 'privacy') return <PrivacyPage />
+  if (page === 'blog' || page === 'blogDetail') return <BlogPage />
   return <PagePlaceholder language={language} page={page} />
 }
 

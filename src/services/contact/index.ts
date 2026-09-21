@@ -3,7 +3,8 @@ export {
   normalizeContactFormValues,
   validateContactFormValues,
 } from './validation'
-export { createWeb3FormsAdapter, submitContactMessage } from './web3Forms'
+export { createPdpwContactAdapter, submitPdpwContactMessage as submitContactMessage } from './pdpw'
+export { createWeb3FormsAdapter } from './web3Forms'
 export {
   ContactSubmissionError,
   type ContactField,

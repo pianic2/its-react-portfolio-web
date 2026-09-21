@@ -117,7 +117,7 @@ export const englishProfileContactLegalContent = {
       submissionError: 'The message could not be sent. Check your connection and try again.',
       successMessage: 'Message sent. Thank you — I will reply as soon as I can.',
       privacyNotice:
-        'Your name, email and message are sent to Web3Forms for delivery. Do not include passwords, financial, health or other sensitive data.',
+        'Your name, email and message are sent to the portfolio backend for delivery. Do not include passwords, financial, health or other sensitive data.',
     },
     githubLabel: 'Use GitHub instead',
   },
@@ -145,14 +145,14 @@ export const englishProfileContactLegalContent = {
         id: 'privacy-purpose',
         title: 'Purpose and provider',
         paragraphs: [
-          'The data is used only to reply to your request and is sent to Web3Forms, the technical provider used to deliver the message to the configured address. The portfolio does not directly retain submissions.',
+          'The data is used only to reply to your request and is sent to the portfolio backend for delivery. The portfolio does not directly retain submissions.',
         ],
       },
       {
         id: 'privacy-sensitive-data',
         title: 'What not to send',
         paragraphs: [
-          'Do not include passwords, credentials, health or financial information, documents or other sensitive personal data. For details about provider-side processing, consult Web3Forms’ privacy information.',
+          'Do not include passwords, credentials, health or financial information, documents or other sensitive personal data. For details about provider-side processing, contact the site owner.',
         ],
       },
       {
@@ -164,8 +164,8 @@ export const englishProfileContactLegalContent = {
       },
     ],
     providerHeading: 'Service provider',
-    providerLabel: 'Read the Web3Forms privacy information',
-    providerUrl: 'https://web3forms.com/privacy',
+    providerLabel: 'Read the portfolio backend privacy information',
+    providerUrl: 'https://github.com/pianic2/its-react-portfolio-web',
     ownerContactHeading: 'Privacy contact',
     ownerContactLabel: 'Contact the site owner on GitHub',
     ownerContactUrl: 'https://github.com/pianic2',

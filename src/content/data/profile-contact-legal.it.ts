@@ -123,7 +123,7 @@ export const italianProfileContactLegalContent = {
       submissionError: 'Invio non riuscito. Controlla la connessione e riprova.',
       successMessage: 'Messaggio inviato. Grazie, ti risponderò appena possibile.',
       privacyNotice:
-        'Nome, email e messaggio vengono trasmessi a Web3Forms per la consegna. Non inviare password, dati finanziari, sanitari o altre informazioni sensibili.',
+        'Nome, email e messaggio vengono trasmessi al backend del portfolio per la consegna. Non inviare password, dati finanziari, sanitari o altre informazioni sensibili.',
     },
     githubLabel: 'Usa GitHub in alternativa',
   },
@@ -151,14 +151,14 @@ export const italianProfileContactLegalContent = {
         id: 'privacy-purpose',
         title: 'Finalità e provider',
         paragraphs: [
-          'I dati sono usati esclusivamente per rispondere alla richiesta e vengono trasmessi a Web3Forms, provider tecnico utilizzato per consegnare il messaggio all’indirizzo configurato. Il portfolio non conserva direttamente le richieste.',
+          'I dati sono usati esclusivamente per rispondere alla richiesta e vengono trasmessi al backend del portfolio per la consegna. Il portfolio non conserva direttamente le richieste.',
         ],
       },
       {
         id: 'privacy-sensitive-data',
         title: 'Cosa non inviare',
         paragraphs: [
-          'Non inserire password, credenziali, dati sanitari o finanziari, documenti o altre informazioni personali sensibili. Per i dettagli sul trattamento lato provider consulta l’informativa di Web3Forms.',
+          'Non inserire password, credenziali, dati sanitari o finanziari, documenti o altre informazioni personali sensibili. Per i dettagli sul trattamento lato provider contatta il proprietario del sito.',
         ],
       },
       {
@@ -170,8 +170,8 @@ export const italianProfileContactLegalContent = {
       },
     ],
     providerHeading: 'Provider del servizio',
-    providerLabel: 'Leggi l’informativa privacy di Web3Forms',
-    providerUrl: 'https://web3forms.com/privacy',
+    providerLabel: 'Leggi l’informativa privacy del backend del portfolio',
+    providerUrl: 'https://github.com/pianic2/its-react-portfolio-web',
     ownerContactHeading: 'Contatto privacy',
     ownerContactLabel: 'Contatta il titolare tramite GitHub',
     ownerContactUrl: 'https://github.com/pianic2',
