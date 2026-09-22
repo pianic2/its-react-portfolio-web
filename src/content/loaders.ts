@@ -177,18 +177,7 @@ export function getLocalizedProjectPath(
 export type ProjectViewModel = NonNullable<ReturnType<typeof loadProject>>
 
 export function getNavigation(language: Language, contentRepository = repository) {
-  const navigation = contentRepository.locales[language].navigation
-  const privacyIndex = navigation.findIndex((item) => item.page === 'privacy')
-  const insertionIndex = privacyIndex >= 0 ? privacyIndex : navigation.length
-  const localizedNavigation = navigation.some((item) => item.page === 'blog')
-    ? navigation
-    : [
-        ...navigation.slice(0, insertionIndex),
-        { page: 'blog' as const, label: utilityPageLabels[language].blog ?? 'Blog' },
-        ...navigation.slice(insertionIndex),
-      ]
-
-  return localizedNavigation.map((item) => ({
+  return contentRepository.locales[language].navigation.map((item) => ({
     ...item,
     href: getRoutePath(item.page, language),
   }))

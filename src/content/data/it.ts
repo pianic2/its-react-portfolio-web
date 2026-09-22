@@ -15,6 +15,7 @@ export const italianContent = {
     { page: 'method', label: 'Metodo' },
     { page: 'profile', label: 'Profilo' },
     { page: 'contact', label: 'Contatti' },
+    { page: 'blog', label: 'Blog' },
     { page: 'privacy', label: 'Privacy' },
   ],
   portfolio: {
