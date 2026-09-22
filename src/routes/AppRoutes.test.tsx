@@ -66,10 +66,10 @@ describe('localized application routes', () => {
     ],
     ['/en/contact', 'Tell me what you are working on.'],
     ['/en/privacy', 'How the contact form handles your data.'],
-  ])('renders %s as %s', (path, heading) => {
+  ])('renders %s as %s', async (path, heading) => {
     renderRoute(path)
 
-    expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: heading })).toBeInTheDocument()
   })
 
   it('renders the exact English Home narrative and actions', () => {
@@ -105,6 +105,10 @@ describe('localized application routes', () => {
       screen.getByRole('heading', { name: 'Different tools for different projects.' }),
     ).toBeInTheDocument()
     expect(screen.getByTestId('skill-groups').children).toHaveLength(6)
+    expect(screen.getByRole('link', { name: 'View my skill' })).toHaveAttribute(
+      'href',
+      '/en/skills',
+    )
     expect(
       screen.getByRole('heading', { name: 'Understand first, then build.' }),
     ).toBeInTheDocument()
@@ -143,6 +147,10 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Tecnologie diverse, scelte in base al progetto.' }),
     ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Esplora le mie competenze' })).toHaveAttribute(
+      'href',
+      '/it/competenze',
+    )
     expect(
       screen.getByRole('heading', { name: 'Prima capire, poi costruire.' }),
     ).toBeInTheDocument()
@@ -174,12 +182,8 @@ describe('localized application routes', () => {
     expect(screen.getAllByRole('heading', { name: 'What I worked on' })).toHaveLength(3)
     expect(screen.getAllByRole('heading', { name: 'What I would improve' })).toHaveLength(3)
     expect(
-      screen.getByRole('heading', { name: 'What changes from one project to another?' }),
-    ).toBeInTheDocument()
-    expect(screen.getByTestId('project-comparison')).toHaveAttribute(
-      'data-layout',
-      'responsive-panels',
-    )
+      screen.queryByRole('heading', { name: 'What changes from one project to another?' }),
+    ).not.toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: 'These are not perfect projects. They are projects that are helping me grow.',
@@ -188,15 +192,15 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Want to see the work behind the projects?' }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Open HomeEdge' })).toHaveAttribute(
-      'href',
-      '/en/projects/homeedge-ai-platform',
-    )
+    expect(screen.getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/en/contact')
     expect(screen.getByRole('link', { name: 'Read about my approach' })).toHaveAttribute(
       'href',
       '/en/method',
     )
-    expect(screen.getByRole('link', { name: 'Contact me' })).toHaveAttribute('href', '/en/contact')
+    expect(screen.getByRole('link', { name: /Visit my GitHub profile/ })).toHaveAttribute(
+      'href',
+      'https://github.com/pianic2',
+    )
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
     expect(screen.queryByText('[UNVALIDATED]')).not.toBeInTheDocument()
 
@@ -233,13 +237,7 @@ describe('localized application routes', () => {
       'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
     )
     expect(
-      screen.getByRole('heading', { name: 'Project progress and stakeholder review' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: /Open the HomeEdge stakeholder space/ }),
-    ).toHaveAttribute('href', 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview')
-    expect(
-      screen.getByText(/The project is managed transparently across GitHub, Jira and Confluence/),
+      screen.getByText(/The public repository is the technical source of truth/),
     ).toBeInTheDocument()
   })
 
@@ -251,15 +249,7 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Leggi la Product Vision/ })).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Avanzamento del progetto e stakeholder review' }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: /Apri lo spazio stakeholder di HomeEdge/ }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        /Il progetto viene gestito in modo trasparente attraverso GitHub, Jira e Confluence/,
-      ),
+      screen.getByText(/Il repository pubblico è la fonte tecnica di riferimento/),
     ).toBeInTheDocument()
   })
 
@@ -312,7 +302,7 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: 'Where it stands today' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'What you can verify' })).toBeInTheDocument()
     expect(screen.getAllByText('Backed by evidence')).toHaveLength(1)
-    expect(screen.getByRole('link', { name: /Open the repository/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /GitHub repository/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node',
     )
@@ -362,10 +352,10 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
   })
 
-  it('exposes the complete design-system review surface only in development builds', () => {
+  it('exposes the complete design-system review surface only in development builds', async () => {
     renderRoute('/__dev/design-system')
 
-    expect(screen.getByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Pop! Digital Studio' })).toBeInTheDocument()
     expect(screen.getByText('Development only · IRPW-17')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Focus, disabled state and optional motion' }),

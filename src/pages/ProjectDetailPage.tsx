@@ -122,7 +122,7 @@ export function ProjectDetailPage() {
                   newTab
                   sx={{ alignItems: 'center', display: 'inline-flex', minHeight: 44 }}
                 >
-                  {labels.repositoryLabel}
+                  {project.repositoryLabel ?? labels.repositoryLabel}
                 </ExternalLink>
               </CardContent>
               <Box sx={{ minWidth: 0, order: { xs: 1, md: 2 } }}>

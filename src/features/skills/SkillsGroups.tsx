@@ -1,6 +1,6 @@
 import { Box, Chip, Stack, Typography } from '@mui/material'
 import type { Language } from '../../routes/routeConfig'
-import { StudioCard } from '../../components/surfaces/StudioCard'
+import { StudioMotionCard } from '../../components/surfaces/StudioMotionCard'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { CompetenceReferences } from '../supporting-pages/CompetenceReferences'
@@ -63,31 +63,14 @@ export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
                     spacing={{ xs: 4, md: 6 }}
                     sx={{ order: { md: index % 2 === 0 ? 1 : -1 } }}
                   >
-                    <StudioCard
+                    <StudioMotionCard
                       component="section"
+                      rotation={index % 2 === 0 ? 1 : -1}
                       sx={(theme) => ({
-                        border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
-                        borderRadius: `${theme.digitalStudio.radii.lg}px`,
-                        boxShadow: theme.digitalStudio.shadows.medium,
-                        marginBlockEnd: `${theme.digitalStudio.shadowOffsets.large}px`,
-                        marginInlineEnd: `${theme.digitalStudio.shadowOffsets.large}px`,
                         textAlign: 'center',
-                        transition: theme.transitions.create(['box-shadow', 'transform'], {
-                          duration: theme.transitions.duration.standard,
-                          easing: theme.transitions.easing.easeIn,
-                        }),
                         backgroundColor: theme.palette.secondary.main,
                         color: theme.palette.secondary.contrastText,
                         p: { xs: 4, md: 6 },
-                        '&:hover': {
-                          boxShadow: theme.digitalStudio.shadows.small,
-                          transform: `translate(${theme.digitalStudio.shadowOffsets.medium}px, ${theme.digitalStudio.shadowOffsets.medium}px) rotate(${index % 2 === 0 ? 1 : -1}deg)`,
-                        },
-                        '@media (prefers-reduced-motion: reduce)': {
-                          transition: 'none',
-                          '&:hover': { transform: 'none' },
-                        },
-                        transform: { md: index % 2 === 0 ? 'rotate(1deg)' : 'rotate(-1deg)' },
                       })}
                     >
                       <Typography
@@ -96,7 +79,7 @@ export function SkillsGroups({ groups, labels, language }: SkillsGroupsProps) {
                       >
                         {group.problem}
                       </Typography>
-                    </StudioCard>
+                    </StudioMotionCard>
                     <EvidenceLinks
                       evidence={group.evidence}
                       heading={group.id}

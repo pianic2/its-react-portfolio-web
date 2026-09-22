@@ -6,8 +6,8 @@ import type { ContentRepository, Language, PageId, SiteContent } from './schema'
 const repository = validateContentRepository()
 
 const utilityPageLabels: Record<Language, Partial<Record<PageId, string>>> = {
-  it: { privacy: 'Privacy' },
-  en: { privacy: 'Privacy' },
+  it: { privacy: 'Privacy', blog: 'Blog', blogDetail: 'Blog' },
+  en: { privacy: 'Privacy', blog: 'Blog', blogDetail: 'Blog' },
 }
 
 function loadProject(contentRepository: ContentRepository, language: Language, projectId: string) {
@@ -30,6 +30,7 @@ function loadProject(contentRepository: ContentRepository, language: Language, p
     detailPath: getRoutePath('projectDetail', language, { slug: project.slug }),
     path: getRoutePath('projectDetail', language, { slug: project.slug }),
     repositoryUrl: repositoryLink.url,
+    repositoryLabel: repositoryLink.label,
     claimStatus: primaryClaim.status,
     claimLabel: primaryClaim.statusLabel,
   }

@@ -176,4 +176,9 @@ export const italianProfileContactLegalContent = {
     ownerContactLabel: 'Contatta il titolare tramite GitHub',
     ownerContactUrl: 'https://github.com/pianic2',
   },
-} satisfies Pick<SiteContent, 'profilePage' | 'contactPage' | 'privacyPage'>
+  notFoundPage: {
+    title: 'Pagina non trovata',
+    description: 'La pagina richiesta non esiste o non è più disponibile.',
+    ctaLabel: 'Torna alla home',
+  },
+} satisfies Pick<SiteContent, 'profilePage' | 'contactPage' | 'privacyPage' | 'notFoundPage'>

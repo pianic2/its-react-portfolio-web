@@ -266,13 +266,6 @@ const editorialSectionSchema = z.object({
   description: z.string().min(1),
 })
 
-const comparisonAnswerSchema = z.object({
-  projectId: stableIdSchema,
-  type: z.string().min(1),
-  learning: z.string().min(1),
-  difficulty: z.string().min(1),
-})
-
 const pageEvidenceCopySchema = z.object({
   evidenceId: stableIdSchema,
   label: z.string().min(1),
@@ -625,6 +618,11 @@ export const siteContentSchema = z.object({
     ownerContactLabel: z.string().min(1),
     ownerContactUrl: httpsUrlSchema,
   }),
+  notFoundPage: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    ctaLabel: z.string().min(1),
+  }),
   projectsPage: z.object({
     hero: editorialSectionSchema.extend({ supportingText: z.string().min(1) }),
     guide: z.object({
@@ -632,21 +630,13 @@ export const siteContentSchema = z.object({
       description: z.string().min(1),
       note: z.string().min(1),
     }),
-    comparison: editorialSectionSchema.extend({
-      questions: z.object({
-        type: z.string().min(1),
-        learning: z.string().min(1),
-        difficulty: z.string().min(1),
-      }),
-      projects: z.array(comparisonAnswerSchema).min(1),
-    }),
     journey: editorialSectionSchema,
     finalCta: z.object({
       title: z.string().min(1),
       description: z.string().min(1),
-      homeEdgeLabel: z.string().min(1),
       methodLabel: z.string().min(1),
       contactLabel: z.string().min(1),
+      githubLabel: z.string().min(1),
     }),
   }),
   projectExperience: z.object({

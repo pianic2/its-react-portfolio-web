@@ -94,11 +94,6 @@ export const sharedContent = {
           type: 'documentation',
           url: 'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
         },
-        {
-          id: 'homeedge-stakeholder-review',
-          type: 'report',
-          url: 'https://niccolopiazzi01.atlassian.net/wiki/spaces/IEHAP/overview',
-        },
       ],
       links: [
         {

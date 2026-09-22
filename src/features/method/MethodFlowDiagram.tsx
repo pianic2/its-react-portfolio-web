@@ -11,6 +11,7 @@ type MethodFlowDiagramProps = {
 
 export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramProps) {
   const theme = useTheme()
+  const { borderWidths, colors, layout, radii, shadows, spacing } = theme.digitalStudio
   const vertical = useMediaQuery(theme.breakpoints.down('sm'))
   const columns = vertical ? 1 : labels.length > 5 ? 4 : labels.length
   const rows = Math.ceil(labels.length / columns)
@@ -24,13 +25,13 @@ export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramPr
     sourcePosition: vertical || (index + 1) % columns === 0 ? Position.Bottom : Position.Right,
     targetPosition: vertical || index % columns === 0 ? Position.Top : Position.Left,
     style: {
-      background: 'var(--mui-palette-background-paper)',
-      border: '3px solid var(--mui-palette-text-primary)',
-      borderRadius: '8px',
-      boxShadow: '4px 4px 0 var(--mui-palette-text-primary)',
-      color: 'var(--mui-palette-text-primary)',
+      background: colors.surface,
+      border: `${borderWidths.bold}px solid ${colors.border}`,
+      borderRadius: `${radii.xs}px`,
+      boxShadow: shadows.small,
+      color: colors.text,
       fontWeight: 900,
-      padding: '12px 16px',
+      padding: `${spacing.base * 3}px ${spacing.base * 4}px`,
       width: 164,
     },
   }))
@@ -40,7 +41,7 @@ export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramPr
     source: `method-flow-node-${index}`,
     target: `method-flow-node-${index + 1}`,
     animated: false,
-    style: { stroke: 'var(--mui-palette-text-primary)', strokeWidth: 3 },
+    style: { stroke: colors.border, strokeWidth: borderWidths.bold },
   }))
 
   return (
@@ -50,8 +51,7 @@ export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramPr
       </Typography>
       <Box
         sx={{
-          border: '3px solid',
-          borderColor: 'text.primary',
+          border: `${borderWidths.bold}px solid ${colors.border}`,
           height: vertical ? Math.max(360, rows * 110 + 80) : Math.max(220, rows * 110 + 60),
           overflow: 'hidden',
           '& .react-flow__attribution': { display: 'none' },
@@ -63,7 +63,7 @@ export function MethodFlowDiagram({ labels, title, testId }: MethodFlowDiagramPr
           nodes={nodes}
           edges={edges}
           fitView
-          fitViewOptions={{ padding: 0.18 }}
+          fitViewOptions={{ padding: layout.diagramViewportPadding }}
           nodesConnectable={false}
           nodesDraggable={false}
           elementsSelectable={false}

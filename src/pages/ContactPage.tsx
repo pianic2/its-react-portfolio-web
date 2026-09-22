@@ -54,7 +54,32 @@ export function ContactPage() {
               gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 0.8fr) minmax(30rem, 1.2fr)' },
             }}
           >
-            <Stack spacing={6}>
+            <Box
+              sx={(theme) => ({
+                backgroundColor: theme.digitalStudio.colors.surface,
+                border:
+                  theme.digitalStudio.borderWidths.bold +
+                  'px solid ' +
+                  theme.digitalStudio.colors.border,
+                borderRadius: theme.digitalStudio.radii.lg + 'px',
+                boxShadow: theme.digitalStudio.shadows.large,
+                gridColumn: { lg: 2 },
+                gridRow: { lg: 1 },
+                p: { xs: 6, md: 8 },
+              })}
+            >
+              <Stack spacing={4}>
+                <Stack spacing={1.5}>
+                  <Typography component="h2" id="contact-form-title" variant="h3">
+                    {page.formTitle}
+                  </Typography>
+                  <Typography color="text.secondary">{page.formDescription}</Typography>
+                </Stack>
+                <ContactForm copy={page.form} locale={language} />
+              </Stack>
+            </Box>
+
+            <Stack spacing={6} sx={{ gridColumn: { lg: 1 }, gridRow: { lg: 1 } }}>
               <ContactList title={page.requestsTitle} items={page.appropriateRequests} />
               <ContactList title={page.guidanceTitle} items={page.messageGuidance} />
               <Stack spacing={2}>
@@ -70,29 +95,6 @@ export function ContactPage() {
                 </ExternalButtonLink>
               </Stack>
             </Stack>
-
-            <Box
-              sx={(theme) => ({
-                backgroundColor: theme.palette.background.paper,
-                border:
-                  theme.digitalStudio.borderWidths.bold +
-                  'px solid ' +
-                  theme.digitalStudio.colors.border,
-                borderRadius: theme.digitalStudio.radii.lg + 'px',
-                boxShadow: theme.digitalStudio.shadows.large,
-                p: { xs: 6, md: 8 },
-              })}
-            >
-              <Stack spacing={4}>
-                <Stack spacing={1.5}>
-                  <Typography component="h2" id="contact-form-title" variant="h3">
-                    {page.formTitle}
-                  </Typography>
-                  <Typography color="text.secondary">{page.formDescription}</Typography>
-                </Stack>
-                <ContactForm copy={page.form} locale={language} />
-              </Stack>
-            </Box>
           </Box>
         </PageContainer>
       </PageSection>
@@ -113,17 +115,10 @@ function ContactList({ items, title }: { items: string[]; title: string }) {
             key={item}
             sx={(theme) => ({
               backgroundColor:
-                index === 0
-                  ? theme.palette.success.main
-                  : index === 1
-                    ? theme.palette.info.main
-                    : theme.palette.warning.main,
-              color:
-                index === 0
-                  ? theme.palette.success.contrastText
-                  : index === 1
-                    ? theme.palette.info.contrastText
-                    : theme.palette.warning.contrastText,
+                index % 2 === 0
+                  ? theme.digitalStudio.colors.canvas
+                  : theme.digitalStudio.colors.surface,
+              color: theme.digitalStudio.colors.text,
               listStyle: 'none',
               border: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
               borderRadius: `${theme.digitalStudio.radii.lg}px`,
@@ -132,18 +127,6 @@ function ContactList({ items, title }: { items: string[]; title: string }) {
               marginInlineEnd: `${theme.digitalStudio.shadowOffsets.large}px`,
               p: 6,
               textAlign: 'center',
-              transition: theme.transitions.create(['box-shadow', 'transform'], {
-                duration: theme.transitions.duration.standard,
-                easing: theme.transitions.easing.easeIn,
-              }),
-              '&:hover': {
-                boxShadow: theme.digitalStudio.shadows.small,
-                transform: `translate(${theme.digitalStudio.shadowOffsets.medium}px, ${theme.digitalStudio.shadowOffsets.medium}px) rotate(${index % 2 === 0 ? 1 : -1}deg)`,
-              },
-              '@media (prefers-reduced-motion: reduce)': {
-                transition: 'none',
-                '&:hover': { transform: 'none' },
-              },
             })}
           >
             <Typography sx={{ fontWeight: 800 }}>{item}</Typography>

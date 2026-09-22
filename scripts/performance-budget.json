@@ -1,8 +1,10 @@
 {
-  "observedOn": "Node 24.17.0 / Vite 8.1.4",
+  "observedOn": "Node 24.18.0 / Vite 8.1.4",
   "assets": {
-    "assets/index.js": { "bytes": 992362, "gzipBytes": 302660 },
-    "assets/index.css": { "bytes": 11304, "gzipBytes": 2120 }
+    "assets/index.js": { "bytes": 804378, "gzipBytes": 241662 },
+    "assets/index.css": { "bytes": 162, "gzipBytes": 138 },
+    "assets/MethodPage.js": { "bytes": 193333, "gzipBytes": 60826 },
+    "assets/MethodPage.css": { "bytes": 11143, "gzipBytes": 2029 }
   },
   "allowance": { "absoluteBytes": 51200, "relative": 0.05 }
 }

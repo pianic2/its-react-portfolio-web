@@ -3,7 +3,6 @@ import { EditorialSectionHeader } from '../components/layout/EditorialSectionHea
 import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
-import { ProjectComparison } from '../features/projects/components/ProjectComparison'
 import { ProjectGuide } from '../features/projects/components/ProjectGuide'
 import { ProjectJourneySection } from '../features/projects/components/ProjectJourneySection'
 import { ProjectShowcase } from '../features/projects/components/ProjectShowcase'
@@ -33,7 +32,6 @@ export function ProjectsPage() {
       </PageSection>
       <ProjectGuide />
       <ProjectShowcase showHeader={false} variant="projects" />
-      <ProjectComparison />
       <ProjectJourneySection />
       <ProjectsClosingSection />
     </>

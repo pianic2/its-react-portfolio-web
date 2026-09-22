@@ -38,7 +38,7 @@ export function PopArtConversionSection({
       spacing="spacious"
       sx={(theme) => ({
         backgroundColor: theme.palette.warning.main,
-        backgroundImage: 'radial-gradient(circle, rgba(0, 0, 0, 0.16) 1.5px, transparent 1.5px)',
+        backgroundImage: theme.digitalStudio.patterns.conversionHalftone,
         backgroundSize: '18px 18px',
         color: theme.palette.warning.contrastText,
       })}

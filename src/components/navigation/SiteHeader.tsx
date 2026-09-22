@@ -53,7 +53,7 @@ export function SiteHeader({ language }: SiteHeaderProps) {
               color: theme.palette.getContrastText(colors.surface),
               backgroundImage: patterns.diagonal,
               borderRadius: `${radii.lg}px`,
-              boxShadow: { xs: shadows.small, md: shadows.medium },
+              boxShadow: shadows.small,
               minWidth: 0,
               overflow: 'hidden',
               pb: { xs: 1.25, md: 4 },
