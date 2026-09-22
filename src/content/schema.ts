@@ -9,6 +9,8 @@ export const publicPageIds = [
   'profile',
   'contact',
   'privacy',
+  'blog',
+  'blogDetail',
 ] as const
 
 export const languageSchema = z.enum(supportedLanguages)
@@ -257,7 +259,6 @@ const editorialItemSchema = z.object({
     })
     .optional(),
 })
-
 const editorialSectionSchema = z.object({
   eyebrow: z.string().min(1),
   title: z.string().min(1),
