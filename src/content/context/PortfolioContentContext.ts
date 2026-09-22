@@ -4,6 +4,8 @@ import type { Language, SiteContent } from '../schema'
 
 export type PortfolioContentContextValue = {
   language: Language
+  status: 'loading' | 'ready' | 'error'
+  error: Error | null
   siteContent: SiteContent
   portfolio: ReturnType<typeof getPortfolio>
   projects: ProjectViewModel[]
