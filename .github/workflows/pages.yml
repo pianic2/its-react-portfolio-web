@@ -26,7 +26,6 @@ jobs:
       contents: read
     environment:
       name: github-pages
-    env:
 
     steps:
       - name: Check out authorized revision
