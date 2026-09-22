@@ -42,12 +42,23 @@ export const routeDefinitions: Record<PageId, RouteDefinition> = {
     indexable: true,
     paths: { it: 'privacy', en: 'privacy' },
   },
+  blog: {
+    indexable: true,
+    paths: { it: 'blog', en: 'blog' },
+  },
+  blogDetail: {
+    indexable: true,
+    paths: { it: 'blog/:slug', en: 'blog/:slug' },
+  },
 }
 
 export function getIndexableStaticRoutePaths() {
   return supportedLanguages.flatMap((language) =>
     publicPageIds
-      .filter((page) => page !== 'projectDetail' && routeDefinitions[page].indexable)
+      .filter(
+        (page) =>
+          page !== 'projectDetail' && page !== 'blogDetail' && routeDefinitions[page].indexable,
+      )
       .map((page) => getRoutePath(page, language)),
   )
 }

@@ -26,8 +26,6 @@ jobs:
       contents: read
     environment:
       name: github-pages
-    env:
-      VITE_WEB3FORMS_ACCESS_KEY: ${{ vars.VITE_WEB3FORMS_ACCESS_KEY }}
 
     steps:
       - name: Check out authorized revision

@@ -22,7 +22,11 @@ export function getIndexableSitemapPaths() {
         ),
       )
     : []
-  return [...staticPaths, ...detailPaths]
+  return [
+    ...staticPaths,
+    ...detailPaths,
+    ...supportedLanguages.map((language) => getRoutePath('blog', language)),
+  ]
 }
 
 export function createSitemapXml() {
