@@ -7,6 +7,8 @@ import type { Language } from '../routes/routeConfig'
 import { RouteFocusManager } from './RouteFocusManager'
 import { SkipLink } from './SkipLink'
 import { SeoMetadata } from '../seo/SeoMetadata'
+import { PortfolioBackendProvider } from '../services/backend'
+import { BlogEngagementSection } from '../features/blog/BlogEngagementSection'
 
 type AppLayoutProps = {
   language: Language
@@ -19,27 +21,30 @@ const skipLabels: Record<Language, string> = {
 
 export function AppLayout({ language }: AppLayoutProps) {
   return (
-    <PortfolioContentProvider language={language}>
-      <SeoMetadata />
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
-        <SkipLink label={skipLabels[language]} targetId="main-content" />
-        <RouteFocusManager targetId="main-content" />
-        <SiteHeader language={language} />
-        <Box
-          component="main"
-          id="main-content"
-          sx={{
-            flex: 1,
-            minWidth: 0,
-            outline: 'none',
-            scrollMarginTop: { xs: '104px', lg: '160px' },
-          }}
-          tabIndex={-1}
-        >
-          <Outlet />
+    <PortfolioBackendProvider>
+      <PortfolioContentProvider language={language}>
+        <SeoMetadata />
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
+          <SkipLink label={skipLabels[language]} targetId="main-content" />
+          <RouteFocusManager targetId="main-content" />
+          <SiteHeader language={language} />
+          <Box
+            component="main"
+            id="main-content"
+            sx={{
+              flex: 1,
+              minWidth: 0,
+              outline: 'none',
+              scrollMarginTop: { xs: '104px', lg: '160px' },
+            }}
+            tabIndex={-1}
+          >
+            <Outlet />
+            {import.meta.env.VITE_BACKEND_API_URL ? <BlogEngagementSection /> : null}
+          </Box>
+          <SiteFooter language={language} />
         </Box>
-        <SiteFooter language={language} />
-      </Box>
-    </PortfolioContentProvider>
+      </PortfolioContentProvider>
+    </PortfolioBackendProvider>
   )
 }

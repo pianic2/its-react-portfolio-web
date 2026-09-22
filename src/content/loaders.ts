@@ -6,8 +6,8 @@ import type { ContentRepository, Language, PageId, SiteContent } from './schema'
 const repository = validateContentRepository()
 
 const utilityPageLabels: Record<Language, Partial<Record<PageId, string>>> = {
-  it: { privacy: 'Privacy' },
-  en: { privacy: 'Privacy' },
+  it: { privacy: 'Privacy', blog: 'Blog', blogDetail: 'Blog' },
+  en: { privacy: 'Privacy', blog: 'Blog', blogDetail: 'Blog' },
 }
 
 function loadProject(contentRepository: ContentRepository, language: Language, projectId: string) {
@@ -177,7 +177,18 @@ export function getLocalizedProjectPath(
 export type ProjectViewModel = NonNullable<ReturnType<typeof loadProject>>
 
 export function getNavigation(language: Language, contentRepository = repository) {
-  return contentRepository.locales[language].navigation.map((item) => ({
+  const navigation = contentRepository.locales[language].navigation
+  const privacyIndex = navigation.findIndex((item) => item.page === 'privacy')
+  const insertionIndex = privacyIndex >= 0 ? privacyIndex : navigation.length
+  const localizedNavigation = navigation.some((item) => item.page === 'blog')
+    ? navigation
+    : [
+        ...navigation.slice(0, insertionIndex),
+        { page: 'blog' as const, label: utilityPageLabels[language].blog ?? 'Blog' },
+        ...navigation.slice(insertionIndex),
+      ]
+
+  return localizedNavigation.map((item) => ({
     ...item,
     href: getRoutePath(item.page, language),
   }))

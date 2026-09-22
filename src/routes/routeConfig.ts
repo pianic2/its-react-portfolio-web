@@ -70,6 +70,7 @@ export const mainNavigationPages: PageId[] = [
   'method',
   'profile',
   'contact',
+  'blog',
 ]
 
 export function isLanguage(value: string | undefined): value is Language {
