@@ -12,7 +12,18 @@ export type BackendPage = Record<string, unknown>
 export type PortfolioBackend = {
   listPages: (type: string, language: BackendLanguage, fields?: string) => Promise<BackendPage[]>
   getPage: (id: number) => Promise<BackendPage>
-  findBySlug: (type: string, language: BackendLanguage, slug: string) => Promise<BackendPage | null>
+  findBySlug: (
+    type: string,
+    language: BackendLanguage,
+    slug: string,
+    fields?: string,
+  ) => Promise<BackendPage | null>
+  findByStableId: (
+    type: string,
+    language: BackendLanguage,
+    stableId: string,
+    fields?: string,
+  ) => Promise<BackendPage | null>
 }
 
 type FetchLike = typeof fetch
@@ -33,9 +44,16 @@ export function createPortfolioBackend(
     return z.record(z.string(), z.unknown()).parse(payload)
   }
 
-  async function listPages(type: string, language: BackendLanguage, fields?: string) {
+  async function listPages(
+    type: string,
+    language: BackendLanguage,
+    fields?: string,
+    filter?: { slug?: string; stableId?: string },
+  ) {
     const query = new URLSearchParams({ type, locale: language })
     if (fields) query.set('fields', fields)
+    if (filter?.slug) query.set('slug', filter.slug)
+    if (filter?.stableId) query.set('stable_id', filter.stableId)
     const payload = await request(`/api/v3/pages/?${query.toString()}`)
     return pageListSchema.parse(payload).items as BackendPage[]
   }
@@ -45,10 +63,19 @@ export function createPortfolioBackend(
     async getPage(id) {
       return request(`/api/v3/pages/${id}/`)
     },
-    async findBySlug(type, language, slug) {
-      const pages = await listPages(type, language)
+    async findBySlug(type, language, slug, fields) {
+      const pages = await listPages(type, language, fields, { slug })
       return (
         pages.find((page) => (page.meta as { slug?: string } | undefined)?.slug === slug) ?? null
+      )
+    },
+    async findByStableId(type, language, stableId, fields) {
+      const pages = await listPages(type, language, fields, { stableId })
+      return (
+        pages.find((page) => {
+          const meta = page.meta as { stable_id?: string } | undefined
+          return page.stable_id === stableId || meta?.stable_id === stableId
+        }) ?? null
       )
     },
   }
