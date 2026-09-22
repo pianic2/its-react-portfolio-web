@@ -259,6 +259,7 @@ const editorialItemSchema = z.object({
     })
     .optional(),
 })
+
 const editorialSectionSchema = z.object({
   eyebrow: z.string().min(1),
   title: z.string().min(1),
