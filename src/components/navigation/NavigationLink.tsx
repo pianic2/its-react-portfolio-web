@@ -9,10 +9,10 @@ const StyledNavigationLink = styled(NavLink, {
 
   return {
     alignItems: 'center',
-    backgroundColor: colors.surface,
-    border: `${borderWidths.bold}px solid ${colors.border}`,
-    borderRadius: radii.md,
-    boxShadow: shadows.small,
+    backgroundColor: fullWidth ? colors.surface : 'transparent',
+    border: `${fullWidth ? borderWidths.bold : borderWidths.regular}px solid ${fullWidth ? colors.border : 'transparent'}`,
+    borderRadius: fullWidth ? radii.md : radii.sm,
+    boxShadow: fullWidth ? shadows.small : 'none',
     color: colors.text,
     display: 'inline-flex',
     fontWeight: 900,
@@ -27,7 +27,7 @@ const StyledNavigationLink = styled(NavLink, {
     }),
     width: fullWidth ? '100%' : 'auto',
     '&:hover': {
-      boxShadow: shadows.medium,
+      boxShadow: fullWidth ? shadows.medium : shadows.small,
       transform: `translate(-${shadowOffsets.small}px, -${shadowOffsets.small}px)`,
     },
     '&:active': {
@@ -39,11 +39,13 @@ const StyledNavigationLink = styled(NavLink, {
       outline: `${focus.width}px solid ${colors.focusInner}`,
       outlineOffset: focus.offset,
     },
-    '&.is-active': {
-      backgroundColor: colors.primary,
+    '&[aria-current="page"]': {
+      backgroundColor: fullWidth ? colors.primary : colors.surfaceStrong,
       boxShadow: 'none',
-      color: colors.onPrimary,
-      transform: `translate(${shadowOffsets.small}px, ${shadowOffsets.small}px)`,
+      color: fullWidth ? colors.onPrimary : colors.text,
+      transform: fullWidth
+        ? `translate(${shadowOffsets.small}px, ${shadowOffsets.small}px)`
+        : 'none',
       '&::after': {
         backgroundColor: 'currentColor',
         blockSize: borderWidths.bold,
@@ -55,7 +57,7 @@ const StyledNavigationLink = styled(NavLink, {
     },
     '@media (prefers-reduced-motion: reduce)': {
       transition: 'none',
-      '&:hover, &:active, &.is-active': {
+      '&:hover, &:active, &[aria-current="page"]': {
         transform: 'none',
       },
     },
@@ -78,13 +80,7 @@ export function NavigationLink({
   to,
 }: NavigationLinkProps) {
   return (
-    <StyledNavigationLink
-      className={({ isActive }) => (isActive ? 'is-active' : undefined)}
-      end={end}
-      fullWidth={fullWidth}
-      onClick={() => onNavigate?.()}
-      to={to}
-    >
+    <StyledNavigationLink end={end} fullWidth={fullWidth} onClick={() => onNavigate?.()} to={to}>
       {children}
     </StyledNavigationLink>
   )
