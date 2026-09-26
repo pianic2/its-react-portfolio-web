@@ -18,7 +18,7 @@ const StyledNavigationLink = styled(NavLink, {
     fontWeight: 900,
     justifyContent: fullWidth ? 'flex-start' : 'center',
     minHeight: theme.spacing(12),
-    paddingInline: theme.spacing(4),
+    paddingInline: theme.spacing(fullWidth ? 4 : 2),
     position: 'relative',
     textDecoration: 'none',
     transition: theme.transitions.create(['box-shadow', 'transform'], {

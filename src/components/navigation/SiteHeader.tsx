@@ -64,6 +64,9 @@ export function SiteHeader({ language }: SiteHeaderProps) {
                 lg: `${layout.panelInset.regular}px`,
               },
               display: 'grid',
+              columnGap: { lg: 3 },
+              gridTemplateColumns: { lg: 'max-content max-content max-content' },
+              justifyContent: { lg: 'space-between' },
             }
           }}
         >

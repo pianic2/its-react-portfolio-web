@@ -91,6 +91,31 @@ describe('shared navigation primitives', () => {
     }
   })
 
+  it.each(['it', 'en'] as const)(
+    'reserves separate content-sized header tracks at 1200px in %s',
+    (language) => {
+      renderWithProviders(<SiteHeader language={language} />, `/${language}`)
+      const identity = screen.getByRole('link', { name: 'Niccolò Piazzi — Home' })
+      const shell = identity.parentElement!.parentElement!
+      const navigation = screen.getByRole('navigation', { hidden: true })
+      const firstLink = within(navigation).getByRole('link', { name: 'Home', hidden: true })
+      const removeViewportRules = applyViewportRules(1200)
+      try {
+        const layout = window.getComputedStyle(shell)
+        // Intrinsic tracks prevent centered navigation from spilling over the brand.
+        expect(layout.gridTemplateColumns).toBe('max-content max-content max-content')
+        expect(layout.columnGap).toBe('calc(3 * var(--mui-spacing))')
+        expect(layout.justifyContent).toBe('space-between')
+        // Compact inline padding leaves room for all seven labels and utilities.
+        expect(window.getComputedStyle(firstLink).paddingInline).toBe(
+          'calc(2 * var(--mui-spacing))',
+        )
+      } finally {
+        removeViewportRules()
+      }
+    },
+  )
+
   it.each([
     { language: 'it', path: '/it/progetti', label: 'Progetti' },
     { language: 'en', path: '/en/projects', label: 'Projects' },
