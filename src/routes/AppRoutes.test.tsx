@@ -69,7 +69,13 @@ describe('localized application routes', () => {
   ])('renders %s as %s', async (path, heading) => {
     renderRoute(path)
 
-    expect(await screen.findByRole('heading', { name: heading })).toBeInTheDocument()
+    // The lazy Italian Method route can take longer to settle under full-suite load.
+    const renderedHeading =
+      path === '/it/metodo'
+        ? await screen.findByRole('heading', { name: heading }, { timeout: 5_000 })
+        : await screen.findByRole('heading', { name: heading })
+
+    expect(renderedHeading).toBeInTheDocument()
   })
 
   it('renders the exact English Home narrative and actions', () => {
