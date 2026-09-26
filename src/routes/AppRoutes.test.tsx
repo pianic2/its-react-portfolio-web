@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { MemoryRouter, useLocation } from 'react-router-dom'
@@ -69,7 +69,13 @@ describe('localized application routes', () => {
   ])('renders %s as %s', async (path, heading) => {
     renderRoute(path)
 
-    expect(await screen.findByRole('heading', { name: heading })).toBeInTheDocument()
+    // The lazy Italian Method route can take longer to settle under full-suite load.
+    const renderedHeading =
+      path === '/it/metodo'
+        ? await screen.findByRole('heading', { name: heading }, { timeout: 5_000 })
+        : await screen.findByRole('heading', { name: heading })
+
+    expect(renderedHeading).toBeInTheDocument()
   })
 
   it('renders the exact English Home narrative and actions', () => {
@@ -119,6 +125,34 @@ describe('localized application routes', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
+  })
+
+  it('keeps the Home signature readable and the primary route before supporting actions', async () => {
+    renderRoute('/en')
+
+    await screen.findByRole('heading', {
+      name: 'I build projects to understand how things really work.',
+    })
+    expect(getComputedStyle(screen.getByText('FULL STACK DEVELOPER')).color).toBe(
+      'var(--mui-palette-text-primary)',
+    )
+    expect(
+      Array.from(screen.getByTestId('home-hero-actions').querySelectorAll('a')).map((link) =>
+        link.getAttribute('href'),
+      ),
+    ).toEqual(['/en/projects', '/en/method', 'https://github.com/pianic2'])
+  })
+
+  it('keeps Home learning articles at the standard structural surface level', async () => {
+    renderRoute('/en')
+
+    const articles = (await screen.findByTestId('learning-items')).querySelectorAll('article')
+    expect(articles).toHaveLength(6)
+
+    for (const article of articles) {
+      expect(getComputedStyle(article).borderRadius).toBe('12px')
+      expect(getComputedStyle(article).boxShadow).toBe('none')
+    }
   })
 
   it('renders the exact Italian Home narrative and actions', () => {
@@ -224,6 +258,32 @@ describe('localized application routes', () => {
     expect(screen.getAllByRole('heading', { name: 'Cosa ho curato' })).toHaveLength(3)
     expect(screen.getAllByRole('heading', { name: 'Cosa vorrei migliorare' })).toHaveLength(3)
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
+  })
+
+  it('presents ProjectGuide as supporting guidance before artwork-led project cards', async () => {
+    renderRoute('/en/projects')
+
+    const guide = await screen.findByRole('complementary', {
+      name: 'Projects with different goals',
+    })
+    const firstProject = screen.getByRole('article', { name: 'HomeEdge AI Platform' })
+    const artwork = firstProject.firstElementChild
+    if (!artwork) {
+      throw new Error('Project artwork must precede its narrative')
+    }
+    const title = within(firstProject).getByRole('heading', { name: 'HomeEdge AI Platform' })
+    const evidenceHeading = within(firstProject).getByRole('heading', { name: 'What I worked on' })
+
+    expect(guide).toContainElement(
+      screen.getByText(
+        'The badge on each card explains where the project comes from. HomeEdge is a personal project I intend to keep developing; the other two were created through ITS assignments and exercises.',
+      ),
+    )
+    expect(artwork).toHaveAttribute('aria-hidden', 'true')
+    expect(artwork.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(
+      title.compareDocumentPosition(evidenceHeading) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
   })
 
   it('renders the expanded HomeEdge evidence and transparency narrative in English', () => {

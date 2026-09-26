@@ -158,14 +158,14 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
         },
         styleOverrides: {
           root: {
-            border: `${digitalStudio.borderWidths.bold}px solid ${colors.border}`,
-            borderRadius: radii.md,
-            boxShadow: shadows.medium,
+            border: `${digitalStudio.borderWidths.regular}px solid ${colors.border}`,
+            borderRadius: radii.sm,
+            boxShadow: 'none',
             minHeight: 48,
             paddingInline: 20,
             transition: `transform ${motion.duration.fast}ms ${motion.easing.standard}, box-shadow ${motion.duration.fast}ms ${motion.easing.standard}`,
             '&:hover': {
-              boxShadow: shadows.large,
+              boxShadow: shadows.small,
               transform: 'translate(-2px, -2px)',
             },
             '&:active': {
@@ -189,14 +189,30 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
               },
             },
           },
+          contained: ({ ownerState, theme }) => ({
+            '&:hover': {
+              '--variant-containedBg':
+                ownerState.color === 'inherit'
+                  ? (theme.vars?.palette.Button.inheritContainedBg ??
+                    theme.palette.grey[theme.palette.mode === 'light' ? 300 : 800])
+                  : (theme.vars ?? theme).palette[ownerState.color ?? 'primary'].main,
+            },
+          }),
           outlined: {
+            '--variant-outlinedBg': colors.surface,
+            '--variant-outlinedBorder': colors.border,
             backgroundColor: colors.surface,
+            '&:hover': {
+              '--variant-outlinedBg': colors.surface,
+              '--variant-outlinedBorder': colors.border,
+            },
           },
           text: {
+            '--variant-textBg': 'transparent',
             borderColor: 'transparent',
             boxShadow: 'none',
             '&:hover': {
-              borderColor: colors.border,
+              '--variant-textBg': 'transparent',
               boxShadow: shadows.small,
             },
           },
@@ -209,15 +225,16 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
         styleOverrides: {
           root: {
             backgroundImage: 'none',
-            border: `${digitalStudio.borderWidths.bold}px solid ${colors.border}`,
-            borderRadius: radii.lg,
+            border: `${digitalStudio.borderWidths.regular}px solid ${colors.border}`,
+            borderRadius: radii.sm,
+            boxShadow: 'none',
           },
         },
       },
       MuiCard: {
         styleOverrides: {
           root: {
-            boxShadow: shadows.medium,
+            boxShadow: 'none',
             overflow: 'visible',
           },
         },

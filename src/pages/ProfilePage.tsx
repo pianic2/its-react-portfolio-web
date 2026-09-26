@@ -17,17 +17,7 @@ export function ProfilePage() {
 
   return (
     <>
-      <PageSection
-        aria-labelledby="profile-page-title"
-        spacing="spacious"
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          minHeight: '58vh',
-          paddingBlockEnd: 'clamp(88px, 10vw, 144px)',
-          paddingBlockStart: 'clamp(112px, 14vw, 176px)',
-        }}
-      >
+      <PageSection aria-labelledby="profile-page-title" spacing="regular">
         <PageContainer>
           <Stack spacing={{ xs: 5, md: 7 }}>
             <EditorialSectionHeader
@@ -129,38 +119,12 @@ export function ProfilePage() {
                 </Stack>
                 <Box
                   sx={(theme) => ({
-                    backgroundColor:
-                      index === 0
-                        ? theme.palette.info.main
-                        : index === 1
-                          ? theme.palette.secondary.main
-                          : theme.digitalStudio.colors.surfaceStrong,
-                    border:
-                      theme.digitalStudio.borderWidths.bold +
-                      'px solid ' +
-                      theme.digitalStudio.colors.border,
-                    borderRadius: theme.digitalStudio.radii.lg + 'px',
-                    boxShadow: theme.digitalStudio.shadows.medium,
-                    color:
-                      index === 0
-                        ? theme.palette.info.contrastText
-                        : index === 1
-                          ? theme.palette.secondary.contrastText
-                          : theme.palette.text.primary,
+                    backgroundColor: theme.digitalStudio.colors.surfaceStrong,
+                    borderInlineStart: `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.secondary}`,
+                    borderRadius: `${theme.digitalStudio.radii.sm}px`,
+                    color: theme.digitalStudio.colors.text,
                     order: { xs: 2, md: reverse ? 1 : 2 },
-                    p: { xs: 4, sm: 6 },
-                    transition: theme.transitions.create(['box-shadow', 'transform'], {
-                      duration: theme.transitions.duration.standard,
-                      easing: theme.transitions.easing.easeIn,
-                    }),
-                    '&:hover': {
-                      boxShadow: theme.digitalStudio.shadows.small,
-                      transform: `translate(${theme.digitalStudio.shadowOffsets.medium}px, ${theme.digitalStudio.shadowOffsets.medium}px) rotate(${index % 2 === 0 ? 1 : -1}deg)`,
-                    },
-                    '@media (prefers-reduced-motion: reduce)': {
-                      transition: 'none',
-                      '&:hover': { transform: 'none' },
-                    },
+                    p: { xs: 3, sm: 4 },
                   })}
                 >
                   <Typography sx={{ fontWeight: 900 }} variant="overline">
@@ -215,22 +179,25 @@ export function ProfilePage() {
                   sx={(theme) => ({
                     backgroundColor: theme.digitalStudio.colors.surface,
                     border:
-                      theme.digitalStudio.borderWidths.bold +
+                      theme.digitalStudio.borderWidths.regular +
                       'px solid ' +
                       theme.digitalStudio.colors.border,
-                    borderRadius: theme.digitalStudio.radii.lg + 'px',
-                    boxShadow: theme.digitalStudio.shadows.medium,
+                    borderRadius: theme.digitalStudio.radii.md + 'px',
+                    boxShadow: theme.digitalStudio.shadows.small,
                     color: theme.palette.text.primary,
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 3,
-                    minHeight: 260,
-                    p: { xs: 4, sm: 6 },
+                    minHeight: 240,
+                    p: { xs: 3, sm: 4 },
                     textDecoration: 'none',
-                    transition: 'transform 160ms ease, box-shadow 160ms ease',
+                    transition: theme.transitions.create(['box-shadow', 'transform'], {
+                      duration: theme.digitalStudio.motion.duration.fast,
+                      easing: theme.digitalStudio.motion.easing.standard,
+                    }),
                     '&:hover': {
-                      boxShadow: theme.digitalStudio.shadows.large,
-                      transform: 'translate(-4px, -4px)',
+                      boxShadow: theme.digitalStudio.shadows.medium,
+                      transform: 'translate(-2px, -2px)',
                     },
                     '&:focus-visible': {
                       outline:
@@ -238,6 +205,10 @@ export function ProfilePage() {
                         'px solid ' +
                         theme.digitalStudio.colors.focusInner,
                       outlineOffset: 4,
+                    },
+                    '@media (prefers-reduced-motion: reduce)': {
+                      transition: 'none',
+                      '&:hover': { transform: 'none' },
                     },
                   })}
                 >

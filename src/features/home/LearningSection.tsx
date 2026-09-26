@@ -1,7 +1,7 @@
 import { Box, CardContent, Stack, Typography } from '@mui/material'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
-import { StudioMotionCard } from '../../components/surfaces/StudioMotionCard'
+import { StudioCard } from '../../components/surfaces/StudioCard'
 import { usePortfolioContent } from '../../content/context'
 
 export function LearningSection() {
@@ -34,10 +34,9 @@ export function LearningSection() {
             }}
           >
             {copy.items.map((item, index) => (
-              <StudioMotionCard
+              <StudioCard
                 key={item.id}
                 component="article"
-                rotation={index % 2 === 0 ? 1 : -1}
                 sx={(theme) => {
                   const tone = index % 3
                   const backgroundColor =
@@ -59,7 +58,7 @@ export function LearningSection() {
                   </Typography>
                   <Typography sx={{ mt: 2 }}>{item.description}</Typography>
                 </CardContent>
-              </StudioMotionCard>
+              </StudioCard>
             ))}
           </Box>
         </Stack>

@@ -64,6 +64,9 @@ export function SiteHeader({ language }: SiteHeaderProps) {
                 lg: `${layout.panelInset.regular}px`,
               },
               display: 'grid',
+              columnGap: { lg: 3 },
+              gridTemplateColumns: { lg: 'max-content max-content max-content' },
+              justifyContent: { lg: 'space-between' },
             }
           }}
         >
@@ -73,10 +76,10 @@ export function SiteHeader({ language }: SiteHeaderProps) {
 
           <Box
             sx={{
-              display: { xs: 'none', xl: 'block' },
-              gridColumn: { xl: '2' },
-              gridRow: { xl: '1' },
-              justifySelf: { xl: 'center' },
+              display: { xs: 'none', lg: 'block' },
+              gridColumn: { lg: '2' },
+              gridRow: { lg: '1' },
+              justifySelf: { lg: 'center' },
               minWidth: 0,
             }}
           >
@@ -87,7 +90,7 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             direction="row"
             sx={{
               alignItems: 'center',
-              display: { xs: 'none', xl: 'flex' },
+              display: { xs: 'none', lg: 'flex' },
               gap: 2,
               gridColumn: '3',
               gridRow: '1',
@@ -104,7 +107,7 @@ export function SiteHeader({ language }: SiteHeaderProps) {
             sx={{
               bgcolor: 'primary.main',
               color: 'primary.contrastText',
-              display: { xs: 'inline-flex', xl: 'none' },
+              display: { xs: 'inline-flex', lg: 'none' },
               gridColumn: '2',
               gridRow: '1',
               justifySelf: 'end',

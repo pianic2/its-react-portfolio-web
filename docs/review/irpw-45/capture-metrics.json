@@ -1,0 +1,3088 @@
+{
+  "captureCount": 54,
+  "checks": {
+    "fontsReady": true,
+    "h1Present": true,
+    "horizontalOverflow": []
+  },
+  "captures": [
+    {
+      "name": "home-it-320-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 50,
+        "y": 181,
+        "width": 220,
+        "height": 199
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-it-320-light.png"
+    },
+    {
+      "name": "home-it-390-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 50,
+        "y": 163,
+        "width": 290,
+        "height": 166
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-it-390-light.png"
+    },
+    {
+      "name": "home-it-768-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 66,
+        "y": 183,
+        "width": 621,
+        "height": 148
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-it-768-light.png"
+    },
+    {
+      "name": "home-it-1024-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1009,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 82,
+        "y": 232,
+        "width": 845,
+        "height": 198
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1009,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 895,
+            "y": 47,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-it-1024-light.png"
+    },
+    {
+      "name": "home-it-1280-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 201,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1058,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-it-1280-light.png"
+    },
+    {
+      "name": "home-it-1440-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 281,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1218,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-it-1440-light.png"
+    },
+    {
+      "name": "home-it-1920-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 267,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 521,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1514,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-it-1920-light.png"
+    },
+    {
+      "name": "projects-it-320-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 26,
+        "y": 139,
+        "width": 268,
+        "height": 101
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-320-light.png"
+    },
+    {
+      "name": "projects-it-390-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 26,
+        "y": 139,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-390-light.png"
+    },
+    {
+      "name": "projects-it-768-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 34,
+        "y": 147,
+        "width": 685,
+        "height": 92
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-768-light.png"
+    },
+    {
+      "name": "projects-it-1024-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1009,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 42,
+        "y": 188,
+        "width": 402,
+        "height": 259
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1009,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 895,
+            "y": 47,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-1024-light.png"
+    },
+    {
+      "name": "projects-it-1280-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 42,
+        "y": 210,
+        "width": 517,
+        "height": 194
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 201,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1058,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-1280-light.png"
+    },
+    {
+      "name": "projects-it-1440-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 42,
+        "y": 210,
+        "width": 589,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 281,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1218,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-1440-light.png"
+    },
+    {
+      "name": "projects-it-1920-light",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 227,
+        "y": 210,
+        "width": 639,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 521,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1514,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-1920-light.png"
+    },
+    {
+      "name": "profile-it-320-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 26,
+        "y": 139,
+        "width": 268,
+        "height": 235
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-320-light.png"
+    },
+    {
+      "name": "profile-it-390-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 26,
+        "y": 139,
+        "width": 338,
+        "height": 168
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-390-light.png"
+    },
+    {
+      "name": "profile-it-768-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 34,
+        "y": 139,
+        "width": 685,
+        "height": 139
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-768-light.png"
+    },
+    {
+      "name": "profile-it-1024-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1009,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 178,
+        "width": 925,
+        "height": 194
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1009,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 895,
+            "y": 47,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-1024-light.png"
+    },
+    {
+      "name": "profile-it-1280-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 200,
+        "width": 1181,
+        "height": 194
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 201,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1058,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-1280-light.png"
+    },
+    {
+      "name": "profile-it-1440-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 200,
+        "width": 1341,
+        "height": 194
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 281,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1218,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-1440-light.png"
+    },
+    {
+      "name": "profile-it-1920-light",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 227,
+        "y": 200,
+        "width": 1452,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 521,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1514,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-1920-light.png"
+    },
+    {
+      "name": "contact-it-320-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 26,
+        "y": 264,
+        "width": 268,
+        "height": 101
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-320-light.png"
+    },
+    {
+      "name": "contact-it-390-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 26,
+        "y": 280,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-390-light.png"
+    },
+    {
+      "name": "contact-it-768-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 34,
+        "y": 268,
+        "width": 685,
+        "height": 92
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-768-light.png"
+    },
+    {
+      "name": "contact-it-1024-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1009,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 42,
+        "y": 281,
+        "width": 925,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1009,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 895,
+            "y": 47,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-1024-light.png"
+    },
+    {
+      "name": "contact-it-1280-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 42,
+        "y": 364,
+        "width": 1181,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 201,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1058,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-1280-light.png"
+    },
+    {
+      "name": "contact-it-1440-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 42,
+        "y": 364,
+        "width": 1341,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 281,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1218,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-1440-light.png"
+    },
+    {
+      "name": "contact-it-1920-light",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 227,
+        "y": 387,
+        "width": 1452,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 521,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1514,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-1920-light.png"
+    },
+    {
+      "name": "privacy-it-320-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 26,
+        "y": 131,
+        "width": 268,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-320-light.png"
+    },
+    {
+      "name": "privacy-it-390-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 26,
+        "y": 131,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-390-light.png"
+    },
+    {
+      "name": "privacy-it-768-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 34,
+        "y": 131,
+        "width": 685,
+        "height": 92
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-768-light.png"
+    },
+    {
+      "name": "privacy-it-1024-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1009,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 170,
+        "width": 925,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1009,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 895,
+            "y": 47,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-1024-light.png"
+    },
+    {
+      "name": "privacy-it-1280-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 192,
+        "width": 1181,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 201,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1058,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-1280-light.png"
+    },
+    {
+      "name": "privacy-it-1440-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 192,
+        "width": 1341,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 281,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1218,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-1440-light.png"
+    },
+    {
+      "name": "privacy-it-1920-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 227,
+        "y": 192,
+        "width": 1452,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 521,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema scuro",
+          "rect": {
+            "x": 1514,
+            "y": 46,
+            "width": 131,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-1920-light.png"
+    },
+    {
+      "name": "home-it-1440-dark",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Portfolio di sviluppo software",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Costruisco progetti per capire come funzionano davvero le cose.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(255, 247, 232)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 284,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema chiaro",
+          "rect": {
+            "x": 1225,
+            "y": 46,
+            "width": 124,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-it-1440-dark.png"
+    },
+    {
+      "name": "projects-it-1440-dark",
+      "fontsReady": true,
+      "title": "Progetti | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Cosa ho costruito e cosa ho imparato.",
+      "h1Rect": {
+        "x": 42,
+        "y": 210,
+        "width": 589,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 284,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema chiaro",
+          "rect": {
+            "x": 1225,
+            "y": 46,
+            "width": 124,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-it-1440-dark.png"
+    },
+    {
+      "name": "profile-it-1440-dark",
+      "fontsReady": true,
+      "title": "Profilo | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Ho trovato nell’informatica il modo di trasformare curiosità e logica in qualcosa di concreto.",
+      "h1Rect": {
+        "x": 42,
+        "y": 200,
+        "width": 1341,
+        "height": 194
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 284,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema chiaro",
+          "rect": {
+            "x": 1225,
+            "y": 46,
+            "width": 124,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-it-1440-dark.png"
+    },
+    {
+      "name": "contact-it-1440-dark",
+      "fontsReady": true,
+      "title": "Contatti | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Raccontami su cosa stai lavorando.",
+      "h1Rect": {
+        "x": 42,
+        "y": 364,
+        "width": 1341,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 284,
+          "y": 46,
+          "width": 666,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema chiaro",
+          "rect": {
+            "x": 1225,
+            "y": 46,
+            "width": 124,
+            "height": 48
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-it-1440-dark.png"
+    },
+    {
+      "name": "privacy-it-390-dark",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "Informazioni sul form di contatto.",
+      "h1Rect": {
+        "x": 26,
+        "y": 131,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Attiva il tema chiaro",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Apri navigazione",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-it-390-dark.png"
+    },
+    {
+      "name": "home-en-1440-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 325,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1232,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-en-1440-light.png"
+    },
+    {
+      "name": "home-en-1440-dark",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(255, 247, 232)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 326,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate light theme",
+          "rect": {
+            "x": 1235,
+            "y": 46,
+            "width": 114,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-en-1440-dark.png"
+    },
+    {
+      "name": "projects-en-1440-light",
+      "fontsReady": true,
+      "title": "Projects | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "What I built and what I learned.",
+      "h1Rect": {
+        "x": 42,
+        "y": 210,
+        "width": 589,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 325,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1232,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-en-1440-light.png"
+    },
+    {
+      "name": "projects-en-1440-dark",
+      "fontsReady": true,
+      "title": "Projects | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "What I built and what I learned.",
+      "h1Rect": {
+        "x": 42,
+        "y": 210,
+        "width": 589,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 326,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate light theme",
+          "rect": {
+            "x": 1235,
+            "y": 46,
+            "width": 114,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/projects-en-1440-dark.png"
+    },
+    {
+      "name": "profile-en-1440-light",
+      "fontsReady": true,
+      "title": "Profile | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "I found in software the way to turn curiosity and logic into something concrete.",
+      "h1Rect": {
+        "x": 42,
+        "y": 200,
+        "width": 1341,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 325,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1232,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-en-1440-light.png"
+    },
+    {
+      "name": "profile-en-1440-dark",
+      "fontsReady": true,
+      "title": "Profile | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "I found in software the way to turn curiosity and logic into something concrete.",
+      "h1Rect": {
+        "x": 42,
+        "y": 200,
+        "width": 1341,
+        "height": 130
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 326,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate light theme",
+          "rect": {
+            "x": 1235,
+            "y": 46,
+            "width": 114,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/profile-en-1440-dark.png"
+    },
+    {
+      "name": "contact-en-1440-light",
+      "fontsReady": true,
+      "title": "Contact | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Tell me what you are working on.",
+      "h1Rect": {
+        "x": 42,
+        "y": 364,
+        "width": 1341,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 325,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1232,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-en-1440-light.png"
+    },
+    {
+      "name": "contact-en-1440-dark",
+      "fontsReady": true,
+      "title": "Contact | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "scrollWidth": 1425,
+      "horizontalOverflow": false,
+      "h1": "Tell me what you are working on.",
+      "h1Rect": {
+        "x": 42,
+        "y": 364,
+        "width": 1341,
+        "height": 65
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 326,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate light theme",
+          "rect": {
+            "x": 1235,
+            "y": 46,
+            "width": 114,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/contact-en-1440-dark.png"
+    },
+    {
+      "name": "privacy-en-390-light",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "How the contact form handles your data.",
+      "h1Rect": {
+        "x": 26,
+        "y": 131,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-en-390-light.png"
+    },
+    {
+      "name": "privacy-en-390-dark",
+      "fontsReady": true,
+      "title": "Privacy | Niccolò Piazzi",
+      "theme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1": "How the contact form handles your data.",
+      "h1Rect": {
+        "x": 26,
+        "y": 131,
+        "width": 338,
+        "height": 67
+      },
+      "eyebrowColor": null,
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate light theme",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 292,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/privacy-en-390-dark.png"
+    },
+    {
+      "name": "home-en-320-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "light",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "scrollWidth": 320,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 50,
+        "y": 181,
+        "width": 220,
+        "height": 166
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 222,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-en-320-light.png"
+    },
+    {
+      "name": "home-en-768-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "light",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "scrollWidth": 753,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 66,
+        "y": 183,
+        "width": 621,
+        "height": 148
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 753,
+        "height": 73
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 647,
+            "y": 15,
+            "width": 46,
+            "height": 46
+          }
+        }
+      ],
+      "screenshot": "after/home-en-768-light.png"
+    },
+    {
+      "name": "home-en-1280-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "light",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scrollWidth": 1265,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 82,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1265,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 245,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1072,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-en-1280-light.png"
+    },
+    {
+      "name": "home-en-1920-light",
+      "fontsReady": true,
+      "title": "Niccolò Piazzi | Software development portfolio",
+      "theme": "light",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scrollWidth": 1905,
+      "horizontalOverflow": false,
+      "h1": "I build projects to understand how things really work.",
+      "h1Rect": {
+        "x": 267,
+        "y": 254,
+        "width": 1088,
+        "height": 232
+      },
+      "eyebrowColor": "rgb(17, 17, 17)",
+      "heroSurfaceColor": null,
+      "headerRect": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 126
+      },
+      "nav": {
+        "display": "block",
+        "rect": {
+          "x": 565,
+          "y": 46,
+          "width": 599,
+          "height": 48
+        }
+      },
+      "headerButtons": [
+        {
+          "label": "Activate dark theme",
+          "rect": {
+            "x": 1528,
+            "y": 46,
+            "width": 117,
+            "height": 48
+          }
+        },
+        {
+          "label": "Open navigation",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "screenshot": "after/home-en-1920-light.png"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import type { ReactNode } from 'react'
@@ -25,16 +25,122 @@ function renderWithProviders(children: ReactNode, initialPath = '/it') {
   )
 }
 
+// JSDOM does not apply viewport media queries. Apply the rendered Emotion
+// min-width rules for the requested viewport so visibility uses real CSS.
+function applyViewportRules(width: number) {
+  const rules: string[] = []
+  for (const sheet of Array.from(document.styleSheets)) {
+    for (const rule of Array.from(sheet.cssRules)) {
+      if (rule instanceof CSSMediaRule) {
+        const minimumWidth = /\(min-width:\s*(\d+)px\)/.exec(rule.conditionText)
+        if (minimumWidth && width >= Number(minimumWidth[1])) {
+          rules.push(...Array.from(rule.cssRules, (child) => child.cssText))
+        }
+      }
+    }
+  }
+  const style = document.createElement('style')
+  style.textContent = rules.join('\n')
+  document.head.append(style)
+  return () => style.remove()
+}
+
 describe('shared navigation primitives', () => {
   beforeEach(() => {
     window.localStorage.clear()
   })
 
-  it('marks the current route structurally and with aria-current', () => {
-    renderWithProviders(<PrimaryNavigation language="it" />, '/it/progetti')
+  it.each(
+    (['it', 'en'] as const).flatMap((language) =>
+      [1199, 1200].map((width) => ({ language, width })),
+    ),
+  )('uses the desktop controls from 1200px: $language at $width', ({ language, width }) => {
+    renderWithProviders(<SiteHeader language={language} />, `/${language}`)
+    let removeViewportRules = () => {}
+    try {
+      const desktop = width >= 1200
+      const navigation = screen.getByRole('navigation', {
+        name: language === 'it' ? 'Navigazione principale' : 'Main navigation',
+        hidden: true,
+      })
+      const languageControl = screen.getByRole('link', {
+        name: language === 'it' ? "Passa all'inglese" : 'Switch to Italian',
+        hidden: true,
+      })
+      const themeControl = screen.getByRole('button', {
+        name: language === 'it' ? 'Attiva il tema scuro' : 'Activate dark theme',
+        hidden: true,
+      })
+      const drawerTrigger = screen.getByRole('button', {
+        name: language === 'it' ? 'Apri navigazione' : 'Open navigation',
+        hidden: true,
+      })
+      removeViewportRules = applyViewportRules(width)
+      expect(screen.queryByRole('navigation')).toBe(desktop ? navigation : null)
+      expect(
+        screen.queryByRole('link', { name: languageControl.getAttribute('aria-label')! }),
+      ).toBe(desktop ? languageControl : null)
+      expect(screen.queryByRole('button', { name: themeControl.getAttribute('aria-label')! })).toBe(
+        desktop ? themeControl : null,
+      )
+      expect(
+        screen.queryByRole('button', { name: drawerTrigger.getAttribute('aria-label')! }),
+      ).toBe(desktop ? null : drawerTrigger)
+    } finally {
+      removeViewportRules()
+    }
+  })
 
-    expect(screen.getByRole('link', { name: 'Progetti' })).toHaveAttribute('aria-current', 'page')
-    expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
+  it.each(['it', 'en'] as const)(
+    'reserves separate content-sized header tracks at 1200px in %s',
+    (language) => {
+      renderWithProviders(<SiteHeader language={language} />, `/${language}`)
+      const identity = screen.getByRole('link', { name: 'Niccolò Piazzi — Home' })
+      const shell = identity.parentElement!.parentElement!
+      const navigation = screen.getByRole('navigation', { hidden: true })
+      const firstLink = within(navigation).getByRole('link', { name: 'Home', hidden: true })
+      const removeViewportRules = applyViewportRules(1200)
+      try {
+        const layout = window.getComputedStyle(shell)
+        // Intrinsic tracks prevent centered navigation from spilling over the brand.
+        expect(layout.gridTemplateColumns).toBe('max-content max-content max-content')
+        expect(layout.columnGap).toBe('calc(3 * var(--mui-spacing))')
+        expect(layout.justifyContent).toBe('space-between')
+        // Compact inline padding leaves room for all seven labels and utilities.
+        expect(window.getComputedStyle(firstLink).paddingInline).toBe(
+          'calc(2 * var(--mui-spacing))',
+        )
+      } finally {
+        removeViewportRules()
+      }
+    },
+  )
+
+  it.each([
+    { language: 'it', path: '/it/progetti', label: 'Progetti' },
+    { language: 'en', path: '/en/projects', label: 'Projects' },
+  ] as const)(
+    'marks the current $language route structurally and with aria-current',
+    ({ language, path, label }) => {
+      renderWithProviders(<PrimaryNavigation language={language} />, path)
+
+      const activeLink = screen.getByRole('link', { name: label })
+      expect(activeLink).toHaveAttribute('aria-current', 'page')
+      expect(window.getComputedStyle(activeLink).backgroundColor).not.toBe('rgba(0, 0, 0, 0)')
+      expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
+    },
+  )
+
+  it('keeps desktop links quiet at rest with 48px targets', () => {
+    renderWithProviders(<PrimaryNavigation language="it" />, '/it/progetti')
+    const resting = window.getComputedStyle(screen.getByRole('link', { name: 'Home' }))
+    expect(resting.backgroundColor).toBe('rgba(0, 0, 0, 0)')
+    expect(resting.boxShadow).toBe('none')
+    // JSDOM preserves calc() rather than resolving CSS custom properties.
+    expect(resting.minHeight).toBe('calc(12 * var(--mui-spacing))')
+    expect(
+      window.getComputedStyle(document.documentElement).getPropertyValue('--mui-spacing'),
+    ).toBe('4px')
   })
 
   it('exposes the canonical localized home link and shared brand asset', () => {
@@ -81,6 +187,13 @@ describe('shared navigation primitives', () => {
     const dialog = screen.getByRole('dialog', { name: 'Navigazione' })
     expect(dialog).toHaveAttribute('aria-modal', 'true')
     expect(dialog).toHaveFocus()
+    const closeControl = within(dialog).getByRole('button', { name: 'Chiudi navigazione' })
+    const themeControl = within(dialog).getByRole('button', { name: 'Attiva il tema scuro' })
+    themeControl.focus()
+    await user.tab()
+    expect(closeControl).toHaveFocus()
+    await user.tab({ shift: true })
+    expect(themeControl).toHaveFocus()
     await user.keyboard('{Escape}')
     await waitFor(() => {
       expect(screen.queryByRole('dialog', { name: 'Navigazione' })).not.toBeInTheDocument()
