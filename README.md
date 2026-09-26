@@ -127,9 +127,9 @@ for local development. The value is public frontend configuration and is
 embedded in the browser bundle; do not treat it as a server-side secret.
 
 For GitHub Pages, create the repository Actions variable
-`VITE_WEB3FORMS_ACCESS_KEY`. The Pages workflow injects it only into the
-validated build job. If the variable is missing, the form fails closed and
-shows a localized configuration message without attempting a request.
+`VITE_BACKEND_API_URL`. The Pages workflow injects it only into the
+validated build job so the backend-powered sections stay enabled in the
+published build.
 
 The analytics identifier stays unset until the project owner approves its
 provider and configuration.
