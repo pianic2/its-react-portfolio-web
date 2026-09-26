@@ -10,6 +10,10 @@ const axeOptions: axe.RunOptions = {
   rules: { 'color-contrast': { enabled: false } },
 }
 
+// Full-route axe scans can exceed Vitest's default timeout in the full suite.
+// Keep the extra allowance local to tests that invoke axe.
+const axeTestTimeoutMs = 15_000
+
 async function getAxeViolations(path: string) {
   const view = render(
     <DigitalStudioProvider>
@@ -28,26 +32,31 @@ describe('representative public accessibility surfaces', () => {
     async (path) => {
       expect(await getAxeViolations(path)).toEqual([])
     },
+    axeTestTimeoutMs,
   )
 
-  it('keeps contact validation errors accessible', async () => {
-    const view = render(
-      <DigitalStudioProvider>
-        <MemoryRouter initialEntries={['/en/contact']}>
-          <AppRoutes />
-        </MemoryRouter>
-      </DigitalStudioProvider>,
-    )
-    fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
+  it(
+    'keeps contact validation errors accessible',
+    async () => {
+      const view = render(
+        <DigitalStudioProvider>
+          <MemoryRouter initialEntries={['/en/contact']}>
+            <AppRoutes />
+          </MemoryRouter>
+        </DigitalStudioProvider>,
+      )
+      fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
 
-    expect(screen.getByRole('textbox', { name: 'Name' })).toHaveAttribute(
-      'aria-describedby',
-      'contact-name-error',
-    )
-    expect(await axe.run(view.container, axeOptions)).toMatchObject({
-      violations: [],
-    })
-  })
+      expect(screen.getByRole('textbox', { name: 'Name' })).toHaveAttribute(
+        'aria-describedby',
+        'contact-name-error',
+      )
+      expect(await axe.run(view.container, axeOptions)).toMatchObject({
+        violations: [],
+      })
+    },
+    axeTestTimeoutMs,
+  )
 
   it('keeps decorative profile imagery out of the accessible name calculation', () => {
     render(
