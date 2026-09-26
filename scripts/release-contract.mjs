@@ -15,10 +15,10 @@ export function siteUrl(pathname) {
 
 export function requirePagesConfiguration(environment) {
   if (
-    typeof environment.VITE_WEB3FORMS_ACCESS_KEY !== 'string' ||
-    !environment.VITE_WEB3FORMS_ACCESS_KEY.trim()
+    typeof environment.VITE_BACKEND_API_URL !== 'string' ||
+    !environment.VITE_BACKEND_API_URL.trim()
   ) {
-    throw new Error('Pages release configuration is missing VITE_WEB3FORMS_ACCESS_KEY.')
+    throw new Error('Pages release configuration is missing VITE_BACKEND_API_URL.')
   }
 }
 

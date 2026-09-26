@@ -14,7 +14,7 @@ describe('release contract', () => {
   })
 
   it('rejects missing Pages-only configuration without exposing a value', () => {
-    expect(() => requirePagesConfiguration({})).toThrow('missing VITE_WEB3FORMS_ACCESS_KEY')
+    expect(() => requirePagesConfiguration({})).toThrow('missing VITE_BACKEND_API_URL')
   })
 
   it('reports budget violations from isolated asset fixtures', () => {
