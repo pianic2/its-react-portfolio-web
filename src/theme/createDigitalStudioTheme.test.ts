@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { render, screen } from '@testing-library/react'
 import { createElement } from 'react'
@@ -8,8 +9,69 @@ import type { ThemeMode } from './tokens'
 
 const modes: ThemeMode[] = ['light', 'dark']
 
+// JSDOM has no pointer hover state. Activate the rendered Emotion hover rules,
+// including MUI's desktop-hover media rules, through a test-only attribute.
+function activateRenderedHoverRules() {
+  const rules: string[] = []
+  function collect(ruleList: CSSRuleList) {
+    for (const rule of Array.from(ruleList)) {
+      if (rule instanceof CSSStyleRule && rule.selectorText.includes(':hover')) {
+        rules.push(rule.cssText.replaceAll(':hover', '[data-hover]'))
+      } else if (rule instanceof CSSMediaRule && /\(hover:\s*hover\)/.test(rule.conditionText)) {
+        collect(rule.cssRules)
+      }
+    }
+  }
+  for (const sheet of Array.from(document.styleSheets)) collect(sheet.cssRules)
+  const style = document.createElement('style')
+  style.textContent = rules.join('\n')
+  document.head.append(style)
+  return () => style.remove()
+}
+
 describe.each(modes)('%s surface emphasis', (mode) => {
   const theme = createDigitalStudioTheme(mode)
+
+  it.each(
+    (['contained', 'outlined', 'text'] as const).flatMap((variant) =>
+      (['primary', 'secondary', 'inherit'] as const).map((color) => ({ variant, color })),
+    ),
+  )(
+    'keeps rendered $color $variant Button surface and border stable on hover',
+    ({ variant, color }) => {
+      render(
+        createElement(
+          ThemeProvider,
+          { theme },
+          createElement(Button, { variant, color }, 'Control'),
+        ),
+      )
+      const button = screen.getByRole('button', { name: 'Control' })
+      const resting = window.getComputedStyle(button)
+      const background = resting.backgroundColor
+      const border = resting.borderColor
+      const surfaceVariable = `--variant-${variant === 'contained' ? 'containedBg' : variant === 'outlined' ? 'outlinedBg' : 'textBg'}`
+      const variables = [
+        surfaceVariable,
+        ...(variant === 'outlined' ? ['--variant-outlinedBorder'] : []),
+      ].map((property) => ({ property, value: resting.getPropertyValue(property) }))
+      const removeHoverRules = activateRenderedHoverRules()
+
+      try {
+        button.setAttribute('data-hover', '')
+        const hovering = window.getComputedStyle(button)
+        expect(hovering.backgroundColor).toBe(background)
+        expect(hovering.borderColor).toBe(border)
+        for (const { property, value } of variables) {
+          expect(hovering.getPropertyValue(property)).toBe(value)
+        }
+        expect(hovering.transform).toBe('translate(-2px, -2px)')
+        expect(hovering.boxShadow).toBe(theme.digitalStudio.shadows.small)
+      } finally {
+        removeHoverRules()
+      }
+    },
+  )
 
   it('keeps structural Paper quiet and contained', () => {
     expect(theme.components?.MuiPaper?.defaultProps?.elevation).toBe(0)

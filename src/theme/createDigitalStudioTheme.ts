@@ -189,13 +189,30 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
               },
             },
           },
+          contained: ({ ownerState, theme }) => ({
+            '&:hover': {
+              '--variant-containedBg':
+                ownerState.color === 'inherit'
+                  ? (theme.vars?.palette.Button.inheritContainedBg ??
+                    theme.palette.grey[theme.palette.mode === 'light' ? 300 : 800])
+                  : (theme.vars ?? theme).palette[ownerState.color ?? 'primary'].main,
+            },
+          }),
           outlined: {
+            '--variant-outlinedBg': colors.surface,
+            '--variant-outlinedBorder': colors.border,
             backgroundColor: colors.surface,
+            '&:hover': {
+              '--variant-outlinedBg': colors.surface,
+              '--variant-outlinedBorder': colors.border,
+            },
           },
           text: {
+            '--variant-textBg': 'transparent',
             borderColor: 'transparent',
             boxShadow: 'none',
             '&:hover': {
+              '--variant-textBg': 'transparent',
               boxShadow: shadows.small,
             },
           },
