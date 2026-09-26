@@ -27,7 +27,7 @@ jobs:
     environment:
       name: github-pages
     env:
-      VITE_WEB3FORMS_ACCESS_KEY: ${{ vars.VITE_WEB3FORMS_ACCESS_KEY }}
+      VITE_BACKEND_API_URL: ${{ vars.VITE_BACKEND_API_URL }}
 
     steps:
       - name: Check out authorized revision
