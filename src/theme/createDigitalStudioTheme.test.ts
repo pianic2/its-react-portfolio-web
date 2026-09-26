@@ -15,7 +15,7 @@ describe.each(modes)('%s surface emphasis', (mode) => {
     expect(theme.components?.MuiPaper?.defaultProps?.elevation).toBe(0)
     expect(theme.components?.MuiPaper?.styleOverrides?.root).toMatchObject({
       border: `2px solid ${theme.digitalStudio.colors.border}`,
-      borderRadius: 20,
+      borderRadius: 12,
       boxShadow: 'none',
     })
   })
@@ -57,7 +57,7 @@ describe.each(modes)('%s surface emphasis', (mode) => {
   })
 
   it.each([
-    { variant: 'standard', offset: 3, radius: '12px' },
+    { variant: 'standard', offset: 0, radius: '12px' },
     { variant: 'featured', offset: 6, radius: '20px' },
   ] as const)('keeps $variant StudioCard treatment explicit', ({ variant, offset, radius }) => {
     render(
@@ -70,7 +70,7 @@ describe.each(modes)('%s surface emphasis', (mode) => {
     const style = window.getComputedStyle(screen.getByText('Shared surface'))
     const shadowColor = mode === 'light' ? '#111111' : '#050208'
 
-    expect(style.boxShadow).toBe(`${offset}px ${offset}px 0 ${shadowColor}`)
+    expect(style.boxShadow).toBe(offset === 0 ? 'none' : `${offset}px ${offset}px 0 ${shadowColor}`)
     expect(style.borderRadius).toBe(radius)
     expect(style.marginBlockEnd).toBe(`${offset}px`)
     expect(style.marginInlineEnd).toBe(`${offset}px`)

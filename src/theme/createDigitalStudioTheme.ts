@@ -209,7 +209,7 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
           root: {
             backgroundImage: 'none',
             border: `${digitalStudio.borderWidths.regular}px solid ${colors.border}`,
-            borderRadius: radii.md,
+            borderRadius: radii.sm,
             boxShadow: 'none',
           },
         },
