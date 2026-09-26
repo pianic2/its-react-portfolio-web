@@ -32,6 +32,8 @@ Page composition remains the responsibility of page routes.
 
 `PrimaryNavigation` is the single source for desktop and mobile navigation. `NavigationLink` uses React Router active state, `aria-current`, a structural underline and shadow compression so the current page is not communicated through colour alone.
 
+`SiteHeader` retains the characterized patterned shell as quiet application chrome. Individual links stay visually quiet at rest and gain emphasis for the active, hover and focus states. The full desktop navigation and utility controls start at 1200 px; the temporary Drawer serves narrower viewports.
+
 The mobile and tablet layout uses a temporary Material UI Drawer. Its paper is a floating surface with safe-area-aware external margins and reserved shadow clearance rather than a rounded panel attached directly to the viewport. Vertical navigation links share one full-width column. The Drawer closes after navigation, supports Escape and relies on the MUI modal focus trap and focus restoration.
 
 `LanguageSwitch` renders one destination-language link. The compact and full presentations expose a custom inline flag graphic plus the target language code or name. The localized URL remains authoritative and the selected preference is stored only as the next root-route default. Fixed flag colours are content semantics and are intentionally isolated inside `LanguageFlag`; application surfaces continue to consume theme tokens.
@@ -48,7 +50,7 @@ The mobile and tablet layout uses a temporary Material UI Drawer. Its paper is a
 
 ## Surfaces
 
-`StudioCard` provides only `standard` and `featured` variants. Both reserve their own offset-shadow footprint. Cards remain non-interactive unless they contain an explicit link or button.
+`StudioCard` provides only `standard` and `featured` variants. `standard` is the structural surface: surface fill, small radius, regular border and no offset shadow or reserved shadow margin. `featured` is an explicit supporting emphasis: stronger surface, medium radius and offset shadow with the matching layout clearance. Cards remain non-interactive unless they contain an explicit link or button.
 
 ## Accessibility and motion
 
