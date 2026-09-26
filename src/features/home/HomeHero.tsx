@@ -55,17 +55,13 @@ export function HomeHero() {
                     letterSpacing: 0,
                     borderBottom: '4px solid',
                     borderColor: 'primary.main',
+                    color: 'text.primary',
                   }}
                   variant="overline"
                 >
-                  <Typography
-                    component="span"
-                    sx={{ letterSpacing: 0, marginRight: '0.5rem' }}
-                    variant="overline"
-                    color="primary.contrastText"
-                  >
+                  <Box component="span" sx={{ fontWeight: 900, marginRight: '0.5rem' }}>
                     FULL STACK DEVELOPER
-                  </Typography>
+                  </Box>
                   {'   '}
                   {copy.eyebrow.replace('FULL STACK DEVELOPER', '').trim()}
                 </Typography>
@@ -74,10 +70,11 @@ export function HomeHero() {
                 component="h1"
                 id="home-page-title"
                 sx={{
-                  fontSize: 'clamp(2.5rem, 7vw, 5.25rem)',
+                  fontSize: 'clamp(2.25rem, 7vw, 5.25rem)',
                   letterSpacing: 0,
-                  maxWidth: '16ch',
+                  maxWidth: '24ch',
                   overflowWrap: 'break-word',
+                  textWrap: 'balance',
                 }}
                 variant="h1"
               >

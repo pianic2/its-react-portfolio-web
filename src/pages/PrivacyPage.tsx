@@ -12,16 +12,7 @@ export function PrivacyPage() {
 
   return (
     <>
-      <PageSection
-        aria-labelledby="privacy-page-title"
-        spacing="spacious"
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          minHeight: '58vh',
-          paddingBlockStart: 'clamp(112px, 14vw, 176px)',
-        }}
-      >
+      <PageSection aria-labelledby="privacy-page-title" spacing="compact">
         <PageContainer>
           <EditorialSectionHeader
             description={page.hero.description}
@@ -54,9 +45,9 @@ export function PrivacyPage() {
         </PageContainer>
       </PageSection>
 
-      <PageSection spacing="spacious">
+      <PageSection spacing="compact">
         <PageContainer>
-          <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '68ch', mb: { xs: 7, md: 10 } }}>
+          <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '68ch', mb: { xs: 4, md: 6 } }}>
             {page.intro}
           </Typography>
           <Stack component="article" spacing={0} sx={{ minWidth: 0 }}>
@@ -74,7 +65,7 @@ export function PrivacyPage() {
                   display: 'grid',
                   gap: { xs: 2, sm: 4 },
                   gridTemplateColumns: { xs: '1fr', sm: '4rem 1fr' },
-                  py: { xs: 7, md: 8 },
+                  py: { xs: 5, md: 6 },
                   scrollMarginTop: 112,
                 })}
               >
@@ -147,12 +138,14 @@ function PrivacyLinkPanel({
       sx={(theme) => ({
         backgroundColor: tone === 'info' ? theme.palette.info.main : theme.palette.warning.main,
         border:
-          theme.digitalStudio.borderWidths.bold + 'px solid ' + theme.digitalStudio.colors.border,
-        borderRadius: theme.digitalStudio.radii.lg + 'px',
-        boxShadow: theme.digitalStudio.shadows.medium,
+          theme.digitalStudio.borderWidths.regular +
+          'px solid ' +
+          theme.digitalStudio.colors.border,
+        borderRadius: theme.digitalStudio.radii.md + 'px',
+        boxShadow: theme.digitalStudio.shadows.small,
         color:
           tone === 'info' ? theme.palette.info.contrastText : theme.palette.warning.contrastText,
-        p: { xs: 4, md: 6 },
+        p: { xs: 3, md: 4 },
       })}
     >
       <Typography sx={{ fontWeight: 950 }} variant="overline">
