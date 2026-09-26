@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom'
 import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
-import { usePortfolioBackend } from '../services/backend'
 import { BlogCard } from '../features/blog/BlogCard'
 import { loadBlogPost, loadBlogPosts, type BlogPost } from '../features/blog/blogContent'
+import { renderRichText } from '../features/blog/richText'
+import { BackendError, usePortfolioBackend } from '../services/backend'
 import { NotFoundPage } from './NotFoundPage'
 
 export function BlogPage() {
@@ -15,20 +16,26 @@ export function BlogPage() {
   const backend = usePortfolioBackend()
   const [articles, setArticles] = useState<BlogPost[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [error, setError] = useState<Error | null>(null)
+
   useEffect(() => {
     let active = true
     setStatus('loading')
+    setError(null)
     const request = slug
       ? loadBlogPost(backend, language, slug).then((article) => (article ? [article] : []))
       : loadBlogPosts(backend, language)
+
     void request
       .then((nextArticles) => {
         if (!active) return
         setArticles(nextArticles)
         setStatus('ready')
       })
-      .catch(() => {
-        if (active) setStatus('error')
+      .catch((reason: unknown) => {
+        if (!active) return
+        setError(reason instanceof Error ? reason : new Error('The Blog could not be loaded.'))
+        setStatus('error')
       })
     return () => {
       active = false
@@ -36,6 +43,31 @@ export function BlogPage() {
   }, [backend, language, slug])
 
   const detail = Boolean(slug)
+  const copy =
+    language === 'it'
+      ? {
+          loading: 'Caricamento blog',
+          notConfigured: 'Il servizio del blog non è configurato.',
+          unavailable: 'Il blog non può essere caricato al momento.',
+          invalidResponse: 'La risposta del blog non può essere letta.',
+          empty: 'Non ci sono ancora articoli disponibili.',
+        }
+      : {
+          loading: 'Loading Blog',
+          notConfigured: 'Blog service is not configured.',
+          unavailable: 'The Blog could not be loaded.',
+          invalidResponse: 'The Blog response could not be read.',
+          empty: 'No articles are available yet.',
+        }
+  const errorMessage =
+    error instanceof BackendError
+      ? error.kind === 'not-configured'
+        ? copy.notConfigured
+        : error.kind === 'invalid-response'
+          ? copy.invalidResponse
+          : copy.unavailable
+      : copy.unavailable
+
   if (detail && status === 'ready' && articles.length === 0) {
     return <NotFoundPage language={language} />
   }
@@ -48,12 +80,10 @@ export function BlogPage() {
           <Typography component="h1" id="blog-page-title" variant="h1">
             {heading}
           </Typography>
-          {status === 'loading' ? <CircularProgress aria-label="Loading Blog" size={32} /> : null}
-          {status === 'error' ? (
-            <Alert severity="error">The Blog could not be loaded.</Alert>
-          ) : null}
+          {status === 'loading' ? <CircularProgress aria-label={copy.loading} size={32} /> : null}
+          {status === 'error' ? <Alert severity="error">{errorMessage}</Alert> : null}
           {status === 'ready' && articles.length === 0 ? (
-            <Typography component="output">No articles are available yet.</Typography>
+            <Typography component="output">{copy.empty}</Typography>
           ) : null}
           {detail && articles[0] ? <BlogDetail article={articles[0]} /> : null}
           {!detail && articles.length > 0 ? (
@@ -76,12 +106,9 @@ export function BlogPage() {
 }
 
 function BlogDetail({ article }: { article: BlogPost }) {
-  const image =
-    typeof article.featured_image === 'string'
-      ? article.featured_image
-      : article.featured_image?.url
-  const imageAlt =
-    typeof article.featured_image === 'object' ? (article.featured_image.alt ?? '') : ''
+  const image = article.featured_image?.url
+  const imageAlt = article.featured_image?.alt ?? ''
+
   return (
     <Stack component="article" spacing={3} sx={{ maxWidth: '72ch' }}>
       {article.publication_date ? (
@@ -99,7 +126,10 @@ function BlogDetail({ article }: { article: BlogPost }) {
         />
       ) : null}
       {article.body ? (
-        <Typography sx={{ whiteSpace: 'pre-wrap' }}>{article.body}</Typography>
+        <Box
+          dangerouslySetInnerHTML={{ __html: renderRichText(article.body) }}
+          sx={{ whiteSpace: 'normal' }}
+        />
       ) : null}
     </Stack>
   )
