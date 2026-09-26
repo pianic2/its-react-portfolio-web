@@ -16,6 +16,7 @@ const StudioCardRoot = styled(Card, {
     backgroundColor: featured
       ? theme.digitalStudio.colors.surfaceStrong
       : theme.digitalStudio.colors.surface,
+    borderRadius: featured ? theme.digitalStudio.radii.md : theme.digitalStudio.radii.sm,
     boxShadow: featured ? theme.digitalStudio.shadows.medium : theme.digitalStudio.shadows.small,
     marginBlockEnd: shadowOffset,
     marginInlineEnd: shadowOffset,

@@ -5,6 +5,7 @@ import { semanticColorSchemes, type ThemeMode } from './tokens'
 const requiredTextPairs = [
   ['text', 'canvas'],
   ['text', 'surface'],
+  ['text', 'surfaceStrong'],
   ['textMuted', 'canvas'],
   ['onPrimary', 'primary'],
   ['onSecondary', 'secondary'],
@@ -12,6 +13,8 @@ const requiredTextPairs = [
   ['onSuccess', 'success'],
   ['onWarning', 'warning'],
   ['onError', 'error'],
+  ['focusInner', 'canvas'],
+  ['focusInner', 'surface'],
 ] as const
 
 const modes: ThemeMode[] = ['light', 'dark']

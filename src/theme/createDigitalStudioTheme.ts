@@ -158,14 +158,14 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
         },
         styleOverrides: {
           root: {
-            border: `${digitalStudio.borderWidths.bold}px solid ${colors.border}`,
-            borderRadius: radii.md,
-            boxShadow: shadows.medium,
+            border: `${digitalStudio.borderWidths.regular}px solid ${colors.border}`,
+            borderRadius: radii.sm,
+            boxShadow: 'none',
             minHeight: 48,
             paddingInline: 20,
             transition: `transform ${motion.duration.fast}ms ${motion.easing.standard}, box-shadow ${motion.duration.fast}ms ${motion.easing.standard}`,
             '&:hover': {
-              boxShadow: shadows.large,
+              boxShadow: shadows.small,
               transform: 'translate(-2px, -2px)',
             },
             '&:active': {
@@ -196,7 +196,6 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
             borderColor: 'transparent',
             boxShadow: 'none',
             '&:hover': {
-              borderColor: colors.border,
               boxShadow: shadows.small,
             },
           },
@@ -209,15 +208,16 @@ export function createDigitalStudioTheme(mode: ThemeMode) {
         styleOverrides: {
           root: {
             backgroundImage: 'none',
-            border: `${digitalStudio.borderWidths.bold}px solid ${colors.border}`,
-            borderRadius: radii.lg,
+            border: `${digitalStudio.borderWidths.regular}px solid ${colors.border}`,
+            borderRadius: radii.md,
+            boxShadow: 'none',
           },
         },
       },
       MuiCard: {
         styleOverrides: {
           root: {
-            boxShadow: shadows.medium,
+            boxShadow: 'none',
             overflow: 'visible',
           },
         },
