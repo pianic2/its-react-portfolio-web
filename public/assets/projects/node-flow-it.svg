@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360">
+  <title>Flusso del gestore di liste e attività Node.js</title>
+  <rect width="1200" height="360" fill="#f4fcff"/>
+  <path d="M0 0h1200v72H0z" fill="#6ddff1"/>
+  <text x="42" y="47" fill="#171717" font-family="Arial,sans-serif" font-size="26" font-weight="700">NODE.JS · FLUSSO LISTE E ATTIVITÀ</text>
+  <rect x="42" y="118" width="300" height="132" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <rect x="450" y="118" width="300" height="132" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <rect x="858" y="118" width="300" height="132" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="70" y="167" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="700">ROUTE LISTE</text>
+  <text x="70" y="211" fill="#333" font-family="Arial,sans-serif" font-size="18">Moduli Express</text>
+  <text x="478" y="167" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="700">ROUTE ATTIVITÀ</text>
+  <text x="478" y="211" fill="#333" font-family="Arial,sans-serif" font-size="18">Operazioni annidate</text>
+  <text x="886" y="167" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="700">SQLITE</text>
+  <text x="886" y="211" fill="#333" font-family="Arial,sans-serif" font-size="18">Persistenza locale</text>
+  <path d="M342 184h108M750 184h108" stroke="#171717" stroke-width="5"/>
+  <path d="M42 288h1116" stroke="#171717" stroke-width="3"/>
+  <text x="42" y="328" fill="#171717" font-family="Arial,sans-serif" font-size="19" font-weight="700">CONFIGURAZIONE CI DEI TEST · NON UN RISULTATO</text>
+</svg>

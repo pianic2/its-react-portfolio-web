@@ -111,37 +111,33 @@ export const englishContent = {
           id: 'frontend',
           title: 'Frontend',
           stack: [
-            { text: 'React', icon: 'devicon:react' },
-            { text: 'React Native', icon: 'devicon:reactnative' },
-            { text: 'Expo', icon: 'devicon:expo' },
-            { text: 'TypeScript', icon: 'devicon:typescript' },
-            { text: 'Material UI', icon: 'mdi:material-ui' },
-            { text: 'accessibility', icon: 'mdi:accessibility' },
-            { text: 'responsive design', icon: 'mdi:design' },
+            { text: 'React' },
+            { text: 'React Native' },
+            { text: 'Expo' },
+            { text: 'TypeScript' },
+            { text: 'Material UI' },
+            { text: 'accessibility' },
+            { text: 'responsive design' },
           ],
         },
         {
           id: 'backend',
           title: 'Backend',
           stack: [
-            { text: 'Java', icon: 'devicon:java' },
-            { text: 'Spring Boot', icon: 'devicon:spring' },
-            { text: 'PHP', icon: 'devicon:php' },
-            { text: 'Laravel', icon: 'devicon:laravel' },
-            { text: 'Node.js', icon: 'devicon:nodejs' },
-            { text: 'Express', icon: 'devicon:javascript' },
-            { text: 'REST API', icon: 'mdi:api' },
+            { text: 'Java' },
+            { text: 'Spring Boot' },
+            { text: 'PHP' },
+            { text: 'Laravel' },
+            { text: 'Node.js' },
+            { text: 'Express' },
+            { text: 'REST API' },
           ],
         },
         {
           id: 'data',
           title: 'Data',
           description: 'PostgreSQL, MySQL, SQLite, validation and relationship modelling.',
-          stack: [
-            { text: 'PostgreSQL', icon: 'devicon:postgresql' },
-            { text: 'MySQL', icon: 'devicon:mysql' },
-            { text: 'SQLite', icon: 'devicon:sqlite' },
-          ],
+          stack: [{ text: 'PostgreSQL' }, { text: 'MySQL' }, { text: 'SQLite' }],
         },
         {
           id: 'delivery',
@@ -149,23 +145,18 @@ export const englishContent = {
           description:
             'Git, GitHub Actions, Docker, automated testing and technical documentation.',
           stack: [
-            { text: 'Git', icon: 'devicon:git' },
-            { text: 'GitHub Actions', icon: 'devicon:github' },
-            { text: 'Docker', icon: 'devicon:docker' },
-            { text: 'Technical Documentation', icon: 'material-symbols:docs' },
-            { text: 'Automated Testing', icon: 'streamline-ultimate:ab-testing-monitors' },
+            { text: 'Git' },
+            { text: 'GitHub Actions' },
+            { text: 'Docker' },
+            { text: 'Technical Documentation' },
+            { text: 'Automated Testing' },
           ],
         },
         {
           id: 'embedded',
           title: 'Embedded',
           description: 'ESP32-C3, C firmware, environmental sensors and edge-first design.',
-          stack: [
-            { text: 'ESP32', icon: 'mdi:react' },
-            { text: 'C', icon: 'devicon:c' },
-            { text: 'Sensors', icon: 'mdi:proximity-sensors' },
-            { text: 'Edge', icon: 'carbon:iot-connect' },
-          ],
+          stack: [{ text: 'ESP32' }, { text: 'C' }, { text: 'Sensors' }, { text: 'Edge' }],
         },
       ],
       labels: {
@@ -319,7 +310,7 @@ export const englishContent = {
     { capabilityId: 'containerized-delivery', label: 'Docker and MySQL' },
     { capabilityId: 'node-api', label: 'Node.js and Express' },
     { capabilityId: 'sqlite-persistence', label: 'SQLite persistence' },
-    { capabilityId: 'automated-testing', label: 'Automated tests' },
+    { capabilityId: 'automated-testing', label: 'CI test workflow' },
   ],
   projects: [
     {
@@ -400,7 +391,15 @@ export const englishContent = {
         },
       ],
       links: [{ linkId: 'homeedge-github', label: 'GitHub repository' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-homeedge-ai-platform',
+          alt: 'Original diagram of the documented HomeEdge scope: room sensing and door state, with node firmware marked as unvalidated.',
+          decorative: false,
+          src: 'assets/projects/homeedge-boundary.svg',
+          mobileSrc: 'assets/projects/homeedge-boundary-mobile.svg',
+        },
+      ],
       metadata: {
         title: 'HomeEdge AI Platform',
         description:
@@ -475,7 +474,15 @@ export const englishContent = {
         },
       ],
       links: [{ linkId: 'library-github', label: 'GitHub repository' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-its-library-api-laravel',
+          alt: 'Original relationship diagram connecting books, authors and categories, with public reads and authenticated writes.',
+          decorative: false,
+          src: 'assets/projects/library-relationships.svg',
+          mobileSrc: 'assets/projects/library-relationships-mobile.svg',
+        },
+      ],
       metadata: {
         title: 'ITS Library API',
         description:
@@ -486,10 +493,10 @@ export const englishContent = {
     {
       projectId: 'node-list-manager',
       slug: 'node-list-manager',
-      title: 'ITS Node.js Project',
+      title: 'Node.js List and Task Manager',
       eyebrow: 'NODE.JS · EXPRESS · SQLITE',
-      detailEyebrow: 'NODE.JS · EXPRESS · SQLITE',
-      ctaLabel: 'Discover the Node.js project',
+      detailEyebrow: 'NODE.JS · LISTS · TASKS',
+      ctaLabel: 'Discover the list manager',
       question: 'How complex does a backend need to be to manage lists and tasks?',
       supportingText:
         'The goal was not to create a large architecture, but to keep the code understandable and the project easy to verify.',
@@ -523,7 +530,7 @@ export const englishContent = {
         },
         {
           id: 'sqlite-test-stack',
-          text: 'The manifest declares better-sqlite3, Jest and Supertest.',
+          text: 'The manifest declares better-sqlite3; the CI workflow configures Jest and Supertest.',
           status: 'demonstrated',
           evidenceIds: ['node-package-manifest', 'node-automated-tests'],
         },
@@ -543,17 +550,25 @@ export const englishContent = {
         },
         {
           evidenceId: 'node-automated-tests',
-          label: 'Automated tests',
+          label: 'Automated test workflow',
           description:
-            'The test suite verifies the expected behaviour of the main backend operations.',
+            'The CI workflow configures automated tests. This file shows the test setup, not a completed test run or its result.',
         },
       ],
       links: [{ linkId: 'node-github', label: 'GitHub repository' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-node-list-manager',
+          alt: 'Original diagram connecting list routes and task routes to SQLite persistence, with a note that the linked CI evidence shows workflow configuration rather than a test result.',
+          decorative: false,
+          src: 'assets/projects/node-flow.svg',
+          mobileSrc: 'assets/projects/node-flow-mobile.svg',
+        },
+      ],
       metadata: {
-        title: 'ITS Node.js Project',
+        title: 'Node.js List and Task Manager',
         description:
-          'A compact backend for managing lists and tasks, designed to keep routes understandable, data persistent and behaviour easy to verify.',
+          'An Express and SQLite backend for managing lists and tasks, designed to keep routes understandable, data persistent and behaviour easy to verify.',
         noIndex: false,
       },
     },

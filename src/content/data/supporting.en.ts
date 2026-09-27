@@ -59,8 +59,9 @@ export const englishSupportingContent = {
     },
     {
       evidenceId: 'node-ci-workflow',
-      label: 'Node.js CI workflow',
-      description: 'See the automated checks configured for the Node.js project.',
+      label: 'Node.js CI configuration',
+      description:
+        'See the test workflow configuration; it does not show an executed run or result.',
     },
   ],
   skillsPage: {
@@ -114,8 +115,8 @@ export const englishSupportingContent = {
         references: [],
         cta: {
           kind: 'external',
-          url: 'https://github.com/pianic2',
-          label: 'Explore the backend projects',
+          url: 'https://github.com/pianic2/its-php-libreria',
+          label: 'Inspect the Laravel Library API',
           analyticsId: 'skills-backend-github',
         },
       },
@@ -125,7 +126,7 @@ export const englishSupportingContent = {
         problem:
           'Turn signals from the physical world into useful information without hiding system limits and uncertainty.',
         description:
-          'Through HomeEdge, I am working on the connection between firmware, sensors, edge devices and application software. I test real hardware behaviour, document decisions and clearly separate validated results from work that is still in progress: a useful prototype should also explain where it may fail.',
+          'Through HomeEdge, I am defining how firmware, sensors, edge devices and application software fit together. I document decisions and distinguish intended capabilities from integrations that still need validation: a useful project should also explain where it may fail.',
         evidenceTitle: 'Tests, decisions and project state',
         tools: ['ESP32-C3', 'C', 'sensors', 'edge systems'],
         evidenceIds: ['homeedge-repository', 'homeedge-readme'],
@@ -361,7 +362,7 @@ export const englishSupportingContent = {
         decision:
           'I therefore separated the MVP boundary, accepted architecture decisions, capabilities that have actually been verified and capabilities that remain planned.',
         result:
-          'Anyone opening the repository can understand what exists today without reconstructing the project history from conversations or implicit intentions.',
+          'The README defines the room and door node scope and marks firmware integration as not yet validated.',
         evidenceLinks: [
           {
             evidenceId: 'homeedge-readme',
@@ -389,7 +390,7 @@ export const englishSupportingContent = {
         decision:
           'The pipeline is therefore not merely technical automation. Formatting, lint, TypeScript, content validation, tests and build are explicit release conditions.',
         result:
-          'Publication does not depend on the memory of the person doing the work. Every change follows the same verifiable sequence.',
+          'The quality workflow lists formatting, lint, TypeScript, content validation, tests and build as release checks; its configuration does not prove a recent run passed.',
         evidenceLinks: [
           {
             evidenceId: 'portfolio-quality-workflow',
@@ -417,7 +418,7 @@ export const englishSupportingContent = {
         decision:
           'The portfolio treats shared data, localized copy, claim status and evidence as entities connected by identifiers and validation rules.',
         result:
-          'Content is not considered correct simply because it appears on screen. It must respect relationships, language parity and the real state of the evidence supporting it.',
+          'The content validation suite checks locale parity and evidence references alongside the schemas and stable identifiers.',
         evidenceLinks: [
           {
             evidenceId: 'portfolio-content-model',
@@ -449,6 +450,17 @@ export const englishSupportingContent = {
         'A verification-first workflow keeps tests, review, evidence and security close together. Agentic execution must leave readable traces rather than turn production speed into a shortcut around judgment.',
         'Human accountability and agentic orchestration therefore remain central: the person owns the outcome, while the agent operates within a declared and verifiable boundary.',
       ],
+      example: {
+        title: 'Home hero: show project evidence without overclaiming',
+        intentLabel: 'Intent',
+        intent: 'Show a real engineering project beside the developer identity in the first view.',
+        executionLabel: 'Execution',
+        execution:
+          'Reuse HomeEdge’s existing scope diagram and label it as documented scope; keep firmware integration marked as unvalidated.',
+        resultLabel: 'Result',
+        result:
+          'At 390 × 844, the HomeEdge name, documented-scope label and top of its boundary diagram appear below the developer identity and primary CTA; the 1440 × 900 desktop view shows the complete diagram beside the identity.',
+      },
       concepts: [
         {
           id: 'intent-engineering',
@@ -470,21 +482,6 @@ export const englishSupportingContent = {
           id: 'verification-first-workflows',
           title: 'Verification-first workflows',
           description: 'Decide first how to check the result using tests, review and evidence.',
-        },
-        {
-          id: 'human-accountability',
-          title: 'Human accountability',
-          description: 'The final decision and risk acceptance remain human.',
-        },
-        {
-          id: 'traceable-agent-execution',
-          title: 'Traceable agent execution',
-          description: 'Make what the agent produced possible to verify.',
-        },
-        {
-          id: 'agentic-orchestration',
-          title: 'Agentic orchestration',
-          description: 'Coordinate agents with distinct roles within an explicit flow.',
         },
       ],
       workflowTitle: 'A verification-oriented agentic pipeline',
@@ -508,7 +505,7 @@ export const englishSupportingContent = {
     labels: {
       examplesTitle: 'Projects that show the method',
       decisionLabel: 'Decision',
-      resultLabel: 'Observable result',
+      resultLabel: 'What the repository shows',
       outputLabel: 'Output',
       evidenceTitle: 'Public evidence',
       resourcesTitle: 'External resources',

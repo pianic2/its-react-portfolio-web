@@ -6,7 +6,6 @@ import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { StudioCard } from '../../components/surfaces/StudioCard'
 import { usePortfolioContent } from '../../content/context'
-import { Icon } from '@iconify/react'
 import { getRoutePath } from '../../routes/routeConfig'
 
 export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
@@ -36,8 +35,8 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
                 sx={{
                   backgroundColor: index % 2 === 0 ? 'background.paper' : 'background.default',
                   gridColumn: {
-                    xs: 'span 6',
-                    sm: 'span 3',
+                    xs: 'span 1',
+                    sm: 'span 1',
                     lg: index < 3 ? 'span 2' : 'span 3',
                   },
                   p: {
@@ -58,7 +57,6 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
                     group.stack.map((item) => (
                       <Chip
                         key={`${group.id}-${item.text}`}
-                        icon={item.icon ? <Icon icon={item.icon} color="text" /> : undefined}
                         label={item.text}
                         size="small"
                         variant="outlined"
@@ -72,7 +70,10 @@ export function SkillsSection({ variant }: { variant?: 'home' | 'other' }) {
             {variant === 'home' ? (
               <ButtonLink
                 endIcon={<ArrowForwardRounded aria-hidden="true" />}
-                sx={{ alignSelf: 'flex-start', gridColumn: { xs: 'span 6', md: 'auto' } }}
+                sx={{
+                  alignSelf: 'flex-start',
+                  gridColumn: { xs: 'span 1', sm: '1 / -1', lg: 'auto' },
+                }}
                 to={getRoutePath('skills', language)}
                 variant="outlined"
               >

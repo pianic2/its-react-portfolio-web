@@ -25,7 +25,7 @@ describe('ProjectShowcase', () => {
     expect(projects).toHaveLength(3)
     expect(
       projects.map((project) => within(project).getByRole('heading', { level: 3 }).textContent),
-    ).toEqual(['HomeEdge AI Platform', 'ITS Library API', 'ITS Node.js Project'])
+    ).toEqual(['HomeEdge AI Platform', 'ITS Library API', 'Node.js List and Task Manager'])
   })
 
   it('keeps the selected-project heading in two structural blocks', () => {
@@ -38,11 +38,12 @@ describe('ProjectShowcase', () => {
     )
   })
 
-  it('renders origin and claim status once per project', () => {
+  it('renders origin and explicit project maturity once per project', () => {
     renderShowcase('en', 'projects')
     expect(screen.getByText('PERSONAL PROJECT')).toBeInTheDocument()
     expect(screen.getAllByText('ITS PROJECT')).toHaveLength(2)
-    expect(screen.getAllByText('Backed by evidence')).toHaveLength(3)
+    expect(screen.getByText('Documented scope')).toBeInTheDocument()
+    expect(screen.getAllByText('Implemented project')).toHaveLength(2)
   })
 
   it('renders explicit questions and supporting text for all cards', () => {
@@ -59,13 +60,23 @@ describe('ProjectShowcase', () => {
     }
   })
 
-  it('renders project-page work and possible improvement copy', () => {
+  it('keeps index cards concise and moves contribution detail to project pages', () => {
     renderShowcase('it', 'projects')
-    expect(screen.getAllByRole('heading', { name: 'Cosa ho curato' })).toHaveLength(3)
-    expect(screen.getAllByRole('heading', { name: 'Cosa vorrei migliorare' })).toHaveLength(3)
-    expect(screen.getByText(/Ho definito la visione, i confini dell’MVP/)).toBeInTheDocument()
-    expect(screen.getByText(/Una possibile evoluzione è aggiungere/)).toBeInTheDocument()
-    expect(screen.getByText(/Potrei estendere la validazione/)).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Cosa ho curato' })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('heading', { name: 'Cosa vorrei migliorare' }),
+    ).not.toBeInTheDocument()
+    expect(screen.getAllByRole('img')).toHaveLength(3)
+    expect(
+      screen.getByRole('img', { name: /Diagramma originale dell’ambito documentato/ }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /Diagramma originale che collega/ })).toBeInTheDocument()
+    const nodeCard = screen.getByRole('article', { name: /Gestore di liste e attività Node.js/ })
+    const title = within(nodeCard).getByRole('heading', {
+      name: 'Gestore di liste e attività Node.js',
+    })
+    const artwork = within(nodeCard).getByRole('img')
+    expect(title.compareDocumentPosition(artwork) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 
   it('uses valid detail and new-tab repository links', () => {

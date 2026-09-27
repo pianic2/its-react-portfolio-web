@@ -37,6 +37,22 @@ describe('content repository validation', () => {
     expect(getProjectById('it', 'node-list-manager')?.claimLabel).toBe('Progetto implementato')
   })
 
+  it('maps original project diagrams to localized informative artwork records', () => {
+    const homeedge = getProjectById('en', 'homeedge-ai-platform')?.assets[0]
+    const library = getProjectById('en', 'its-library-api-laravel')?.assets[0]
+    const nodeEnglish = getProjectById('en', 'node-list-manager')?.assets[0]
+    const nodeItalian = getProjectById('it', 'node-list-manager')?.assets[0]
+
+    expect(homeedge).toMatchObject({ provenance: 'original', decorative: false })
+    expect(homeedge?.src).toBe('assets/projects/homeedge-boundary.svg')
+    expect(homeedge?.mobileSrc).toBe('assets/projects/homeedge-boundary-mobile.svg')
+    expect(library).toMatchObject({ provenance: 'original', decorative: false })
+    expect(library?.alt).toMatch(/books, authors and categories/i)
+    expect(nodeEnglish?.alt).toMatch(/workflow configuration rather than a test result/i)
+    expect(nodeItalian?.alt).toMatch(/configurazione del workflow, non un risultato/i)
+    expect(nodeItalian?.src).toBe('assets/projects/node-flow-it.svg')
+  })
+
   it('keeps the complete editorial narrative contract equivalent across locales', () => {
     const repository = validateContentRepository()
     const narrativeFields = [
@@ -80,7 +96,10 @@ describe('content repository validation', () => {
       expect(method.tools.items).toHaveLength(3)
       expect(method.principles).toHaveLength(5)
       expect(method.value.items).toHaveLength(6)
-      expect(method.agenticDelivery.concepts).toHaveLength(7)
+      expect(method.agenticDelivery.concepts).toHaveLength(4)
+      expect(method.agenticDelivery.example.intent).not.toHaveLength(0)
+      expect(method.agenticDelivery.example.execution).not.toHaveLength(0)
+      expect(method.agenticDelivery.example.result).not.toHaveLength(0)
       expect(method.agenticDelivery.workflow).toHaveLength(5)
       expect(method.agenticDelivery.workflowDescriptions).toHaveLength(5)
       expect(method.agenticDelivery.workflow).toEqual(

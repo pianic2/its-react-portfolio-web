@@ -7,6 +7,8 @@ import { usePortfolioContent } from '../../content/context'
 export function LearningSection() {
   const { siteContent } = usePortfolioContent()
   const copy = siteContent.homePage.learning
+  const learningItems = copy.items.filter((item) => item.id !== 'stack')
+  const preferredStack = copy.items.find((item) => item.id === 'stack')
   return (
     <PageSection
       aria-labelledby="home-learning-title"
@@ -33,7 +35,7 @@ export function LearningSection() {
               gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
             }}
           >
-            {copy.items.map((item, index) => (
+            {learningItems.map((item, index) => (
               <StudioCard
                 key={item.id}
                 component="article"
@@ -61,6 +63,24 @@ export function LearningSection() {
               </StudioCard>
             ))}
           </Box>
+          {preferredStack ? (
+            <StudioCard
+              component="article"
+              data-capability-kind="preference"
+              sx={(theme) => ({
+                backgroundColor: theme.digitalStudio.colors.surface,
+                color: theme.digitalStudio.colors.text,
+                maxWidth: '52rem',
+              })}
+            >
+              <CardContent sx={{ p: { xs: 3, sm: 5 }, '&:last-child': { pb: { xs: 3, sm: 5 } } }}>
+                <Typography component="h3" variant="h5">
+                  {preferredStack.title}
+                </Typography>
+                <Typography sx={{ mt: 1.5 }}>{preferredStack.description}</Typography>
+              </CardContent>
+            </StudioCard>
+          ) : null}
         </Stack>
       </PageContainer>
     </PageSection>

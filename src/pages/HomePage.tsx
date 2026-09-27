@@ -9,9 +9,9 @@ export function HomePage() {
   return (
     <>
       <HomeHero />
-      <LearningSection />
       <ProjectShowcase variant="home" />
       <SkillsSection variant="home" />
+      <LearningSection />
       <ProcessSection />
       <ContactSection />
     </>
