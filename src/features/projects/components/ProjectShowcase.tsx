@@ -86,10 +86,6 @@ export function ProjectShowcase({
                   language={language}
                   project={project}
                   repositoryLabel={siteContent.projectExperience.labels.repositoryLabel}
-                  futureImprovementLabel={
-                    siteContent.projectExperience.labels.futureImprovementLabel
-                  }
-                  whatIWorkedOnLabel={siteContent.projectExperience.labels.whatIWorkedOnLabel}
                   variant={variant}
                 />
               </Box>

@@ -55,6 +55,9 @@ describe('localized application routes', () => {
     expect(await screen.findByRole('heading', { name: 'What I worked on' })).toBeInTheDocument()
     expect(screen.getByText(/I worked on the API structure/)).toBeInTheDocument()
     expect(screen.getByText('Implemented project')).toBeInTheDocument()
+    expect(
+      screen.getByRole('img', { name: /Original relationship diagram connecting books/ }),
+    ).toBeInTheDocument()
     const claim = screen.getByText(
       'The repository documents REST resources for books, authors and categories.',
     )
@@ -64,6 +67,25 @@ describe('localized application routes', () => {
       within(claimRow as HTMLElement).getByRole('link', { name: 'Documented REST endpoints' }),
     ).toHaveAttribute('href', '#project-evidence-library-rest-endpoints')
     expect(document.getElementById('project-evidence-library-rest-endpoints')).toBeInTheDocument()
+  })
+
+  it('reveals linked evidence with native pointer and keyboard-operable disclosure', async () => {
+    const user = userEvent.setup()
+    renderRoute('/en/projects/its-library-api-laravel')
+
+    const label = await screen.findByRole('heading', { name: 'Documented REST endpoints' })
+    const disclosure = label.closest('summary') as HTMLElement
+    expect(disclosure).not.toBeNull()
+    const details = disclosure.closest('details')
+    expect(details).not.toBeNull()
+    expect(details).not.toHaveAttribute('open')
+
+    await user.click(disclosure)
+    expect(details).toHaveAttribute('open')
+    expect(screen.getByText(/The README lists public and protected operations/)).toBeVisible()
+
+    disclosure.focus()
+    expect(disclosure).toHaveFocus()
   })
 
   it.each([
@@ -109,18 +131,10 @@ describe('localized application routes', () => {
       'href',
       '/en/projects',
     )
-    expect(screen.getAllByRole('link', { name: /GitHub/ })[0]).toHaveAttribute(
-      'href',
-      'https://github.com/pianic2',
-    )
-    expect(screen.getByRole('link', { name: 'See how I work' })).toHaveAttribute(
-      'href',
-      '/en/method',
-    )
     expect(
       screen.getByRole('heading', { name: 'From code to a complete product.' }),
     ).toBeInTheDocument()
-    expect(screen.getByTestId('learning-items').children).toHaveLength(6)
+    expect(screen.getByTestId('learning-items').children).toHaveLength(5)
     expect(
       screen.getByRole('heading', { name: 'Three projects from different stages of my journey.' }),
     ).toBeInTheDocument()
@@ -144,7 +158,7 @@ describe('localized application routes', () => {
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
-  it('keeps the Home signature readable and the primary route before supporting actions', async () => {
+  it('keeps the Home signature readable, shows project proof and a single primary route', async () => {
     renderRoute('/en')
 
     await screen.findByRole('heading', {
@@ -153,18 +167,24 @@ describe('localized application routes', () => {
     expect(getComputedStyle(screen.getByText('FULL STACK DEVELOPER')).color).toBe(
       'var(--mui-palette-text-primary)',
     )
-    expect(
-      Array.from(screen.getByTestId('home-hero-actions').querySelectorAll('a')).map((link) =>
-        link.getAttribute('href'),
-      ),
-    ).toEqual(['/en/projects', '/en/method', 'https://github.com/pianic2'])
+    expect(screen.getByTestId('home-hero-project-proof')).toHaveTextContent('HomeEdge AI Platform')
+    expect(screen.getByTestId('home-hero-project-proof').querySelector('img')).toHaveAttribute(
+      'data-project-artwork',
+      'homeedge-ai-platform',
+    )
+    expect(screen.getByTestId('home-hero-primary-cta')).toHaveAttribute('href', '/en/projects')
+    expect(screen.getByTestId('home-hero')).not.toHaveTextContent('See how I work')
   })
 
   it('keeps Home learning articles at the standard structural surface level', async () => {
     renderRoute('/en')
 
     const articles = (await screen.findByTestId('learning-items')).querySelectorAll('article')
-    expect(articles).toHaveLength(6)
+    expect(articles).toHaveLength(5)
+    expect(screen.getByText('Preferred Stack')).toBeInTheDocument()
+    expect(
+      screen.getByText('Preferred Stack').closest('[data-capability-kind="preference"]'),
+    ).toBeInTheDocument()
 
     for (const article of articles) {
       expect(getComputedStyle(article).borderRadius).toBe('12px')
@@ -183,14 +203,6 @@ describe('localized application routes', () => {
     expect(screen.getByRole('link', { name: 'Guarda i progetti' })).toHaveAttribute(
       'href',
       '/it/progetti',
-    )
-    expect(screen.getAllByRole('link', { name: /GitHub/ })[0]).toHaveAttribute(
-      'href',
-      'https://github.com/pianic2',
-    )
-    expect(screen.getByRole('link', { name: 'Scopri il mio metodo' })).toHaveAttribute(
-      'href',
-      '/it/metodo',
     )
     expect(
       screen.getByRole('heading', { name: 'Dal codice al prodotto completo.' }),
@@ -230,8 +242,8 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Projects with different goals' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { name: 'What I worked on' })).toHaveLength(3)
-    expect(screen.getAllByRole('heading', { name: 'What I would improve' })).toHaveLength(3)
+    expect(screen.queryByRole('heading', { name: 'What I worked on' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'What I would improve' })).not.toBeInTheDocument()
     expect(
       screen.queryByRole('heading', { name: 'What changes from one project to another?' }),
     ).not.toBeInTheDocument()
@@ -272,43 +284,51 @@ describe('localized application routes', () => {
     expect(
       screen.getByRole('heading', { name: 'Progetti con obiettivi diversi' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { name: 'Cosa ho curato' })).toHaveLength(3)
-    expect(screen.getAllByRole('heading', { name: 'Cosa vorrei migliorare' })).toHaveLength(3)
+    expect(screen.queryByRole('heading', { name: 'Cosa ho curato' })).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('heading', { name: 'Cosa vorrei migliorare' }),
+    ).not.toBeInTheDocument()
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
-  it('presents ProjectGuide as supporting guidance before artwork-led project cards', async () => {
+  it('places project identity before informative artwork in the Projects index', async () => {
     renderRoute('/en/projects')
 
     const guide = await screen.findByRole('complementary', {
       name: 'Projects with different goals',
     })
     const firstProject = screen.getByRole('article', { name: 'HomeEdge AI Platform' })
-    const artwork = firstProject.firstElementChild
-    if (!artwork) {
-      throw new Error('Project artwork must precede its narrative')
-    }
+    const artwork = within(firstProject).getByRole('img')
     const title = within(firstProject).getByRole('heading', { name: 'HomeEdge AI Platform' })
-    const evidenceHeading = within(firstProject).getByRole('heading', { name: 'What I worked on' })
 
     expect(guide).toContainElement(
       screen.getByText(
         'The badge on each card explains where the project comes from. HomeEdge is a personal project I intend to keep developing; the other two were created through ITS assignments and exercises.',
       ),
     )
-    expect(artwork).toHaveAttribute('aria-hidden', 'true')
-    expect(artwork.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(
-      title.compareDocumentPosition(evidenceHeading) & Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy()
+    expect(artwork).toHaveAttribute('data-artwork-provenance', 'original')
+    expect(title.compareDocumentPosition(artwork) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 
-  it('renders the expanded HomeEdge evidence and transparency narrative in English', () => {
+  it('opens HomeEdge evidence and shows the transparency narrative in English', async () => {
+    const user = userEvent.setup()
     renderRoute('/en/projects/homeedge-ai-platform')
 
+    const details = screen.getByTestId('project-evidence-details-homeedge-product-vision')
+    const summary = within(details)
+      .getByText('Product vision and MVP boundaries')
+      .closest('summary') as HTMLElement
     expect(
-      screen.getByRole('heading', { name: 'Product vision and MVP boundaries' }),
-    ).toBeInTheDocument()
+      summary.parentElement?.querySelector('[data-evidence-disclosure-indicator]'),
+    ).not.toBeNull()
+    await user.click(summary)
+    expect(
+      screen
+        .getAllByText(
+          'The Product Vision explains what HomeEdge is intended to become, which capabilities belong to the current MVP and which ideas remain outside its present scope.',
+        )
+        .some((element) => element.closest('details')?.open),
+    ).toBe(true)
     expect(screen.getByRole('link', { name: /Read the Product Vision/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/homeedge-ai-platform/blob/main/docs/product/product-vision.md',
@@ -318,12 +338,20 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders the expanded HomeEdge evidence and transparency narrative in Italian', () => {
+  it('opens HomeEdge evidence and shows the transparency narrative in Italian', async () => {
+    const user = userEvent.setup()
     renderRoute('/it/progetti/homeedge-ai-platform')
 
+    const details = screen.getByTestId('project-evidence-details-homeedge-product-vision')
+    const summary = within(details)
+      .getByText('Visione del prodotto e confini dell’MVP')
+      .closest('summary') as HTMLElement
+    await user.click(summary)
     expect(
-      screen.getByRole('heading', { name: 'Visione del prodotto e confini dell’MVP' }),
-    ).toBeInTheDocument()
+      screen
+        .getAllByText(/La Product Vision spiega cosa intende diventare HomeEdge/)
+        .some((element) => element.closest('details')?.open),
+    ).toBe(true)
     expect(screen.getByRole('link', { name: /Leggi la Product Vision/ })).toBeInTheDocument()
     expect(
       screen.getByText(/Il repository pubblico è la fonte tecnica di riferimento/),
@@ -337,7 +365,9 @@ describe('localized application routes', () => {
     await user.click(screen.getByRole('link', { name: "Passa all'inglese", hidden: true }))
 
     expect(screen.getByTestId('location')).toHaveTextContent('/en/projects/node-list-manager')
-    expect(screen.getByRole('heading', { name: 'ITS Node.js Project' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Node.js List and Task Manager' }),
+    ).toBeInTheDocument()
     expect(window.localStorage.getItem('irpw.language-preference')).toBe('en')
   })
 
@@ -372,7 +402,9 @@ describe('localized application routes', () => {
   it('renders Project Detail from the localized content context with claims and evidence', () => {
     renderRoute('/en/projects/node-list-manager')
 
-    expect(screen.getByRole('heading', { name: 'ITS Node.js Project' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Node.js List and Task Manager' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'The idea' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'What has been built' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Why it matters' })).toBeInTheDocument()
@@ -404,7 +436,7 @@ describe('localized application routes', () => {
     ).toBe(true)
     expect(
       screen
-        .getAllByRole('link', { name: /Automated tests/ })
+        .getAllByRole('link', { name: /Automated test workflow/ })
         .some((link) => link.getAttribute('href')?.startsWith('https://')),
     ).toBe(true)
     expect(
@@ -414,7 +446,7 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'The test suite verifies the expected behaviour of the main backend operations.',
+        'The CI workflow configures automated tests. This file shows the test setup, not a completed test run or its result.',
       ),
     ).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Documented scope' })).not.toBeInTheDocument()
@@ -438,6 +470,9 @@ describe('localized application routes', () => {
     renderRoute('/en/projects/homeedge-ai-platform')
 
     expect(screen.queryByText(/\[UNVALIDATED\]/)).not.toBeInTheDocument()
+    const title = screen.getByRole('heading', { name: 'HomeEdge AI Platform', level: 1 })
+    const artwork = screen.getByRole('img', { name: /Original diagram of the documented HomeEdge/ })
+    expect(title.compareDocumentPosition(artwork) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
     expect(
       screen.getByText(/does not present the node firmware, backend or mobile app as integrated/),
     ).toBeInTheDocument()

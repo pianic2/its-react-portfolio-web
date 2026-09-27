@@ -1,4 +1,5 @@
 import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
+import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
 import { Box, CardContent, Chip, Link, Stack, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { ButtonLink, ExternalLink } from '../components/actions/AppLink'
@@ -70,7 +71,7 @@ export function ProjectDetailPage() {
             <Box
               sx={{
                 display: 'grid',
-                gridTemplateColumns: { md: 'minmax(0, 7fr) minmax(280px, 5fr)' },
+                gridTemplateColumns: { md: 'minmax(0, 1fr)' },
                 minWidth: 0,
               }}
             >
@@ -81,7 +82,7 @@ export function ProjectDetailPage() {
                   flexDirection: 'column',
                   gap: 3,
                   minWidth: 0,
-                  order: { xs: 2, md: 1 },
+                  order: { xs: 1, md: 1 },
                   p: { xs: 3, sm: 5, md: 7 },
                   '&:last-child': { pb: { xs: 3, sm: 5, md: 7 } },
                 }}
@@ -125,8 +126,8 @@ export function ProjectDetailPage() {
                   {project.repositoryLabel ?? labels.repositoryLabel}
                 </ExternalLink>
               </CardContent>
-              <Box sx={{ minWidth: 0, order: { xs: 1, md: 2 } }}>
-                <ProjectArtwork number={project.number} variant={project.visualVariant} />
+              <Box sx={{ minWidth: 0, order: { xs: 2, md: 2 } }}>
+                <ProjectArtwork project={project} />
               </Box>
             </Box>
           </StudioCard>
@@ -280,26 +281,51 @@ export function ProjectDetailPage() {
             <Stack spacing={0} sx={{ minWidth: 0 }}>
               {project.evidence.map((evidence) => (
                 <Box
+                  data-testid={`project-evidence-details-${evidence.id}`}
                   id={`project-evidence-${evidence.id}`}
                   key={evidence.id}
-                  component="article"
+                  component="details"
                   sx={{
                     borderBlockStart: (theme) =>
                       `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
                     minWidth: 0,
-                    py: 4,
+                    '& > summary': {
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      listStyle: 'none',
+                      minHeight: 48,
+                      py: 3,
+                    },
+                    '& > summary::-webkit-details-marker': { display: 'none' },
+                    '&[open] > summary [data-evidence-disclosure-indicator]': {
+                      transform: 'rotate(180deg)',
+                    },
+                    '& > summary:focus-visible': {
+                      outline: (theme) =>
+                        `${theme.digitalStudio.focus.outerWidth}px solid ${theme.digitalStudio.colors.primary}`,
+                      outlineOffset: (theme) => `${theme.digitalStudio.focus.offset}px`,
+                    },
                   }}
                 >
-                  <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0 }}>
+                  <Box component="summary" sx={{ gap: 2 }}>
+                    <Typography sx={{ letterSpacing: 0 }} variant="h5">
+                      {evidence.label}
+                    </Typography>
+                    <ExpandMoreRounded
+                      aria-hidden="true"
+                      data-evidence-disclosure-indicator
+                      sx={{ flexShrink: 0 }}
+                    />
+                  </Box>
+                  <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0, pb: 4 }}>
                     <Typography
                       component="p"
                       sx={{ fontWeight: 900, letterSpacing: 0 }}
                       variant="overline"
                     >
                       {evidence.typeLabel}
-                    </Typography>
-                    <Typography component="h3" sx={{ letterSpacing: 0 }} variant="h5">
-                      {evidence.label}
                     </Typography>
                     <Typography>{evidence.description}</Typography>
                     {evidence.url ? (
