@@ -15,6 +15,8 @@ const wagtailImageSchema = z
       })
       .passthrough(),
     title: z.string(),
+    width: z.number().int().positive().optional(),
+    height: z.number().int().positive().optional(),
   })
   .passthrough()
 
@@ -51,7 +53,15 @@ const blogPostSchema = z.object({
   excerpt: z.string().nullable().optional(),
   publication_date: z.string().nullable().optional(),
   body: z.string().nullable().optional(),
-  featured_image: z.object({ url: z.string().url(), alt: z.string() }).nullable().optional(),
+  featured_image: z
+    .object({
+      url: z.string().url(),
+      alt: z.string(),
+      width: z.number().int().positive().optional(),
+      height: z.number().int().positive().optional(),
+    })
+    .nullable()
+    .optional(),
 })
 
 export type BlogPost = z.infer<typeof blogPostSchema>
@@ -74,7 +84,12 @@ export function parseBlogPost(
   const featuredImage =
     image === undefined || image === null
       ? image
-      : { url: resolveAssetUrl(image.meta.download_url), alt: image.title }
+      : {
+          url: resolveAssetUrl(image.meta.download_url),
+          alt: image.title,
+          ...(image.width ? { width: image.width } : {}),
+          ...(image.height ? { height: image.height } : {}),
+        }
   const parsedPost = blogPostSchema.safeParse({ ...result.data, featured_image: featuredImage })
   if (!parsedPost.success) {
     throw new InvalidBackendResponseError(
@@ -90,12 +105,14 @@ export function parseBlogPost(
 export async function loadBlogPosts(
   backend: PortfolioBackend | null,
   language: BackendLanguage,
+  limit?: number,
 ): Promise<BlogPost[]> {
   if (!backend) throw new BackendNotConfiguredError()
 
-  const summaries = await backend.listPages('portfolio.BlogPostPage', language)
+  const summaries = await backend.listPages('portfolio.BlogPostPage', language, limit)
+  const visibleSummaries = limit === undefined ? summaries : summaries.slice(0, limit)
   return Promise.all(
-    summaries.map(async (summary) => {
+    visibleSummaries.map(async (summary) => {
       const page = await backend.getPage(summary.id)
       const post = parseBlogPost(page, backend.resolveAssetUrl)
       if (post.id !== summary.id || post.meta.slug !== summary.meta.slug) {

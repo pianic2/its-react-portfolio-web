@@ -42,18 +42,21 @@ export function LanguageSwitch({ presentation = 'compact' }: LanguageSwitchProps
       }
     }
     const targetLanguage = alternativeLanguage[currentRoute.language]
-    void loadBlogPost(backend, currentRoute.language, currentRoute.slug).then(async (post) => {
-      const translated = post
-        ? await loadTranslatedBlogPost(backend, targetLanguage, post.stable_id)
-        : null
-      if (active) {
-        setTargetBlogPath(
-          translated?.meta?.slug
-            ? getRoutePath('blogDetail', targetLanguage, { slug: translated.meta.slug })
-            : getRoutePath('blog', targetLanguage),
-        )
-      }
-    })
+    void loadBlogPost(backend, currentRoute.language, currentRoute.slug)
+      .then(async (post) => {
+        const translated = post
+          ? await loadTranslatedBlogPost(backend, targetLanguage, post.stable_id)
+          : null
+        return translated?.meta?.slug
+          ? getRoutePath('blogDetail', targetLanguage, { slug: translated.meta.slug })
+          : getRoutePath('blog', targetLanguage)
+      })
+      .then((nextPath) => {
+        if (active) setTargetBlogPath(nextPath)
+      })
+      .catch(() => {
+        if (active) setTargetBlogPath(getRoutePath('blog', targetLanguage))
+      })
     return () => {
       active = false
     }

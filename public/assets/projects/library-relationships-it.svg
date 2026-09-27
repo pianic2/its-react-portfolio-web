@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img">
+  <title>Risorse e accessi della Library API</title>
+  <rect width="1200" height="420" fill="#fff8fb"/>
+  <path d="M0 0h1200v72H0z" fill="#f28ab2"/>
+  <text x="42" y="47" fill="#171717" font-family="Arial,sans-serif" font-size="26" font-weight="700">LIBRARY API · RISORSE E ACCESSI</text>
+  <rect x="42" y="112" width="330" height="128" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <rect x="435" y="112" width="330" height="128" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <rect x="828" y="112" width="330" height="128" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="70" y="163" fill="#171717" font-family="Arial,sans-serif" font-size="25" font-weight="700">LIBRI</text>
+  <text x="70" y="204" fill="#333" font-family="Arial,sans-serif" font-size="19">Lettura pubblica</text>
+  <text x="463" y="163" fill="#171717" font-family="Arial,sans-serif" font-size="25" font-weight="700">AUTORI</text>
+  <text x="463" y="204" fill="#333" font-family="Arial,sans-serif" font-size="19">Record collegati</text>
+  <text x="856" y="163" fill="#171717" font-family="Arial,sans-serif" font-size="25" font-weight="700">CATEGORIE</text>
+  <text x="856" y="204" fill="#333" font-family="Arial,sans-serif" font-size="19">Record collegati</text>
+  <path d="M373 176h62M766 176h62" stroke="#171717" stroke-width="5"/>
+  <path d="M42 280h1116" stroke="#171717" stroke-width="3"/>
+  <text x="42" y="326" fill="#171717" font-family="Arial,sans-serif" font-size="21" font-weight="700">SCRITTURE · AUTENTICAZIONE CON TOKEN</text>
+  <text x="42" y="367" fill="#333" font-family="Arial,sans-serif" font-size="18">Laravel · MySQL · setup Docker locale</text>
+</svg>

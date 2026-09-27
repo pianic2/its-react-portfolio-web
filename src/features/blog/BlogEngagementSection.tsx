@@ -30,10 +30,12 @@ export function BlogEngagementSection() {
   const { language } = usePortfolioContent()
   const backend = usePortfolioBackend()
   const route = resolveLocalizedRoute(useLocation().pathname)
+  const routePage = route?.page
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
 
   useEffect(() => {
+    if (!routePage || routePage === 'blog' || routePage === 'blogDetail') return
     if (!backend) {
       setPosts([])
       setStatus('ready')
@@ -41,7 +43,7 @@ export function BlogEngagementSection() {
     }
     let active = true
     setStatus('loading')
-    void loadBlogPosts(backend, language)
+    void loadBlogPosts(backend, language, 3)
       .then((nextPosts) => {
         if (!active) return
         setPosts(nextPosts.slice(0, 3))
@@ -53,9 +55,9 @@ export function BlogEngagementSection() {
     return () => {
       active = false
     }
-  }, [backend, language])
+  }, [backend, language, routePage])
 
-  if (!route || route.page === 'blog' || route.page === 'blogDetail') return null
+  if (!routePage || routePage === 'blog' || routePage === 'blogDetail') return null
   if (!backend) return null
   const labels = copy[language]
 
@@ -64,7 +66,7 @@ export function BlogEngagementSection() {
       <PageContainer>
         <Stack spacing={4}>
           <Stack spacing={1}>
-            <Typography color="secondary.main" variant="overline">
+            <Typography color="text.primary" variant="overline">
               {labels.eyebrow}
             </Typography>
             <Typography component="h2" id="blog-engagement-title" variant="h3">

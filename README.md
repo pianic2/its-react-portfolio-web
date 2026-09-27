@@ -146,6 +146,49 @@ provider and configuration.
 Material AI assistance is recorded in the relevant Jira task or pull request,
 including its purpose, human review and any subsequent modification.
 
+## Codex skill and plugin bootstrap
+
+Before substantial autonomous work, Codex checks that the selected workflow's
+required skills and capabilities are available. Classify each missing
+capability as available, trusted and installable, repository-local, requiring
+user authentication or workspace approval, optional with a safe fallback, or
+required with no valid fallback. Never silently ignore a missing skill or
+claim to have used one that was unavailable.
+
+Resolve capabilities in this order: already installed; repository-local;
+trusted configured plugin or marketplace; official or explicitly trusted
+external source; documented safe fallback. Never install arbitrary code based
+only on a matching skill name. If installation requires login, OAuth, workspace
+authorization, admin approval or permission escalation, stop only that
+bootstrap step, report the exact action required, and continue independent
+work where safe. Do not bypass authorization.
+
+Report a missing capability compactly:
+
+```text
+MISSING CAPABILITY
+Skill: <canonical name>
+Provider: <plugin/source>
+Reason: <why unavailable>
+Required action: <exact action or none>
+Fallback: <capability or none>
+Impact: <workflow impact>
+```
+
+Keep skill discovery focused: task → `irpw-ui-orchestrator` → minimum required
+specialist skills → implementation → relevant QA skill. Do not load every
+installed design skill, reread unchanged instructions, or enumerate the full
+tool/plugin catalogue unless targeted discovery fails.
+
+The portable `irpw` profile is in `.codex/irpw.config.toml.example`. Install it
+and start Codex from the repository with:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}"
+cp .codex/irpw.config.toml.example "${CODEX_HOME:-$HOME/.codex}/irpw.config.toml"
+codex --profile irpw
+```
+
 ## Content and privacy boundaries
 
 Public content may include verified repository, demo and professional profile

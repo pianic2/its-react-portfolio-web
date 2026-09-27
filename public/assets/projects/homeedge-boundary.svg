@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img">
+  <title>HomeEdge documented MVP boundary</title>
+  <rect width="1200" height="360" fill="#fffdf3"/>
+  <path d="M0 0h1200v72H0z" fill="#f4d52d"/>
+  <text x="42" y="47" fill="#171717" font-family="Arial,sans-serif" font-size="26" font-weight="700">HOMEEDGE · MVP BOUNDARY</text>
+  <rect x="42" y="108" width="410" height="145" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="68" y="157" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="700">ROOM NODE</text>
+  <text x="68" y="203" fill="#333" font-family="Arial,sans-serif" font-size="20">Temperature · humidity · local presence</text>
+  <path d="M477 180h196" stroke="#171717" stroke-width="5" stroke-dasharray="12 12"/>
+  <rect x="698" y="108" width="460" height="145" rx="4" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="724" y="157" fill="#171717" font-family="Arial,sans-serif" font-size="24" font-weight="700">DOOR NODE</text>
+  <text x="724" y="203" fill="#333" font-family="Arial,sans-serif" font-size="20">Open · closed</text>
+  <path d="M42 290h1116" stroke="#171717" stroke-width="3"/>
+  <text x="42" y="330" fill="#171717" font-family="Arial,sans-serif" font-size="18" font-weight="700">DOCUMENTED CAPABILITY · FIRMWARE INTEGRATION NOT VALIDATED</text>
+</svg>

@@ -3,7 +3,6 @@ import { PageSection } from '../../components/layout/PageSection'
 import type { Language } from '../../routes/routeConfig'
 import { MethodPageContainer } from './MethodPageContainer'
 import { MethodResourceLinks } from './MethodResourceLinks'
-import { Icon } from '@iconify/react'
 
 type MethodTool = {
   id: string
@@ -99,7 +98,6 @@ export function MethodToolsSection({
                       gap: 2,
                     }}
                   >
-                    <Icon icon={`devicon:${tool.title.toLocaleLowerCase()}`} />
                     {tool.title}
                   </Typography>
                   <Typography color="text.secondary" sx={{ fontWeight: 800, pt: 4 }}>

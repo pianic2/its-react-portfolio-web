@@ -70,6 +70,14 @@ export const italianProfileContactLegalContent = {
         },
       ],
     },
+    selectedWork: {
+      eyebrow: 'PROGETTI SELEZIONATI',
+      title: 'Progetti che rendono concreto questo percorso.',
+      description:
+        'Queste pagine mostrano lavori in fasi diverse della mia crescita, con link all’implementazione e alle evidenze disponibili.',
+      detailLabel: 'Leggi i dettagli del progetto',
+      repositoryLabel: 'Apri il repository',
+    },
     ctas: {
       projectsLabel: 'Apri LeetCode',
       contactLabel: 'Contattami',
@@ -137,7 +145,7 @@ export const italianProfileContactLegalContent = {
     updatedLabel: 'Ultimo aggiornamento',
     updatedAt: '21 luglio 2026',
     intro:
-      'Questo portfolio è un sito statico pubblicato su GitHub Pages. Non dispone di un backend applicativo e non conserva direttamente i messaggi inviati dal form di contatto.',
+      'Questo portfolio è pubblicato come sito statico su GitHub Pages. Il form inoltra i dati al backend del portfolio per la consegna.',
     indexLabel: 'In questa pagina',
     sections: [
       {
@@ -151,7 +159,7 @@ export const italianProfileContactLegalContent = {
         id: 'privacy-purpose',
         title: 'Finalità e provider',
         paragraphs: [
-          'I dati sono usati esclusivamente per rispondere alla richiesta e vengono trasmessi al backend del portfolio per la consegna. Il portfolio non conserva direttamente le richieste.',
+          'I dati sono usati per rispondere alla richiesta e vengono inoltrati al backend del portfolio per la consegna.',
         ],
       },
       {
@@ -169,9 +177,9 @@ export const italianProfileContactLegalContent = {
         ],
       },
     ],
-    providerHeading: 'Provider del servizio',
-    providerLabel: 'Leggi l’informativa privacy del backend del portfolio',
-    providerUrl: 'https://github.com/pianic2/its-react-portfolio-web',
+    providerHeading: 'Informazioni privacy del backend',
+    providerLabel: 'Consulta le informazioni privacy del backend del portfolio',
+    providerUrl: 'https://pdpw-production.onrender.com',
     ownerContactHeading: 'Contatto privacy',
     ownerContactLabel: 'Contatta il titolare tramite GitHub',
     ownerContactUrl: 'https://github.com/pianic2',

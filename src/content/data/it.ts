@@ -36,7 +36,7 @@ export const italianContent = {
     metadata: {
       title: 'Niccolò Piazzi | Portfolio di sviluppo software',
       description:
-        'Realizzo progetti che collegano codice, dispositivi e persone — dai sensori per la casa intelligente alle API web. Ogni progetto spiega cosa funziona oggi, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
+        'Progetto esperienze che collegano codice, dispositivi e persone — dai sistemi smart home alle API web. Ogni progetto spiega cosa è documentato, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
     },
   },
   homePage: {
@@ -115,13 +115,13 @@ export const italianContent = {
           title: 'Frontend',
           description: 'React, TypeScript, Material UI, design adattivo e accessibilità.',
           stack: [
-            { text: 'React', icon: 'devicon:react' },
-            { text: 'React Native', icon: 'devicon:reactnative' },
-            { text: 'Expo', icon: 'devicon:expo' },
-            { text: 'TypeScript', icon: 'devicon:typescript' },
-            { text: 'Material UI', icon: 'mdi:material-ui' },
-            { text: 'accessibility', icon: 'mdi:accessibility' },
-            { text: 'responsive design', icon: 'mdi:design' },
+            { text: 'React' },
+            { text: 'React Native' },
+            { text: 'Expo' },
+            { text: 'TypeScript' },
+            { text: 'Material UI' },
+            { text: 'accessibilità' },
+            { text: 'design responsive' },
           ],
         },
         {
@@ -129,47 +129,38 @@ export const italianContent = {
           title: 'Backend',
           description: 'Java, Spring Boot, PHP, Laravel, Node.js, Express e API REST.',
           stack: [
-            { text: 'Java', icon: 'devicon:java' },
-            { text: 'Spring Boot', icon: 'devicon:spring' },
-            { text: 'PHP', icon: 'devicon:php' },
-            { text: 'Laravel', icon: 'devicon:laravel' },
-            { text: 'Node.js', icon: 'devicon:nodejs' },
-            { text: 'Express', icon: 'devicon:javascript' },
-            { text: 'REST API', icon: 'mdi:api' },
+            { text: 'Java' },
+            { text: 'Spring Boot' },
+            { text: 'PHP' },
+            { text: 'Laravel' },
+            { text: 'Node.js' },
+            { text: 'Express' },
+            { text: 'REST API' },
           ],
         },
         {
           id: 'data',
           title: 'Dati',
           description: 'PostgreSQL, MySQL, SQLite, validazione e modellazione delle relazioni.',
-          stack: [
-            { text: 'PostgreSQL', icon: 'devicon:postgresql' },
-            { text: 'MySQL', icon: 'devicon:mysql' },
-            { text: 'SQLite', icon: 'devicon:sqlite' },
-          ],
+          stack: [{ text: 'PostgreSQL' }, { text: 'MySQL' }, { text: 'SQLite' }],
         },
         {
           id: 'delivery',
           title: 'Delivery',
           description: 'Git, GitHub Actions, Docker, testing automatico e documentazione tecnica.',
           stack: [
-            { text: 'Git', icon: 'devicon:git' },
-            { text: 'GitHub Actions', icon: 'devicon:github' },
-            { text: 'Docker', icon: 'devicon:docker' },
-            { text: 'Documentazione tecnica', icon: 'material-symbols:docs' },
-            { text: 'Testing automatico', icon: 'streamline-ultimate:ab-testing-monitors' },
+            { text: 'Git' },
+            { text: 'GitHub Actions' },
+            { text: 'Docker' },
+            { text: 'Documentazione tecnica' },
+            { text: 'Test automatici' },
           ],
         },
         {
           id: 'embedded',
           title: 'Embedded',
           description: 'ESP32-C3, firmware in C, sensori ambientali e progettazione edge-first.',
-          stack: [
-            { text: 'ESP32', icon: 'mdi:react' },
-            { text: 'C', icon: 'devicon:c' },
-            { text: 'Sensori', icon: 'mdi:proximity-sensors' },
-            { text: 'Edge', icon: 'carbon:iot-connect' },
-          ],
+          stack: [{ text: 'ESP32' }, { text: 'C' }, { text: 'Sensori' }, { text: 'Edge' }],
         },
       ],
       labels: {
@@ -302,6 +293,10 @@ export const italianContent = {
       declared: 'Direzione documentata',
       planned: 'Prossimo passo pianificato',
     },
+    projectMaturityLabels: {
+      documented: 'Ambito documentato',
+      implemented: 'Progetto implementato',
+    },
     evidenceTypeLabels: {
       repository: 'Repository',
       'pull-request': 'Pull request',
@@ -321,7 +316,7 @@ export const italianContent = {
     { capabilityId: 'containerized-delivery', label: 'Docker e MySQL' },
     { capabilityId: 'node-api', label: 'Node.js ed Express' },
     { capabilityId: 'sqlite-persistence', label: 'Persistenza SQLite' },
-    { capabilityId: 'automated-testing', label: 'Test automatici' },
+    { capabilityId: 'automated-testing', label: 'Workflow CI per i test' },
   ],
   projects: [
     {
@@ -343,18 +338,18 @@ export const italianContent = {
         'HomeEdge non è un esercizio didattico isolato. È il progetto con cui approfondisco nel tempo sistemi embedded, architettura di prodotto e governance tecnica responsabile.',
       narrative: {
         cardSummary:
-          'HomeEdge parte da piccoli nodi ESP32-C3 che rilevano temperatura, umidità, presenza locale e stato della porta.',
+          'HomeEdge documenta il progetto di nodi ESP32-C3 pensati per rilevare temperatura, umidità, presenza locale e stato della porta.',
         cardValue:
           'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
         heroSummary:
-          'HomeEdge è una piattaforma smart home sperimentale costruita intorno a piccoli sensori per le stanze. Il suo obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
+          'HomeEdge è un progetto smart home sperimentale che documenta una piattaforma pensata intorno a sensori per le stanze. L’obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
         idea: 'Molti prodotti smart home non spiegano chiaramente quali dati raccolgono, dove vengono inviati o come il sistema prende le proprie decisioni. HomeEdge sperimenta un approccio più trasparente: ogni dispositivo ha uno scopo limitato, ogni tipo di dato ha un confine esplicito e ogni scelta importante viene documentata.',
         built:
-          'L’MVP attuale è concentrato su un nodo per stanza e porta basato su ESP32-C3. Misura temperatura e umidità, rileva localmente una presenza non identificativa e comunica se una porta è aperta o chiusa. Il repository definisce inoltre l’architettura, i rischi e le regole di lavoro che guideranno le fasi successive.',
+          'La documentazione definisce un MVP centrato su un nodo ESP32-C3 per stanza e porta, con temperatura, umidità, presenza locale non identificativa e stato della porta. Il repository descrive anche un display locale come capacità accettata; l’integrazione firmware del nodo resta da validare.',
         value:
           'Il progetto combina programmazione embedded, architettura software, progettazione di un prodotto mobile e governance tecnica responsabile. Il suo valore non è soltanto nel nodo sensore: mostra anche come far crescere un sistema connesso senza nasconderne i limiti.',
         currentStage:
-          'HomeEdge si trova nella fase iniziale di sviluppo. Il nodo ESP32-C3 e i confini dell’MVP sono documentati. I servizi backend, l’applicazione mobile e le funzionalità assistite dall’AI sono direzioni pianificate che non sono ancora state dimostrate.',
+          'Il repository documenta il perimetro dell’MVP e le decisioni di prodotto. Non presenta come integrate le funzionalità firmware del nodo, il backend o l’app mobile; le funzioni AI restano una direzione futura.',
         evidenceIntroduction:
           'Il repository pubblico permette di controllare i confini dell’MVP, i segnali inclusi, la direzione architetturale e le regole usate per evitare affermazioni non supportate.',
         transparency:
@@ -363,13 +358,13 @@ export const italianContent = {
       claims: [
         {
           id: 'sprint-zero-boundary',
-          text: 'Il README documenta il confine del nodo MVP ESP32-C3 e i segnali inclusi.',
+          text: 'La documentazione definisce il perimetro del nodo MVP ESP32-C3 e i segnali previsti.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-mvp-scope'],
         },
         {
           id: 'target-services-unvalidated',
-          text: 'Backend, applicazione mobile e funzionalità AI restano direzioni future, non funzionalità già completate.',
+          text: 'Backend e app mobile sono direzioni di prodotto non ancora integrate; le funzionalità AI restano future.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-architecture-governance'],
         },
@@ -402,11 +397,19 @@ export const italianContent = {
         },
       ],
       links: [{ linkId: 'homeedge-github', label: 'Repository GitHub' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-homeedge-ai-platform',
+          alt: 'Diagramma originale dell’ambito documentato di HomeEdge: rilevamento nella stanza e stato della porta, con firmware del nodo indicato come da validare.',
+          decorative: false,
+          src: 'assets/projects/homeedge-boundary-it.svg',
+          mobileSrc: 'assets/projects/homeedge-boundary-mobile-it.svg',
+        },
+      ],
       metadata: {
         title: 'HomeEdge AI Platform',
         description:
-          'HomeEdge è una piattaforma smart home sperimentale costruita intorno a piccoli sensori per le stanze. Il suo obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
+          'HomeEdge è un progetto smart home sperimentale che documenta una piattaforma pensata intorno a sensori per le stanze. L’obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
         noIndex: false,
       },
     },
@@ -477,7 +480,15 @@ export const italianContent = {
         },
       ],
       links: [{ linkId: 'library-github', label: 'Repository GitHub' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-its-library-api-laravel',
+          alt: 'Diagramma originale delle relazioni tra libri, autori e categorie, con letture pubbliche e scritture autenticate.',
+          decorative: false,
+          src: 'assets/projects/library-relationships-it.svg',
+          mobileSrc: 'assets/projects/library-relationships-mobile-it.svg',
+        },
+      ],
       metadata: {
         title: 'ITS Library API',
         description:
@@ -488,10 +499,10 @@ export const italianContent = {
     {
       projectId: 'node-list-manager',
       slug: 'gestore-liste-node',
-      title: 'Progetto ITS Node.js',
+      title: 'Gestore di liste e attività Node.js',
       eyebrow: 'NODE.JS · EXPRESS · SQLITE',
-      detailEyebrow: 'NODE.JS · EXPRESS · SQLITE',
-      ctaLabel: 'Scopri il progetto Node.js',
+      detailEyebrow: 'NODE.JS · LISTE · ATTIVITÀ',
+      ctaLabel: 'Scopri il gestore di liste',
       question: 'Quanto deve essere complesso un backend per gestire liste e attività?',
       supportingText:
         'Qui l’obiettivo non era costruire una grande architettura, ma mantenere il codice leggibile e il progetto facile da verificare.',
@@ -525,7 +536,7 @@ export const italianContent = {
         },
         {
           id: 'sqlite-test-stack',
-          text: 'Il manifest dichiara better-sqlite3, Jest e Supertest.',
+          text: 'Il manifest dichiara better-sqlite3; il workflow CI configura Jest e Supertest.',
           status: 'demonstrated',
           evidenceIds: ['node-package-manifest', 'node-automated-tests'],
         },
@@ -545,17 +556,25 @@ export const italianContent = {
         },
         {
           evidenceId: 'node-automated-tests',
-          label: 'Test automatici',
+          label: 'Workflow dei test automatici',
           description:
-            'La suite di test verifica il comportamento atteso delle principali operazioni del backend.',
+            'Il workflow CI configura i test automatici. Questo file mostra il setup, non un’esecuzione completata o il relativo risultato.',
         },
       ],
       links: [{ linkId: 'node-github', label: 'Repository GitHub' }],
-      assets: [],
+      assets: [
+        {
+          assetId: 'project-diagram-node-list-manager',
+          alt: 'Diagramma originale che collega le route per liste e attività alla persistenza SQLite, con una nota che chiarisce che l’evidenza CI mostra la configurazione del workflow, non un risultato dei test.',
+          decorative: false,
+          src: 'assets/projects/node-flow-it.svg',
+          mobileSrc: 'assets/projects/node-flow-mobile-it.svg',
+        },
+      ],
       metadata: {
-        title: 'Progetto ITS Node.js',
+        title: 'Gestore di liste e attività Node.js',
         description:
-          'Un backend compatto per gestire liste e attività, progettato per mantenere le route comprensibili, i dati persistenti e il comportamento facile da verificare.',
+          'Un backend Express e SQLite per gestire liste e attività, progettato per mantenere le route comprensibili, i dati persistenti e il comportamento facile da verificare.',
         noIndex: false,
       },
     },

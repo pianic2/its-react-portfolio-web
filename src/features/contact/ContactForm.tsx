@@ -62,6 +62,7 @@ export function ContactForm({ copy, locale }: ContactFormProps) {
   const successRef = useRef<HTMLOutputElement>(null)
 
   useEffect(() => {
+    mountedRef.current = true
     return () => {
       mountedRef.current = false
       abortControllerRef.current?.abort()

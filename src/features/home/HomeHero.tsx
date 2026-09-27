@@ -1,24 +1,22 @@
-import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
 import { Box, Stack, Typography } from '@mui/material'
-import { ButtonLink, ExternalButtonLink, ExternalLink } from '../../components/actions/AppLink'
+import { ButtonLink, ExternalLink } from '../../components/actions/AppLink'
 import { PageContainer } from '../../components/layout/PageContainer'
 import { PageSection } from '../../components/layout/PageSection'
 import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import { externalLinks } from '../../config/externalLinks'
-
-const githubUrl = externalLinks.githubProfile
+import { ProjectArtwork } from '../projects/components/ProjectArtwork'
 
 export function HomeHero() {
-  const { language, siteContent } = usePortfolioContent()
+  const { language, siteContent, featuredProjects } = usePortfolioContent()
   const copy = siteContent.homePage.hero
+  const project = featuredProjects[0]
 
   return (
     <PageSection aria-labelledby="home-page-title" spacing="spacious">
       <PageContainer>
         <Box
           component="header"
+          data-testid="home-hero"
           sx={(theme) => ({
             backgroundColor: theme.digitalStudio.colors.surfaceStrong,
             color: theme.digitalStudio.colors.text,
@@ -47,7 +45,7 @@ export function HomeHero() {
               },
             })}
           >
-            <Stack spacing={{ xs: 3, sm: 4 }} sx={{ maxWidth: '68rem', minWidth: 0 }}>
+            <Stack spacing={{ xs: 2.5, sm: 4 }} sx={{ maxWidth: '76rem', minWidth: 0 }}>
               <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
                 <Typography
                   component="span"
@@ -70,9 +68,9 @@ export function HomeHero() {
                 component="h1"
                 id="home-page-title"
                 sx={{
-                  fontSize: 'clamp(2.25rem, 7vw, 5.25rem)',
+                  fontSize: 'clamp(2.25rem, 6vw, 5rem)',
                   letterSpacing: 0,
-                  maxWidth: '24ch',
+                  maxWidth: '19ch',
                   overflowWrap: 'break-word',
                   textWrap: 'balance',
                 }}
@@ -80,49 +78,62 @@ export function HomeHero() {
               >
                 {copy.title}
               </Typography>
-              <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '65ch' }}>
-                {copy.description.prefix}
-                <ExternalLink
-                  href={copy.description.url}
-                  language={language}
-                  newTab
-                  sx={{ fontWeight: 900 }}
-                >
-                  {copy.description.linkLabel}
-                </ExternalLink>
-                {copy.description.suffix}
-              </Typography>
-              <Stack
-                data-testid="home-hero-actions"
-                direction={{ xs: 'column', sm: 'row' }}
-                sx={{ flexWrap: 'wrap', gap: 4, minWidth: 0 }}
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: { xs: 2.5, md: 5 },
+                  gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1fr) minmax(18rem, 0.8fr)' },
+                  alignItems: 'center',
+                }}
               >
-                <ButtonLink
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  to={getRoutePath('projects', language)}
-                  variant="contained"
-                >
-                  {copy.primaryCtaLabel}
-                </ButtonLink>
-                <ButtonLink
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  to={getRoutePath('method', language)}
-                  variant="outlined"
-                >
-                  {copy.methodCtaLabel}
-                </ButtonLink>
-                <ExternalButtonLink
-                  endIcon={<OpenInNewRounded aria-hidden="true" />}
-                  href={githubUrl}
-                  language={language}
-                  newTab
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  variant="text"
-                >
-                  <GitHubIcon sx={{ mr: 1 }} />
-                  {copy.githubCtaLabel}
-                </ExternalButtonLink>
-              </Stack>
+                <Stack spacing={2} sx={{ minWidth: 0 }}>
+                  <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '65ch' }}>
+                    {copy.description.prefix}
+                    <ExternalLink
+                      href={copy.description.url}
+                      language={language}
+                      newTab
+                      sx={{ fontWeight: 900 }}
+                    >
+                      {copy.description.linkLabel}
+                    </ExternalLink>
+                    {copy.description.suffix}
+                  </Typography>
+                  <ButtonLink
+                    data-testid="home-hero-primary-cta"
+                    sx={{ minHeight: 44, width: { xs: '100%', sm: 'fit-content' } }}
+                    to={getRoutePath('projects', language)}
+                    variant="contained"
+                  >
+                    {copy.primaryCtaLabel}
+                  </ButtonLink>
+                </Stack>
+                {project ? (
+                  <Box
+                    component="article"
+                    data-testid="home-hero-project-proof"
+                    sx={{
+                      backgroundColor: 'background.paper',
+                      color: 'text.primary',
+                      display: 'grid',
+                      gap: 1.5,
+                      minWidth: 0,
+                      p: { xs: 2, sm: 3 },
+                    }}
+                  >
+                    <Typography component="p" variant="overline">
+                      {project.originLabel} · {project.claimLabel}
+                    </Typography>
+                    <Typography component="h2" variant="h5">
+                      {project.title}
+                    </Typography>
+                    <ProjectArtwork project={project} />
+                    <Typography color="text.secondary" variant="body2">
+                      {project.narrative.cardSummary}
+                    </Typography>
+                  </Box>
+                ) : null}
+              </Box>
             </Stack>
           </Box>
         </Box>

@@ -17,6 +17,7 @@ export const languageSchema = z.enum(supportedLanguages)
 export const pageIdSchema = z.enum(publicPageIds)
 export const projectVisualVariantSchema = z.enum(['signal-yellow', 'studio-pink', 'electric-cyan'])
 export const projectOriginSchema = z.enum(['personal-long-term', 'its-training'])
+export const projectMaturitySchema = z.enum(['documented', 'implemented'])
 export const evidenceTypeSchema = z.enum([
   'repository',
   'pull-request',
@@ -98,6 +99,8 @@ export const localizedAssetSchema = z
     assetId: stableIdSchema,
     alt: z.string(),
     decorative: z.boolean().default(false),
+    src: z.string().min(1).optional(),
+    mobileSrc: z.string().min(1).optional(),
   })
   .superRefine((asset, context) => {
     if (asset.decorative && asset.alt !== '') {
@@ -157,6 +160,7 @@ export const claimSchema = z.discriminatedUnion('status', [
 export const projectCoreSchema = z
   .object({
     id: stableIdSchema,
+    maturity: projectMaturitySchema,
     capabilityIds: z.array(stableIdSchema).min(1),
     evidence: z.array(evidenceSchema).min(1),
     links: z.array(externalLinkSchema).min(1),
@@ -249,7 +253,6 @@ const editorialItemSchema = z.object({
       z.object({
         text: z.string().min(1),
         color: z.string().optional(),
-        icon: z.string().min(1).optional(),
       }),
     )
     .optional(),
@@ -427,6 +430,15 @@ const methodPageSchema = z.object({
     subtitle: z.string().min(1),
     responseLabel: z.string().min(1),
     paragraphs: z.array(z.string().min(1)).length(3),
+    example: z.object({
+      title: z.string().min(1),
+      intentLabel: z.string().min(1),
+      intent: z.string().min(1),
+      executionLabel: z.string().min(1),
+      execution: z.string().min(1),
+      resultLabel: z.string().min(1),
+      result: z.string().min(1),
+    }),
     concepts: z
       .array(
         z.object({
@@ -435,7 +447,7 @@ const methodPageSchema = z.object({
           description: z.string().min(1),
         }),
       )
-      .length(7),
+      .length(4),
     workflowTitle: z.string().min(1),
     workflow: z.array(z.string().min(1)).length(5),
     workflowDescriptions: z.array(z.string().min(1)).length(5),
@@ -564,6 +576,13 @@ export const siteContentSchema = z.object({
         )
         .min(1),
     }),
+    selectedWork: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      description: z.string().min(1),
+      detailLabel: z.string().min(1),
+      repositoryLabel: z.string().min(1),
+    }),
     ctas: z.object({
       projectsLabel: z.string().min(1),
       contactLabel: z.string().min(1),
@@ -678,6 +697,7 @@ export const siteContentSchema = z.object({
       z.enum(['verified', 'demonstrated', 'declared', 'planned']),
       z.string().min(1),
     ),
+    projectMaturityLabels: z.record(projectMaturitySchema, z.string().min(1)),
     evidenceTypeLabels: z.record(evidenceTypeSchema, z.string().min(1)),
   }),
   capabilities: z.array(localizedCapabilitySchema).min(1),

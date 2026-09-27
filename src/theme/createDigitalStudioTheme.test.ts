@@ -32,6 +32,11 @@ function activateRenderedHoverRules() {
 describe.each(modes)('%s surface emphasis', (mode) => {
   const theme = createDigitalStudioTheme(mode)
 
+  it('uses the documented self-hosted display and interface font families', () => {
+    expect(theme.typography.fontFamily).toContain('"Atkinson Hyperlegible Next"')
+    expect(theme.typography.h1.fontFamily).toContain('"Archivo Black"')
+  })
+
   it.each(
     (['contained', 'outlined', 'text'] as const).flatMap((variant) =>
       (['primary', 'secondary', 'inherit'] as const).map((color) => ({ variant, color })),

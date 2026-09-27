@@ -76,10 +76,47 @@ describe('blog content boundary', () => {
       { stable_id: 'second-article', title: 'Second article' },
     ])
 
-    expect(backend.listPages).toHaveBeenCalledWith('portfolio.BlogPostPage', 'en')
+    expect(backend.listPages).toHaveBeenCalledWith('portfolio.BlogPostPage', 'en', undefined)
     expect(backend.getPage).toHaveBeenCalledTimes(2)
     expect(backend.getPage).toHaveBeenNthCalledWith(1, 19)
     expect(backend.getPage).toHaveBeenNthCalledWith(2, 20)
+  })
+
+  it('hydrates only the requested number of Blog preview details', async () => {
+    const extraSummaries = [
+      {
+        ...summaries[0]!,
+        id: 21,
+        title: 'Third article',
+        meta: { ...summaries[0]!.meta, slug: 'third' },
+      },
+      {
+        ...summaries[0]!,
+        id: 22,
+        title: 'Fourth article',
+        meta: { ...summaries[0]!.meta, slug: 'fourth' },
+      },
+    ]
+    const extraDetails = {
+      21: {
+        ...secondDetail,
+        id: 21,
+        stable_id: 'third',
+        title: 'Third article',
+        meta: { type: 'portfolio.BlogPostPage', locale: 'en', slug: 'third' },
+      },
+    }
+    const backend = backendFor([...summaries, ...extraSummaries], {
+      19: firstDetail,
+      20: secondDetail,
+      ...extraDetails,
+    })
+
+    await expect(loadBlogPosts(backend, 'en', 3)).resolves.toHaveLength(3)
+
+    expect(backend.listPages).toHaveBeenCalledWith('portfolio.BlogPostPage', 'en', 3)
+    expect(backend.getPage).toHaveBeenCalledTimes(3)
+    expect(backend.getPage).not.toHaveBeenCalledWith(22)
   })
 
   it('keeps a legitimate empty list distinct from failures', async () => {
@@ -107,6 +144,8 @@ describe('blog content boundary', () => {
         featured_image: {
           url: 'https://api.example.test/media/blog/mcp.jpg',
           alt: 'MCP article cover',
+          width: 1600,
+          height: 900,
         },
       },
     ])

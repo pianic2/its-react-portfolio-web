@@ -64,6 +64,14 @@ export const englishProfileContactLegalContent = {
         },
       ],
     },
+    selectedWork: {
+      eyebrow: 'SELECTED WORK',
+      title: 'Projects that make this path concrete.',
+      description:
+        'These project pages show work from different stages of my development, with links to the implementation and its current evidence.',
+      detailLabel: 'Read the project details',
+      repositoryLabel: 'Open the repository',
+    },
     ctas: {
       projectsLabel: 'Open LeetCode',
       contactLabel: 'Contact me',
@@ -131,7 +139,7 @@ export const englishProfileContactLegalContent = {
     updatedLabel: 'Last updated',
     updatedAt: '21 July 2026',
     intro:
-      'This portfolio is a static site published on GitHub Pages. It has no application backend and does not directly retain messages sent through the contact form.',
+      'This portfolio is published as a static site on GitHub Pages. The form forwards submissions to the portfolio backend for delivery.',
     indexLabel: 'On this page',
     sections: [
       {
@@ -145,7 +153,7 @@ export const englishProfileContactLegalContent = {
         id: 'privacy-purpose',
         title: 'Purpose and provider',
         paragraphs: [
-          'The data is used only to reply to your request and is sent to the portfolio backend for delivery. The portfolio does not directly retain submissions.',
+          'The data is used to reply to your request and forwarded to the portfolio backend for delivery.',
         ],
       },
       {
@@ -163,9 +171,9 @@ export const englishProfileContactLegalContent = {
         ],
       },
     ],
-    providerHeading: 'Service provider',
-    providerLabel: 'Read the portfolio backend privacy information',
-    providerUrl: 'https://github.com/pianic2/its-react-portfolio-web',
+    providerHeading: 'Backend privacy information',
+    providerLabel: 'View the portfolio backend privacy information',
+    providerUrl: 'https://pdpw-production.onrender.com',
     ownerContactHeading: 'Privacy contact',
     ownerContactLabel: 'Contact the site owner on GitHub',
     ownerContactUrl: 'https://github.com/pianic2',

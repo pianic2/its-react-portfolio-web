@@ -1,5 +1,6 @@
 import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
-import { Box, CardContent, Chip, Stack, Typography } from '@mui/material'
+import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
+import { Box, CardContent, Chip, Link, Stack, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { ButtonLink, ExternalLink } from '../components/actions/AppLink'
 import { PageContainer } from '../components/layout/PageContainer'
@@ -15,6 +16,17 @@ const narrativePlacement = [
   { md: '1 / span 5' },
   { md: '6 / span 7' },
 ] as const
+
+const responsiveChipSx = {
+  height: 'auto',
+  maxWidth: '100%',
+  '& .MuiChip-label': {
+    display: 'block',
+    overflowWrap: 'anywhere',
+    py: 0.5,
+    whiteSpace: 'normal',
+  },
+}
 
 export function ProjectDetailPage() {
   const { slug } = useParams()
@@ -70,7 +82,7 @@ export function ProjectDetailPage() {
             <Box
               sx={{
                 display: 'grid',
-                gridTemplateColumns: { md: 'minmax(0, 7fr) minmax(280px, 5fr)' },
+                gridTemplateColumns: { md: 'minmax(0, 1fr)' },
                 minWidth: 0,
               }}
             >
@@ -81,12 +93,12 @@ export function ProjectDetailPage() {
                   flexDirection: 'column',
                   gap: 3,
                   minWidth: 0,
-                  order: { xs: 2, md: 1 },
+                  order: { xs: 1, md: 1 },
                   p: { xs: 3, sm: 5, md: 7 },
                   '&:last-child': { pb: { xs: 3, sm: 5, md: 7 } },
                 }}
               >
-                <Stack spacing={1.5} sx={{ minWidth: 0 }}>
+                <Stack spacing={1.5} sx={{ minWidth: 0, width: '100%' }}>
                   <Typography sx={{ letterSpacing: 0 }} variant="overline">
                     {project.detailEyebrow}
                   </Typography>
@@ -98,7 +110,7 @@ export function ProjectDetailPage() {
                       hyphens: 'auto',
                       letterSpacing: 0,
                       maxWidth: '14ch',
-                      overflowWrap: 'break-word',
+                      overflowWrap: 'anywhere',
                     }}
                     variant="h2"
                   >
@@ -109,11 +121,21 @@ export function ProjectDetailPage() {
                   </Typography>
                 </Stack>
 
-                <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+                <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1, width: '100%' }}>
                   {project.capabilities.map((capability) => (
-                    <Chip key={capability.id} label={capability.label} size="small" />
+                    <Chip
+                      key={capability.id}
+                      label={capability.label}
+                      size="small"
+                      sx={responsiveChipSx}
+                    />
                   ))}
-                  <Chip label={project.claimLabel} size="small" variant="outlined" />
+                  <Chip
+                    label={project.claimLabel}
+                    size="small"
+                    sx={responsiveChipSx}
+                    variant="outlined"
+                  />
                 </Stack>
 
                 <ExternalLink
@@ -125,8 +147,8 @@ export function ProjectDetailPage() {
                   {project.repositoryLabel ?? labels.repositoryLabel}
                 </ExternalLink>
               </CardContent>
-              <Box sx={{ minWidth: 0, order: { xs: 1, md: 2 } }}>
-                <ProjectArtwork number={project.number} variant={project.visualVariant} />
+              <Box sx={{ minWidth: 0, order: { xs: 2, md: 2 } }}>
+                <ProjectArtwork project={project} />
               </Box>
             </Box>
           </StudioCard>
@@ -172,7 +194,11 @@ export function ProjectDetailPage() {
                     >
                       {String(index + 1).padStart(2, '0')}
                     </Typography>
-                    <Typography component="h2" sx={{ letterSpacing: 0, mt: 2 }} variant="h4">
+                    <Typography
+                      component="h2"
+                      sx={{ letterSpacing: 0, mt: 2, overflowWrap: 'anywhere' }}
+                      variant="h4"
+                    >
                       {section.label}
                     </Typography>
                     <Typography sx={{ maxWidth: '70ch', mt: 2 }}>{section.body}</Typography>
@@ -185,6 +211,79 @@ export function ProjectDetailPage() {
                 </StudioCard>
               </Box>
             ))}
+          </Box>
+        </PageContainer>
+      </PageSection>
+
+      <PageSection aria-labelledby="project-contribution-title" spacing="spacious">
+        <PageContainer>
+          <Box
+            sx={{
+              display: 'grid',
+              gap: { xs: 4, md: 7 },
+              gridTemplateColumns: { md: 'minmax(0, 4fr) minmax(0, 8fr)' },
+              minWidth: 0,
+            }}
+          >
+            <Stack spacing={2} sx={{ minWidth: 0 }}>
+              <Typography
+                component="h2"
+                id="project-contribution-title"
+                sx={{
+                  fontSize: { xs: '2rem', sm: '2.75rem' },
+                  letterSpacing: 0,
+                  overflowWrap: 'anywhere',
+                }}
+                variant="h3"
+              >
+                {labels.whatIWorkedOnLabel}
+              </Typography>
+              <Typography sx={{ maxWidth: '65ch' }}>{project.whatIWorkedOn}</Typography>
+              <Typography color="text.secondary" sx={{ maxWidth: '65ch' }}>
+                {labels.futureImprovementLabel}: {project.futureImprovement}
+              </Typography>
+            </Stack>
+
+            <Stack component="ul" spacing={3} sx={{ listStyle: 'none', m: 0, minWidth: 0, p: 0 }}>
+              {project.claims.map((claim) => (
+                <Box
+                  component="li"
+                  key={claim.id}
+                  sx={{
+                    borderBlockStart: (theme) =>
+                      `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
+                    minWidth: 0,
+                    py: 3,
+                  }}
+                >
+                  <Stack spacing={1.5} sx={{ alignItems: 'flex-start', width: '100%' }}>
+                    <Chip
+                      label={claim.statusLabel}
+                      size="small"
+                      sx={responsiveChipSx}
+                      variant="outlined"
+                    />
+                    <Typography>{claim.text}</Typography>
+                    {claim.evidenceIds.length ? (
+                      <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5 }}>
+                        {claim.evidenceIds.map((evidenceId) => {
+                          const evidence = project.evidence.find((item) => item.id === evidenceId)
+                          return evidence ? (
+                            <Link
+                              href={`#project-evidence-${evidenceId}`}
+                              key={evidenceId}
+                              underline="always"
+                            >
+                              {evidence.label}
+                            </Link>
+                          ) : null
+                        })}
+                      </Stack>
+                    ) : null}
+                  </Stack>
+                </Box>
+              ))}
+            </Stack>
           </Box>
         </PageContainer>
       </PageSection>
@@ -203,7 +302,11 @@ export function ProjectDetailPage() {
               <Typography
                 component="h2"
                 id="project-evidence-title"
-                sx={{ fontSize: { xs: '2rem', sm: '2.75rem' }, letterSpacing: 0 }}
+                sx={{
+                  fontSize: { xs: '2rem', sm: '2.75rem' },
+                  letterSpacing: 0,
+                  overflowWrap: 'anywhere',
+                }}
                 variant="h3"
               >
                 {labels.evidenceLabel}
@@ -216,25 +319,55 @@ export function ProjectDetailPage() {
             <Stack spacing={0} sx={{ minWidth: 0 }}>
               {project.evidence.map((evidence) => (
                 <Box
+                  data-testid={`project-evidence-details-${evidence.id}`}
+                  id={`project-evidence-${evidence.id}`}
                   key={evidence.id}
-                  component="article"
+                  component="details"
                   sx={{
                     borderBlockStart: (theme) =>
                       `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
                     minWidth: 0,
-                    py: 4,
+                    '& > summary': {
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      listStyle: 'none',
+                      minHeight: 48,
+                      py: 3,
+                    },
+                    '& > summary::-webkit-details-marker': { display: 'none' },
+                    '&[open] > summary [data-evidence-disclosure-indicator]': {
+                      transform: 'rotate(180deg)',
+                    },
+                    '& > summary:focus-visible': {
+                      outline: (theme) =>
+                        `${theme.digitalStudio.focus.outerWidth}px solid ${theme.digitalStudio.colors.primary}`,
+                      outlineOffset: (theme) => `${theme.digitalStudio.focus.offset}px`,
+                    },
                   }}
                 >
-                  <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0 }}>
+                  <Box component="summary" sx={{ gap: 2 }}>
+                    <Typography
+                      component="h3"
+                      sx={{ flex: 1, letterSpacing: 0, minWidth: 0, overflowWrap: 'anywhere' }}
+                      variant="h5"
+                    >
+                      {evidence.label}
+                    </Typography>
+                    <ExpandMoreRounded
+                      aria-hidden="true"
+                      data-evidence-disclosure-indicator
+                      sx={{ flexShrink: 0 }}
+                    />
+                  </Box>
+                  <Stack spacing={1.5} sx={{ maxWidth: '70ch', minWidth: 0, pb: 4 }}>
                     <Typography
                       component="p"
                       sx={{ fontWeight: 900, letterSpacing: 0 }}
                       variant="overline"
                     >
                       {evidence.typeLabel}
-                    </Typography>
-                    <Typography component="h3" sx={{ letterSpacing: 0 }} variant="h5">
-                      {evidence.label}
                     </Typography>
                     <Typography>{evidence.description}</Typography>
                     {evidence.url ? (

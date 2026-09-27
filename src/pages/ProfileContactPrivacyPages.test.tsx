@@ -45,13 +45,21 @@ describe('Profile, Contact and Privacy pages', () => {
     expect(
       screen.getByRole('heading', { name: 'Other places where you can follow my progress.' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(5)
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(6)
     expect(screen.getAllByRole('link', { name: 'Contact me' })).toHaveLength(2)
     expect(screen.getAllByRole('link', { name: /Explore GitHub/ })).toHaveLength(2)
     expect(screen.getByRole('link', { name: /Open my LeetCode profile/ })).toHaveAttribute(
       'href',
       'https://leetcode.com/u/pianic2',
     )
+    expect(
+      screen.getByRole('heading', { name: 'Projects that make this path concrete.' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: /Read the project details/ })[0]).toHaveAttribute(
+      'href',
+      '/en/projects/homeedge-ai-platform',
+    )
+    expect(screen.getAllByRole('link', { name: /Open the repository/ })).toHaveLength(3)
   }, 20_000)
 
   it('presents the Italian contact form with visible labels and useful guidance', () => {
@@ -73,6 +81,18 @@ describe('Profile, Contact and Privacy pages', () => {
     )
   }, 20_000)
 
+  it('shows project work as a localized author-approved profile milestone', () => {
+    renderPage('it', 'profile')
+
+    expect(
+      screen.getByRole('heading', { name: 'Progetti che rendono concreto questo percorso.' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getAllByRole('link', { name: /Leggi i dettagli del progetto/ })[0],
+    ).toHaveAttribute('href', '/it/progetti/homeedge-ai-platform')
+    expect(screen.getAllByRole('link', { name: /Apri il repository/ })).toHaveLength(3)
+  }, 20_000)
+
   it('makes the English privacy notice scannable and identifies both external contacts', () => {
     renderPage('en', 'privacy')
 
@@ -81,12 +101,23 @@ describe('Profile, Contact and Privacy pages', () => {
     ).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(4)
     expect(
-      screen.getByRole('link', { name: /Read the portfolio backend privacy information/ }),
-    ).toHaveAttribute('href', 'https://github.com/pianic2/its-react-portfolio-web')
+      screen.getByText(/The form forwards submissions to the portfolio backend for delivery/),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /View the portfolio backend privacy information/ }),
+    ).toHaveAttribute('href', 'https://pdpw-production.onrender.com')
     expect(screen.getByRole('link', { name: /Contact the site owner on GitHub/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2',
     )
     expect(screen.getByText('Last updated: 21 July 2026')).toBeInTheDocument()
+  }, 20_000)
+
+  it('describes the Italian static site and contact delivery consistently', () => {
+    renderPage('it', 'privacy')
+
+    expect(
+      screen.getByText(/Il form inoltra i dati al backend del portfolio per la consegna/),
+    ).toBeInTheDocument()
   }, 20_000)
 })

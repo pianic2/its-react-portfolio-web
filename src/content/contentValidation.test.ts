@@ -30,6 +30,29 @@ describe('content repository validation', () => {
     )
   })
 
+  it('uses explicit project maturity independent of claim ordering in both locales', () => {
+    expect(getProjectById('en', 'homeedge-ai-platform')?.claimLabel).toBe('Documented scope')
+    expect(getProjectById('it', 'homeedge-ai-platform')?.claimLabel).toBe('Ambito documentato')
+    expect(getProjectById('en', 'its-library-api-laravel')?.claimLabel).toBe('Implemented project')
+    expect(getProjectById('it', 'node-list-manager')?.claimLabel).toBe('Progetto implementato')
+  })
+
+  it('maps original project diagrams to localized informative artwork records', () => {
+    const homeedge = getProjectById('en', 'homeedge-ai-platform')?.assets[0]
+    const library = getProjectById('en', 'its-library-api-laravel')?.assets[0]
+    const nodeEnglish = getProjectById('en', 'node-list-manager')?.assets[0]
+    const nodeItalian = getProjectById('it', 'node-list-manager')?.assets[0]
+
+    expect(homeedge).toMatchObject({ provenance: 'original', decorative: false })
+    expect(homeedge?.src).toBe('assets/projects/homeedge-boundary.svg')
+    expect(homeedge?.mobileSrc).toBe('assets/projects/homeedge-boundary-mobile.svg')
+    expect(library).toMatchObject({ provenance: 'original', decorative: false })
+    expect(library?.alt).toMatch(/books, authors and categories/i)
+    expect(nodeEnglish?.alt).toMatch(/workflow configuration rather than a test result/i)
+    expect(nodeItalian?.alt).toMatch(/configurazione del workflow, non un risultato/i)
+    expect(nodeItalian?.src).toBe('assets/projects/node-flow-it.svg')
+  })
+
   it('keeps the complete editorial narrative contract equivalent across locales', () => {
     const repository = validateContentRepository()
     const narrativeFields = [
@@ -73,7 +96,10 @@ describe('content repository validation', () => {
       expect(method.tools.items).toHaveLength(3)
       expect(method.principles).toHaveLength(5)
       expect(method.value.items).toHaveLength(6)
-      expect(method.agenticDelivery.concepts).toHaveLength(7)
+      expect(method.agenticDelivery.concepts).toHaveLength(4)
+      expect(method.agenticDelivery.example.intent).not.toHaveLength(0)
+      expect(method.agenticDelivery.example.execution).not.toHaveLength(0)
+      expect(method.agenticDelivery.example.result).not.toHaveLength(0)
       expect(method.agenticDelivery.workflow).toHaveLength(5)
       expect(method.agenticDelivery.workflowDescriptions).toHaveLength(5)
       expect(method.agenticDelivery.workflow).toEqual(
@@ -139,6 +165,17 @@ describe('content repository validation', () => {
     const italian = repository.locales.it.projects.find(
       (project) => project.projectId === 'homeedge-ai-platform',
     )!
+
+    expect(english.narrative.cardSummary).toMatch(/documents plans for ESP32-C3 nodes/i)
+    expect(italian.narrative.cardSummary).toMatch(/documenta il progetto di nodi ESP32-C3/i)
+    expect(english.narrative.built).toMatch(/firmware integration of the node remains unvalidated/i)
+    expect(english.narrative.currentStage).toMatch(
+      /does not present the node firmware.*as integrated/i,
+    )
+    expect(italian.narrative.built).toMatch(/integrazione firmware del nodo resta da validare/i)
+    expect(italian.narrative.currentStage).toMatch(
+      /non presenta come integrate le funzionalità firmware/i,
+    )
 
     expect(
       shared.evidence.find((evidence) => evidence.id === 'homeedge-product-vision'),

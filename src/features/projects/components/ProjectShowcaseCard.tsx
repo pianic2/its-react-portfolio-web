@@ -2,7 +2,6 @@ import ArrowForwardRounded from '@mui/icons-material/ArrowForwardRounded'
 import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
 import { Box, CardContent, Chip, Stack, Typography } from '@mui/material'
 import { ButtonLink, ExternalButtonLink } from '../../../components/actions/AppLink'
-import { StudioCard } from '../../../components/surfaces/StudioCard'
 import type { ProjectViewModel } from '../../../content/loaders'
 import type { Language } from '../../../content/schema'
 import { ProjectArtwork } from './ProjectArtwork'
@@ -11,8 +10,6 @@ type ProjectShowcaseCardProps = {
   language: Language
   project: ProjectViewModel
   repositoryLabel: string
-  futureImprovementLabel: string
-  whatIWorkedOnLabel: string
   variant: 'home' | 'projects'
 }
 
@@ -20,8 +17,6 @@ export function ProjectShowcaseCard({
   language,
   project,
   repositoryLabel,
-  futureImprovementLabel,
-  whatIWorkedOnLabel,
   variant,
 }: ProjectShowcaseCardProps) {
   const titleId = `showcase-${project.id}-title`
@@ -41,19 +36,8 @@ export function ProjectShowcaseCard({
         flexDirection: 'column',
         minWidth: 0,
         overflow: 'hidden',
-        transition: (theme) =>
-          `transform ${theme.digitalStudio.motion.duration.fast}ms ${theme.digitalStudio.motion.easing.standard}`,
-        '&:focus-within': { outline: 'none' },
-        '@media (hover: hover)': {
-          '&:hover': { transform: variant === 'projects' ? 'none' : 'translateY(-4px)' },
-        },
-        '@media (prefers-reduced-motion: reduce)': {
-          transition: 'none',
-          '&:hover': { transform: 'none' },
-        },
       }}
     >
-      <ProjectArtwork number={project.number} variant={project.visualVariant} />
       <CardContent
         sx={{
           display: 'flex',
@@ -113,40 +97,7 @@ export function ProjectShowcaseCard({
           <Typography>{project.supportingText}</Typography>
         </Stack>
 
-        {variant === 'projects' ? (
-          <Stack spacing={2.5}>
-            <StudioCard
-              sx={{
-                borderInlineStart: (theme) =>
-                  `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.secondary}`,
-                p: 2.5,
-              }}
-            >
-              <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
-                {whatIWorkedOnLabel}
-              </Typography>
-              <Typography sx={{ mt: 1 }}>{project.whatIWorkedOn}</Typography>
-            </StudioCard>
-            <StudioCard
-              sx={{
-                borderInlineStart: (theme) =>
-                  `${theme.digitalStudio.borderWidths.hero}px solid ${theme.digitalStudio.colors.accent}`,
-                p: 2.5,
-              }}
-            >
-              <Typography component="h4" sx={{ fontWeight: 900 }} variant="h6">
-                {futureImprovementLabel}
-              </Typography>
-              <Typography sx={{ mt: 1 }}>{project.futureImprovement}</Typography>
-            </StudioCard>
-          </Stack>
-        ) : null}
-
-        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
-          {project.capabilities.map((capability) => (
-            <Chip key={capability.id} label={capability.label} size="small" />
-          ))}
-        </Stack>
+        <ProjectArtwork project={project} />
 
         <Stack
           data-layout={variant === 'projects' ? 'vertical-full-width' : 'responsive'}
