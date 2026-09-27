@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { StrictMode } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { DigitalStudioProvider } from '../../theme'
 import {
@@ -43,10 +44,16 @@ const copy = {
   privacyNotice: 'Do not send sensitive data.',
 }
 
-function renderForm() {
+function renderForm(strict = false) {
   return render(
     <DigitalStudioProvider>
-      <ContactForm copy={copy} locale="en" />
+      {strict ? (
+        <StrictMode>
+          <ContactForm copy={copy} locale="en" />
+        </StrictMode>
+      ) : (
+        <ContactForm copy={copy} locale="en" />
+      )}
     </DigitalStudioProvider>,
   )
 }
@@ -112,6 +119,24 @@ describe('ContactForm', () => {
     await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent('Sent.'))
     fireEvent.click(screen.getByRole('button', { name: 'Send another message' }))
     expect(screen.getByRole('textbox', { name: /Name/ })).toHaveValue('')
+  })
+
+  it('handles a successful submission after StrictMode effect replay', async () => {
+    submitContactMessage.mockResolvedValue({ delivered: true })
+    renderForm(true)
+    fireEvent.change(screen.getByRole('textbox', { name: /Name/ }), {
+      target: { value: 'Niccolò' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Email/ }), {
+      target: { value: 'niccolo@example.com' },
+    })
+    fireEvent.change(screen.getByRole('textbox', { name: /Message/ }), {
+      target: { value: 'A message that is long enough.' },
+    })
+
+    fireEvent.submit(screen.getByRole('button', { name: 'Send message' }).closest('form')!)
+
+    expect(await screen.findByText('Sent.')).toBeInTheDocument()
   })
 
   it('keeps values after a failed submission and does not reveal provider details', async () => {

@@ -1,6 +1,15 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { githubPagesBasePath, siteOrigin } from '../routes/sitemap'
 import { getSeoMetadata } from './seoContract'
+
+export type SeoMetadataOverrides = Partial<Pick<SeoMetadataValue, 'description' | 'title'>> & {
+  image?: string
+  publishedTime?: string
+  type?: 'article' | 'website'
+}
+
+type SeoMetadataValue = ReturnType<typeof getSeoMetadata>
 
 function setMeta(attribute: 'name' | 'property', key: string, value: string) {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`)
@@ -12,10 +21,19 @@ function setMeta(attribute: 'name' | 'property', key: string, value: string) {
   element.content = value
 }
 
-export function SeoMetadata() {
+export function SeoMetadata({ overrides }: { overrides?: SeoMetadataOverrides }) {
   const { pathname } = useLocation()
+  const title = overrides?.title
+  const description = overrides?.description
+  const image = overrides?.image
+  const publishedTime = overrides?.publishedTime
+  const type = overrides?.type
   useEffect(() => {
-    const metadata = getSeoMetadata(pathname)
+    const metadata = { ...getSeoMetadata(pathname), ...overrides }
+    const socialImage =
+      image ??
+      new URL(`${githubPagesBasePath.replace(/^\//, '')}assets/social-card.png`, siteOrigin)
+    const socialImageUrl = typeof socialImage === 'string' ? socialImage : socialImage.href
     document.title = metadata.title
     document.documentElement.lang = metadata.language
     setMeta('name', 'description', metadata.description)
@@ -24,10 +42,15 @@ export function SeoMetadata() {
     setMeta('property', 'og:description', metadata.description)
     setMeta('property', 'og:url', metadata.canonical ?? '')
     setMeta('property', 'og:locale', metadata.language === 'it' ? 'it_IT' : 'en_US')
-    setMeta('property', 'og:type', 'website')
-    setMeta('name', 'twitter:card', 'summary')
+    setMeta('property', 'og:type', type ?? 'website')
+    setMeta('property', 'og:image', socialImageUrl)
+    setMeta('property', 'og:image:width', image ? '' : '1200')
+    setMeta('property', 'og:image:height', image ? '' : '630')
+    setMeta('property', 'article:published_time', publishedTime ?? '')
+    setMeta('name', 'twitter:card', 'summary_large_image')
     setMeta('name', 'twitter:title', metadata.title)
     setMeta('name', 'twitter:description', metadata.description)
+    setMeta('name', 'twitter:image', socialImageUrl)
     document.head
       .querySelectorAll('link[data-seo-alternate], link[data-seo-canonical]')
       .forEach((element) => element.remove())
@@ -46,6 +69,6 @@ export function SeoMetadata() {
       link.dataset.seoAlternate = 'true'
       document.head.append(link)
     })
-  }, [pathname])
+  }, [description, image, overrides, pathname, publishedTime, title, type])
   return null
 }

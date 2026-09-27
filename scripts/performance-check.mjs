@@ -3,10 +3,12 @@ import { join } from 'node:path'
 import { compareBudget, summarizeAssets } from './release-contract.mjs'
 
 const baseline = JSON.parse(readFileSync('scripts/performance-budget.json', 'utf8'))
-const files = readdirSync('dist/assets').map((name) => ({
-  path: `assets/${name.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:css|js)$)/, '')}`,
-  contents: readFileSync(join('dist/assets', name)),
-}))
+const files = readdirSync('dist/assets')
+  .filter((name) => /\.(?:css|js)$/.test(name))
+  .map((name) => ({
+    path: `assets/${name.replace(/-[A-Za-z0-9_-]{8}(?=\.(?:css|js)$)/, '')}`,
+    contents: readFileSync(join('dist/assets', name)),
+  }))
 const measured = summarizeAssets(files)
 const budget = Object.fromEntries(
   Object.entries(baseline.assets).map(([path, asset]) => [

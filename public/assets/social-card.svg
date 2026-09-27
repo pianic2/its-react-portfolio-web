@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <title>Niccolò Piazzi — Full Stack Developer Portfolio</title>
+  <desc>Editorial portfolio card in violet, cyan and orange with projects, skills and method.</desc>
+  <rect width="1200" height="630" fill="#F5F1E8"/>
+  <path d="M0 0h1200v630H0z" stroke="#171717" stroke-width="20"/>
+  <path d="M824 62h278v278H824z" fill="#7257E8" stroke="#171717" stroke-width="12"/>
+  <circle cx="963" cy="201" r="91" fill="#D7F36A" stroke="#171717" stroke-width="12"/>
+  <path d="m970 118 108 126h-88l63 76-149-122h88z" fill="#FF784F" stroke="#171717" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M790 417h337v118H790z" fill="#D7F36A" stroke="#171717" stroke-width="10"/>
+  <path d="M835 458h247M835 488h190" stroke="#171717" stroke-width="12" stroke-linecap="square"/>
+  <text x="76" y="108" fill="#171717" font-family="Arial, sans-serif" font-size="22" font-weight="700">NICCOLÒ PIAZZI / PORTFOLIO</text>
+  <path d="M72 139h652" stroke="#171717" stroke-width="6"/>
+  <text x="70" y="263" fill="#171717" font-family="Arial, sans-serif" font-size="72" font-weight="900">FULL STACK</text>
+  <text x="70" y="350" fill="#171717" font-family="Arial, sans-serif" font-size="72" font-weight="900">DEVELOPER</text>
+  <path d="M76 421h622v91H76z" fill="#B8EEFF" stroke="#171717" stroke-width="8"/>
+  <text x="108" y="477" fill="#171717" font-family="Arial, sans-serif" font-size="26" font-weight="700">PROJECTS / SKILLS / METHOD</text>
+  <text x="76" y="570" fill="#171717" font-family="Arial, sans-serif" font-size="24" font-weight="700">ITALIANO · ENGLISH</text>
+</svg>
