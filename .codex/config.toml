@@ -1,0 +1,30 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# GPT-6 Luna has a 1,050,000-token context window. Compact at 85%, leaving
+# about 157,500 tokens for the compaction response and continued work.
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+model_auto_compact_token_limit = 892500
+model_auto_compact_token_limit_scope = "total"
+
+# Bound one large shell/MCP/browser result to under 0.8% of Luna's context.
+tool_output_token_limit = 8192
+
+# Live research is available when repository evidence is insufficient.
+web_search = "live"
+
+[features]
+apps = true
+browser_use = true
+
+[skills]
+# Codex defaults to 2% of the model window (21,000 tokens); 2,048 is about
+# 0.2%, enough for short skill descriptions while keeping discovery compact.
+max_context_tokens = 2048
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3
+max_depth = 1
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "medium"
