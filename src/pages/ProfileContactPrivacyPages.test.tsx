@@ -26,7 +26,7 @@ describe('Profile, Contact and Privacy pages', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'I found in software the way to turn curiosity and logic into something concrete.',
+        name: 'Software gives me a way to turn curiosity into practical work.',
       }),
     ).toBeInTheDocument()
     expect(

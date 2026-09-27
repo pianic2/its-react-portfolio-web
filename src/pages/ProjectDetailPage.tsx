@@ -6,7 +6,7 @@ import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { StudioCard } from '../components/surfaces/StudioCard'
 import { usePortfolioContent } from '../content/context'
-import { ProjectArtwork } from '../features/projects/components/ProjectArtwork'
+import { ProjectVisualStory } from '../features/projects/components/ProjectVisualStory'
 import { getRoutePath } from '../routes/routeConfig'
 
 const narrativePlacement = [
@@ -126,7 +126,11 @@ export function ProjectDetailPage() {
                 </ExternalLink>
               </CardContent>
               <Box sx={{ minWidth: 0, order: { xs: 1, md: 2 } }}>
-                <ProjectArtwork number={project.number} variant={project.visualVariant} />
+                <ProjectVisualStory
+                  interactive
+                  title={project.visualStory.title}
+                  steps={project.visualStory.steps}
+                />
               </Box>
             </Box>
           </StudioCard>

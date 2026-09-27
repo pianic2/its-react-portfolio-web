@@ -102,7 +102,7 @@ export const italianContent = {
       eyebrow: 'PROGETTI SELEZIONATI',
       title: 'Tre progetti che raccontano tappe diverse del mio percorso.',
       description:
-        'Durante il corso Full Stack Dev. in ITS Prodigi, ho realizzato diversi progetti portfolio, tra cui "Library API" (un backend REST con Laravel) e una "ToDo list" in Node.js. HomeEdge è un progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
+        'Dall’API per una biblioteca digitale a HomeEdge, un progetto smart home ancora in fase iniziale.',
     },
     skills: {
       eyebrow: 'STRUMENTI E COMPETENZE',
@@ -120,8 +120,8 @@ export const italianContent = {
             { text: 'Expo', icon: 'devicon:expo' },
             { text: 'TypeScript', icon: 'devicon:typescript' },
             { text: 'Material UI', icon: 'mdi:material-ui' },
-            { text: 'accessibility', icon: 'mdi:accessibility' },
-            { text: 'responsive design', icon: 'mdi:design' },
+            { text: 'accessibilità', icon: 'mdi:accessibility' },
+            { text: 'design adattivo', icon: 'mdi:design' },
           ],
         },
         {
@@ -150,7 +150,7 @@ export const italianContent = {
         },
         {
           id: 'delivery',
-          title: 'Delivery',
+          title: 'Distribuzione',
           description: 'Git, GitHub Actions, Docker, testing automatico e documentazione tecnica.',
           stack: [
             { text: 'Git', icon: 'devicon:git' },
@@ -162,13 +162,13 @@ export const italianContent = {
         },
         {
           id: 'embedded',
-          title: 'Embedded',
-          description: 'ESP32-C3, firmware in C, sensori ambientali e progettazione edge-first.',
+          title: 'Sistemi embedded',
+          description: 'ESP32-C3, firmware in C, sensori ambientali ed elaborazione locale.',
           stack: [
             { text: 'ESP32', icon: 'mdi:react' },
             { text: 'C', icon: 'devicon:c' },
             { text: 'Sensori', icon: 'mdi:proximity-sensors' },
-            { text: 'Edge', icon: 'carbon:iot-connect' },
+            { text: 'Elaborazione locale', icon: 'carbon:iot-connect' },
           ],
         },
       ],
@@ -259,16 +259,15 @@ export const italianContent = {
       eyebrow: 'PROGETTI SELEZIONATI',
       title: 'Tre progetti che raccontano parti diverse del mio percorso.',
       introduction:
-        'La Library API e il progetto Node.js sono nati durante il corso ITS. HomeEdge è il progetto personale con cui sto approfondendo smart home, sistemi embedded e progettazione a lungo termine.',
+        'Due progetti didattici e uno personale. Apri una scheda per vedere obiettivo, contributo, stato e prove consultabili.',
       supportingText: 'PROGETTO PERSONALE · PROGETTO ITS',
     },
     projects: {
       eyebrow: 'INDICE DEI PROGETTI',
       title: 'Progetti costruiti per imparare e per durare.',
       introduction:
-        'I progetti ITS mostrano come rispondo a requisiti didattici definiti. HomeEdge mostra invece come affronto un prodotto indipendente che deve evolvere attraverso ricerca, decisioni, implementazione e revisione continua.',
-      supportingText:
-        'Apri un progetto per comprenderne il problema, la soluzione implementata, la fase attuale e le evidenze disponibili oggi.',
+        'Due progetti didattici e uno personale. Ogni scheda presenta obiettivo, contributo, stato attuale e prove consultabili.',
+      supportingText: 'Le affermazioni rimandano alle evidenze disponibili nei repository.',
     },
     labels: {
       ideaLabel: 'L’idea',
@@ -299,7 +298,7 @@ export const italianContent = {
     claimStatusLabels: {
       verified: 'Verificato',
       demonstrated: 'Supportato da evidenze',
-      declared: 'Direzione documentata',
+      declared: 'Documentato, non ancora realizzato',
       planned: 'Prossimo passo pianificato',
     },
     evidenceTypeLabels: {
@@ -343,14 +342,14 @@ export const italianContent = {
         'HomeEdge non è un esercizio didattico isolato. È il progetto con cui approfondisco nel tempo sistemi embedded, architettura di prodotto e governance tecnica responsabile.',
       narrative: {
         cardSummary:
-          'HomeEdge parte da piccoli nodi ESP32-C3 che rilevano temperatura, umidità, presenza locale e stato della porta.',
+          'HomeEdge documenta il perimetro di un nodo ESP32-C3 per sensori ambientali e stato della porta. Il nodo funzionante è ancora un obiettivo.',
         cardValue:
           'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
         heroSummary:
-          'HomeEdge è una piattaforma smart home sperimentale costruita intorno a piccoli sensori per le stanze. Il suo obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
+          'HomeEdge è un progetto smart home sperimentale. La documentazione definisce un nodo per stanza e porta e i confini dei dati che dovrebbe raccogliere.',
         idea: 'Molti prodotti smart home non spiegano chiaramente quali dati raccolgono, dove vengono inviati o come il sistema prende le proprie decisioni. HomeEdge sperimenta un approccio più trasparente: ogni dispositivo ha uno scopo limitato, ogni tipo di dato ha un confine esplicito e ogni scelta importante viene documentata.',
         built:
-          'L’MVP attuale è concentrato su un nodo per stanza e porta basato su ESP32-C3. Misura temperatura e umidità, rileva localmente una presenza non identificativa e comunica se una porta è aperta o chiusa. Il repository definisce inoltre l’architettura, i rischi e le regole di lavoro che guideranno le fasi successive.',
+          'Il perimetro documentato dell’MVP prevede un nodo per stanza e porta basato su ESP32-C3, con misure di temperatura e umidità, rilevamento locale di presenza non identificativa e stato della porta. Il repository definisce architettura e rischi; un nodo hardware funzionante non è ancora dimostrato.',
         value:
           'Il progetto combina programmazione embedded, architettura software, progettazione di un prodotto mobile e governance tecnica responsabile. Il suo valore non è soltanto nel nodo sensore: mostra anche come far crescere un sistema connesso senza nasconderne i limiti.',
         currentStage:
@@ -359,6 +358,29 @@ export const italianContent = {
           'Il repository pubblico permette di controllare i confini dell’MVP, i segnali inclusi, la direzione architetturale e le regole usate per evitare affermazioni non supportate.',
         transparency:
           'Il repository pubblico è la fonte tecnica di riferimento per i confini dell’MVP, le note architetturali e la direzione del prodotto.',
+      },
+      visualStory: {
+        title: 'Confini documentati del nodo',
+        steps: [
+          {
+            id: 'signals',
+            label: 'Segnali',
+            description:
+              'Temperatura, umidità, presenza non identificativa e stato della porta sono i segnali previsti dal perimetro MVP.',
+          },
+          {
+            id: 'node',
+            label: 'Nodo ESP32-C3 previsto',
+            description:
+              'Il repository documenta un nodo per stanza e porta basato su ESP32-C3; il nodo funzionante è ancora un obiettivo.',
+          },
+          {
+            id: 'boundary',
+            label: 'Non ancora realizzato',
+            description:
+              'Sono documentati ambito e architettura. Backend, app mobile e funzioni AI restano pianificati.',
+          },
+        ],
       },
       claims: [
         {
@@ -432,15 +454,38 @@ export const italianContent = {
           'Mostra come autenticazione, validazione, relazioni tra dati e gestione dei file lavorano insieme in un backend reale.',
         heroSummary:
           'ITS Library API è un backend didattico per gestire una collezione digitale di libri, autori e categorie attraverso endpoint chiari e documentati.',
-        idea: 'Una libreria digitale richiede più di un elenco di titoli. Deve collegare i libri ai loro autori e alle categorie, validare le informazioni ricevute, proteggere le operazioni di modifica e offrire una configurazione che un altro sviluppatore possa riprodurre.',
+        idea: 'L’obiettivo era gestire libri, autori e categorie tramite un’API che validasse i dati, proteggesse le modifiche e offrisse un setup riproducibile.',
         built:
           'L’API permette la lettura pubblica e protegge le operazioni di scrittura tramite autenticazione. Gestisce libri, autori e categorie, usa Laravel Sanctum per gli accessi tramite token, salva i dati in MySQL e può associare file di testo scaricabili ai libri. Docker prepara localmente l’applicazione e il database.',
         value:
-          'Il progetto riunisce le parti essenziali di un vero backend: autenticazione, validazione, relazioni tra dati, archiviazione di file, errori prevedibili, documentazione e test automatici.',
+          'Il repository documenta endpoint, validazione, avvio locale e test: elementi che permettono di esaminare il comportamento senza affidarsi alla sola descrizione.',
         currentStage:
           'Il repository documenta gli endpoint disponibili, gli esempi di richiesta, le regole di validazione, l’avvio locale e le credenziali dimostrative. È una API didattica pensata per essere riprodotta localmente, non un servizio commerciale di libreria già pubblicato online.',
         evidenceIntroduction:
           'La documentazione pubblica mostra come avviare l’applicazione, ottenere un token di accesso, utilizzare gli endpoint disponibili e verificare il comportamento della validazione.',
+      },
+      visualStory: {
+        title: 'Lettura pubblica, scrittura protetta',
+        steps: [
+          {
+            id: 'catalogue',
+            label: 'Libri · autori · categorie',
+            description:
+              'Le risorse della libreria sono collegate nel modello dati e negli endpoint documentati.',
+          },
+          {
+            id: 'api',
+            label: 'API Laravel',
+            description:
+              'Gli endpoint consentono la lettura pubblica e proteggono le operazioni di scrittura con token Sanctum.',
+          },
+          {
+            id: 'storage',
+            label: 'MySQL · Docker',
+            description:
+              'Il database MySQL e il setup Docker sono descritti nel repository per l’avvio locale.',
+          },
+        ],
       },
       claims: [
         {
@@ -515,6 +560,27 @@ export const italianContent = {
           'Il repository attuale dimostra il flusso del backend, l’organizzazione delle route, la persistenza SQLite e i test automatici. È un progetto didattico Node.js, non un servizio di gestione attività pronto per la produzione.',
         evidenceIntroduction:
           'Il repository pubblico permette di controllare la struttura delle route, l’implementazione della persistenza e i test automatici.',
+      },
+      visualStory: {
+        title: 'Un backend piccolo, verificabile',
+        steps: [
+          {
+            id: 'requests',
+            label: 'Liste · attività',
+            description: 'Il backend gestisce liste e attività tramite endpoint dedicati.',
+          },
+          {
+            id: 'routes',
+            label: 'Route Express',
+            description: 'Le route per liste e attività sono separate in moduli Express.',
+          },
+          {
+            id: 'checks',
+            label: 'SQLite · test',
+            description:
+              'SQLite conserva i dati e i test automatici verificano i comportamenti principali.',
+          },
+        ],
       },
       claims: [
         {

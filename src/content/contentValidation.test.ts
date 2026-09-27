@@ -170,13 +170,13 @@ describe('content repository validation', () => {
     expect(repository.locales.en.common.claimStatusLabels).toEqual({
       verified: 'Verified',
       demonstrated: 'Backed by evidence',
-      declared: 'Documented direction',
+      declared: 'Documented, not yet built',
       planned: 'Planned next step',
     })
     expect(repository.locales.it.common.claimStatusLabels).toEqual({
       verified: 'Verificato',
       demonstrated: 'Supportato da evidenze',
-      declared: 'Direzione documentata',
+      declared: 'Documentato, non ancora realizzato',
       planned: 'Prossimo passo pianificato',
     })
   })

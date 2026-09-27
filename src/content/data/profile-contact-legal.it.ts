@@ -71,7 +71,7 @@ export const italianProfileContactLegalContent = {
       ],
     },
     ctas: {
-      projectsLabel: 'Apri LeetCode',
+      projectsLabel: 'Guarda i progetti',
       contactLabel: 'Contattami',
       githubLabel: 'Esplora GitHub',
     },

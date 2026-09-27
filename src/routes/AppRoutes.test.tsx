@@ -60,10 +60,7 @@ describe('localized application routes', () => {
     ['/it/privacy', 'Informazioni sul form di contatto.'],
     ['/en/skills', 'From a problem to software people can use, understand and verify.'],
     ['/en/method', 'Direction first. Then speed.'],
-    [
-      '/en/profile',
-      'I found in software the way to turn curiosity and logic into something concrete.',
-    ],
+    ['/en/profile', 'Software gives me a way to turn curiosity into practical work.'],
     ['/en/contact', 'Tell me what you are working on.'],
     ['/en/privacy', 'How the contact form handles your data.'],
   ])('renders %s as %s', async (path, heading) => {
@@ -111,7 +108,7 @@ describe('localized application routes', () => {
       screen.getByRole('heading', { name: 'Different tools for different projects.' }),
     ).toBeInTheDocument()
     expect(screen.getByTestId('skill-groups').children).toHaveLength(6)
-    expect(screen.getByRole('link', { name: 'View my skill' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Explore my skills' })).toHaveAttribute(
       'href',
       '/en/skills',
     )
@@ -260,7 +257,7 @@ describe('localized application routes', () => {
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
-  it('presents ProjectGuide as supporting guidance before artwork-led project cards', async () => {
+  it('presents ProjectGuide before project-story diagrams and narratives', async () => {
     renderRoute('/en/projects')
 
     const guide = await screen.findByRole('complementary', {
@@ -279,7 +276,7 @@ describe('localized application routes', () => {
         'The badge on each card explains where the project comes from. HomeEdge is a personal project I intend to keep developing; the other two were created through ITS assignments and exercises.',
       ),
     )
-    expect(artwork).toHaveAttribute('aria-hidden', 'true')
+    expect(artwork).toHaveAttribute('aria-label', 'Documented node boundaries')
     expect(artwork.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
     expect(
       title.compareDocumentPosition(evidenceHeading) & Node.DOCUMENT_POSITION_FOLLOWING,

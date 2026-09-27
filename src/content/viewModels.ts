@@ -41,6 +41,7 @@ export function buildProjectViewModel(
     futureImprovement: localized.futureImprovement,
     originDescription: localized.originDescription,
     narrative: localized.narrative,
+    visualStory: localized.visualStory,
     metadata: localized.metadata,
     featured: core.featured,
     order: core.order,

@@ -4,7 +4,7 @@ export const englishProfileContactLegalContent = {
   profilePage: {
     hero: {
       eyebrow: 'PROFILE',
-      title: 'I found in software the way to turn curiosity and logic into something concrete.',
+      title: 'Software gives me a way to turn curiosity into practical work.',
       description:
         'My path did not begin as a straight line, but with a recurring question: how do things really work? Today I bring that curiosity into software development, building projects and skills with method, transparency and continuity.',
     },
@@ -65,7 +65,7 @@ export const englishProfileContactLegalContent = {
       ],
     },
     ctas: {
-      projectsLabel: 'Open LeetCode',
+      projectsLabel: 'View projects',
       contactLabel: 'Contact me',
       githubLabel: 'Explore GitHub',
     },

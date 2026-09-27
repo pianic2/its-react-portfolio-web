@@ -7,12 +7,14 @@ import { usePortfolioContent } from '../../content/context'
 import { getRoutePath } from '../../routes/routeConfig'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { externalLinks } from '../../config/externalLinks'
+import { ProjectVisualStory } from '../projects/components/ProjectVisualStory'
 
 const githubUrl = externalLinks.githubProfile
 
 export function HomeHero() {
-  const { language, siteContent } = usePortfolioContent()
+  const { featuredProjects, language, siteContent } = usePortfolioContent()
   const copy = siteContent.homePage.hero
+  const focalProject = featuredProjects.find((project) => project.id === 'homeedge-ai-platform')
 
   return (
     <PageSection aria-labelledby="home-page-title" spacing="spacious">
@@ -47,83 +49,99 @@ export function HomeHero() {
               },
             })}
           >
-            <Stack spacing={{ xs: 3, sm: 4 }} sx={{ maxWidth: '68rem', minWidth: 0 }}>
-              <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
+            <Box
+              sx={{
+                alignItems: 'center',
+                display: 'grid',
+                gap: { xs: 4, md: 6 },
+                gridTemplateColumns: { md: 'minmax(0, 7fr) minmax(300px, 5fr)' },
+                minWidth: 0,
+              }}
+            >
+              <Stack spacing={{ xs: 3, sm: 4 }} sx={{ maxWidth: '68rem', minWidth: 0 }}>
+                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      letterSpacing: 0,
+                      borderBottom: '4px solid',
+                      borderColor: 'primary.main',
+                      color: 'text.primary',
+                    }}
+                    variant="overline"
+                  >
+                    <Box component="span" sx={{ fontWeight: 900, marginRight: '0.5rem' }}>
+                      FULL STACK DEVELOPER
+                    </Box>
+                    {'   '}
+                    {copy.eyebrow.replace('FULL STACK DEVELOPER', '').trim()}
+                  </Typography>
+                </Stack>
                 <Typography
-                  component="span"
+                  component="h1"
+                  id="home-page-title"
                   sx={{
+                    fontSize: 'clamp(2.25rem, 7vw, 5.25rem)',
                     letterSpacing: 0,
-                    borderBottom: '4px solid',
-                    borderColor: 'primary.main',
-                    color: 'text.primary',
+                    maxWidth: '24ch',
+                    overflowWrap: 'break-word',
+                    textWrap: 'balance',
                   }}
-                  variant="overline"
+                  variant="h1"
                 >
-                  <Box component="span" sx={{ fontWeight: 900, marginRight: '0.5rem' }}>
-                    FULL STACK DEVELOPER
-                  </Box>
-                  {'   '}
-                  {copy.eyebrow.replace('FULL STACK DEVELOPER', '').trim()}
+                  {copy.title}
                 </Typography>
+                <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '65ch' }}>
+                  {copy.description.prefix}
+                  <ExternalLink
+                    href={copy.description.url}
+                    language={language}
+                    newTab
+                    sx={{ fontWeight: 900 }}
+                  >
+                    {copy.description.linkLabel}
+                  </ExternalLink>
+                  {copy.description.suffix}
+                </Typography>
+                <Stack
+                  data-testid="home-hero-actions"
+                  direction={{ xs: 'column', sm: 'row' }}
+                  sx={{ flexWrap: 'wrap', gap: 4, minWidth: 0 }}
+                >
+                  <ButtonLink
+                    sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
+                    to={getRoutePath('projects', language)}
+                    variant="contained"
+                  >
+                    {copy.primaryCtaLabel}
+                  </ButtonLink>
+                  <ButtonLink
+                    sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
+                    to={getRoutePath('method', language)}
+                    variant="outlined"
+                  >
+                    {copy.methodCtaLabel}
+                  </ButtonLink>
+                  <ExternalButtonLink
+                    endIcon={<OpenInNewRounded aria-hidden="true" />}
+                    href={githubUrl}
+                    language={language}
+                    newTab
+                    sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
+                    variant="text"
+                  >
+                    <GitHubIcon sx={{ mr: 1 }} />
+                    {copy.githubCtaLabel}
+                  </ExternalButtonLink>
+                </Stack>
               </Stack>
-              <Typography
-                component="h1"
-                id="home-page-title"
-                sx={{
-                  fontSize: 'clamp(2.25rem, 7vw, 5.25rem)',
-                  letterSpacing: 0,
-                  maxWidth: '24ch',
-                  overflowWrap: 'break-word',
-                  textWrap: 'balance',
-                }}
-                variant="h1"
-              >
-                {copy.title}
-              </Typography>
-              <Typography sx={{ fontSize: { sm: '1.2rem' }, maxWidth: '65ch' }}>
-                {copy.description.prefix}
-                <ExternalLink
-                  href={copy.description.url}
-                  language={language}
-                  newTab
-                  sx={{ fontWeight: 900 }}
-                >
-                  {copy.description.linkLabel}
-                </ExternalLink>
-                {copy.description.suffix}
-              </Typography>
-              <Stack
-                data-testid="home-hero-actions"
-                direction={{ xs: 'column', sm: 'row' }}
-                sx={{ flexWrap: 'wrap', gap: 4, minWidth: 0 }}
-              >
-                <ButtonLink
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  to={getRoutePath('projects', language)}
-                  variant="contained"
-                >
-                  {copy.primaryCtaLabel}
-                </ButtonLink>
-                <ButtonLink
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  to={getRoutePath('method', language)}
-                  variant="outlined"
-                >
-                  {copy.methodCtaLabel}
-                </ButtonLink>
-                <ExternalButtonLink
-                  endIcon={<OpenInNewRounded aria-hidden="true" />}
-                  href={githubUrl}
-                  language={language}
-                  newTab
-                  sx={{ minHeight: 44, width: { xs: '100%', sm: 'auto' } }}
-                  variant="text"
-                >
-                  <GitHubIcon sx={{ mr: 1 }} />
-                  {copy.githubCtaLabel}
-                </ExternalButtonLink>
-              </Stack>
-            </Stack>
+              {focalProject ? (
+                <ProjectVisualStory
+                  title={focalProject.visualStory.title}
+                  steps={focalProject.visualStory.steps}
+                />
+              ) : null}
+            </Box>
           </Box>
         </Box>
       </PageContainer>

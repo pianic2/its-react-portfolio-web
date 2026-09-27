@@ -5,7 +5,7 @@ import { ButtonLink, ExternalButtonLink } from '../../../components/actions/AppL
 import { StudioCard } from '../../../components/surfaces/StudioCard'
 import type { ProjectViewModel } from '../../../content/loaders'
 import type { Language } from '../../../content/schema'
-import { ProjectArtwork } from './ProjectArtwork'
+import { ProjectVisualStory } from './ProjectVisualStory'
 
 type ProjectShowcaseCardProps = {
   language: Language
@@ -53,7 +53,11 @@ export function ProjectShowcaseCard({
         },
       }}
     >
-      <ProjectArtwork number={project.number} variant={project.visualVariant} />
+      <ProjectVisualStory
+        compact
+        title={project.visualStory.title}
+        steps={project.visualStory.steps}
+      />
       <CardContent
         sx={{
           display: 'flex',

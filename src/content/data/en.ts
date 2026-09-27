@@ -98,8 +98,7 @@ export const englishContent = {
     selectedProjects: {
       eyebrow: 'SELECTED PROJECTS',
       title: 'Three projects from different stages of my journey.',
-      description:
-        'During the Full Stack Dev. course at ITS Prodigi, I developed several projects for my portfolio, including "Library API" (a REST backend with Laravel) and a "ToDo list" in Node.js. On the other hand, HomeEdge is an on-going personal project where I’m exploring smart-home systems, embedded development and long-term product design.',
+      description: 'From a digital-library API to HomeEdge, an early-stage smart-home project.',
     },
     skills: {
       eyebrow: 'TOOLS AND SKILLS',
@@ -169,7 +168,7 @@ export const englishContent = {
         },
       ],
       labels: {
-        skillCtaLabel: 'View my skill',
+        skillCtaLabel: 'Explore my skills',
       },
     },
     process: {
@@ -254,16 +253,15 @@ export const englishContent = {
       eyebrow: 'SELECTED PROJECTS',
       title: 'Three projects from different stages of my journey.',
       introduction:
-        'The Library API and the Node.js project were developed during my ITS course. HomeEdge is my personal project, where I’m exploring smart-home systems, embedded development and long-term product design.',
+        'Two course projects and one personal project. Open a card to see its goal, my contribution, current status and available evidence.',
       supportingText: 'PERSONAL PROJECT · ITS PROJECT',
     },
     projects: {
       eyebrow: 'PROJECT INDEX',
       title: 'Projects built for learning and for the long term.',
       introduction:
-        'The ITS projects demonstrate how I respond to defined educational requirements. HomeEdge shows how I approach an independent product that must evolve through research, decisions, implementation and continuous review.',
-      supportingText:
-        'Open a project to understand the problem, the implemented solution, its current stage and the evidence available today.',
+        'Two course projects and one personal project. Each card explains its goal, my contribution, current status and available evidence.',
+      supportingText: 'Claims link to evidence available in the project repositories.',
     },
     labels: {
       ideaLabel: 'The idea',
@@ -293,7 +291,7 @@ export const englishContent = {
     claimStatusLabels: {
       verified: 'Verified',
       demonstrated: 'Backed by evidence',
-      declared: 'Documented direction',
+      declared: 'Documented, not yet built',
       planned: 'Planned next step',
     },
     evidenceTypeLabels: {
@@ -337,14 +335,14 @@ export const englishContent = {
         'HomeEdge is not a one-off course assignment. It is the project I use to explore embedded systems, product architecture and responsible technical governance over the long term.',
       narrative: {
         cardSummary:
-          'HomeEdge starts with small ESP32-C3 nodes that measure temperature and humidity, detect local presence and report whether a door is open or closed.',
+          'HomeEdge documents the scope for an ESP32-C3 node with environmental sensing and door state. A working node remains a goal.',
         cardValue:
           'It brings together physical sensors, software architecture and responsible data use in one project.',
         heroSummary:
-          'HomeEdge is an experimental smart-home platform built around small room sensors. Its purpose is to collect useful information close to where it is generated, without turning the home into an opaque system.',
+          'HomeEdge is an experimental smart-home project. Its documentation defines a room and door node and the boundaries for the data it is intended to collect.',
         idea: 'Many smart-home products do not clearly explain what they collect, where the information goes or how the system makes decisions. HomeEdge explores a more transparent approach: every device has a limited purpose, every type of data has an explicit boundary and every important choice is documented.',
         built:
-          'The current MVP focuses on an ESP32-C3 room and door node. It measures temperature and humidity, detects non-identifying presence locally and reports whether a door is open or closed. The repository also defines the architecture, risks and working rules that guide the next phases.',
+          'The documented MVP scope describes an ESP32-C3 room and door node for temperature and humidity readings, local non-identifying presence detection and door state. The repository defines architecture and risks; a working hardware node has not yet been demonstrated.',
         value:
           'The project combines embedded programming, software architecture, mobile-product thinking and responsible technical governance. Its value is not only the sensor node: it also demonstrates how a connected system can grow without hiding its limitations.',
         currentStage:
@@ -353,6 +351,29 @@ export const englishContent = {
           'The public repository allows visitors to inspect the MVP boundaries, the included sensor signals, the architectural direction and the rules used to prevent unsupported claims.',
         transparency:
           'The public repository is the technical source of truth for the current MVP boundaries, architecture notes and product direction.',
+      },
+      visualStory: {
+        title: 'Documented node boundaries',
+        steps: [
+          {
+            id: 'signals',
+            label: 'Signals',
+            description:
+              'Temperature, humidity, non-identifying presence and door state are defined in the MVP scope.',
+          },
+          {
+            id: 'node',
+            label: 'Planned ESP32-C3 node',
+            description:
+              'The repository documents a room and door node; a working device remains a goal.',
+          },
+          {
+            id: 'boundary',
+            label: 'Not built yet',
+            description:
+              'Scope and architecture are documented. Backend, mobile app and AI features remain planned.',
+          },
+        ],
       },
       claims: [
         {
@@ -426,15 +447,37 @@ export const englishContent = {
           'It shows how authentication, validation, data relationships and file management work together in a real backend.',
         heroSummary:
           'ITS Library API is an educational backend for managing a digital collection of books, authors and categories through clear and documented endpoints.',
-        idea: 'A digital library needs more than a list of titles. It must connect books with their authors and categories, validate incoming information, protect editing operations and provide a setup that another developer can reproduce.',
+        idea: 'The goal was to manage books, authors and categories through an API that validates data, protects changes and provides a reproducible setup.',
         built:
           'The API supports public reading and authenticated write operations. It manages books, authors and categories, uses Laravel Sanctum for token-based access, stores data in MySQL and can associate downloadable text files with books. Docker prepares the application and its database locally.',
         value:
-          'This project brings together the essential parts of a real backend: authentication, validation, database relationships, file storage, predictable errors, documentation and automated tests.',
+          'The repository documents endpoints, validation, local setup and tests, so visitors can inspect behaviour instead of relying on the summary alone.',
         currentStage:
           'The repository documents the available endpoints, request examples, validation rules, local bootstrap and demo credentials. It is an educational API designed for local reproduction, not a hosted commercial library service.',
         evidenceIntroduction:
           'The public documentation shows how to start the application, obtain an access token, use the available endpoints and verify the validation behaviour.',
+      },
+      visualStory: {
+        title: 'Public reads, protected writes',
+        steps: [
+          {
+            id: 'catalogue',
+            label: 'Books · authors · categories',
+            description:
+              'Library resources are connected in the data model and documented endpoints.',
+          },
+          {
+            id: 'api',
+            label: 'Laravel API',
+            description:
+              'Endpoints allow public reads and protect write operations with Sanctum tokens.',
+          },
+          {
+            id: 'storage',
+            label: 'MySQL · Docker',
+            description: 'The repository documents MySQL and Docker setup for local use.',
+          },
+        ],
       },
       claims: [
         {
@@ -509,6 +552,26 @@ export const englishContent = {
           'The current repository demonstrates the backend flow, the route organisation, SQLite persistence and automated testing. It is an educational Node.js project rather than a production task-management service.',
         evidenceIntroduction:
           'The public repository makes it possible to inspect the route structure, the persistence implementation and the automated tests.',
+      },
+      visualStory: {
+        title: 'A small backend, easy to verify',
+        steps: [
+          {
+            id: 'requests',
+            label: 'Lists · tasks',
+            description: 'The backend manages lists and tasks through dedicated endpoints.',
+          },
+          {
+            id: 'routes',
+            label: 'Express routes',
+            description: 'Routes for lists and tasks are separated into Express modules.',
+          },
+          {
+            id: 'checks',
+            label: 'SQLite · tests',
+            description: 'SQLite persists data and automated tests check the main behaviours.',
+          },
+        ],
       },
       claims: [
         {

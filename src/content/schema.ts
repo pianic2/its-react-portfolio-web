@@ -199,6 +199,18 @@ export const localizedProjectSchema = z.object({
     evidenceIntroduction: z.string().min(1),
     transparency: z.string().min(1).optional(),
   }),
+  visualStory: z.object({
+    title: z.string().min(1),
+    steps: z
+      .array(
+        z.object({
+          id: stableIdSchema,
+          label: z.string().min(1),
+          description: z.string().min(1),
+        }),
+      )
+      .min(2),
+  }),
   claims: z.array(claimSchema).min(1),
   evidence: z
     .array(

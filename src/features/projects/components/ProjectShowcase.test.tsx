@@ -34,7 +34,7 @@ describe('ProjectShowcase', () => {
       screen.getByRole('heading', { name: 'Three projects from different stages of my journey.' }),
     )
     expect(screen.getByTestId('home-showcase-description')).toHaveTextContent(
-      'During the Full Stack Dev. course at ITS Prodigi, I developed several projects for my portfolio, including "Library API" (a REST backend with Laravel) and a "ToDo list" in Node.js.',
+      'From a digital-library API to HomeEdge, an early-stage smart-home project.',
     )
   })
 
