@@ -45,6 +45,8 @@ export function buildProjectViewModel(
     featured: core.featured,
     order: core.order,
     origin: core.origin,
+    maturity: core.maturity,
+    maturityLabel: repository.locales[language].common.projectMaturityLabels[core.maturity],
     originLabel: originLabels[core.origin],
     visualVariant: core.visualVariant,
     capabilities: core.capabilityIds.map((capabilityId) => ({

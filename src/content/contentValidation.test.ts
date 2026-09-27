@@ -30,6 +30,13 @@ describe('content repository validation', () => {
     )
   })
 
+  it('uses explicit project maturity independent of claim ordering in both locales', () => {
+    expect(getProjectById('en', 'homeedge-ai-platform')?.claimLabel).toBe('Documented scope')
+    expect(getProjectById('it', 'homeedge-ai-platform')?.claimLabel).toBe('Ambito documentato')
+    expect(getProjectById('en', 'its-library-api-laravel')?.claimLabel).toBe('Implemented project')
+    expect(getProjectById('it', 'node-list-manager')?.claimLabel).toBe('Progetto implementato')
+  })
+
   it('keeps the complete editorial narrative contract equivalent across locales', () => {
     const repository = validateContentRepository()
     const narrativeFields = [
@@ -139,6 +146,17 @@ describe('content repository validation', () => {
     const italian = repository.locales.it.projects.find(
       (project) => project.projectId === 'homeedge-ai-platform',
     )!
+
+    expect(english.narrative.cardSummary).toMatch(/documents plans for ESP32-C3 nodes/i)
+    expect(italian.narrative.cardSummary).toMatch(/documenta il progetto di nodi ESP32-C3/i)
+    expect(english.narrative.built).toMatch(/firmware integration of the node remains unvalidated/i)
+    expect(english.narrative.currentStage).toMatch(
+      /does not present the node firmware.*as integrated/i,
+    )
+    expect(italian.narrative.built).toMatch(/integrazione firmware del nodo resta da validare/i)
+    expect(italian.narrative.currentStage).toMatch(
+      /non presenta come integrate le funzionalità firmware/i,
+    )
 
     expect(
       shared.evidence.find((evidence) => evidence.id === 'homeedge-product-vision'),

@@ -36,7 +36,7 @@ export const italianContent = {
     metadata: {
       title: 'Niccolò Piazzi | Portfolio di sviluppo software',
       description:
-        'Realizzo progetti che collegano codice, dispositivi e persone — dai sensori per la casa intelligente alle API web. Ogni progetto spiega cosa funziona oggi, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
+        'Progetto esperienze che collegano codice, dispositivi e persone — dai sistemi smart home alle API web. Ogni progetto spiega cosa è documentato, cosa deve ancora essere costruito e perché le scelte tecniche sono importanti.',
     },
   },
   homePage: {
@@ -302,6 +302,10 @@ export const italianContent = {
       declared: 'Direzione documentata',
       planned: 'Prossimo passo pianificato',
     },
+    projectMaturityLabels: {
+      documented: 'Ambito documentato',
+      implemented: 'Progetto implementato',
+    },
     evidenceTypeLabels: {
       repository: 'Repository',
       'pull-request': 'Pull request',
@@ -343,18 +347,18 @@ export const italianContent = {
         'HomeEdge non è un esercizio didattico isolato. È il progetto con cui approfondisco nel tempo sistemi embedded, architettura di prodotto e governance tecnica responsabile.',
       narrative: {
         cardSummary:
-          'HomeEdge parte da piccoli nodi ESP32-C3 che rilevano temperatura, umidità, presenza locale e stato della porta.',
+          'HomeEdge documenta il progetto di nodi ESP32-C3 pensati per rilevare temperatura, umidità, presenza locale e stato della porta.',
         cardValue:
           'Unisce sensori fisici, architettura software e uso responsabile dei dati in un unico progetto.',
         heroSummary:
-          'HomeEdge è una piattaforma smart home sperimentale costruita intorno a piccoli sensori per le stanze. Il suo obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
+          'HomeEdge è un progetto smart home sperimentale che documenta una piattaforma pensata intorno a sensori per le stanze. L’obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
         idea: 'Molti prodotti smart home non spiegano chiaramente quali dati raccolgono, dove vengono inviati o come il sistema prende le proprie decisioni. HomeEdge sperimenta un approccio più trasparente: ogni dispositivo ha uno scopo limitato, ogni tipo di dato ha un confine esplicito e ogni scelta importante viene documentata.',
         built:
-          'L’MVP attuale è concentrato su un nodo per stanza e porta basato su ESP32-C3. Misura temperatura e umidità, rileva localmente una presenza non identificativa e comunica se una porta è aperta o chiusa. Il repository definisce inoltre l’architettura, i rischi e le regole di lavoro che guideranno le fasi successive.',
+          'La documentazione definisce un MVP centrato su un nodo ESP32-C3 per stanza e porta, con temperatura, umidità, presenza locale non identificativa e stato della porta. Il repository descrive anche un display locale come capacità accettata; l’integrazione firmware del nodo resta da validare.',
         value:
           'Il progetto combina programmazione embedded, architettura software, progettazione di un prodotto mobile e governance tecnica responsabile. Il suo valore non è soltanto nel nodo sensore: mostra anche come far crescere un sistema connesso senza nasconderne i limiti.',
         currentStage:
-          'HomeEdge si trova nella fase iniziale di sviluppo. Il nodo ESP32-C3 e i confini dell’MVP sono documentati. I servizi backend, l’applicazione mobile e le funzionalità assistite dall’AI sono direzioni pianificate che non sono ancora state dimostrate.',
+          'Il repository documenta il perimetro dell’MVP e le decisioni di prodotto. Non presenta come integrate le funzionalità firmware del nodo, il backend o l’app mobile; le funzioni AI restano una direzione futura.',
         evidenceIntroduction:
           'Il repository pubblico permette di controllare i confini dell’MVP, i segnali inclusi, la direzione architetturale e le regole usate per evitare affermazioni non supportate.',
         transparency:
@@ -363,13 +367,13 @@ export const italianContent = {
       claims: [
         {
           id: 'sprint-zero-boundary',
-          text: 'Il README documenta il confine del nodo MVP ESP32-C3 e i segnali inclusi.',
+          text: 'La documentazione definisce il perimetro del nodo MVP ESP32-C3 e i segnali previsti.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-mvp-scope'],
         },
         {
           id: 'target-services-unvalidated',
-          text: 'Backend, applicazione mobile e funzionalità AI restano direzioni future, non funzionalità già completate.',
+          text: 'Backend e app mobile sono direzioni di prodotto non ancora integrate; le funzionalità AI restano future.',
           status: 'demonstrated',
           evidenceIds: ['homeedge-architecture-governance'],
         },
@@ -406,7 +410,7 @@ export const italianContent = {
       metadata: {
         title: 'HomeEdge AI Platform',
         description:
-          'HomeEdge è una piattaforma smart home sperimentale costruita intorno a piccoli sensori per le stanze. Il suo obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
+          'HomeEdge è un progetto smart home sperimentale che documenta una piattaforma pensata intorno a sensori per le stanze. L’obiettivo è raccogliere informazioni utili vicino al luogo in cui vengono generate, senza trasformare la casa in un sistema opaco.',
         noIndex: false,
       },
     },

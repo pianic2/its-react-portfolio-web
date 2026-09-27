@@ -17,6 +17,7 @@ export const languageSchema = z.enum(supportedLanguages)
 export const pageIdSchema = z.enum(publicPageIds)
 export const projectVisualVariantSchema = z.enum(['signal-yellow', 'studio-pink', 'electric-cyan'])
 export const projectOriginSchema = z.enum(['personal-long-term', 'its-training'])
+export const projectMaturitySchema = z.enum(['documented', 'implemented'])
 export const evidenceTypeSchema = z.enum([
   'repository',
   'pull-request',
@@ -157,6 +158,7 @@ export const claimSchema = z.discriminatedUnion('status', [
 export const projectCoreSchema = z
   .object({
     id: stableIdSchema,
+    maturity: projectMaturitySchema,
     capabilityIds: z.array(stableIdSchema).min(1),
     evidence: z.array(evidenceSchema).min(1),
     links: z.array(externalLinkSchema).min(1),
@@ -678,6 +680,7 @@ export const siteContentSchema = z.object({
       z.enum(['verified', 'demonstrated', 'declared', 'planned']),
       z.string().min(1),
     ),
+    projectMaturityLabels: z.record(projectMaturitySchema, z.string().min(1)),
     evidenceTypeLabels: z.record(evidenceTypeSchema, z.string().min(1)),
   }),
   capabilities: z.array(localizedCapabilitySchema).min(1),

@@ -77,6 +77,7 @@ export const sharedContent = {
   projects: [
     {
       id: 'homeedge-ai-platform',
+      maturity: 'documented',
       capabilityIds: ['embedded-firmware', 'privacy-aware-design', 'technical-governance'],
       evidence: [
         {
@@ -110,6 +111,7 @@ export const sharedContent = {
     },
     {
       id: 'its-library-api-laravel',
+      maturity: 'implemented',
       capabilityIds: ['laravel-api', 'sanctum-authentication', 'containerized-delivery'],
       evidence: [
         {
@@ -143,6 +145,7 @@ export const sharedContent = {
     },
     {
       id: 'node-list-manager',
+      maturity: 'implemented',
       capabilityIds: ['node-api', 'sqlite-persistence', 'automated-testing'],
       evidence: [
         {

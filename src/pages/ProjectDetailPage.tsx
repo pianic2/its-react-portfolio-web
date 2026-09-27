@@ -1,5 +1,5 @@
 import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
-import { Box, CardContent, Chip, Stack, Typography } from '@mui/material'
+import { Box, CardContent, Chip, Link, Stack, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { ButtonLink, ExternalLink } from '../components/actions/AppLink'
 import { PageContainer } from '../components/layout/PageContainer'
@@ -189,6 +189,70 @@ export function ProjectDetailPage() {
         </PageContainer>
       </PageSection>
 
+      <PageSection aria-labelledby="project-contribution-title" spacing="spacious">
+        <PageContainer>
+          <Box
+            sx={{
+              display: 'grid',
+              gap: { xs: 4, md: 7 },
+              gridTemplateColumns: { md: 'minmax(0, 4fr) minmax(0, 8fr)' },
+              minWidth: 0,
+            }}
+          >
+            <Stack spacing={2} sx={{ minWidth: 0 }}>
+              <Typography
+                component="h2"
+                id="project-contribution-title"
+                sx={{ fontSize: { xs: '2rem', sm: '2.75rem' }, letterSpacing: 0 }}
+                variant="h3"
+              >
+                {labels.whatIWorkedOnLabel}
+              </Typography>
+              <Typography sx={{ maxWidth: '65ch' }}>{project.whatIWorkedOn}</Typography>
+              <Typography color="text.secondary" sx={{ maxWidth: '65ch' }}>
+                {labels.futureImprovementLabel}: {project.futureImprovement}
+              </Typography>
+            </Stack>
+
+            <Stack component="ul" spacing={3} sx={{ listStyle: 'none', m: 0, minWidth: 0, p: 0 }}>
+              {project.claims.map((claim) => (
+                <Box
+                  component="li"
+                  key={claim.id}
+                  sx={{
+                    borderBlockStart: (theme) =>
+                      `${theme.digitalStudio.borderWidths.bold}px solid ${theme.digitalStudio.colors.border}`,
+                    minWidth: 0,
+                    py: 3,
+                  }}
+                >
+                  <Stack spacing={1.5} sx={{ alignItems: 'flex-start' }}>
+                    <Chip label={claim.statusLabel} size="small" variant="outlined" />
+                    <Typography>{claim.text}</Typography>
+                    {claim.evidenceIds.length ? (
+                      <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5 }}>
+                        {claim.evidenceIds.map((evidenceId) => {
+                          const evidence = project.evidence.find((item) => item.id === evidenceId)
+                          return evidence ? (
+                            <Link
+                              href={`#project-evidence-${evidenceId}`}
+                              key={evidenceId}
+                              underline="always"
+                            >
+                              {evidence.label}
+                            </Link>
+                          ) : null
+                        })}
+                      </Stack>
+                    ) : null}
+                  </Stack>
+                </Box>
+              ))}
+            </Stack>
+          </Box>
+        </PageContainer>
+      </PageSection>
+
       <PageSection aria-labelledby="project-evidence-title" spacing="spacious">
         <PageContainer>
           <Box
@@ -216,6 +280,7 @@ export function ProjectDetailPage() {
             <Stack spacing={0} sx={{ minWidth: 0 }}>
               {project.evidence.map((evidence) => (
                 <Box
+                  id={`project-evidence-${evidence.id}`}
                   key={evidence.id}
                   component="article"
                   sx={{

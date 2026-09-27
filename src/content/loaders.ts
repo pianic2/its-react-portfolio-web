@@ -14,10 +14,6 @@ function loadProject(contentRepository: ContentRepository, language: Language, p
   const project = buildProjectViewModel(contentRepository, language, projectId)
   if (!project) return null
 
-  const primaryClaim = project.claims.at(0)
-  if (!primaryClaim) {
-    throw new Error(`Validated project "${projectId}" has no claim for locale "${language}".`)
-  }
   const repositoryLink = project.links.find((link) => link.kind === 'repository')
   if (!repositoryLink) {
     throw new Error(
@@ -31,8 +27,8 @@ function loadProject(contentRepository: ContentRepository, language: Language, p
     path: getRoutePath('projectDetail', language, { slug: project.slug }),
     repositoryUrl: repositoryLink.url,
     repositoryLabel: repositoryLink.label,
-    claimStatus: primaryClaim.status,
-    claimLabel: primaryClaim.statusLabel,
+    claimStatus: project.maturity,
+    claimLabel: project.maturityLabel,
   }
 }
 

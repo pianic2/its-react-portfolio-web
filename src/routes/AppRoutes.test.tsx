@@ -49,6 +49,23 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
   })
 
+  it('shows project contribution and direct claim-to-evidence links', async () => {
+    renderRoute('/en/projects/its-library-api-laravel')
+
+    expect(await screen.findByRole('heading', { name: 'What I worked on' })).toBeInTheDocument()
+    expect(screen.getByText(/I worked on the API structure/)).toBeInTheDocument()
+    expect(screen.getByText('Implemented project')).toBeInTheDocument()
+    const claim = screen.getByText(
+      'The repository documents REST resources for books, authors and categories.',
+    )
+    const claimRow = claim.closest('li')
+    expect(claimRow).not.toBeNull()
+    expect(
+      within(claimRow as HTMLElement).getByRole('link', { name: 'Documented REST endpoints' }),
+    ).toHaveAttribute('href', '#project-evidence-library-rest-endpoints')
+    expect(document.getElementById('project-evidence-library-rest-endpoints')).toBeInTheDocument()
+  })
+
   it.each([
     ['/it/competenze', 'Dal problema al software che puoi usare, capire e verificare.'],
     ['/it/metodo', 'Prima la direzione. Poi la velocità.'],
@@ -361,12 +378,17 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: 'Why it matters' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Where it stands today' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'What you can verify' })).toBeInTheDocument()
-    expect(screen.getAllByText('Backed by evidence')).toHaveLength(1)
+    expect(screen.getByText('Implemented project')).toBeInTheDocument()
+    expect(screen.getAllByText('Backed by evidence')).toHaveLength(2)
     expect(screen.getByRole('link', { name: /GitHub repository/ })).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node',
     )
-    expect(screen.getByRole('link', { name: /Modular Express routes/ })).toHaveAttribute(
+    expect(
+      screen
+        .getAllByRole('link', { name: /Modular Express routes/ })
+        .find((link) => link.getAttribute('href')?.startsWith('https://')),
+    ).toHaveAttribute(
       'href',
       'https://github.com/pianic2/todo-list-manager-node/blob/main/src/server.js',
     )
@@ -375,8 +397,16 @@ describe('localized application routes', () => {
         'The backend separates the endpoints used to manage lists and tasks into focused route modules.',
       ),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /SQLite persistence/ })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Automated tests/ })).toBeInTheDocument()
+    expect(
+      screen
+        .getAllByRole('link', { name: /SQLite persistence/ })
+        .some((link) => link.getAttribute('href')?.startsWith('https://')),
+    ).toBe(true)
+    expect(
+      screen
+        .getAllByRole('link', { name: /Automated tests/ })
+        .some((link) => link.getAttribute('href')?.startsWith('https://')),
+    ).toBe(true)
     expect(
       screen.getByText(
         'Application data is stored in a local SQLite database instead of disappearing when the server restarts.',
@@ -400,7 +430,8 @@ describe('localized application routes', () => {
     expect(screen.getByRole('heading', { name: 'Perché conta' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'A che punto è oggi' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Cosa puoi verificare' })).toBeInTheDocument()
-    expect(screen.getAllByText('Supportato da evidenze')).toHaveLength(1)
+    expect(screen.getByText('Progetto implementato')).toBeInTheDocument()
+    expect(screen.getAllByText('Supportato da evidenze')).toHaveLength(2)
   })
 
   it('does not expose the internal unvalidated marker on the HomeEdge detail page', () => {
@@ -408,7 +439,7 @@ describe('localized application routes', () => {
 
     expect(screen.queryByText(/\[UNVALIDATED\]/)).not.toBeInTheDocument()
     expect(
-      screen.getByText(/planned directions that have not been demonstrated yet/),
+      screen.getByText(/does not present the node firmware, backend or mobile app as integrated/),
     ).toBeInTheDocument()
   })
 
