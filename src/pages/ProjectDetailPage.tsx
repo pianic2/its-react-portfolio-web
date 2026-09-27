@@ -310,7 +310,7 @@ export function ProjectDetailPage() {
                   }}
                 >
                   <Box component="summary" sx={{ gap: 2 }}>
-                    <Typography sx={{ letterSpacing: 0 }} variant="h5">
+                    <Typography component="h3" sx={{ letterSpacing: 0 }} variant="h5">
                       {evidence.label}
                     </Typography>
                     <ExpandMoreRounded
