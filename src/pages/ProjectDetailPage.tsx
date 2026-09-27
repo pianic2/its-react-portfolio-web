@@ -17,6 +17,17 @@ const narrativePlacement = [
   { md: '6 / span 7' },
 ] as const
 
+const responsiveChipSx = {
+  height: 'auto',
+  maxWidth: '100%',
+  '& .MuiChip-label': {
+    display: 'block',
+    overflowWrap: 'anywhere',
+    py: 0.5,
+    whiteSpace: 'normal',
+  },
+}
+
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const { getProjectBySlug, language, siteContent } = usePortfolioContent()
@@ -87,7 +98,7 @@ export function ProjectDetailPage() {
                   '&:last-child': { pb: { xs: 3, sm: 5, md: 7 } },
                 }}
               >
-                <Stack spacing={1.5} sx={{ minWidth: 0 }}>
+                <Stack spacing={1.5} sx={{ minWidth: 0, width: '100%' }}>
                   <Typography sx={{ letterSpacing: 0 }} variant="overline">
                     {project.detailEyebrow}
                   </Typography>
@@ -99,7 +110,7 @@ export function ProjectDetailPage() {
                       hyphens: 'auto',
                       letterSpacing: 0,
                       maxWidth: '14ch',
-                      overflowWrap: 'break-word',
+                      overflowWrap: 'anywhere',
                     }}
                     variant="h2"
                   >
@@ -110,11 +121,21 @@ export function ProjectDetailPage() {
                   </Typography>
                 </Stack>
 
-                <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+                <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1, width: '100%' }}>
                   {project.capabilities.map((capability) => (
-                    <Chip key={capability.id} label={capability.label} size="small" />
+                    <Chip
+                      key={capability.id}
+                      label={capability.label}
+                      size="small"
+                      sx={responsiveChipSx}
+                    />
                   ))}
-                  <Chip label={project.claimLabel} size="small" variant="outlined" />
+                  <Chip
+                    label={project.claimLabel}
+                    size="small"
+                    sx={responsiveChipSx}
+                    variant="outlined"
+                  />
                 </Stack>
 
                 <ExternalLink
@@ -173,7 +194,11 @@ export function ProjectDetailPage() {
                     >
                       {String(index + 1).padStart(2, '0')}
                     </Typography>
-                    <Typography component="h2" sx={{ letterSpacing: 0, mt: 2 }} variant="h4">
+                    <Typography
+                      component="h2"
+                      sx={{ letterSpacing: 0, mt: 2, overflowWrap: 'anywhere' }}
+                      variant="h4"
+                    >
                       {section.label}
                     </Typography>
                     <Typography sx={{ maxWidth: '70ch', mt: 2 }}>{section.body}</Typography>
@@ -204,7 +229,11 @@ export function ProjectDetailPage() {
               <Typography
                 component="h2"
                 id="project-contribution-title"
-                sx={{ fontSize: { xs: '2rem', sm: '2.75rem' }, letterSpacing: 0 }}
+                sx={{
+                  fontSize: { xs: '2rem', sm: '2.75rem' },
+                  letterSpacing: 0,
+                  overflowWrap: 'anywhere',
+                }}
                 variant="h3"
               >
                 {labels.whatIWorkedOnLabel}
@@ -227,8 +256,13 @@ export function ProjectDetailPage() {
                     py: 3,
                   }}
                 >
-                  <Stack spacing={1.5} sx={{ alignItems: 'flex-start' }}>
-                    <Chip label={claim.statusLabel} size="small" variant="outlined" />
+                  <Stack spacing={1.5} sx={{ alignItems: 'flex-start', width: '100%' }}>
+                    <Chip
+                      label={claim.statusLabel}
+                      size="small"
+                      sx={responsiveChipSx}
+                      variant="outlined"
+                    />
                     <Typography>{claim.text}</Typography>
                     {claim.evidenceIds.length ? (
                       <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1.5 }}>
@@ -268,7 +302,11 @@ export function ProjectDetailPage() {
               <Typography
                 component="h2"
                 id="project-evidence-title"
-                sx={{ fontSize: { xs: '2rem', sm: '2.75rem' }, letterSpacing: 0 }}
+                sx={{
+                  fontSize: { xs: '2rem', sm: '2.75rem' },
+                  letterSpacing: 0,
+                  overflowWrap: 'anywhere',
+                }}
                 variant="h3"
               >
                 {labels.evidenceLabel}
@@ -310,7 +348,11 @@ export function ProjectDetailPage() {
                   }}
                 >
                   <Box component="summary" sx={{ gap: 2 }}>
-                    <Typography component="h3" sx={{ letterSpacing: 0 }} variant="h5">
+                    <Typography
+                      component="h3"
+                      sx={{ flex: 1, letterSpacing: 0, minWidth: 0, overflowWrap: 'anywhere' }}
+                      variant="h5"
+                    >
                       {evidence.label}
                     </Typography>
                     <ExpandMoreRounded

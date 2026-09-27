@@ -338,6 +338,19 @@ describe('localized application routes', () => {
     ).toBeInTheDocument()
   })
 
+  it('keeps HomeEdge headings and project labels inside their responsive containers', () => {
+    renderRoute('/en/projects/homeedge-ai-platform')
+
+    const title = screen.getByRole('heading', { name: 'HomeEdge AI Platform', level: 1 })
+    expect(getComputedStyle(title.parentElement!).width).toBe('100%')
+
+    const capabilityLabel = screen.getByText('Privacy-aware design')
+    const capabilityChip = capabilityLabel.closest('.MuiChip-root')
+    expect(capabilityChip).not.toBeNull()
+    expect(getComputedStyle(capabilityChip!).maxWidth).toBe('100%')
+    expect(getComputedStyle(capabilityLabel).whiteSpace).toBe('normal')
+  })
+
   it('opens HomeEdge evidence and shows the transparency narrative in Italian', async () => {
     const user = userEvent.setup()
     renderRoute('/it/progetti/homeedge-ai-platform')
