@@ -1,73 +1,35 @@
-<p align="center">
+<h1 align="center">
   <img
     src="docs/assets/readme-background.svg"
-    alt="Technology stack background"
+    alt="ITS React Portfolio Web — Bilingual portfolio for projects, skills, and engineering method"
     width="100%"
   />
-</p>
-
-<h1 align="center">ITS React Portfolio Web</h1>
-
-<p align="center">A bilingual portfolio built with React and TypeScript to present projects, skills, and engineering practice.</p>
+</h1>
 
 <p align="center">
-  <a href="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml"><img alt="Quality workflow status for main" src="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml/badge.svg?branch=main" /></a>
+  <a href="https://github.com/pianic2/its-react-portfolio-web"><img src="https://img.shields.io/badge/React_19_%2B_TypeScript-5b1ae8?style=for-the-badge" alt="React 19 and TypeScript" /></a>
+  <a href="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml"><img src="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml/badge.svg?branch=main&style=for-the-badge" alt="Quality workflow status" /></a>
+  <a href="https://pianic2.github.io/its-react-portfolio-web/"><img src="https://img.shields.io/badge/site-GitHub_Pages-ff4d5a?style=for-the-badge" alt="GitHub Pages site" /></a>
+  <a href="docs/README.md"><img src="https://img.shields.io/badge/docs-browse-111111?style=for-the-badge" alt="Browse documentation" /></a>
 </p>
 
-## Quick start
+Bilingual portfolio for projects, technical capabilities, and an evidence-based engineering method.
 
-Requires Node.js `>=24 <25` and npm.
+## Quick Start
+
+Requires Node.js 24 and npm.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-## Architecture
+Run `npm run check` for the local quality gate.
 
-| Area                           | Responsibility                                                     |
-| ------------------------------ | ------------------------------------------------------------------ |
-| `src/routes`                   | Localized route matching                                           |
-| `src/content`                  | Italian and English content, Zod validation, and localized loaders |
-| `src/pages` and `src/features` | Page composition and reusable portfolio sections                   |
-| `src/services`                 | Backend and contact adapters                                       |
-| `src/theme`                    | Material UI theme and design tokens                                |
+## Documentation
 
-Stable content IDs are kept separate from translated copy and localized slugs. See the [content model](docs/content/irpw-9-content-model.md) for its validation and identity rules.
-
-## Development
-
-| Command                | Purpose                           |
-| ---------------------- | --------------------------------- |
-| `npm run dev`          | Start the Vite development server |
-| `npm run lint`         | Check lint rules                  |
-| `npm run typecheck`    | Check TypeScript projects         |
-| `npm run format:check` | Check formatting                  |
-
-## Testing
-
-| Command         | Purpose                                     |
-| --------------- | ------------------------------------------- |
-| `npm run test`  | Run the Vitest suite                        |
-| `npm run check` | Run static, test, build, and release checks |
-
-The [Quality workflow](.github/workflows/quality.yml) runs `npm run check` for pull requests and pushes to `main`.
+Browse the [documentation index](docs/README.md) for architecture, development plans, design review records, deployment, and release references.
 
 ## Deployment
 
-The project is configured for GitHub Pages with the `/its-react-portfolio-web/` base path. See the [deployment guide](docs/deployment/github-pages.md) for route recovery and release validation.
-
-## Project structure
-
-```text
-src/
-├── app/          # Application setup
-├── content/      # Validated bilingual portfolio content
-├── features/     # Reusable page sections
-├── pages/        # Route-level pages
-├── routes/       # Localized route configuration
-├── services/     # Backend and contact adapters
-└── theme/        # Material UI theme and tokens
-```
-
-See also: [design tokens](docs/design-system/tokens.md) and [portfolio wordmark](docs/assets/logo.svg).
+The site is published on [GitHub Pages](https://pianic2.github.io/its-react-portfolio-web/) under `/its-react-portfolio-web/`. See the [deployment guide](docs/operations/github-pages.md).

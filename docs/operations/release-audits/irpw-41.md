@@ -23,7 +23,7 @@ IRPW-41 supplies evidence to IRPW-31; it does not select GO, CONDITIONAL GO or N
 Create a timestamped evidence directory only during final execution:
 
 ```text
-docs/release-audits/irpw-41/evidence/<YYYY-MM-DDTHH-mm-ss+02-00>-<candidate-short-sha>/
+docs/operations/release-audits/evidence/<YYYY-MM-DDTHH-mm-ss+02-00>-<candidate-short-sha>/
 ```
 
 Use these names:
