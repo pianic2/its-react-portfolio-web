@@ -1,20 +1,17 @@
 <p align="center">
-  <img src="docs/assets/readme-hero.svg" alt="Portfolio Web, with a bold editorial wordmark and geometric color shapes" width="100%" />
+  <img
+    src="docs/assets/readme-background.svg"
+    alt="Technology stack background"
+    width="100%"
+  />
 </p>
 
 <h1 align="center">ITS React Portfolio Web</h1>
 
-<p align="center">A bilingual React portfolio for presenting projects, skills, and engineering practice.</p>
+<p align="center">A bilingual portfolio built with React and TypeScript to present projects, skills, and engineering practice.</p>
 
 <p align="center">
   <a href="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml"><img alt="Quality workflow status for main" src="https://github.com/pianic2/its-react-portfolio-web/actions/workflows/quality.yml/badge.svg?branch=main" /></a>
-</p>
-
-<p align="center">
-  <a href="https://react.dev/"><img alt="React" src="https://cdn.simpleicons.org/react/61DAFB" height="28" /></a>&nbsp;&nbsp;
-  <a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://cdn.simpleicons.org/typescript/3178C6" height="28" /></a>&nbsp;&nbsp;
-  <a href="https://vite.dev/"><img alt="Vite" src="https://cdn.simpleicons.org/vite/646CFF" height="28" /></a>&nbsp;&nbsp;
-  <a href="https://mui.com/"><img alt="Material UI" src="https://cdn.simpleicons.org/mui/007FFF" height="28" /></a>
 </p>
 
 ## Quick start
@@ -28,34 +25,49 @@ npm run dev
 
 ## Architecture
 
-| Area                           | Responsibility                                             |
-| ------------------------------ | ---------------------------------------------------------- |
-| `src/app` and `src/routes`     | Application shell and localized route wiring               |
-| `src/content`                  | Italian and English content, Zod validation, and page data |
-| `src/pages` and `src/features` | Page composition and reusable portfolio sections           |
-| `src/services`                 | Backend and contact adapters                               |
-| `src/theme`                    | Shared Material UI theme and design tokens                 |
+| Area                           | Responsibility                                                     |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `src/routes`                   | Localized route matching                                           |
+| `src/content`                  | Italian and English content, Zod validation, and localized loaders |
+| `src/pages` and `src/features` | Page composition and reusable portfolio sections                   |
+| `src/services`                 | Backend and contact adapters                                       |
+| `src/theme`                    | Material UI theme and design tokens                                |
 
-The content layer validates data before pages consume it. Stable project IDs stay separate from translated copy and localized slugs.
+Stable content IDs are kept separate from translated copy and localized slugs. See the [content model](docs/content/irpw-9-content-model.md) for its validation and identity rules.
 
 ## Development
 
-| Command         | Purpose                           |
-| --------------- | --------------------------------- |
-| `npm run dev`   | Start the Vite development server |
-| `npm run test`  | Run the Vitest suite              |
-| `npm run lint`  | Check lint rules                  |
-| `npm run check` | Run the complete quality gate     |
+| Command                | Purpose                           |
+| ---------------------- | --------------------------------- |
+| `npm run dev`          | Start the Vite development server |
+| `npm run lint`         | Check lint rules                  |
+| `npm run typecheck`    | Check TypeScript projects         |
+| `npm run format:check` | Check formatting                  |
 
-The same `npm run check` command is used by the [Quality workflow](.github/workflows/quality.yml).
+## Testing
+
+| Command         | Purpose                                     |
+| --------------- | ------------------------------------------- |
+| `npm run test`  | Run the Vitest suite                        |
+| `npm run check` | Run static, test, build, and release checks |
+
+The [Quality workflow](.github/workflows/quality.yml) runs `npm run check` for pull requests and pushes to `main`.
 
 ## Deployment
 
-The portfolio is published on [GitHub Pages](https://pianic2.github.io/its-react-portfolio-web/). The [deployment guide](docs/deployment/github-pages.md) documents route recovery and the production base path, `/its-react-portfolio-web/`.
+The project is configured for GitHub Pages with the `/its-react-portfolio-web/` base path. See the [deployment guide](docs/deployment/github-pages.md) for route recovery and release validation.
 
-## Project docs
+## Project structure
 
-- [Content model](docs/content/irpw-9-content-model.md)
-- [GitHub Pages deployment and route recovery](docs/deployment/github-pages.md)
-- [Design tokens](docs/design-system/tokens.md)
-- [Portfolio Web wordmark](docs/assets/logo.svg)
+```text
+src/
+├── app/          # Application setup
+├── content/      # Validated bilingual portfolio content
+├── features/     # Reusable page sections
+├── pages/        # Route-level pages
+├── routes/       # Localized route configuration
+├── services/     # Backend and contact adapters
+└── theme/        # Material UI theme and tokens
+```
+
+See also: [design tokens](docs/design-system/tokens.md) and [portfolio wordmark](docs/assets/logo.svg).
