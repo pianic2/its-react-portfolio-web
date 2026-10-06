@@ -8,6 +8,23 @@ This document records the repeatable production validation procedure for IRPW-22
 - Deployment environment: `github-pages`
 - Allowed deployment branch: `main`
 
+## Deployment workflow
+
+The [Pages workflow](../../.github/workflows/pages.yml) deploys only validated
+`main` revisions:
+
+1. It starts when the Quality workflow completes successfully for `main`, or
+   from a manual `workflow_dispatch` on `main`.
+2. It checks out the exact revision that passed Quality and runs `npm ci`.
+3. `npm run release:pages` requires `VITE_BACKEND_API_URL` (provided by the
+   repository variable of the same name) and then runs the full `npm run check`.
+4. The `dist` directory is uploaded and deployed to the `github-pages`
+   environment.
+
+The production base path `/its-react-portfolio-web/` is set in
+`vite.config.ts` and `scripts/release-contract.mjs`. `public/404.html` recovers
+direct and refreshed deep links on GitHub Pages.
+
 ## Smoke test
 
 After a successful Pages deployment, verify:
