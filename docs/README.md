@@ -1,5 +1,9 @@
 # Documentation
 
+## Getting Started
+
+- [Local setup and environment variables](getting-started/setup.md)
+
 ## Architecture
 
 - [Bilingual content model](architecture/content-model.md)
@@ -9,6 +13,7 @@
 
 ## Development
 
+- [Quality gates](development/quality-gates.md)
 - [IRPW-45 design system refinement plan](development/plans/irpw-45-design-system-refinement-v2.md)
 
 ## Operations
