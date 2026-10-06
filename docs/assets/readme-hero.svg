@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 440" role="img" aria-labelledby="title description">
+  <title id="title">Portfolio Web</title>
+  <desc id="description">An editorial Portfolio Web title beside a bold composition of violet, coral, cyan, and yellow geometric forms.</desc>
+  <rect x="8" y="8" width="1424" height="424" rx="28" fill="#fff7e8" stroke="#111111" stroke-width="16" />
+  <text x="86" y="114" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" letter-spacing="4">ITS REACT · PERSONAL PORTFOLIO</text>
+  <text x="78" y="254" fill="#111111" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="112" font-weight="900">Portfolio</text>
+  <text x="80" y="366" fill="#5b1ae8" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="112" font-weight="900">Web</text>
+  <path d="M86 393h325" stroke="#111111" stroke-width="7" />
+  <path d="M427 393h58" stroke="#ff4d5a" stroke-width="7" />
+
+  <circle cx="1166" cy="217" r="158" fill="#5b1ae8" stroke="#111111" stroke-width="9" />
+  <circle cx="1166" cy="217" r="116" fill="#fff7e8" stroke="#111111" stroke-width="8" />
+  <rect x="1103" y="156" width="126" height="126" fill="#ffd400" stroke="#111111" stroke-width="8" />
+  <rect x="1133" y="189" width="112" height="78" fill="#00b8d9" stroke="#111111" stroke-width="8" />
+  <circle cx="1292" cy="92" r="32" fill="#ff4d5a" stroke="#111111" stroke-width="8" />
+  <path d="M972 326l48-41 43 49-48 41z" fill="#ff4d5a" stroke="#111111" stroke-width="8" />
+  <path d="M1320 308h38" stroke="#111111" stroke-width="8" stroke-linecap="square" />
+  <path d="M1339 289v38" stroke="#111111" stroke-width="8" stroke-linecap="square" />
+</svg>

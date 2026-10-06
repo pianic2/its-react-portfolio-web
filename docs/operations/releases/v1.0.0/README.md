@@ -32,7 +32,7 @@ the Project Owner merges the pull request.
 | Quality workflow      | `.github/workflows/quality.yml`                                                     |
 | Pages workflow        | `.github/workflows/pages.yml`                                                       |
 | Rollback              | Dedicated revert pull request, successful Quality run, replacement Pages deployment |
-| Release notes         | [RELEASE_NOTES.md](./RELEASE_NOTES.md)                                              |
+| Release notes         | [Release notes](./release-notes.md)                                                 |
 
 No open pull request existed when the source baseline was recorded. `AGENT.md`
 was not present on `main`; the repository intentionally ignores `AGENTS.md`.
