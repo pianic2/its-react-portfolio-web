@@ -49,16 +49,17 @@ export function getSeoMetadata(pathname: string): SeoMetadata {
     project?.metadata.description ??
     staticSeoDescriptions[language][resolved.page] ??
     content.portfolio.metadata.description
+  const detailSlug = resolved.page === 'blogDetail' && resolved.slug ? { slug: resolved.slug } : {}
   const alternates = Object.fromEntries(
     supportedLanguages.map((locale) => {
       const localizedPath = project ? getLocalizedProjectPath(project.id, locale) : null
-      return [locale, absolute(localizedPath ?? getRoutePath(resolved.page, locale))]
+      return [locale, absolute(localizedPath ?? getRoutePath(resolved.page, locale, detailSlug))]
     }),
   ) as Record<Language, string>
   return {
     alternates,
     canonical: absolute(
-      getRoutePath(resolved.page, language, project ? { slug: project.slug } : {}),
+      getRoutePath(resolved.page, language, project ? { slug: project.slug } : detailSlug),
     ),
     description,
     indexable: true,

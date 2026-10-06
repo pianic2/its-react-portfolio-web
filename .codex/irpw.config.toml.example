@@ -1,0 +1,26 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# Copy to $CODEX_HOME/irpw.config.toml (or ~/.codex/irpw.config.toml):
+# mkdir -p ~/.codex && cp .codex/irpw.config.toml.example ~/.codex/irpw.config.toml
+# Start Codex in this repository with: codex --profile irpw
+
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+model_auto_compact_token_limit = 892500
+model_auto_compact_token_limit_scope = "total"
+tool_output_token_limit = 8192
+web_search = "live"
+
+[features]
+apps = true
+browser_use = true
+
+[skills]
+max_context_tokens = 2048
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3
+max_depth = 1
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "medium"

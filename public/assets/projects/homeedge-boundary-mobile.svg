@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 840" role="img">
+  <title>HomeEdge MVP boundary</title>
+  <rect width="600" height="840" fill="#fffdf3"/>
+  <path d="M0 0h600v112H0z" fill="#f4d52d"/>
+  <text x="28" y="70" fill="#171717" font-family="Arial,sans-serif" font-size="32" font-weight="700">HOMEEDGE · MVP SCOPE</text>
+  <rect x="28" y="150" width="544" height="134" rx="5" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="52" y="204" fill="#171717" font-family="Arial,sans-serif" font-size="30" font-weight="700">ROOM SENSING</text>
+  <text x="52" y="250" fill="#333" font-family="Arial,sans-serif" font-size="25">↓</text>
+  <rect x="28" y="320" width="544" height="134" rx="5" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="52" y="374" fill="#171717" font-family="Arial,sans-serif" font-size="30" font-weight="700">DOOR STATE</text>
+  <text x="52" y="420" fill="#333" font-family="Arial,sans-serif" font-size="25">↓</text>
+  <rect x="28" y="490" width="544" height="134" rx="5" fill="#fff" stroke="#171717" stroke-width="5"/>
+  <text x="52" y="544" fill="#171717" font-family="Arial,sans-serif" font-size="30" font-weight="700">NODE FIRMWARE · UNVALIDATED</text>
+  <path d="M28 674h544" stroke="#171717" stroke-width="3"/>
+  <text x="28" y="726" fill="#171717" font-family="Arial,sans-serif" font-size="22" font-weight="700">DOCUMENTED SCOPE</text>
+</svg>

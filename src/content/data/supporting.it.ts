@@ -69,8 +69,8 @@ export const italianSupportingContent = {
     },
     {
       evidenceId: 'node-ci-workflow',
-      label: 'Controlli automatici Node.js',
-      description: 'Verifica i controlli di integrazione continua configurati per il progetto.',
+      label: 'Configurazione CI Node.js',
+      description: 'Consulta la configurazione dei test; non mostra un’esecuzione o un risultato.',
     },
   ],
   skillsPage: {
@@ -101,7 +101,7 @@ export const italianSupportingContent = {
         description:
           'Progetto interfacce che aiutano le persone a capire subito dove si trovano, cosa possono fare e quale sarà il risultato delle loro azioni. Organizzo componenti, contenuti e comportamenti affinché il prodotto rimanga coerente su mobile e desktop e possa evolvere senza diventare confuso.',
         evidenceTitle: 'Interfaccia e struttura verificabili',
-        tools: ['React', 'TypeScript', 'Material UI', 'Vite', 'responsive design', 'accessibility'],
+        tools: ['React', 'TypeScript', 'Material UI', 'Vite', 'design responsive', 'accessibilità'],
         evidenceIds: ['portfolio-repository', 'portfolio-content-model'],
         references: [],
         cta: {
@@ -124,8 +124,8 @@ export const italianSupportingContent = {
         references: [],
         cta: {
           kind: 'external',
-          url: 'https://github.com/pianic2',
-          label: 'Esplora i progetti backend',
+          url: 'https://github.com/pianic2/its-php-libreria',
+          label: 'Esamina la Library API Laravel',
           analyticsId: 'skills-backend-github',
         },
       },
@@ -135,9 +135,9 @@ export const italianSupportingContent = {
         problem:
           'Trasformare segnali provenienti dal mondo fisico in informazioni utilizzabili, senza nascondere limiti e incertezze del sistema.',
         description:
-          'Con HomeEdge sto lavorando sul collegamento tra firmware, sensori, dispositivi edge e software applicativo. Verifico il comportamento reale dell’hardware, documento le decisioni e separo chiaramente ciò che è stato provato da ciò che è ancora in sviluppo: un prototipo utile deve dichiarare anche dove può fallire.',
+          'Con HomeEdge sto definendo come collegare firmware, sensori, dispositivi edge e software applicativo. Documento le decisioni e distinguo le capacità previste da quelle la cui integrazione deve ancora essere validata: un progetto utile deve dichiarare anche dove può fallire.',
         evidenceTitle: 'Test, decisioni e stato del progetto',
-        tools: ['ESP32-C3', 'C', 'sensors', 'edge systems'],
+        tools: ['ESP32-C3', 'C', 'sensori', 'sistemi edge'],
         evidenceIds: ['homeedge-repository', 'homeedge-readme'],
         references: [],
         cta: {
@@ -155,7 +155,7 @@ export const italianSupportingContent = {
         description:
           'Organizzo il lavoro affinché ogni modifica possa essere ricostruita, revisionata e rilasciata con controlli ripetibili. Versionamento, test automatici, pipeline CI/CD e documentazione riducono gli errori tardivi e permettono a chi entra nel progetto di capire cosa è cambiato, perché e con quali verifiche.',
         evidenceTitle: 'Processo e controlli automatici',
-        tools: ['Git', 'GitHub Actions', 'Docker', 'automated testing', 'CI/CD'],
+        tools: ['Git', 'GitHub Actions', 'Docker', 'test automatici', 'CI/CD'],
         evidenceIds: ['portfolio-quality-workflow', 'portfolio-pages-documentation'],
         references: [],
         cta: {
@@ -371,7 +371,7 @@ export const italianSupportingContent = {
         decision:
           'Ho quindi distinto il perimetro dell’MVP, le decisioni architetturali accettate, le capacità realmente verificate e quelle ancora pianificate.',
         result:
-          'Chi apre il repository può capire che cosa esiste oggi senza dover ricostruire la storia del progetto da conversazioni o intenzioni implicite.',
+          'Il README definisce l’ambito dei nodi per stanza e porta e indica che l’integrazione firmware non è ancora stata validata.',
         evidenceLinks: [
           {
             evidenceId: 'homeedge-readme',
@@ -399,7 +399,7 @@ export const italianSupportingContent = {
         decision:
           'Per questo la pipeline non viene usata come semplice automazione tecnica. Formattazione, lint, TypeScript, validazione dei contenuti, test e build costituiscono condizioni esplicite di rilascio.',
         result:
-          'La pubblicazione non dipende dalla memoria di chi esegue il lavoro. Ogni modifica attraversa la stessa sequenza verificabile.',
+          'Il workflow di qualità elenca formattazione, lint, TypeScript, validazione dei contenuti, test e build tra i controlli di rilascio; la configurazione non prova che un’esecuzione recente sia riuscita.',
         evidenceLinks: [
           {
             evidenceId: 'portfolio-quality-workflow',
@@ -427,7 +427,7 @@ export const italianSupportingContent = {
         decision:
           'Il portfolio tratta dati condivisi, copy localizzato, stato dei claim ed evidenze come entità collegate da identificatori e regole di validazione.',
         result:
-          'Un contenuto non viene considerato corretto soltanto perché appare sullo schermo. Deve rispettare relazioni, parità linguistica e stato reale delle prove che lo sostengono.',
+          'La suite di validazione dei contenuti controlla la parità tra lingue e i riferimenti alle evidenze, insieme a schemi e identificatori stabili.',
         evidenceLinks: [
           {
             evidenceId: 'portfolio-content-model',
@@ -459,6 +459,18 @@ export const italianSupportingContent = {
         'Un verification-first workflow mantiene vicini test, review, evidenze e sicurezza. L’esecuzione agentica deve lasciare tracce leggibili e non trasformare la velocità di produzione in una scorciatoia per saltare il giudizio.',
         'Human accountability e agentic orchestration restano quindi centrali: la persona mantiene responsabilità sul risultato, mentre l’agente opera entro un perimetro dichiarato e verificabile.',
       ],
+      example: {
+        title: 'Hero Home: mostrare prove senza sovrastimare lo stato',
+        intentLabel: 'Intento',
+        intent:
+          'Mostrare un progetto reale accanto all’identità dello sviluppatore nella prima schermata.',
+        executionLabel: 'Esecuzione',
+        execution:
+          'Riutilizzare il diagramma esistente dell’ambito HomeEdge e indicarlo come documentato; mantenere l’integrazione firmware marcata come da validare.',
+        resultLabel: 'Risultato',
+        result:
+          'A 390 × 844, il nome HomeEdge, l’etichetta di ambito documentato e l’inizio del diagramma compaiono sotto l’identità e la CTA primaria; a 1440 × 900 il diagramma completo è accanto all’identità.',
+      },
       concepts: [
         {
           id: 'intent-engineering',
@@ -480,21 +492,6 @@ export const italianSupportingContent = {
           id: 'verification-first-workflows',
           title: 'Verification-first workflows',
           description: 'Decidere prima come controllare il risultato con test, review ed evidenze.',
-        },
-        {
-          id: 'human-accountability',
-          title: 'Human accountability',
-          description: 'La decisione finale e l’accettazione del rischio rimangono umane.',
-        },
-        {
-          id: 'traceable-agent-execution',
-          title: 'Traceable agent execution',
-          description: 'Rendere verificabile ciò che l’agente ha prodotto.',
-        },
-        {
-          id: 'agentic-orchestration',
-          title: 'Agentic orchestration',
-          description: 'Coordinare agenti con ruoli distinti dentro un flusso esplicito.',
         },
       ],
       workflowTitle: 'Una pipeline agentica orientata alla verifica',
@@ -519,7 +516,7 @@ export const italianSupportingContent = {
     labels: {
       examplesTitle: 'Il metodo applicato a casi reali',
       decisionLabel: 'Decisione',
-      resultLabel: 'Risultato osservabile',
+      resultLabel: 'Cosa mostra il repository',
       outputLabel: 'Output',
       evidenceTitle: 'Evidenze verificabili',
       resourcesTitle: 'Risorse esterne',

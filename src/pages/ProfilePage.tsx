@@ -1,6 +1,7 @@
 import LaunchIcon from '@mui/icons-material/Launch'
 import { Box, Stack, Typography } from '@mui/material'
 import { EditorialSectionHeader } from '../components/layout/EditorialSectionHeader'
+import { ButtonLink, ExternalLink } from '../components/actions/AppLink'
 import { PageContainer } from '../components/layout/PageContainer'
 import { PageSection } from '../components/layout/PageSection'
 import { usePortfolioContent } from '../content/context'
@@ -10,9 +11,10 @@ import { getRoutePath } from '../routes/routeConfig'
 import { externalLinks } from '../config/externalLinks'
 
 export function ProfilePage() {
-  const { language, siteContent } = usePortfolioContent()
+  const { language, siteContent, projects } = usePortfolioContent()
   const page = siteContent.profilePage
   const links = page.usefulLinks
+  const selectedWork = page.selectedWork
   const contactPath = getRoutePath('contact', language)
 
   return (
@@ -142,6 +144,58 @@ export function ProfilePage() {
           </PageSection>
         )
       })}
+
+      <PageSection aria-labelledby="profile-selected-work-title" spacing="spacious">
+        <PageContainer>
+          <Stack spacing={{ xs: 4, md: 6 }}>
+            <EditorialSectionHeader
+              description={selectedWork.description}
+              eyebrow={selectedWork.eyebrow}
+              headingLevel="h2"
+              id="profile-selected-work-title"
+              layout="single"
+              title={selectedWork.title}
+            />
+            <Box
+              sx={{
+                display: 'grid',
+                gap: 3,
+                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
+              }}
+            >
+              {projects.slice(0, 3).map((project) => (
+                <Box
+                  component="article"
+                  key={project.id}
+                  sx={(theme) => ({
+                    backgroundColor: theme.digitalStudio.colors.surface,
+                    border: `${theme.digitalStudio.borderWidths.regular}px solid ${theme.digitalStudio.colors.border}`,
+                    boxShadow: theme.digitalStudio.shadows.small,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    minWidth: 0,
+                    p: { xs: 3, sm: 4 },
+                  })}
+                >
+                  <Typography component="h3" variant="h5">
+                    {project.title}
+                  </Typography>
+                  <Typography sx={{ fontWeight: 800 }}>{project.question}</Typography>
+                  <Typography color="text.secondary">{project.supportingText}</Typography>
+                  <Typography sx={{ fontWeight: 800 }}>{project.claimLabel}</Typography>
+                  <ButtonLink to={project.detailPath} variant="outlined">
+                    {selectedWork.detailLabel}
+                  </ButtonLink>
+                  <ExternalLink href={project.repositoryUrl} language={language} newTab>
+                    {selectedWork.repositoryLabel}
+                  </ExternalLink>
+                </Box>
+              ))}
+            </Box>
+          </Stack>
+        </PageContainer>
+      </PageSection>
 
       <PageSection
         aria-labelledby="profile-useful-links-title"

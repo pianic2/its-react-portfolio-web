@@ -28,11 +28,12 @@ describe('critical CTA and link behaviour', () => {
       'href',
       '/en/projects',
     )
-    expect(screen.getByRole('link', { name: 'See how I work' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Discover HomeEdge' })).toHaveAttribute(
       'href',
-      '/en/method',
+      '/en/projects/homeedge-ai-platform',
     )
-    const github = screen.getByRole('link', { name: /Look at GitHub/ })
+    expect(screen.queryByRole('link', { name: 'See how I work' })).not.toBeInTheDocument()
+    const github = screen.getByRole('link', { name: /Open GitHub/ })
     expect(github).toHaveAttribute('href', externalLinks.githubProfile)
     expect(github).toHaveAttribute('target', '_blank')
     expect(github).toHaveAttribute('rel', 'noopener noreferrer')

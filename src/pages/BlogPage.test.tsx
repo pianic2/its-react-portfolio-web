@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { PortfolioContentProvider } from '../content/context'
@@ -46,7 +47,33 @@ describe('BlogPage backend states', () => {
     renderBlog(backend)
 
     expect(await screen.findByText('No articles are available yet.')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Back to the portfolio' })).toHaveAttribute(
+      'href',
+      '/en',
+    )
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
+
+  it('offers a retry action for load failures', async () => {
+    const listPages = vi
+      .fn<PortfolioBackend['listPages']>()
+      .mockRejectedValueOnce(new Error('temporary outage'))
+      .mockResolvedValueOnce([])
+    const backend = backendFor(
+      listPages,
+      vi.fn(async () => ({}) as BackendPage),
+    )
+    const user = userEvent.setup()
+
+    renderBlog(backend)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('The Blog could not be loaded.')
+    await user.click(screen.getByRole('button', { name: 'Try again' }))
+    expect(await screen.findByRole('link', { name: 'Back to the portfolio' })).toHaveAttribute(
+      'href',
+      '/en',
+    )
+    expect(listPages).toHaveBeenCalledTimes(2)
   })
 
   it('shows a configuration error when the backend is not configured', async () => {

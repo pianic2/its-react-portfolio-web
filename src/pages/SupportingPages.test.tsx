@@ -48,6 +48,8 @@ describe('Skills and Method pages', () => {
     expect(screen.getByTestId('skills-group-section-frontend-interfaces')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-backend-data')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-connected-embedded')).toBeInTheDocument()
+    expect(screen.getByText('sensori')).toBeInTheDocument()
+    expect(screen.getByText('sistemi edge')).toBeInTheDocument()
     expect(screen.getByTestId('skills-group-section-delivery-quality')).toBeInTheDocument()
     for (const title of [
       'Interfaccia e struttura verificabili',
@@ -99,15 +101,10 @@ describe('Skills and Method pages', () => {
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument()
     }
-    expect(screen.getByTestId('method-value')).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: 'Fewer surprises. More clarity. Better decisions.' }),
-    ).toBeInTheDocument()
-    expect(screen.getByTestId('method-tools')).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: 'Not more tools: clearer responsibilities' }),
-    ).toBeInTheDocument()
+    expect(screen.queryByTestId('method-value')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('method-tools')).not.toBeInTheDocument()
     expect(screen.getByTestId('method-agentic')).toBeInTheDocument()
+    expect(getComputedStyle(screen.getByText('HOW I RESPOND')).color).toBe('rgb(17, 17, 17)')
     expect(
       screen.getByRole('heading', {
         name: 'When producing becomes easier, good decisions matter more',
@@ -132,11 +129,13 @@ describe('Skills and Method pages', () => {
     expect(
       screen.getByRole('link', { name: /Read the principles behind the Agile Manifesto/ }),
     ).toHaveAttribute('target', '_blank')
-    expect(screen.getByRole('link', { name: /Discover Jira/ })).toHaveAttribute(
-      'rel',
-      'noopener noreferrer',
-    )
     expect(screen.getByTestId('method-agentic-flow')).toBeInTheDocument()
+    expect(screen.getByTestId('method-agentic-example')).toHaveTextContent(
+      'Home hero: show project evidence without overclaiming',
+    )
+    expect(
+      screen.getByTestId('method-agentic-workflow-descriptions').querySelectorAll('li'),
+    ).toHaveLength(5)
     expect(screen.getByRole('link', { name: /Tell me about the project/ })).toHaveAttribute(
       'href',
       '/en/contact',
@@ -164,15 +163,20 @@ describe('Skills and Method pages', () => {
       'href',
       'https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Italian.pdf',
     )
-    expect(
-      screen.getByRole('heading', { name: 'Meno sorprese. Più chiarezza. Decisioni migliori.' }),
-    ).toBeInTheDocument()
+    expect(screen.queryByTestId('method-value')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('method-tools')).not.toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: 'Partiamo dall’obiettivo, poi scegliamo che cosa costruire',
       }),
     ).toBeInTheDocument()
     expect(screen.queryByText('In questa pagina')).not.toBeInTheDocument()
+    expect(screen.getByTestId('method-agentic-example')).toHaveTextContent(
+      'Hero Home: mostrare prove senza sovrastimare lo stato',
+    )
+    expect(
+      screen.getByTestId('method-agentic-workflow-descriptions').querySelectorAll('li'),
+    ).toHaveLength(5)
     for (const title of [
       'Capire che cosa dobbiamo davvero risolvere',
       'Scegliere il passo più piccolo che permette di imparare',

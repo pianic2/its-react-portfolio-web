@@ -32,6 +32,12 @@ describe('SeoMetadata integration', () => {
     ).toContain('Selected software projects')
     expect(document.head.querySelectorAll('link[rel="canonical"]')).toHaveLength(1)
     expect(document.head.querySelectorAll('link[rel="alternate"]')).toHaveLength(2)
+    expect(document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.content).toBe(
+      'https://pianic2.github.io/its-react-portfolio-web/assets/social-card.png',
+    )
+    expect(document.head.querySelector<HTMLMetaElement>('meta[name="twitter:card"]')?.content).toBe(
+      'summary_large_image',
+    )
     expect(document.documentElement.lang).toBe('en')
   })
 

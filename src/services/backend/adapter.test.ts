@@ -60,6 +60,21 @@ describe('Wagtail v3 portfolio backend adapter', () => {
     expect(new URL(String(fetcher.mock.calls[1]?.[0])).searchParams.get('offset')).toBe('20')
   })
 
+  it('uses the requested preview limit without fetching later summary pages', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      jsonResponse({
+        count: 80,
+        items: Array.from({ length: 3 }, (_, index) => summary(index + 1, `post-${index + 1}`)),
+      }),
+    )
+    const backend = createPortfolioBackend('https://api.example.test', fetcher)
+
+    await expect(backend.listPages('portfolio.BlogPostPage', 'en', 3)).resolves.toHaveLength(3)
+
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    expect(new URL(String(fetcher.mock.calls[0]?.[0])).searchParams.get('limit')).toBe('3')
+  })
+
   it('uses a matching summary slug to request only that page detail', async () => {
     const first = summary(19, 'first-post')
     const second = summary(20, 'second-post')

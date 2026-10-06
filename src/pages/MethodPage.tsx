@@ -8,8 +8,6 @@ import { MethodCaseStudySection } from '../features/method/MethodCaseStudySectio
 import { MethodFoundationsSection } from '../features/method/MethodFoundationsSection'
 import { MethodPageContainer } from '../features/method/MethodPageContainer'
 import { MethodPrincipleSection } from '../features/method/MethodPrincipleSection'
-import { MethodToolsSection } from '../features/method/MethodToolsSection'
-import { MethodValueSection } from '../features/method/MethodValueSection'
 import { PopArtConversionSection } from '../features/supporting-pages/PopArtConversionSection'
 import { SupportingPageCta } from '../features/supporting-pages/SupportingPageCtas'
 
@@ -73,17 +71,6 @@ export function MethodPage() {
         />
       ))}
 
-      <MethodValueSection value={page.value} />
-
-      <MethodToolsSection
-        closing={page.tools.closing}
-        eyebrow={page.tools.eyebrow}
-        introduction={page.tools.introduction}
-        language={language}
-        title={page.tools.title}
-        tools={page.tools.items}
-      />
-
       {page.examples.map((example, index) => (
         <MethodCaseStudySection
           caseStudy={example}
@@ -99,6 +86,7 @@ export function MethodPage() {
       <AgenticDeliverySection
         closing={page.agenticDelivery.closing}
         concepts={page.agenticDelivery.concepts}
+        example={page.agenticDelivery.example}
         eyebrow={page.agenticDelivery.eyebrow}
         language={language}
         paragraphs={page.agenticDelivery.paragraphs}
@@ -108,6 +96,7 @@ export function MethodPage() {
         subtitle={page.agenticDelivery.subtitle}
         title={page.agenticDelivery.title}
         workflow={page.agenticDelivery.workflow}
+        workflowDescriptions={page.agenticDelivery.workflowDescriptions}
         workflowTitle={page.agenticDelivery.workflowTitle}
       />
 

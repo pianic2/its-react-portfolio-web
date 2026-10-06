@@ -59,7 +59,7 @@ export const sharedContent = {
     },
     {
       id: 'node-ci-workflow',
-      type: 'test',
+      type: 'documentation',
       url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/.github/workflows/ci.yml',
     },
   ],
@@ -77,6 +77,7 @@ export const sharedContent = {
   projects: [
     {
       id: 'homeedge-ai-platform',
+      maturity: 'documented',
       capabilityIds: ['embedded-firmware', 'privacy-aware-design', 'technical-governance'],
       evidence: [
         {
@@ -102,7 +103,7 @@ export const sharedContent = {
           url: 'https://github.com/pianic2/homeedge-ai-platform',
         },
       ],
-      assetIds: [],
+      assetIds: ['project-diagram-homeedge-ai-platform'],
       featured: true,
       order: 0,
       origin: 'personal-long-term',
@@ -110,6 +111,7 @@ export const sharedContent = {
     },
     {
       id: 'its-library-api-laravel',
+      maturity: 'implemented',
       capabilityIds: ['laravel-api', 'sanctum-authentication', 'containerized-delivery'],
       evidence: [
         {
@@ -135,7 +137,7 @@ export const sharedContent = {
           url: 'https://github.com/pianic2/its-php-libreria',
         },
       ],
-      assetIds: [],
+      assetIds: ['project-diagram-its-library-api-laravel'],
       featured: true,
       order: 1,
       origin: 'its-training',
@@ -143,6 +145,7 @@ export const sharedContent = {
     },
     {
       id: 'node-list-manager',
+      maturity: 'implemented',
       capabilityIds: ['node-api', 'sqlite-persistence', 'automated-testing'],
       evidence: [
         {
@@ -157,7 +160,7 @@ export const sharedContent = {
         },
         {
           id: 'node-automated-tests',
-          type: 'test',
+          type: 'documentation',
           url: 'https://github.com/pianic2/todo-list-manager-node/blob/main/.github/workflows/ci.yml',
         },
       ],
@@ -168,12 +171,37 @@ export const sharedContent = {
           url: 'https://github.com/pianic2/todo-list-manager-node',
         },
       ],
-      assetIds: [],
+      assetIds: ['project-diagram-node-list-manager'],
       featured: true,
       order: 2,
       origin: 'its-training',
       visualVariant: 'electric-cyan',
     },
   ],
-  assets: [],
+  assets: [
+    {
+      id: 'project-diagram-homeedge-ai-platform',
+      src: 'assets/projects/homeedge-boundary.svg',
+      width: 1200,
+      height: 360,
+      provenance: 'original',
+      credit: 'Original diagram based on the public HomeEdge product documentation.',
+    },
+    {
+      id: 'project-diagram-its-library-api-laravel',
+      src: 'assets/projects/library-relationships.svg',
+      width: 1200,
+      height: 420,
+      provenance: 'original',
+      credit: 'Original diagram based on the public Library API repository documentation.',
+    },
+    {
+      id: 'project-diagram-node-list-manager',
+      src: 'assets/projects/node-flow.svg',
+      width: 1200,
+      height: 360,
+      provenance: 'original',
+      credit: 'Original diagram based on the public Node.js project repository.',
+    },
+  ],
 } satisfies Pick<ContentRepository, 'publicEvidence' | 'capabilities' | 'projects' | 'assets'>

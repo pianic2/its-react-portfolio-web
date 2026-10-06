@@ -62,7 +62,11 @@ export class InvalidBackendResponseError extends BackendError {
 }
 
 export type PortfolioBackend = {
-  listPages: (type: string, language: BackendLanguage) => Promise<BackendPageSummary[]>
+  listPages: (
+    type: string,
+    language: BackendLanguage,
+    limit?: number,
+  ) => Promise<BackendPageSummary[]>
   getPage: (id: number) => Promise<BackendPage>
   findBySlug: (type: string, language: BackendLanguage, slug: string) => Promise<BackendPage | null>
   findByStableId: (
@@ -152,7 +156,15 @@ export function createPortfolioBackend(
     return page
   }
 
-  async function listPages(type: string, language: BackendLanguage): Promise<BackendPageSummary[]> {
+  async function listPages(
+    type: string,
+    language: BackendLanguage,
+    requestedLimit?: number,
+  ): Promise<BackendPageSummary[]> {
+    const limit =
+      requestedLimit === undefined
+        ? undefined
+        : Math.max(1, Math.min(PAGE_LIST_LIMIT, Math.floor(requestedLimit)))
     const summaries: BackendPageSummary[] = []
     const ids = new Set<number>()
     let expectedCount: number | undefined
@@ -161,7 +173,7 @@ export function createPortfolioBackend(
       const query = new URLSearchParams({
         type,
         locale: language,
-        limit: String(PAGE_LIST_LIMIT),
+        limit: String(limit ?? PAGE_LIST_LIMIT),
         offset: String(summaries.length),
       })
       const payload = await request(`/api/v3/pages/?${query.toString()}`)
@@ -197,6 +209,8 @@ export function createPortfolioBackend(
         ids.add(page.id)
         summaries.push(page)
       }
+
+      if (limit !== undefined && summaries.length >= limit) return summaries.slice(0, limit)
 
       if (summaries.length > expectedCount) {
         throw new InvalidBackendResponseError(
