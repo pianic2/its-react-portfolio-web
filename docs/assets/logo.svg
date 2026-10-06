@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 84" role="img" aria-labelledby="title description">
+  <title id="title">Portfolio Web</title>
+  <desc id="description">The Portfolio Web wordmark with a violet underline and cyan accent.</desc>
+  <text x="8" y="59" fill="#111111" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="46" font-weight="900">Portfolio Web</text>
+  <path d="M8 74h198" stroke="#5b1ae8" stroke-width="8" stroke-linecap="square" />
+  <path d="M218 74h28" stroke="#00b8d9" stroke-width="8" stroke-linecap="square" />
+</svg>

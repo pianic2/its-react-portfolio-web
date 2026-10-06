@@ -8,7 +8,7 @@
 
 **Tech Stack:** React 19, TypeScript, MUI, Emotion, React Router, Vitest, React Testing Library, Oxlint, Prettier, Vite.
 
-**Spec:** `docs/design-system/irpw-45-refinement-v2.md` and Jira `IRPW-45`.
+**Spec:** `docs/review/design-system/irpw-45-refinement-v2.md` and Jira `IRPW-45`.
 
 ## Global Constraints
 
@@ -99,7 +99,7 @@
 
 **Files:**
 
-- Modify: `docs/design-system/tokens.md` and/or `docs/design-system/shared-primitives.md` only where current docs contradict the implemented hierarchy.
+- Modify: `docs/architecture/design-system/tokens.md` and/or `docs/architecture/design-system/shared-primitives.md` only where current docs contradict the implemented hierarchy.
 - Create: `docs/review/irpw-45/` with selected before/after captures and a concise evidence report, if the artifacts are appropriate to commit.
 - No product code changes unless a review finding requires a scoped fix.
 
